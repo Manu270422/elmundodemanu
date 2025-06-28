@@ -1,4 +1,4 @@
-/* estilos.css - El Mundo de Manu 🌍 - Versión Profesional */
+/* estilos.css - El Mundo de Manu 🌍 - Versión Profesional Responsive */
 
 :root {
   --color-principal: #304ffe;
@@ -54,6 +54,8 @@ nav ul li a {
   padding: 0.6rem 1.2rem;
   border-radius: var(--borde-suave);
   transition: background-color 0.3s, transform 0.2s;
+  font-weight: bold;
+  display: inline-block;
 }
 
 nav ul li a:hover {
@@ -76,7 +78,7 @@ section {
   box-shadow: var(--sombra);
 }
 
-/* Animación para scroll suave con IntersectionObserver */
+/* Animación con IntersectionObserver */
 .oculto {
   opacity: 0;
   transform: translateY(30px);
@@ -141,22 +143,67 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive: Pantallas pequeñas */
+/* ------------------------- */
+/* 🧠 DISEÑO RESPONSIVO 📱 */
+/* ------------------------- */
 @media (max-width: 768px) {
+  header h1 {
+    font-size: 1.6rem;
+  }
+
   nav ul {
     flex-direction: column;
     align-items: center;
   }
 
-  header h1 {
-    font-size: 1.5rem;
+  nav ul li a {
+    width: 90%;
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
   }
 
   section {
-    padding: 1rem;
+    padding: 1.2rem;
   }
 
   input, textarea, button {
     font-size: 0.95rem;
+  }
+
+  main {
+    padding: 1.5rem 1rem;
+  }
+
+  footer {
+    font-size: 0.85rem;
+    padding: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.4rem;
+  }
+
+  nav ul li a {
+    font-size: 0.95rem;
+    padding: 0.7rem 0.9rem;
+  }
+
+  section h2 {
+    font-size: 1.2rem;
+  }
+
+  section h3 {
+    font-size: 1.05rem;
+  }
+
+  ul li, p, blockquote {
+    font-size: 0.95rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
   }
 }
