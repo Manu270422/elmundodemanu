@@ -2,14 +2,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>🧠 Tecnología y Tutoriales | El Mundo de Manu</title>
-  <link rel="stylesheet" href="../estilos.css">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../assets/css/estilos.css">
+  <!-- Lucide icons (puede estar en head) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <header>
     <h1>🧠 Tecnología y Tutoriales</h1>
-    <nav>
+
+    <!-- Botón menú hamburguesa -->
+    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú">☰</button>
+
+    <nav aria-label="Navegación principal">
       <ul>
         <li><a href="../index.html">🏠 Inicio</a></li>
         <li><a href="gaming.html">🎮 Gaming</a></li>
@@ -23,49 +31,225 @@
   </header>
 
   <main>
-    <section>
+    <!-- Programación desde Cero -->
+    <section class="temas">
       <h2>💻 Programación desde Cero</h2>
-      <ul>
-        <li>🌐 HTML, CSS y JS explicados fácil</li>
-        <li>🔧 Cómo crear tu primera página web</li>
-        <li>📂 Proyectos prácticos para principiantes</li>
-      </ul>
+
+      <details class="acordeon">
+        <summary>🚀 HTML, CSS y JavaScript con ejemplos prácticos</summary>
+        <div class="acordeon-contenido">
+          <p>Domina la base de la web: HTML (estructura), CSS (diseño) y JavaScript (interactividad) con ejemplos cortos y claros.</p>
+          <ul>
+            <li>HTML semántico + buenas prácticas</li>
+            <li>CSS moderno (Flexbox y Grid)</li>
+            <li>JS para eventos, DOM y lógica básica</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acordeon">
+        <summary>🌐 Construye tu primera página web paso a paso</summary>
+        <div class="acordeon-contenido">
+          <p>Desde crear tu carpeta del proyecto hasta publicar gratis con GitHub Pages.</p>
+          <ol>
+            <li>Estructura de archivos (<code>index.html</code>, <code>assets/css</code>, <code>assets/js</code>)</li>
+            <li>Maquetación básica y estilos</li>
+            <li>Publicar con Git y GitHub Pages</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="acordeon">
+        <summary>🕹️ Mini proyectos interactivos (calculadora, reloj, tareas)</summary>
+        <div class="acordeon-contenido">
+          <p>Proyectos perfectos para practicar y empezar tu portafolio:</p>
+          <ul>
+            <li>Calculadora (operaciones, teclado y validaciones)</li>
+            <li>Reloj digital (fecha/hora y formato)</li>
+            <li>Lista de tareas (CRUD en localStorage)</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acordeon">
+        <summary>💡 Consejos para no rendirte al empezar</summary>
+        <div class="acordeon-contenido">
+          <ul>
+            <li>Método Pomodoro 25/5</li>
+            <li>Aprende publicando: sube cada mini-proyecto a GitHub</li>
+            <li>Practica diario 30–60 min; consistencia > intensidad</li>
+          </ul>
+        </div>
+      </details>
     </section>
 
-    <section>
+    <!-- VS Code + MySQL -->
+    <section class="temas">
       <h2>🛠️ Tutoriales con VS Code y MySQL</h2>
-      <ul>
-        <li>⚙️ Cómo instalar VS Code y configurar tu entorno</li>
-        <li>🗃️ Conectando tu base de datos MySQL con Java</li>
-        <li>👨‍💻 Consejos para organizar tu proyecto CRUD</li>
-      </ul>
+
+      <details class="acordeon">
+        <summary>🧩 Instalar VS Code y configurar tu entorno</summary>
+        <div class="acordeon-contenido">
+          <ul>
+            <li>Extensiones clave: ESLint, Prettier, Live Server, GitLens</li>
+            <li>Atajos útiles y snippets</li>
+            <li>Configuración de tema y fuente (recomiendo Fira Code)</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acordeon">
+        <summary>🗄️ Conectando MySQL (Workbench / XAMPP / Docker)</summary>
+        <div class="acordeon-contenido">
+          <p>Instalación rápida y conexión segura (usuario, puertos, backups).</p>
+          <ul>
+            <li>Crear BD y tablas con SQL básico</li>
+            <li>Importar/exportar datos</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acordeon">
+        <summary>🧪 Buenas prácticas para tu CRUD</summary>
+        <div class="acordeon-contenido">
+          <ul>
+            <li>Estructura de carpetas clara</li>
+            <li>Variables de entorno para credenciales</li>
+            <li>Validaciones y manejo de errores</li>
+          </ul>
+        </div>
+      </details>
     </section>
 
-    <section>
+    <!-- Tips estudiar -->
+    <section class="temas">
       <h2>🎓 Tips para Estudiar Ingeniería Informática</h2>
-      <p>Consejos desde la experiencia para afrontar materias, manejar el tiempo, y no rendirse.</p>
-      <ul>
-        <li>📅 Planificación semanal</li>
-        <li>🧠 Técnicas de memorización para código</li>
-        <li>🧃 Cómo balancear estudios y descanso</li>
-      </ul>
+
+      <details class="acordeon">
+        <summary>📅 Planificación semanal efectiva</summary>
+        <div class="acordeon-contenido">
+          <ul>
+            <li>Bloques de estudio por materias</li>
+            <li>Repasos espaciados (SRS)</li>
+            <li>Checklist diaria simple</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acordeon">
+        <summary>🧠 Memoriza código sin morir en el intento</summary>
+        <div class="acordeon-contenido">
+          <ul>
+            <li>Aprende patrones, no líneas sueltas</li>
+            <li>Diagramas y pseudocódigo antes de programar</li>
+            <li>Explica en voz alta (método Feynman)</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acordeon">
+        <summary>⚖️ Balance estudio-descanso</summary>
+        <div class="acordeon-contenido">
+          <ul>
+            <li>Breaks activos y sueño de 7–8 h</li>
+            <li>Ejercicio ligero para mantener foco</li>
+          </ul>
+        </div>
+      </details>
     </section>
 
-    <section>
+    <!-- Trucos -->
+    <section class="temas">
       <h2>📱 Trucos para PC y Celular</h2>
-      <ul>
-        <li>🖥️ Atajos útiles en Windows para programadores</li>
-        <li>📲 Cómo liberar espacio sin apps raras</li>
-        <li>🔒 Seguridad básica en tu celular</li>
-      </ul>
+
+      <details class="acordeon">
+        <summary>⌨️ Atajos útiles en Windows / macOS</summary>
+        <div class="acordeon-contenido">
+          <ul>
+            <li>Windows: Win+V, Win+Shift+S, Win+.</li>
+            <li>macOS: Cmd+Shift+4, Option+Space, Ctrl+Cmd+Q</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acordeon">
+        <summary>🧹 Libera espacio sin apps raras</summary>
+        <div class="acordeon-contenido">
+          <ul>
+            <li>Windows: Storage Sense, Disk Cleanup</li>
+            <li>Android/iOS: borrar caché, fotos duplicadas, mover a la nube</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acordeon">
+        <summary>🛡️ Seguridad básica en tu celular</summary>
+        <div class="acordeon-contenido">
+          <ul>
+            <li>Autenticación 2FA y gestor de contraseñas</li>
+            <li>Permisos por app y copias de seguridad</li>
+          </ul>
+        </div>
+      </details>
     </section>
+
+<section class="tecnologia-tutoriales">
+  <h2>🧠 Tecnología y Tutoriales</h2>
+
+  <!-- Primer tema -->
+  <div class="acordeon-item">
+    <button class="acordeon-boton">🚀 HTML, CSS y JavaScript con ejemplos prácticos</button>
+    <div class="acordeon-contenido">
+      <p>Aprende a usar las tres tecnologías base del desarrollo web. Con ejemplos claros podrás entender cómo se conectan entre sí.</p>
+    </div>
+  </div>
+
+  <!-- Segundo tema -->
+  <div class="acordeon-item">
+    <button class="acordeon-boton">🌐 Construye tu primera página web paso a paso</button>
+    <div class="acordeon-contenido">
+      <p>Desde cero te explicamos cómo levantar tu primer sitio con estructura HTML, estilos CSS y un poco de interactividad con JavaScript.</p>
+    </div>
+  </div>
+
+  <!-- Tercer tema -->
+  <div class="acordeon-item">
+    <button class="acordeon-boton">🕹️ Mini proyectos interactivos</button>
+    <div class="acordeon-contenido">
+      <ul>
+        <li>Calculadora básica</li>
+        <li>Reloj digital</li>
+        <li>Lista de tareas</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Cuarto tema -->
+  <div class="acordeon-item">
+    <button class="acordeon-boton">💡 Consejos para no rendirte al empezar en la programación</button>
+    <div class="acordeon-contenido">
+      <p>La clave está en la práctica diaria, proyectos pequeños y buscar siempre resolver dudas con ejemplos reales.</p>
+    </div>
+  </div>
+
+</section>
+
   </main>
 
   <footer>
-    <p>&copy; 2025 El Mundo de Manu | Tecnología y Tutoriales</p>
+    <p>&copy; 2025 El Mundo de Manu. Todos los derechos reservados.</p>
+    <div class="footer-links">
+      <a href="privacidad.html">Política de Privacidad</a> ·
+      <a href="https://github.com/Manu270422/elmundodemanu" target="_blank" rel="noopener">GitHub Repo</a> ·
+      <a href="../contacto.html">Contacto</a>
+    </div>
   </footer>
 
-  <!-- ✅ Script agregado correctamente -->
-  <script src="../script.js"></script>
+  <!-- Script principal (menú + reveal) -->
+  <script src="../assets/js/script.js"></script>
+  <script>
+    // Inicializar iconos Lucide (si está cargado)
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  </script>
 </body>
 </html>

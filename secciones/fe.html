@@ -3,12 +3,18 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🙏 Fe y Espiritualidad | El Mundo de Manu</title>
-  <link rel="stylesheet" href="../estilos.css">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../assets/css/estilos.css">
 </head>
 <body>
   <header>
     <h1>🙏 Fe y Espiritualidad</h1>
+
+    <!-- ✅ Botón de menú hamburguesa para móviles -->
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
     <nav>
       <ul>
         <li><a href="../index.html">🏠 Inicio</a></li>
@@ -22,44 +28,52 @@
     </nav>
   </header>
 
-  <main>
-    <section>
-      <h2>📖 Versículo del Día</h2>
-      <blockquote>
-        <p>“El Señor es mi pastor, nada me faltará.” – Salmo 23:1</p>
-      </blockquote>
-    </section>
+<main>
+  <!-- ✅ Versículo dinámico -->
+  <section class="reveal">
+    <h2>📖 Versículo del Día</h2>
+    <blockquote>
+      <p id="versiculo"></p>
+    </blockquote>
+  </section>
 
-    <section>
-      <h2>🌟 Reflexiones Cristianas</h2>
-      <p>La vida nos presenta desafíos, pero con fe podemos superarlos. Estas reflexiones te ayudarán a mantener la esperanza viva.</p>
-      <ul>
-        <li>🌅 Cómo confiar en Dios en tiempos difíciles</li>
-        <li>🌱 El poder de la oración en tu día a día</li>
-        <li>💬 La importancia del perdón y la paz interior</li>
-      </ul>
-    </section>
+  <section class="reveal">
+    <h2>🌟 Reflexiones Cristianas</h2>
+    <p>La vida nos presenta desafíos, pero con fe podemos superarlos. Estas reflexiones te ayudarán a mantener la esperanza viva.</p>
+    <ul>
+      <li>🌅 Cómo confiar en Dios en tiempos difíciles</li>
+      <li>🌱 El poder de la oración en tu día a día</li>
+      <li>💬 La importancia del perdón y la paz interior</li>
+    </ul>
+  </section>
 
-    <section>
-      <h2>🙋‍♂️ Testimonios de Fe</h2>
-      <p>Conoce historias reales de personas que encontraron esperanza, amor y dirección a través de su fe.</p>
-    </section>
+  <section class="reveal">
+    <h2>🙋‍♂️ Testimonios de Fe</h2>
+    <p>Conoce historias reales de personas que encontraron esperanza, amor y dirección a través de su fe.</p>
+  </section>
 
-    <section>
-      <h2>👨‍🏫 Enseñanzas para Jóvenes</h2>
-      <ul>
-        <li>🧭 Cómo tomar decisiones guiadas por Dios</li>
-        <li>💡 Principios bíblicos para la juventud</li>
-        <li>👥 ¿Cómo vivir la fe en el colegio o universidad?</li>
-      </ul>
-    </section>
-  </main>
+  <section class="reveal">
+    <h2>👨‍🏫 Enseñanzas para Jóvenes</h2>
+    <ul>
+      <li>🧭 Cómo tomar decisiones guiadas por Dios</li>
+      <li>💡 Principios bíblicos para la juventud</li>
+      <li>👥 ¿Cómo vivir la fe en el colegio o universidad?</li>
+    </ul>
+  </section>
+</main>
 
-  <footer>
-    <p>&copy; 2025 El Mundo de Manu | Fe y Espiritualidad</p>
-  </footer>
+<footer>
+  <p>&copy; 2025 El Mundo de Manu. Todos los derechos reservados.</p>
+  <div class="footer-links">
+    <a href="privacidad.html">Política de Privacidad</a> ·
+    <a href="https://github.com/Manu270422/elmundodemanu" target="_blank" rel="noopener">GitHub Repo</a> ·
+    <a href="../contacto.html">Contacto</a>
+  </div>
+</footer>
 
-  <!-- ✅ Script agregado correctamente -->
+  <!-- ✅ Script global (menú + scroll reveal) -->
   <script src="../script.js"></script>
+  <!-- ✅ Script de versículos -->
+  <script src="../assets/js/versiculos.js"></script>
 </body>
 </html>

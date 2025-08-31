@@ -3,12 +3,18 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>❤️ Relaciones y Vida | El Mundo de Manu</title>
-  <link rel="stylesheet" href="../estilos.css">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../assets/css/estilos.css">
 </head>
 <body>
   <header>
     <h1>❤️ Relaciones y Vida Personal</h1>
+
+    <!-- ✅ Menú hamburguesa -->
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
     <nav>
       <ul>
         <li><a href="../index.html">🏠 Inicio</a></li>
@@ -22,46 +28,56 @@
     </nav>
   </header>
 
-  <main>
-    <section>
-      <h2>❓ Preguntas para Conocer a tu Pareja</h2>
-      <ul>
-        <li>💕 ¿Qué es lo que más valoras de nuestra relación?</li>
-        <li>🌍 ¿A qué lugar te gustaría viajar conmigo?</li>
-        <li>🎶 ¿Cuál canción describe nuestra historia?</li>
-      </ul>
-    </section>
+<main>
+  <section>
+    <h2>❓ Preguntas para Conocer a tu Pareja</h2>
+    <ul id="preguntas">
+      <li>💕 ¿Qué es lo que más valoras de nuestra relación?</li>
+      <li>🌍 ¿A qué lugar te gustaría viajar conmigo?</li>
+      <li>🎶 ¿Cuál canción describe nuestra historia?</li>
+    </ul>
+  </section>
 
-    <section>
-      <h2>💘 Consejos para el Amor</h2>
-      <p>Mantener una relación sana es un arte. Aquí tienes consejos prácticos:</p>
-      <ul>
-        <li>🗣️ Comunicación clara y sin juicios</li>
-        <li>⏳ Tiempo de calidad juntos</li>
-        <li>🎁 Detalles inesperados fortalecen el vínculo</li>
-      </ul>
-    </section>
+  <section>
+    <h2>💘 Consejos para el Amor</h2>
+    <ul>
+      <li>🗣️ Comunicación clara y sin juicios</li>
+      <li>⏳ Tiempo de calidad juntos</li>
+      <li>🎁 Detalles inesperados fortalecen el vínculo</li>
+    </ul>
+  </section>
 
-    <section>
-      <h2>📖 Historias Reales</h2>
-      <p>Conoce experiencias románticas o inspiradoras que pueden ayudarte en tu camino emocional.</p>
-    </section>
+  <section>
+    <h2>📖 Historias Reales</h2>
+    <p>Conoce experiencias románticas o inspiradoras que pueden ayudarte en tu camino emocional.</p>
+  </section>
 
-    <section>
-      <h2>🎲 Juegos y Retos Divertidos</h2>
-      <ul>
-        <li>💬 Juego de 20 preguntas para parejas</li>
-        <li>🤭 Reto: "Dime algo que nunca me hayas dicho"</li>
-        <li>📸 Desafío de fotos juntos durante una semana</li>
-      </ul>
-    </section>
-  </main>
+  <section>
+    <h2>🎲 Juegos y Retos Divertidos</h2>
+    <ul>
+      <li>💬 Juego de 20 preguntas para parejas</li>
+      <li>🤭 Reto: "Dime algo que nunca me hayas dicho"</li>
+      <li>📸 Desafío de fotos juntos durante una semana</li>
+    </ul>
+  </section>
 
-  <footer>
-    <p>&copy; 2025 El Mundo de Manu | Relaciones y Vida</p>
-  </footer>
+  <section id="relaciones">
+  <h2>💕 Preguntas para ti</h2>
+  <ul id="preguntas"></ul>
+  <button id="btnPregunta">Nueva Pregunta</button>
+</section>
+</main>
 
-  <!-- ✅ Script agregado correctamente -->
+<footer>
+  <p>&copy; 2025 El Mundo de Manu. Todos los derechos reservados.</p>
+  <div class="footer-links">
+    <a href="privacidad.html">Política de Privacidad</a> ·
+    <a href="https://github.com/Manu270422/elmundodemanu" target="_blank" rel="noopener">GitHub Repo</a> ·
+    <a href="../contacto.html">Contacto</a>
+  </div>
+</footer>
+
+  <!-- ✅ Script del menú -->
   <script src="../script.js"></script>
 </body>
 </html>

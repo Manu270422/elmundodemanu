@@ -1,39 +1,93 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>El Mundo de Manu 🌎</title>
-  <link rel="stylesheet" href="estilos.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="assets/css/estilos.css">
+  <!-- 📌 Librería de iconos Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
+  <!-- 🔹 Header -->
   <header>
     <h1>🌍 Bienvenido a El Mundo de Manu</h1>
-    <nav>
+
+    <!-- ☰ Menú hamburguesa visible en móvil -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+
+    <!-- 🔹 Menú de navegación con iconos -->
+    <nav id="mainNav">
       <ul>
-        <li><a href="secciones/gaming.html">🎮 Gaming y Entretenimiento</a></li>
-        <li><a href="secciones/fe.html">🙏 Fe y Espiritualidad</a></li>
-        <li><a href="secciones/relaciones.html">❤️ Relaciones y Vida</a></li>
-        <li><a href="secciones/tecnologia.html">🧠 Tecnología y Tutoriales</a></li>
-        <li><a href="secciones/infantil.html">🧸 Mundo Infantil</a></li>
-        <li><a href="secciones/contacto.html">📞 Contacto</a></li>
-        <li><a href="secciones/sobre.html">📝 Sobre el autor</a></li>
+        <li><a href="secciones/gaming.html"><i data-lucide="gamepad-2"></i> Gaming y Entretenimiento</a></li>
+        <li><a href="secciones/fe.html"><i data-lucide="hands-praying"></i> Fe y Espiritualidad</a></li>
+        <li><a href="secciones/relaciones.html"><i data-lucide="heart"></i> Relaciones y Vida</a></li>
+        <li><a href="secciones/tecnologia.html"><i data-lucide="cpu"></i> Tecnología y Tutoriales</a></li>
+        <li><a href="secciones/infantil.html"><i data-lucide="baby"></i> Mundo Infantil</a></li>
+        <li><a href="secciones/contacto.html"><i data-lucide="phone"></i> Contacto</a></li>
+        <li><a href="secciones/sobre.html"><i data-lucide="user"></i> Sobre el autor</a></li>
+        <!-- Nuevo acceso directo -->
+        <li><a href="calculadora/index.html"><i data-lucide="calculator"></i> Calculadora de Notas</a></li>
       </ul>
     </nav>
   </header>
 
+  <!-- 🔹 Contenido principal -->
   <main>
-    <section>
+    <!-- Bienvenida -->
+    <section class="intro">
       <h2>Explora los temas que te apasionan ✨</h2>
-      <p>Este sitio está lleno de ideas, juegos, tutoriales, reflexiones, y mucho más. ¡Explora cada sección y disfruta!</p>
+      <p>
+        Este sitio está lleno de ideas, juegos, tutoriales, reflexiones, y mucho más.
+        ¡Explora cada sección y disfruta de la experiencia!
+      </p>
+    </section>
+
+    <!-- 📖 Versículo del día -->
+    <section class="versiculo-dia">
+      <h2><i data-lucide="book"></i> Versículo del Día</h2>
+      <blockquote id="versiculo"></blockquote>
+    </section>
+
+    <!-- Herramientas útiles -->
+    <section class="herramientas">
+      <h2><i data-lucide="wrench"></i> Herramientas y Recursos</h2>
+      <div class="card">
+        <h3><i data-lucide="calculator"></i> Calculadora de Notas</h3>
+        <p>
+          Ingresa tus notas de parciales, quizzes y trabajos, y obtén tu promedio automáticamente.
+          También puedes calcular cuánto necesitas para alcanzar tu meta final.
+        </p>
+        <a href="calculadora/index.html" class="btn-calculadora">Abrir Calculadora</a>
+      </div>
     </section>
   </main>
 
+  <!-- 🔹 Footer mejorado -->
   <footer>
     <p>&copy; 2025 El Mundo de Manu. Todos los derechos reservados.</p>
+    <div class="footer-links">
+      <a href="privacidad.html">Política de Privacidad</a> ·
+      <a href="terminos.html">Términos y Condiciones</a> ·
+      <a href="https://github.com/Manu270422/elmundodemanu" target="_blank" rel="noopener">GitHub Repo</a> ·
+      <a href="contacto.html">Contacto</a>
+    </div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Scripts -->
+  <script src="assets/js/script.js"></script>
+  <script src="assets/js/versiculos.js"></script>
+  <script>
+    // Inicializar iconos Lucide
+    lucide.createIcons();
+
+    // Inicializar Versículo del Día
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof mostrarVersiculo === "function") {
+        mostrarVersiculo(); // 👉 Muestra el versículo al cargar
+      }
+    });
+  </script>
 </body>
 </html>
