@@ -1,7 +1,3 @@
-Perfecto bro 🙌, lo que ya tienes en el README está muy bien escrito y organizado, solo que como ya hemos avanzado con el **acordeón**, estructura más clara y la idea de que tu web es un **proyecto en construcción**, conviene actualizarlo para que refleje lo que llevas hasta ahora 🚀.
-
-Aquí te dejo una propuesta actualizada:
-
 ---
 
 # 🌎 El Mundo de Manu
