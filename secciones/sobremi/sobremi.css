@@ -1,0 +1,926 @@
+/*
+  ============================================================
+  sobremi.css — El Mundo de Manu / Sobre Mí
+  ============================================================
+  Aquí defino todos los estilos específicos de mi página
+  "Sobre Mí". Heredo las variables y componentes globales
+  de style.css (que se carga antes que este archivo), así que
+  aquí solo escribo lo que es exclusivo de esta sección.
+
+  Estructura de este archivo:
+  01. Breadcrumb
+  02. Hero personal (sm-hero)
+  03. Pilares (sm-pillars)
+  04. Línea de tiempo (sm-timeline)
+  05. Habilidades (sm-skills)
+  06. Visión y metas (sm-vision)
+  07. CTA final (sm-cta)
+  08. Responsive
+
+  Nomenclatura BEM: sm- (sobre-mí) como prefijo para
+  evitar colisiones con estilos globales.
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+*/
+
+/* ============================================================
+  01. BREADCRUMB
+  Barra de navegación contextual bajo el navbar.
+  Le dice al usuario exactamente dónde está en el sitio.
+  ============================================================ */
+.breadcrumb {
+  padding: calc(var(--space-4) + 70px) 0 var(--space-4);
+  /* El padding-top incluye la altura del navbar fijo (≈70px) */
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.breadcrumb__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.breadcrumb__link {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  transition: color var(--transition-base);
+}
+.breadcrumb__link:hover { color: var(--color-primary); }
+
+.breadcrumb__sep {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  opacity: 0.5;
+}
+
+.breadcrumb__current {
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+
+/* ============================================================
+  02. HERO PERSONAL
+  La primera sección de la página — mi presentación extendida.
+  Diseño asimétrico con el avatar a la izquierda y texto
+  a la derecha.
+  ============================================================ */
+.sm-hero {
+  position: relative;
+  padding: var(--space-20) 0 var(--space-24);
+  overflow: hidden;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Fondo con patrón de puntos sutil */
+.sm-hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sm-hero__dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    rgba(108, 99, 255, 0.12) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+.sm-hero__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+}
+.sm-hero__glow--1 {
+  width: 500px; height: 500px;
+  top: -100px; left: -100px;
+  background: radial-gradient(circle, rgba(108, 99, 255, 0.15) 0%, transparent 70%);
+}
+.sm-hero__glow--2 {
+  width: 400px; height: 400px;
+  bottom: -80px; right: -80px;
+  background: radial-gradient(circle, rgba(245, 166, 35, 0.1) 0%, transparent 70%);
+}
+
+/* Layout interno del hero — 2 columnas en desktop */
+.sm-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .sm-hero__inner {
+    grid-template-columns: 420px 1fr;
+    gap: var(--space-20);
+  }
+}
+
+/* ── Avatar y visual ── */
+.sm-hero__visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.sm-hero__avatar-wrap {
+  position: relative;
+  width: 260px;
+  height: 260px;
+}
+
+/* Anillos decorativos giratorios */
+.sm-hero__ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(108, 99, 255, 0.3);
+  pointer-events: none;
+}
+.sm-hero__ring--outer {
+  inset: -24px;
+  animation: ringRotateSlow 20s linear infinite;
+}
+.sm-hero__ring--inner {
+  inset: -8px;
+  border-color: rgba(245, 166, 35, 0.2);
+  animation: ringRotateSlow 14s linear infinite reverse;
+}
+
+@keyframes ringRotateSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Avatar en sí */
+.sm-hero__avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-surface-2) 0%, var(--color-surface) 100%);
+  border: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(108, 99, 255, 0.2), var(--shadow-lg);
+}
+
+.sm-hero__avatar-letter {
+  font-family: var(--font-display);
+  font-size: 7rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  opacity: 0.35;
+  user-select: none;
+}
+
+/* Badge de disponibilidad */
+.sm-hero__status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: #4ADE80;
+  letter-spacing: 0.03em;
+}
+
+.sm-hero__status-dot {
+  width: 7px;
+  height: 7px;
+  background: #4ADE80;
+  border-radius: 50%;
+  animation: statusPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes statusPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
+/* Mini tarjetas de contexto bajo el avatar */
+.sm-hero__cards {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sm-hero__mini-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-base), transform var(--transition-slow);
+}
+.sm-hero__mini-card:hover {
+  border-color: var(--color-primary);
+  transform: translateX(4px);
+}
+
+.sm-hero__mini-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.sm-hero__mini-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+.sm-hero__mini-value {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-top: 1px;
+}
+
+/* ── Texto del hero ── */
+.sm-hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.sm-hero__tag-row {
+  display: flex;
+}
+
+.sm-hero__title {
+  font-size: clamp(var(--text-3xl), 5vw, var(--text-4xl));
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.sm-hero__name {
+  color: transparent;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Texto rotatorio de roles */
+.sm-hero__roles {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.sm-hero__roles-prefix {
+  color: var(--color-text-muted);
+}
+
+.sm-hero__roles-text {
+  color: var(--color-accent);
+  font-weight: 600;
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+/* Cursor parpadeante al final del texto rotatorio */
+.sm-hero__roles-text::after {
+  content: '|';
+  color: var(--color-primary);
+  animation: caretBlink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes caretBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.sm-hero__intro {
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+}
+
+.sm-hero__actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  padding-top: var(--space-2);
+}
+
+
+/* ============================================================
+  03. PILARES — LO QUE ME DEFINE
+  Grid de tarjetas que representan mis áreas fundamentales.
+  Diseño limpio con efecto hover de color por tarjeta.
+  ============================================================ */
+.sm-pillars {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sm-pillars__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 640px) {
+  .sm-pillars__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .sm-pillars__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.sm-pillar-card {
+  padding: var(--space-8);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: transform var(--transition-slow), border-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+.sm-pillar-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 30px var(--color-primary-dim);
+}
+
+/* La tarjeta destacada (tecnología) tiene fondo especial */
+.sm-pillar-card--featured {
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.06) 0%, var(--color-bg) 100%);
+  border-color: rgba(108, 99, 255, 0.25);
+}
+
+.sm-pillar-card__icon {
+  font-size: 2.25rem;
+  line-height: 1;
+}
+
+.sm-pillar-card__title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.sm-pillar-card__desc {
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+
+
+/* ============================================================
+  04. LÍNEA DE TIEMPO — MI HISTORIA
+  Timeline vertical con items alternados izq/der en desktop.
+  En mobile todos van al mismo lado.
+  ============================================================ */
+.sm-timeline {
+  padding: var(--space-24) 0;
+}
+
+.sm-timeline__track {
+  position: relative;
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Línea central vertical */
+.sm-timeline__track::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--color-border) 10%,
+    var(--color-border) 90%,
+    transparent 100%
+  );
+}
+
+@media (max-width: 768px) {
+  /* En mobile la línea va al borde izquierdo */
+  .sm-timeline__track::before {
+    left: 24px;
+  }
+}
+
+/* Cada item de la timeline */
+.sm-timeline__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 48px 1fr;
+  gap: 0;
+  align-items: center;
+}
+
+/* Items del lado izquierdo — contenido en col 1, punto en col 2 */
+.sm-timeline__item--left .sm-timeline__content  { grid-column: 1; padding-right: var(--space-10); text-align: right; }
+.sm-timeline__item--left .sm-timeline__dot       { grid-column: 2; }
+
+/* Items del lado derecho — punto en col 2, contenido en col 3 */
+.sm-timeline__item--right .sm-timeline__dot      { grid-column: 2; }
+.sm-timeline__item--right .sm-timeline__content  { grid-column: 3; padding-left: var(--space-10); text-align: left; }
+
+/* Mobile — todo a la izquierda */
+@media (max-width: 768px) {
+  .sm-timeline__item {
+    grid-template-columns: 48px 1fr;
+    margin-bottom: var(--space-6);
+  }
+  .sm-timeline__item--left .sm-timeline__dot,
+  .sm-timeline__item--right .sm-timeline__dot { grid-column: 1; grid-row: 1; }
+
+  .sm-timeline__item--left .sm-timeline__content,
+  .sm-timeline__item--right .sm-timeline__content {
+    grid-column: 2; grid-row: 1;
+    padding-left: var(--space-6);
+    padding-right: 0;
+    text-align: left;
+  }
+}
+
+/* Punto central del timeline */
+.sm-timeline__dot {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  z-index: 1;
+  margin: 0 auto;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base),
+              transform var(--transition-spring);
+  flex-shrink: 0;
+}
+
+.sm-timeline__item:hover .sm-timeline__dot {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 20px var(--color-primary-dim);
+  transform: scale(1.1);
+}
+
+/* Contenido de cada evento */
+.sm-timeline__content {
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition-base), transform var(--transition-slow);
+}
+.sm-timeline__item:hover .sm-timeline__content {
+  border-color: rgba(108, 99, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.sm-timeline__year {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-2);
+}
+
+.sm-timeline__event {
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.sm-timeline__desc {
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+
+/* El item del futuro tiene estilo diferente — más difuso */
+.sm-timeline__item--future .sm-timeline__content {
+  border-style: dashed;
+  border-color: rgba(108, 99, 255, 0.25);
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.04) 0%, var(--color-surface) 100%);
+}
+.sm-timeline__item--future .sm-timeline__dot {
+  border-color: var(--color-primary);
+  background: var(--color-primary-dim);
+  box-shadow: 0 0 24px var(--color-primary-glow);
+}
+
+
+/* ============================================================
+  05. HABILIDADES
+  Panel dividido: barras de progreso técnicas a la izquierda,
+  chips de habilidades blandas y herramientas a la derecha.
+  ============================================================ */
+.sm-skills {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sm-skills__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+}
+
+@media (min-width: 768px) {
+  .sm-skills__inner { grid-template-columns: 1fr 1fr; gap: var(--space-16); }
+}
+
+.sm-skills__group-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-6);
+}
+.sm-skills__group-title--tools {
+  margin-top: var(--space-8);
+}
+
+/* ── Barras de habilidades técnicas ── */
+.sm-skills__bars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.sm-skill-bar__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.sm-skill-bar__name {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.sm-skill-bar__level {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-primary);
+  font-family: var(--font-display);
+}
+
+.sm-skill-bar__track {
+  width: 100%;
+  height: 6px;
+  background: var(--color-surface-2);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.sm-skill-bar__fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, var(--color-primary), #9D97FF);
+  width: 0%;               /* Empieza en 0, se anima desde JS */
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
+}
+
+/* ── Chips de habilidades blandas ── */
+.sm-skills__soft-desc {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-5);
+}
+
+.sm-skills__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.sm-skills__chip {
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: all var(--transition-base);
+  cursor: default;
+}
+.sm-skills__chip:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--color-primary-dim);
+  transform: translateY(-2px);
+}
+
+/* ── Herramientas ── */
+.sm-skills__tools {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.sm-skills__tool {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: all var(--transition-base);
+}
+.sm-skills__tool:hover {
+  border-color: var(--color-primary);
+  color: var(--color-text-primary);
+  transform: translateY(-2px);
+}
+
+.sm-skills__tool-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+  06. VISIÓN Y METAS
+  Sección de declaración de visión + metas por plazo.
+  La quote grande llama la atención antes de las metas.
+  ============================================================ */
+.sm-vision {
+  padding: var(--space-24) 0;
+}
+
+.sm-vision__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Quote grande de visión */
+.sm-vision__quote {
+  position: relative;
+  padding: var(--space-10) var(--space-12);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  border-left: 3px solid var(--color-primary);
+  overflow: hidden;
+}
+
+/* Decoración tipográfica grande en el fondo */
+.sm-vision__quote::before {
+  content: '"';
+  position: absolute;
+  top: -20px; left: 20px;
+  font-family: var(--font-display);
+  font-size: 15rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  opacity: 0.04;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.sm-vision__quote-text {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-lg), 2.5vw, var(--text-2xl));
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+}
+
+.sm-vision__quote-text em {
+  color: var(--color-primary);
+  font-style: normal;
+}
+
+.sm-vision__quote-author {
+  margin-top: var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Grid de metas por plazo */
+.sm-vision__goals {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .sm-vision__goals { grid-template-columns: repeat(3, 1fr); }
+}
+
+.sm-vision__goal {
+  padding: var(--space-8);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: transform var(--transition-slow), border-color var(--transition-base);
+}
+.sm-vision__goal:hover {
+  transform: translateY(-4px);
+  border-color: rgba(108, 99, 255, 0.3);
+}
+
+.sm-vision__goal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sm-vision__goal-tag {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.sm-vision__goal-tag--short {
+  background: rgba(74, 222, 128, 0.1);
+  color: #4ADE80;
+  border: 1px solid rgba(74, 222, 128, 0.25);
+}
+.sm-vision__goal-tag--mid {
+  background: rgba(245, 166, 35, 0.1);
+  color: var(--color-accent);
+  border: 1px solid rgba(245, 166, 35, 0.25);
+}
+.sm-vision__goal-tag--long {
+  background: var(--color-primary-dim);
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+}
+
+.sm-vision__goal-icon {
+  font-size: 1.5rem;
+}
+
+.sm-vision__goal-title {
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.sm-vision__goal-desc {
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+
+
+/* ============================================================
+  07. CTA FINAL
+  Sección de cierre con invitación a conectar.
+  Diseño centrado con glow de fondo para destacar.
+  ============================================================ */
+.sm-cta {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+
+.sm-cta__inner {
+  position: relative;
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-12);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+/* Glow de fondo del CTA */
+.sm-cta__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(108, 99, 255, 0.08) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.sm-cta__title {
+  font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl));
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+.sm-cta__highlight {
+  color: transparent;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.sm-cta__desc {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  max-width: 440px;
+  line-height: 1.7;
+}
+
+.sm-cta__actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+/* ============================================================
+  08. RESPONSIVE — AJUSTES ADICIONALES
+  ============================================================ */
+
+/* Hero en mobile — stack vertical */
+@media (max-width: 640px) {
+  .sm-hero {
+    padding: var(--space-16) 0 var(--space-20);
+    min-height: auto;
+  }
+  .sm-hero__avatar-wrap { width: 200px; height: 200px; }
+  .sm-hero__avatar-letter { font-size: 5rem; }
+  .sm-hero__actions { flex-direction: column; }
+  .sm-hero__actions .btn { width: 100%; justify-content: center; }
+}
+
+/* Quote en mobile */
+@media (max-width: 640px) {
+  .sm-vision__quote { padding: var(--space-8); }
+  .sm-vision__quote::before { font-size: 8rem; }
+}
+
+/* Footer activo */
+.footer__link--active {
+  color: var(--color-primary);
+}

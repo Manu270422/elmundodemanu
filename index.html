@@ -1,93 +1,639 @@
 <!DOCTYPE html>
+<!--
+  ============================================================
+  index.html — El Mundo de Manu
+  ============================================================
+  Esta es la puerta de entrada a mi sitio web personal.
+  Aquí presento quién soy, mis áreas de interés y los mundos
+  que he decidido construir digitalmente. Este archivo es el
+  corazón de toda mi plataforma: define la estructura base,
+  carga mis estilos globales y mi lógica principal.
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0 — Base
+  ============================================================
+-->
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>El Mundo de Manu 🌎</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="assets/css/estilos.css">
-  <!-- 📌 Librería de iconos Lucide -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <meta name="description"
+    content="El Mundo de Manu — Portafolio personal de un estudiante de Ingeniería Informática apasionado por la tecnología, el gaming, la fe y el emprendimiento digital." />
+  <meta name="keywords" content="portafolio, desarrollador, ingeniería informática, gaming, tecnología, fe, emprendimiento" />
+  <meta name="author" content="Manu" />
+
+  <!-- Open Graph para compartir en redes sociales -->
+  <meta property="og:title" content="El Mundo de Manu" />
+  <meta property="og:description" content="Mi espacio digital — tecnología, fe, gaming y más." />
+  <meta property="og:type" content="website" />
+
+  <title>El Mundo de Manu</title>
+
+  <!-- Google Fonts: Syne (display / titulares) + DM Sans (cuerpo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet" />
+
+  <!-- Mi hoja de estilos principal -->
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <!-- 🔹 Header -->
-  <header>
-    <h1>🌍 Bienvenido a El Mundo de Manu</h1>
 
-    <!-- ☰ Menú hamburguesa visible en móvil -->
-    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+  <!-- ============================================================
+    CURSOR PERSONALIZADO
+    Creo un cursor propio para darle personalidad al sitio.
+  ============================================================ -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
 
-    <!-- 🔹 Menú de navegación con iconos -->
-    <nav id="mainNav">
-      <ul>
-        <li><a href="secciones/gaming.html"><i data-lucide="gamepad-2"></i> Gaming y Entretenimiento</a></li>
-        <li><a href="secciones/fe.html"><i data-lucide="hands-praying"></i> Fe y Espiritualidad</a></li>
-        <li><a href="secciones/relaciones.html"><i data-lucide="heart"></i> Relaciones y Vida</a></li>
-        <li><a href="secciones/tecnologia.html"><i data-lucide="cpu"></i> Tecnología y Tutoriales</a></li>
-        <li><a href="secciones/infantil.html"><i data-lucide="baby"></i> Mundo Infantil</a></li>
-        <li><a href="secciones/contacto.html"><i data-lucide="phone"></i> Contacto</a></li>
-        <li><a href="secciones/sobre.html"><i data-lucide="user"></i> Sobre el autor</a></li>
-        <!-- Nuevo acceso directo -->
-        <li><a href="calculadora/index.html"><i data-lucide="calculator"></i> Calculadora de Notas</a></li>
+  <!-- ============================================================
+    LOADER DE ENTRADA
+    Pantalla de carga animada que da la bienvenida al usuario
+    antes de revelar el sitio completo.
+  ============================================================ -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <div class="loader__logo">
+        <span class="loader__letter">M</span>
+      </div>
+      <div class="loader__bar">
+        <div class="loader__progress" id="loaderProgress"></div>
+      </div>
+      <p class="loader__text">Cargando mi mundo...</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+    NAVBAR — NAVEGACIÓN GLOBAL
+    Barra de navegación fija y reutilizable que cargará
+    en todas las páginas del sitio.
+  ============================================================ -->
+  <header class="navbar" id="navbar" role="banner">
+    <nav class="navbar__container" aria-label="Navegación principal">
+
+      <!-- Logo / Identidad -->
+      <a href="index.html" class="navbar__logo" aria-label="Ir al inicio">
+        <span class="navbar__logo-mark">M</span>
+        <span class="navbar__logo-text">El Mundo de <strong>Manu</strong></span>
+      </a>
+
+      <!-- Links de navegación (desktop) -->
+      <ul class="navbar__links" role="list">
+        <li><a href="#inicio" class="navbar__link navbar__link--active">Inicio</a></li>
+        <li><a href="#mundos" class="navbar__link">Mis Mundos</a></li>
+        <li><a href="#proyectos" class="navbar__link">Proyectos</a></li>
+        <li><a href="#sobre-mi" class="navbar__link">Sobre Mí</a></li>
+        <li>
+          <a href="#contacto" class="navbar__link navbar__link--cta">
+            Contáctame
+            <span class="navbar__cta-dot" aria-hidden="true"></span>
+          </a>
+        </li>
       </ul>
+
+      <!-- Botón hamburguesa (mobile) -->
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false"
+        aria-controls="mobileMenu">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
     </nav>
+
+    <!-- Menú mobile desplegable -->
+    <div class="navbar__mobile" id="mobileMenu" aria-hidden="true" role="dialog" aria-label="Menú de navegación">
+      <ul class="navbar__mobile-links" role="list">
+        <li><a href="#inicio" class="navbar__mobile-link">Inicio</a></li>
+        <li><a href="#mundos" class="navbar__mobile-link">Mis Mundos</a></li>
+        <li><a href="#proyectos" class="navbar__mobile-link">Proyectos</a></li>
+        <li><a href="#sobre-mi" class="navbar__mobile-link">Sobre Mí</a></li>
+        <li><a href="#contacto" class="navbar__mobile-link navbar__mobile-link--cta">Contáctame</a></li>
+      </ul>
+    </div>
   </header>
 
-  <!-- 🔹 Contenido principal -->
-  <main>
-    <!-- Bienvenida -->
-    <section class="intro">
-      <h2>Explora los temas que te apasionan ✨</h2>
-      <p>
-        Este sitio está lleno de ideas, juegos, tutoriales, reflexiones, y mucho más.
-        ¡Explora cada sección y disfruta de la experiencia!
-      </p>
-    </section>
+  <!-- ============================================================
+    MAIN — CONTENIDO PRINCIPAL
+  ============================================================ -->
+  <main id="main" role="main">
 
-    <!-- 📖 Versículo del día -->
-    <section class="versiculo-dia">
-      <h2><i data-lucide="book"></i> Versículo del Día</h2>
-      <blockquote id="versiculo"></blockquote>
-    </section>
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN HERO — INICIO
+      Primera impresión. Aquí me presento con fuerza y claridad.
+      El fondo animado de partículas lo controlo desde script.js.
+    ────────────────────────────────────────────────────────── -->
+    <section class="hero" id="inicio" aria-labelledby="heroTitle">
 
-    <!-- Herramientas útiles -->
-    <section class="herramientas">
-      <h2><i data-lucide="wrench"></i> Herramientas y Recursos</h2>
-      <div class="card">
-        <h3><i data-lucide="calculator"></i> Calculadora de Notas</h3>
-        <p>
-          Ingresa tus notas de parciales, quizzes y trabajos, y obtén tu promedio automáticamente.
-          También puedes calcular cuánto necesitas para alcanzar tu meta final.
+      <!-- Fondo de partículas / cosmos -->
+      <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+
+      <!-- Líneas de gradiente decorativas -->
+      <div class="hero__glow hero__glow--left" aria-hidden="true"></div>
+      <div class="hero__glow hero__glow--right" aria-hidden="true"></div>
+
+      <div class="hero__content">
+
+        <!-- Insignia pequeña de presentación -->
+        <div class="hero__badge" data-animate="fade-up" data-delay="0">
+          <span class="hero__badge-dot" aria-hidden="true"></span>
+          Estudiante · Emprendedor · Creador
+        </div>
+
+        <!-- Título principal -->
+        <h1 class="hero__title" id="heroTitle" data-animate="fade-up" data-delay="1">
+          Bienvenido a<br />
+          <span class="hero__title-highlight">Mi Mundo</span>
+        </h1>
+
+        <!-- Descripción -->
+        <p class="hero__subtitle" data-animate="fade-up" data-delay="2">
+          Soy <strong>Manu</strong>, estudiante de Ingeniería Informática con una visión clara:
+          construir, crear y crecer. Este espacio es mi universo digital —
+          donde la <em>tecnología</em>, la <em>fe</em>, el <em>gaming</em> y las
+          <em>relaciones humanas</em> conviven.
         </p>
-        <a href="calculadora/index.html" class="btn-calculadora">Abrir Calculadora</a>
+
+        <!-- Call to actions -->
+        <div class="hero__actions" data-animate="fade-up" data-delay="3">
+          <a href="#mundos" class="btn btn--primary">
+            Explorar mis mundos
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+          <a href="#sobre-mi" class="btn btn--ghost">Conoce más sobre mí</a>
+        </div>
+
+        <!-- Métricas / stats rápidos -->
+        <div class="hero__stats" data-animate="fade-up" data-delay="4">
+          <div class="hero__stat">
+            <span class="hero__stat-number" data-count="6">0</span>
+            <span class="hero__stat-label">Mundos</span>
+          </div>
+          <div class="hero__stat-divider" aria-hidden="true"></div>
+          <div class="hero__stat">
+            <span class="hero__stat-number" data-count="100">0</span>
+            <span class="hero__stat-label">% Pasión</span>
+          </div>
+          <div class="hero__stat-divider" aria-hidden="true"></div>
+          <div class="hero__stat">
+            <span class="hero__stat-number" data-count="1">0</span>
+            <span class="hero__stat-label">Gran visión</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Indicador scroll -->
+      <div class="hero__scroll" aria-hidden="true">
+        <div class="hero__scroll-line"></div>
+        <span>Scroll</span>
       </div>
     </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN MIS MUNDOS
+      Presento cada área temática del sitio como un "mundo"
+      con personalidad propia. Cada tarjeta lleva al usuario
+      a la sección correspondiente.
+    ────────────────────────────────────────────────────────── -->
+    <section class="worlds" id="mundos" aria-labelledby="worldsTitle">
+      <div class="container">
+
+        <!-- Encabezado de sección -->
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag">Explora</span>
+          <h2 class="section-title" id="worldsTitle">Mis Mundos</h2>
+          <p class="section-desc">
+            Cada mundo es una parte de mí. Los he construido con pasión
+            y quiero compartirlos contigo.
+          </p>
+        </div>
+
+        <!-- Grid de mundos -->
+        <div class="worlds__grid" role="list">
+
+          <!-- Mundo: Fe -->
+          <article class="world-card world-card--fe" role="listitem" data-animate="fade-up" data-delay="0">
+            <div class="world-card__icon" aria-hidden="true">✝</div>
+            <div class="world-card__content">
+              <h3 class="world-card__title">Fe</h3>
+              <p class="world-card__desc">
+                Mi fundamento. Reflexiones, devocionales y el camino
+                que da sentido a todo lo demás.
+              </p>
+            </div>
+            <a href="secciones/fe/fe.html" class="world-card__link" aria-label="Ir al mundo Fe">
+              Explorar
+              <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </a>
+            <div class="world-card__glow" aria-hidden="true"></div>
+          </article>
+
+          <!-- Mundo: Gaming -->
+          <article class="world-card world-card--gaming" role="listitem" data-animate="fade-up" data-delay="1">
+            <div class="world-card__icon" aria-hidden="true">🎮</div>
+            <div class="world-card__content">
+              <h3 class="world-card__title">Gaming</h3>
+              <p class="world-card__desc">
+                Partidas, reseñas, estrategias y la cultura gamer
+                que me acompaña desde siempre.
+              </p>
+            </div>
+            <a href="secciones/gaming/gaming.html" class="world-card__link" aria-label="Ir al mundo Gaming">
+              Explorar
+              <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </a>
+            <div class="world-card__glow" aria-hidden="true"></div>
+          </article>
+
+          <!-- Mundo: Infantil -->
+          <article class="world-card world-card--infantil" role="listitem" data-animate="fade-up" data-delay="2">
+            <div class="world-card__icon" aria-hidden="true">🌈</div>
+            <div class="world-card__content">
+              <h3 class="world-card__title">Infantil</h3>
+              <p class="world-card__desc">
+                Contenido, historias y recursos pensados
+                para los más pequeños del mundo.
+              </p>
+            </div>
+            <a href="secciones/infantil/infantil.html" class="world-card__link" aria-label="Ir al mundo Infantil">
+              Explorar
+              <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </a>
+            <div class="world-card__glow" aria-hidden="true"></div>
+          </article>
+
+          <!-- Mundo: Relaciones -->
+          <article class="world-card world-card--relaciones" role="listitem" data-animate="fade-up" data-delay="3">
+            <div class="world-card__icon" aria-hidden="true">🤝</div>
+            <div class="world-card__content">
+              <h3 class="world-card__title">Relaciones</h3>
+              <p class="world-card__desc">
+                Familia, amistad, comunidad. Las conexiones humanas
+                que nos hacen crecer.
+              </p>
+            </div>
+            <a href="secciones/relaciones/relaciones.html" class="world-card__link"
+              aria-label="Ir al mundo Relaciones">
+              Explorar
+              <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </a>
+            <div class="world-card__glow" aria-hidden="true"></div>
+          </article>
+
+          <!-- Mundo: Tecnología -->
+          <article class="world-card world-card--tecnologia" role="listitem" data-animate="fade-up" data-delay="4">
+            <div class="world-card__icon" aria-hidden="true">⚡</div>
+            <div class="world-card__content">
+              <h3 class="world-card__title">Tecnología</h3>
+              <p class="world-card__desc">
+                Código, proyectos, tutoriales y mi camino
+                como desarrollador e ingeniero en formación.
+              </p>
+            </div>
+            <a href="secciones/tecnologia/tecnologia.html" class="world-card__link"
+              aria-label="Ir al mundo Tecnología">
+              Explorar
+              <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </a>
+            <div class="world-card__glow" aria-hidden="true"></div>
+          </article>
+
+          <!-- Mundo: Sobre Mí -->
+          <article class="world-card world-card--sobremi" role="listitem" data-animate="fade-up" data-delay="5">
+            <div class="world-card__icon" aria-hidden="true">🚀</div>
+            <div class="world-card__content">
+              <h3 class="world-card__title">Sobre Mí</h3>
+              <p class="world-card__desc">
+                Mi historia, mis valores, mis metas y
+                el sueño que me impulsa cada día.
+              </p>
+            </div>
+            <a href="secciones/sobremi/sobremi.html" class="world-card__link" aria-label="Ir a Sobre Mí">
+              Explorar
+              <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </a>
+            <div class="world-card__glow" aria-hidden="true"></div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN PROYECTOS DESTACADOS
+      Vitrina de mis proyectos más importantes.
+      Funciona como catálogo; se expandirá con nuevos proyectos.
+    ────────────────────────────────────────────────────────── -->
+    <section class="projects" id="proyectos" aria-labelledby="projectsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag">Portafolio</span>
+          <h2 class="section-title" id="projectsTitle">Proyectos Destacados</h2>
+          <p class="section-desc">
+            Aquí vivo lo que aprendo. Cada proyecto es un paso real
+            hacia mis metas.
+          </p>
+        </div>
+
+        <!-- Grid de proyectos -->
+        <div class="projects__grid">
+
+          <!-- Proyecto 1: El Mundo de Manu (este mismo sitio) -->
+          <article class="project-card project-card--featured" data-animate="fade-up" data-delay="0">
+            <div class="project-card__meta">
+              <span class="project-card__tag">Web</span>
+              <span class="project-card__status project-card__status--active">En desarrollo</span>
+            </div>
+            <h3 class="project-card__title">El Mundo de Manu</h3>
+            <p class="project-card__desc">
+              Mi plataforma web personal. La construyo desde cero con HTML, CSS y
+              JavaScript puro — aprendiendo cada línea de código que escribo.
+            </p>
+            <div class="project-card__stack">
+              <span class="project-card__tech">HTML5</span>
+              <span class="project-card__tech">CSS3</span>
+              <span class="project-card__tech">JavaScript</span>
+            </div>
+            <a href="#" class="project-card__link" aria-label="Ver proyecto El Mundo de Manu">
+              Ver proyecto →
+            </a>
+          </article>
+
+          <!-- Proyecto 2: Placeholder para próximo proyecto -->
+          <article class="project-card project-card--coming" data-animate="fade-up" data-delay="1">
+            <div class="project-card__meta">
+              <span class="project-card__tag">Próximamente</span>
+            </div>
+            <h3 class="project-card__title">Próximo Proyecto</h3>
+            <p class="project-card__desc">
+              Estoy trabajando en algo nuevo. Cuando esté listo, lo encontrarás aquí.
+              El proceso de construir es parte del viaje.
+            </p>
+            <div class="project-card__placeholder" aria-hidden="true">
+              <span>⚙️</span>
+              <p>En construcción</p>
+            </div>
+          </article>
+
+          <!-- Proyecto 3: Placeholder -->
+          <article class="project-card project-card--coming" data-animate="fade-up" data-delay="2">
+            <div class="project-card__meta">
+              <span class="project-card__tag">Ideas</span>
+            </div>
+            <h3 class="project-card__title">Ideas en el Horizonte</h3>
+            <p class="project-card__desc">
+              El futuro tiene muchos proyectos esperando nacer. Este espacio
+              crecerá junto conmigo.
+            </p>
+            <div class="project-card__placeholder" aria-hidden="true">
+              <span>💡</span>
+              <p>Muy pronto</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN SOBRE MÍ — PREVIEW
+      Una introducción breve. La página completa /secciones/sobremi
+      tendrá toda la profundidad de mi historia personal.
+    ────────────────────────────────────────────────────────── -->
+    <section class="about-preview" id="sobre-mi" aria-labelledby="aboutTitle">
+      <div class="container">
+        <div class="about-preview__inner">
+
+          <!-- Lado izquierdo: imagen / avatar -->
+          <div class="about-preview__visual" data-animate="fade-right">
+            <div class="about-preview__avatar">
+              <div class="about-preview__avatar-ring" aria-hidden="true"></div>
+              <div class="about-preview__avatar-img" aria-label="Avatar de Manu">
+                <!-- Cuando tenga foto real, reemplazaré este placeholder -->
+                <span class="about-preview__avatar-letter">M</span>
+              </div>
+              <!-- Badges flotantes -->
+              <div class="about-preview__badge about-preview__badge--1" aria-hidden="true">
+                <span>⚡</span> Dev
+              </div>
+              <div class="about-preview__badge about-preview__badge--2" aria-hidden="true">
+                <span>🎮</span> Gamer
+              </div>
+              <div class="about-preview__badge about-preview__badge--3" aria-hidden="true">
+                <span>✝</span> Fe
+              </div>
+            </div>
+          </div>
+
+          <!-- Lado derecho: texto -->
+          <div class="about-preview__text" data-animate="fade-left">
+            <div class="section-header section-header--left">
+              <span class="section-tag">Quién soy</span>
+              <h2 class="section-title" id="aboutTitle">Hola, soy Manu</h2>
+            </div>
+            <p class="about-preview__desc">
+              Estudiante de Ingeniería Informática con recursos limitados pero con una
+              visión enorme. Creo que la tecnología puede cambiar vidas — empezando
+              por la mía y luego ayudando a los demás.
+            </p>
+            <p class="about-preview__desc">
+              Este sitio es más que un portafolio: es el inicio de mi camino
+              como emprendedor digital. Cada página, cada línea de código y cada
+              proyecto aquí representa horas de trabajo y mucha fe.
+            </p>
+            <!-- Lista de valores -->
+            <ul class="about-preview__values" role="list">
+              <li class="about-preview__value">
+                <span class="about-preview__value-icon" aria-hidden="true">🧠</span>
+                Aprendizaje continuo
+              </li>
+              <li class="about-preview__value">
+                <span class="about-preview__value-icon" aria-hidden="true">🔥</span>
+                Pasión por construir
+              </li>
+              <li class="about-preview__value">
+                <span class="about-preview__value-icon" aria-hidden="true">🌱</span>
+                Crecimiento personal
+              </li>
+            </ul>
+            <a href="secciones/sobremi/sobremi.html" class="btn btn--primary">
+              Mi historia completa →
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN CONTACTO
+      Formulario simple y efectivo para que puedan contactarme.
+    ────────────────────────────────────────────────────────── -->
+    <section class="contact" id="contacto" aria-labelledby="contactTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag">Hablemos</span>
+          <h2 class="section-title" id="contactTitle">¿Tienes algo en mente?</h2>
+          <p class="section-desc">
+            Estoy abierto a colaboraciones, propuestas y nuevas amistades.
+            No dudes en escribirme.
+          </p>
+        </div>
+
+        <div class="contact__inner" data-animate="fade-up" data-delay="1">
+          <!-- Formulario de contacto -->
+          <form class="contact__form" id="contactForm" novalidate aria-label="Formulario de contacto">
+            <div class="form-group">
+              <label for="contactName" class="form-label">Nombre</label>
+              <input type="text" id="contactName" name="name" class="form-input" placeholder="¿Cómo te llamas?"
+                required autocomplete="name" />
+              <span class="form-error" role="alert" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+              <label for="contactEmail" class="form-label">Email</label>
+              <input type="email" id="contactEmail" name="email" class="form-input" placeholder="tu@email.com"
+                required autocomplete="email" />
+              <span class="form-error" role="alert" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+              <label for="contactMessage" class="form-label">Mensaje</label>
+              <textarea id="contactMessage" name="message" class="form-input form-textarea"
+                placeholder="Cuéntame en qué puedo ayudarte..." required rows="5"></textarea>
+              <span class="form-error" role="alert" aria-live="polite"></span>
+            </div>
+            <button type="submit" class="btn btn--primary btn--full" id="contactSubmit">
+              <span class="btn-text">Enviar mensaje</span>
+              <span class="btn-loading" aria-hidden="true">Enviando...</span>
+            </button>
+            <!-- Mensaje de éxito -->
+            <div class="contact__success" id="contactSuccess" role="status" aria-live="polite" hidden>
+              <span>✅</span> ¡Mensaje enviado! Te respondo pronto.
+            </div>
+          </form>
+
+          <!-- Info de contacto lateral -->
+          <div class="contact__info">
+            <h3 class="contact__info-title">También puedes encontrarme en:</h3>
+            <ul class="contact__socials" role="list">
+              <li>
+                <a href="#" class="contact__social" aria-label="GitHub de Manu" target="_blank"
+                  rel="noopener noreferrer">
+                  <span class="contact__social-icon" aria-hidden="true">
+                    <!-- SVG GitHub -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path
+                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                    </svg>
+                  </span>
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a href="#" class="contact__social" aria-label="LinkedIn de Manu" target="_blank"
+                  rel="noopener noreferrer">
+                  <span class="contact__social-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path
+                        d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                      <circle cx="4" cy="4" r="2" />
+                    </svg>
+                  </span>
+                  LinkedIn
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
-  <!-- 🔹 Footer mejorado -->
-  <footer>
-    <p>&copy; 2025 El Mundo de Manu. Todos los derechos reservados.</p>
-    <div class="footer-links">
-      <a href="privacidad.html">Política de Privacidad</a> ·
-      <a href="terminos.html">Términos y Condiciones</a> ·
-      <a href="https://github.com/Manu270422/elmundodemanu" target="_blank" rel="noopener">GitHub Repo</a> ·
-      <a href="contacto.html">Contacto</a>
+  <!-- ============================================================
+    FOOTER — PIE DE PÁGINA GLOBAL
+    Será reutilizado en todas las páginas del sitio.
+  ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+
+        <!-- Branding -->
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo" aria-label="Volver al inicio">
+            <span class="footer__logo-mark">M</span>
+            El Mundo de Manu
+          </a>
+          <p class="footer__tagline">
+            Construyendo mi universo digital, un proyecto a la vez.
+          </p>
+        </div>
+
+        <!-- Links del sitio -->
+        <nav class="footer__nav" aria-label="Navegación del pie de página">
+          <h4 class="footer__nav-title">Mis Mundos</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="secciones/fe/fe.html" class="footer__link">Fe</a></li>
+            <li><a href="secciones/gaming/gaming.html" class="footer__link">Gaming</a></li>
+            <li><a href="secciones/infantil/infantil.html" class="footer__link">Infantil</a></li>
+            <li><a href="secciones/relaciones/relaciones.html" class="footer__link">Relaciones</a></li>
+            <li><a href="secciones/tecnologia/tecnologia.html" class="footer__link">Tecnología</a></li>
+            <li><a href="secciones/sobremi/sobremi.html" class="footer__link">Sobre Mí</a></li>
+          </ul>
+        </nav>
+
+        <!-- Links rápidos -->
+        <nav class="footer__nav" aria-label="Links rápidos">
+          <h4 class="footer__nav-title">Sitio</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="#inicio" class="footer__link">Inicio</a></li>
+            <li><a href="#proyectos" class="footer__link">Proyectos</a></li>
+            <li><a href="#contacto" class="footer__link">Contacto</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="footer__bottom">
+        <p class="footer__copy">
+          © <span id="footerYear"></span> El Mundo de Manu. Construido con 💛 y mucho café.
+        </p>
+        <p class="footer__credits">
+          Diseñado y desarrollado por <strong>Manu</strong>
+        </p>
+      </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="assets/js/script.js"></script>
-  <script src="assets/js/versiculos.js"></script>
-  <script>
-    // Inicializar iconos Lucide
-    lucide.createIcons();
+  <!-- Mi script principal -->
+  <script src="script.js"></script>
 
-    // Inicializar Versículo del Día
-    document.addEventListener("DOMContentLoaded", () => {
-      if (typeof mostrarVersiculo === "function") {
-        mostrarVersiculo(); // 👉 Muestra el versículo al cargar
-      }
-    });
-  </script>
 </body>
 </html>

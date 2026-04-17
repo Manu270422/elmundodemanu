@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  fe.html — El Mundo de Manu / Fe
+  ============================================================
+  Esta es la sección más personal y profunda de todo mi sitio.
+  Aquí comparto mi fe: lo que creo, por qué lo creo,
+  reflexiones del camino y recursos que me han formado.
+
+  No es predicar ni imponer — es compartir lo que me da
+  sentido y dirección en la vida.
+
+  Estructura:
+  - Hero: Mi declaración de fe
+  - ¿Por qué comparto esto?: Contexto de la sección
+  - Mis pilares de fe: Las verdades que me anclan
+  - Reflexiones: Pensamientos del camino (tipo blog)
+  - Versículos que me marcan: Palabras que vivo
+  - Recursos: Lo que leo, escucho y veo
+  - CTA: Invitación a conversar
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Fe — El Mundo de Manu. Mi fundamento espiritual: reflexiones, versículos, pilares de fe y el camino que da sentido a todo lo que hago." />
+  <meta name="author" content="Manu" />
+
+  <title>Fe — El Mundo de Manu</title>
+
+  <!-- Fuentes: Syne + DM Sans del sitio principal, más Playfair Display
+       para los versículos — le da un tono editorial y contemplativo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap"
+    rel="stylesheet" />
+
+  <!-- CSS global del sitio, luego el específico de Fe -->
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="fe.css" />
+</head>
+
+<body class="page-fe">
+
+  <!-- Cursor personalizado global -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
+
+  <!-- ============================================================
+    NAVBAR — Misma estructura global, paths relativos desde /fe/
+  ============================================================ -->
+  <header class="navbar" id="navbar" role="banner">
+    <nav class="navbar__container" aria-label="Navegación principal">
+
+      <a href="../../index.html" class="navbar__logo" aria-label="Volver al inicio">
+        <span class="navbar__logo-mark">M</span>
+        <span class="navbar__logo-text">El Mundo de <strong>Manu</strong></span>
+      </a>
+
+      <ul class="navbar__links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__link navbar__link--active">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__link">Sobre Mí</a></li>
+        <li>
+          <a href="../../index.html#contacto" class="navbar__link navbar__link--cta">
+            Contáctame
+            <span class="navbar__cta-dot" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+
+      <button class="navbar__toggle" id="navToggle"
+        aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </nav>
+
+    <div class="navbar__mobile" id="mobileMenu" aria-hidden="true">
+      <ul class="navbar__mobile-links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__mobile-link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__mobile-link">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__mobile-link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__mobile-link">Sobre Mí</a></li>
+        <li><a href="../../index.html#contacto"  class="navbar__mobile-link navbar__mobile-link--cta">Contáctame</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" aria-label="Ruta de navegación">
+    <div class="container">
+      <nav class="breadcrumb__nav">
+        <a href="../../index.html"         class="breadcrumb__link">Inicio</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="../../index.html#mundos"  class="breadcrumb__link">Mis Mundos</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span class="breadcrumb__current" aria-current="page">Fe</span>
+      </nav>
+    </div>
+  </div>
+
+  <main id="main" role="main">
+
+    <!-- ──────────────────────────────────────────────────────────
+      HERO DE FE
+      Diseño espiritual y contemplativo. Fondo con partículas
+      de luz suaves (constelaciones), versículo central grande,
+      declaración personal de fe.
+    ────────────────────────────────────────────────────────── -->
+    <section class="fe-hero" id="fe-inicio" aria-labelledby="feHeroTitle">
+
+      <!-- Fondo animado de partículas de luz -->
+      <canvas class="fe-hero__canvas" id="feCanvas" aria-hidden="true"></canvas>
+
+      <!-- Destellos de luz decorativos -->
+      <div class="fe-hero__light fe-hero__light--1" aria-hidden="true"></div>
+      <div class="fe-hero__light fe-hero__light--2" aria-hidden="true"></div>
+      <div class="fe-hero__light fe-hero__light--3" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="fe-hero__inner">
+
+          <!-- Cruz decorativa SVG -->
+          <div class="fe-hero__cross-wrap" aria-hidden="true">
+            <svg class="fe-hero__cross" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="24" y="0"  width="12" height="80" rx="6" fill="currentColor"/>
+              <rect x="0"  y="24" width="60" height="12" rx="6" fill="currentColor"/>
+            </svg>
+          </div>
+
+          <!-- Contenido central -->
+          <div class="fe-hero__content" data-animate="fade-up">
+
+            <div class="fe-hero__tag-row">
+              <span class="section-tag fe-tag">Mi fundamento</span>
+            </div>
+
+            <h1 class="fe-hero__title" id="feHeroTitle">
+              Fe
+            </h1>
+
+            <!-- Versículo destacado central — estilo editorial -->
+            <blockquote class="fe-hero__verse" data-animate="fade-up" data-delay="1">
+              <p class="fe-hero__verse-text">
+                "Porque yo sé los pensamientos que tengo acerca de vosotros,
+                pensamientos de paz, y no de mal, para daros el fin que esperáis."
+              </p>
+              <footer class="fe-hero__verse-ref">— Jeremías 29:11</footer>
+            </blockquote>
+
+            <p class="fe-hero__desc" data-animate="fade-up" data-delay="2">
+              Esta sección es la más honesta de todo mi sitio.
+              Aquí no hay código ni proyectos — hay lo que realmente
+              me sostiene: mi fe en Dios.
+            </p>
+
+            <div class="fe-hero__actions" data-animate="fade-up" data-delay="3">
+              <a href="#fe-pilares" class="btn fe-btn--primary">
+                Explorar
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a href="#fe-reflexiones" class="btn btn--ghost fe-btn--ghost">Reflexiones</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="fe-hero__scroll" aria-hidden="true">
+        <div class="fe-hero__scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: ¿POR QUÉ COMPARTO ESTO?
+      Contexto humano y honesto de por qué tengo esta
+      sección en mi sitio. Sin pretensiones.
+    ────────────────────────────────────────────────────────── -->
+    <section class="fe-why" id="fe-porque" aria-labelledby="feWhyTitle">
+      <div class="container">
+        <div class="fe-why__inner" data-animate="fade-up">
+
+          <div class="fe-why__text">
+            <span class="section-tag fe-tag">Transparencia</span>
+            <h2 class="fe-why__title" id="feWhyTitle">
+              ¿Por qué comparto<br/>mi fe aquí?
+            </h2>
+            <p class="fe-why__desc">
+              Porque sería deshonesto de mi parte tener un sitio que me represente
+              y dejar afuera lo más importante de mi vida.
+              La fe no es solo algo que practico los domingos,
+              es el lente con el que veo todo lo demás.
+            </p>
+            <p class="fe-why__desc">
+              Mi código, mis proyectos, mis relaciones, mi forma de trabajar...
+              todo está filtrado por lo que creo. No comparto esto para
+              convencer a nadie, lo hago para ser completamente auténtico.
+            </p>
+            <p class="fe-why__desc">
+              Si compartes esta fe, espero que estas páginas te animen.
+              Si no la compartes, espero que al menos entiendas mejor quién soy.
+            </p>
+          </div>
+
+          <!-- Tarjeta de cita lateral -->
+          <div class="fe-why__card">
+            <div class="fe-why__card-icon" aria-hidden="true">✝</div>
+            <p class="fe-why__card-quote">
+              "Todo lo puedo en Cristo que me fortalece."
+            </p>
+            <span class="fe-why__card-ref">Filipenses 4:13</span>
+            <div class="fe-why__card-glow" aria-hidden="true"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: MIS PILARES DE FE
+      Las verdades centrales que me anclan.
+      Las cosas en las que creo con convicción.
+    ────────────────────────────────────────────────────────── -->
+    <section class="fe-pillars" id="fe-pilares" aria-labelledby="fePillarsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag fe-tag">Lo que creo</span>
+          <h2 class="section-title" id="fePillarsTitle">Mis Pilares de Fe</h2>
+          <p class="section-desc">
+            No es una doctrina teológica completa — son las verdades
+            que me sostienen en el día a día.
+          </p>
+        </div>
+
+        <div class="fe-pillars__grid">
+
+          <!-- Pilar 1: Dios es bueno -->
+          <article class="fe-pillar-card" data-animate="fade-up" data-delay="0">
+            <div class="fe-pillar-card__number" aria-hidden="true">01</div>
+            <div class="fe-pillar-card__icon" aria-hidden="true">🙏</div>
+            <h3 class="fe-pillar-card__title">Dios es bueno</h3>
+            <p class="fe-pillar-card__desc">
+              No condicionalmente bueno — bueno en su esencia.
+              Esa convicción cambia cómo enfrento las dificultades:
+              no como castigos sino como formación.
+            </p>
+            <div class="fe-pillar-card__verse">
+              <span>"Dad gracias al Señor, porque él es bueno"</span>
+              <cite>Salmo 136:1</cite>
+            </div>
+          </article>
+
+          <!-- Pilar 2: La fe sin obras -->
+          <article class="fe-pillar-card" data-animate="fade-up" data-delay="1">
+            <div class="fe-pillar-card__number" aria-hidden="true">02</div>
+            <div class="fe-pillar-card__icon" aria-hidden="true">⚡</div>
+            <h3 class="fe-pillar-card__title">Fe que actúa</h3>
+            <p class="fe-pillar-card__desc">
+              Creo que la fe sin obras está muerta. Por eso no espero
+              condiciones perfectas para construir, servir o dar.
+              Actúo desde hoy con lo que tengo.
+            </p>
+            <div class="fe-pillar-card__verse">
+              <span>"La fe sin obras es muerta"</span>
+              <cite>Santiago 2:26</cite>
+            </div>
+          </article>
+
+          <!-- Pilar 3: Propósito -->
+          <article class="fe-pillar-card" data-animate="fade-up" data-delay="2">
+            <div class="fe-pillar-card__number" aria-hidden="true">03</div>
+            <div class="fe-pillar-card__icon" aria-hidden="true">🎯</div>
+            <h3 class="fe-pillar-card__title">Propósito claro</h3>
+            <p class="fe-pillar-card__desc">
+              No estoy aquí por casualidad. Creo que Dios tiene un plan
+              específico para mí. Eso me da dirección cuando el camino
+              no es claro y calma cuando falla lo planificado.
+            </p>
+            <div class="fe-pillar-card__verse">
+              <span>"Porque somos hechura suya, creados para buenas obras"</span>
+              <cite>Efesios 2:10</cite>
+            </div>
+          </article>
+
+          <!-- Pilar 4: Gracia -->
+          <article class="fe-pillar-card" data-animate="fade-up" data-delay="3">
+            <div class="fe-pillar-card__number" aria-hidden="true">04</div>
+            <div class="fe-pillar-card__icon" aria-hidden="true">💛</div>
+            <h3 class="fe-pillar-card__title">Gracia, no perfección</h3>
+            <p class="fe-pillar-card__desc">
+              Me equivoco. Fallo. Aprendo. La gracia me recuerda
+              que el valor no viene de mis logros sino de quién
+              me creó. Eso me libera para intentarlo de nuevo.
+            </p>
+            <div class="fe-pillar-card__verse">
+              <span>"Bástate mi gracia, porque mi poder se perfecciona en la debilidad"</span>
+              <cite>2 Corintios 12:9</cite>
+            </div>
+          </article>
+
+          <!-- Pilar 5: Comunidad -->
+          <article class="fe-pillar-card" data-animate="fade-up" data-delay="4">
+            <div class="fe-pillar-card__number" aria-hidden="true">05</div>
+            <div class="fe-pillar-card__icon" aria-hidden="true">🤝</div>
+            <h3 class="fe-pillar-card__title">Fe en comunidad</h3>
+            <p class="fe-pillar-card__desc">
+              La fe no es algo privado que se practica en soledad.
+              Necesitamos otros para crecer. La comunidad me ha
+              dado corrección, apoyo y modelos a seguir.
+            </p>
+            <div class="fe-pillar-card__verse">
+              <span>"No dejando de congregarnos, como algunos tienen por costumbre"</span>
+              <cite>Hebreos 10:25</cite>
+            </div>
+          </article>
+
+          <!-- Pilar 6: Confianza en el proceso -->
+          <article class="fe-pillar-card" data-animate="fade-up" data-delay="5">
+            <div class="fe-pillar-card__number" aria-hidden="true">06</div>
+            <div class="fe-pillar-card__icon" aria-hidden="true">🌱</div>
+            <h3 class="fe-pillar-card__title">Confiar el proceso</h3>
+            <p class="fe-pillar-card__desc">
+              No todo tiene que tener sentido ahora. Aprendí a
+              soltar el control de los tiempos y confiar en
+              que hay una sabiduría mayor que la mía.
+            </p>
+            <div class="fe-pillar-card__verse">
+              <span>"Fíate del Señor con todo tu corazón"</span>
+              <cite>Proverbios 3:5</cite>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: REFLEXIONES
+      Mis pensamientos del camino. Honestidad espiritual.
+      Cada tarjeta es una reflexión breve con un tema.
+    ────────────────────────────────────────────────────────── -->
+    <section class="fe-reflections" id="fe-reflexiones" aria-labelledby="feReflectionsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag fe-tag">Del camino</span>
+          <h2 class="section-title" id="feReflectionsTitle">Reflexiones</h2>
+          <p class="section-desc">
+            Pensamientos cortos del camino. Sin pretensión teológica —
+            solo lo que voy aprendiendo en el proceso.
+          </p>
+        </div>
+
+        <div class="fe-reflections__grid">
+
+          <!-- Reflexión 1 -->
+          <article class="fe-reflection-card" data-animate="fade-up" data-delay="0">
+            <div class="fe-reflection-card__header">
+              <span class="fe-reflection-card__tag">Proceso</span>
+              <span class="fe-reflection-card__date">2026</span>
+            </div>
+            <h3 class="fe-reflection-card__title">
+              Cuando los recursos son limitados
+            </h3>
+            <p class="fe-reflection-card__body">
+              Empecé este proyecto sin mucho dinero, sin un equipo,
+              sin garantías. Y aprendí que la fe no es creer que todo
+              saldrá perfecto, es actuar aunque no lo tengas todo.
+              Cada línea de código que escribo desde esa convicción
+              tiene un peso diferente.
+            </p>
+            <div class="fe-reflection-card__verse">
+              "No por el poder ni por la fuerza, sino por mi Espíritu" — Zacarías 4:6
+            </div>
+          </article>
+
+          <!-- Reflexión 2 -->
+          <article class="fe-reflection-card" data-animate="fade-up" data-delay="1">
+            <div class="fe-reflection-card__header">
+              <span class="fe-reflection-card__tag">Identidad</span>
+              <span class="fe-reflection-card__date">2026</span>
+            </div>
+            <h3 class="fe-reflection-card__title">
+              La tecnología como vocación
+            </h3>
+            <p class="fe-reflection-card__body">
+              Tardé en entender que estudiar ingeniería y tener fe
+              no son cosas separadas. Hoy creo que aprender a programar
+              es una forma de desarrollar el talento que me fue dado,
+              y que usarlo para servir a otros es la mayor expresión
+              de gratitud que puedo tener.
+            </p>
+            <div class="fe-reflection-card__verse">
+              "Al que mucho se le da, mucho se le demandará" — Lucas 12:48
+            </div>
+          </article>
+
+          <!-- Reflexión 3 -->
+          <article class="fe-reflection-card" data-animate="fade-up" data-delay="2">
+            <div class="fe-reflection-card__header">
+              <span class="fe-reflection-card__tag">Fracaso</span>
+              <span class="fe-reflection-card__date">2026</span>
+            </div>
+            <h3 class="fe-reflection-card__title">
+              Cuando fallas y vuelves a empezar
+            </h3>
+            <p class="fe-reflection-card__body">
+              El desarrollo te enseña que los errores son parte del proceso.
+              La fe me enseñó lo mismo pero a un nivel más profundo.
+              No hay fracaso que defina mi valor. Hay corrección,
+              aprendizaje y un nuevo intento. Siempre hay un nuevo intento.
+            </p>
+            <div class="fe-reflection-card__verse">
+              "Aunque el justo caiga siete veces, se volverá a levantar" — Proverbios 24:16
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Nota de más reflexiones próximamente -->
+        <div class="fe-reflections__more" data-animate="fade-up">
+          <p>Seguiré añadiendo reflexiones a medida que el camino avance.</p>
+          <span class="fe-reflections__more-tag">Más por venir ✍️</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: VERSÍCULOS QUE ME MARCAN
+      Una galería visual de los versículos que más han
+      impactado mi vida. Diseño tipo tarjetas de cita.
+    ────────────────────────────────────────────────────────── -->
+    <section class="fe-verses" id="fe-versiculos" aria-labelledby="feVersesTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag fe-tag">Palabras que vivo</span>
+          <h2 class="section-title" id="feVersesTitle">Versículos que me Marcan</h2>
+        </div>
+
+        <!-- Carrusel / grid de versículos -->
+        <div class="fe-verses__grid" role="list">
+
+          <div class="fe-verse-card" role="listitem" data-animate="fade-up" data-delay="0">
+            <p class="fe-verse-card__text">
+              "Todo lo puedo en Cristo que me fortalece."
+            </p>
+            <cite class="fe-verse-card__ref">Filipenses 4:13</cite>
+          </div>
+
+          <div class="fe-verse-card fe-verse-card--accent" role="listitem" data-animate="fade-up" data-delay="1">
+            <p class="fe-verse-card__text">
+              "No os conforméis a este siglo, sino transformaos por medio de la renovación de vuestro entendimiento."
+            </p>
+            <cite class="fe-verse-card__ref">Romanos 12:2</cite>
+          </div>
+
+          <div class="fe-verse-card" role="listitem" data-animate="fade-up" data-delay="2">
+            <p class="fe-verse-card__text">
+              "Porque yo sé los pensamientos que tengo acerca de vosotros... pensamientos de paz, y no de mal."
+            </p>
+            <cite class="fe-verse-card__ref">Jeremías 29:11</cite>
+          </div>
+
+          <div class="fe-verse-card fe-verse-card--wide" role="listitem" data-animate="fade-up" data-delay="3">
+            <p class="fe-verse-card__text">
+              "Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas."
+            </p>
+            <cite class="fe-verse-card__ref">Mateo 6:33</cite>
+          </div>
+
+          <div class="fe-verse-card" role="listitem" data-animate="fade-up" data-delay="4">
+            <p class="fe-verse-card__text">
+              "Fíate del Señor con todo tu corazón, y no te apoyes en tu propia prudencia."
+            </p>
+            <cite class="fe-verse-card__ref">Proverbios 3:5</cite>
+          </div>
+
+          <div class="fe-verse-card" role="listitem" data-animate="fade-up" data-delay="5">
+            <p class="fe-verse-card__text">
+              "Y todo lo que hagáis, hacedlo de corazón, como para el Señor."
+            </p>
+            <cite class="fe-verse-card__ref">Colosenses 3:23</cite>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: RECURSOS DE FE
+      Lo que leo, escucho y veo que me nutre espiritualmente.
+      Recomendaciones honestas, no exhaustivas.
+    ────────────────────────────────────────────────────────── -->
+    <section class="fe-resources" id="fe-recursos" aria-labelledby="feResourcesTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag fe-tag">Lo que me nutre</span>
+          <h2 class="section-title" id="feResourcesTitle">Recursos</h2>
+          <p class="section-desc">
+            Lo que estoy leyendo, escuchando y aprendiendo en este camino.
+          </p>
+        </div>
+
+        <div class="fe-resources__grid">
+
+          <!-- Recurso: La Biblia -->
+          <div class="fe-resource-card" data-animate="fade-up" data-delay="0">
+            <div class="fe-resource-card__icon" aria-hidden="true">📖</div>
+            <div class="fe-resource-card__info">
+              <span class="fe-resource-card__type">Lectura diaria</span>
+              <h3 class="fe-resource-card__title">La Biblia</h3>
+              <p class="fe-resource-card__desc">
+                Mi fuente primaria. La leo en la versión Reina-Valera 1960
+                y complemento con la NVI para comparar traducciones.
+              </p>
+            </div>
+          </div>
+
+          <!-- Recurso: Iglesia local -->
+          <div class="fe-resource-card" data-animate="fade-up" data-delay="1">
+            <div class="fe-resource-card__icon" aria-hidden="true">🏛️</div>
+            <div class="fe-resource-card__info">
+              <span class="fe-resource-card__type">Comunidad</span>
+              <h3 class="fe-resource-card__title">Iglesia local</h3>
+              <p class="fe-resource-card__desc">
+                La comunidad de fe presencial sigue siendo irremplazable.
+                El encuentro cara a cara con otros creyentes me forma
+                de maneras que ningún contenido digital puede igualar.
+              </p>
+            </div>
+          </div>
+
+          <!-- Recurso: Louie Giglio / Passion -->
+          <div class="fe-resource-card" data-animate="fade-up" data-delay="2">
+            <div class="fe-resource-card__icon" aria-hidden="true">🎙️</div>
+            <div class="fe-resource-card__info">
+              <span class="fe-resource-card__type">Prédicas</span>
+              <h3 class="fe-resource-card__title">Predicadores que me forman</h3>
+              <p class="fe-resource-card__desc">
+                Escucho predicadores que conectan la fe con la vida real:
+                Louie Giglio, Steven Furtick, Andrés Spyker (en español).
+                La enseñanza bíblica aplicada es oro.
+              </p>
+            </div>
+          </div>
+
+          <!-- Recurso: Música de alabanza -->
+          <div class="fe-resource-card" data-animate="fade-up" data-delay="3">
+            <div class="fe-resource-card__icon" aria-hidden="true">🎵</div>
+            <div class="fe-resource-card__info">
+              <span class="fe-resource-card__type">Música</span>
+              <h3 class="fe-resource-card__title">Adoración que transforma</h3>
+              <p class="fe-resource-card__desc">
+                La música de adoración ha sido sanadora en momentos difíciles.
+                Hillsong, Elevation Worship, Maverick City Music,
+                Funky, Almighty — acompañan mis sesiones de código también.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      CTA FINAL — INVITACIÓN A CONVERSAR
+    ────────────────────────────────────────────────────────── -->
+    <section class="fe-cta" id="fe-conectar" aria-labelledby="feCtaTitle">
+      <div class="container">
+        <div class="fe-cta__inner" data-animate="fade-up">
+
+          <!-- Fondo luminoso -->
+          <div class="fe-cta__glow" aria-hidden="true"></div>
+
+          <div class="fe-cta__icon" aria-hidden="true">✝</div>
+
+          <h2 class="fe-cta__title" id="feCtaTitle">
+            ¿Quieres hablar<br/>
+            <span class="fe-cta__highlight">sobre fe?</span>
+          </h2>
+
+          <p class="fe-cta__desc">
+            Si algo de lo que leíste resonó contigo, si tienes preguntas,
+            si quieres compartir tu historia o simplemente charlar,
+            me encantaría escucharte. No tengo todas las respuestas,
+            pero sí tengo disposición y tiempo.
+          </p>
+
+          <div class="fe-cta__actions">
+            <a href="../../index.html#contacto" class="btn fe-btn--primary">
+              Escríbeme →
+            </a>
+            <a href="../../index.html#mundos" class="btn btn--ghost fe-btn--ghost">
+              Otros mundos
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer reutilizable -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="../../index.html" class="footer__logo" aria-label="Volver al inicio">
+            <span class="footer__logo-mark">M</span>
+            El Mundo de Manu
+          </a>
+          <p class="footer__tagline">Construyendo mi universo digital, un proyecto a la vez.</p>
+        </div>
+        <nav class="footer__nav" aria-label="Mis mundos">
+          <h4 class="footer__nav-title">Mis Mundos</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="fe.html"                           class="footer__link footer__link--active">Fe</a></li>
+            <li><a href="../gaming/gaming.html"             class="footer__link">Gaming</a></li>
+            <li><a href="../infantil/infantil.html"         class="footer__link">Infantil</a></li>
+            <li><a href="../relaciones/relaciones.html"     class="footer__link">Relaciones</a></li>
+            <li><a href="../tecnologia/tecnologia.html"     class="footer__link">Tecnología</a></li>
+            <li><a href="../sobremi/sobremi.html"           class="footer__link">Sobre Mí</a></li>
+          </ul>
+        </nav>
+        <nav class="footer__nav" aria-label="Links del sitio">
+          <h4 class="footer__nav-title">Sitio</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../../index.html#inicio"    class="footer__link">Inicio</a></li>
+            <li><a href="../../index.html#proyectos" class="footer__link">Proyectos</a></li>
+            <li><a href="../../index.html#contacto"  class="footer__link">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© <span id="footerYear"></span> El Mundo de Manu. Construido con 💛 y mucho café.</p>
+        <p class="footer__credits">Diseñado y desarrollado por <strong>Manu</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+  <script src="fe.js"></script>
+
+</body>
+</html>

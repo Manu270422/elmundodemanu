@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  sobremi.html — El Mundo de Manu / Sobre Mí
+  ============================================================
+  Esta es la página más personal de todo mi sitio. Aquí cuento
+  quién soy, de dónde vengo, hacia dónde voy y qué me mueve
+  cada día. No es solo un "about me" genérico — es mi historia
+  real, con mis valores, mi recorrido y mi visión de futuro.
+
+  Estructura de la página:
+  - Hero personal con presentación extendida
+  - Mi historia (línea de tiempo)
+  - Mis valores y lo que me define
+  - Mis habilidades técnicas y blandas
+  - Mi visión y metas
+  - Call to action para conectar
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Conoce a Manu — estudiante de Ingeniería Informática, emprendedor digital, apasionado por la tecnología, la fe y el crecimiento personal." />
+  <meta name="author" content="Manu" />
+
+  <title>Sobre Mí — El Mundo de Manu</title>
+
+  <!-- Las mismas fuentes que uso en todo el sitio para mantener coherencia -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet" />
+
+  <!-- Primero cargo el CSS global del sitio, luego el específico de esta sección -->
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="sobremi.css" />
+</head>
+
+<body>
+
+  <!-- Mi cursor personalizado — igual que en el index -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
+
+  <!-- ============================================================
+    NAVBAR — Reutilizo la misma estructura del index.
+    Los paths de los links apuntan al index y a los anchors
+    con rutas relativas desde esta subcarpeta.
+  ============================================================ -->
+  <header class="navbar" id="navbar" role="banner">
+    <nav class="navbar__container" aria-label="Navegación principal">
+
+      <a href="../../index.html" class="navbar__logo" aria-label="Volver al inicio">
+        <span class="navbar__logo-mark">M</span>
+        <span class="navbar__logo-text">El Mundo de <strong>Manu</strong></span>
+      </a>
+
+      <ul class="navbar__links" role="list">
+        <li><a href="../../index.html#inicio" class="navbar__link">Inicio</a></li>
+        <li><a href="../../index.html#mundos" class="navbar__link">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi" class="navbar__link navbar__link--active">Sobre Mí</a></li>
+        <li>
+          <a href="../../index.html#contacto" class="navbar__link navbar__link--cta">
+            Contáctame
+            <span class="navbar__cta-dot" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false"
+        aria-controls="mobileMenu">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </nav>
+
+    <div class="navbar__mobile" id="mobileMenu" aria-hidden="true">
+      <ul class="navbar__mobile-links" role="list">
+        <li><a href="../../index.html#inicio" class="navbar__mobile-link">Inicio</a></li>
+        <li><a href="../../index.html#mundos" class="navbar__mobile-link">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__mobile-link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi" class="navbar__mobile-link">Sobre Mí</a></li>
+        <li><a href="../../index.html#contacto" class="navbar__mobile-link navbar__mobile-link--cta">Contáctame</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ============================================================
+    BREADCRUMB — Navegación contextual
+    Le indico al usuario dónde está dentro del sitio.
+  ============================================================ -->
+  <div class="breadcrumb" aria-label="Ruta de navegación">
+    <div class="container">
+      <nav class="breadcrumb__nav">
+        <a href="../../index.html" class="breadcrumb__link">Inicio</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span class="breadcrumb__current" aria-current="page">Sobre Mí</span>
+      </nav>
+    </div>
+  </div>
+
+  <main id="main" role="main">
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN HERO — PRESENTACIÓN PERSONAL
+      Mi primera impresión en esta página. Aquí me muestro
+      con fuerza, sin pretensiones pero con mucha claridad
+      sobre quién soy y qué quiero.
+    ────────────────────────────────────────────────────────── -->
+    <section class="sm-hero" id="presentacion" aria-labelledby="smHeroTitle">
+
+      <!-- Fondo decorativo con patrón de puntos -->
+      <div class="sm-hero__bg" aria-hidden="true">
+        <div class="sm-hero__dots"></div>
+        <div class="sm-hero__glow sm-hero__glow--1"></div>
+        <div class="sm-hero__glow sm-hero__glow--2"></div>
+      </div>
+
+      <div class="container">
+        <div class="sm-hero__inner">
+
+          <!-- Columna izquierda: Avatar grande con detalles -->
+          <div class="sm-hero__visual" data-animate="fade-right">
+            <div class="sm-hero__avatar-wrap">
+
+              <!-- Anillo giratorio decorativo -->
+              <div class="sm-hero__ring sm-hero__ring--outer" aria-hidden="true"></div>
+              <div class="sm-hero__ring sm-hero__ring--inner" aria-hidden="true"></div>
+
+              <!-- Avatar principal -->
+              <div class="sm-hero__avatar">
+                <!-- Cuando tenga foto real la pongo aquí como <img> -->
+                <span class="sm-hero__avatar-letter" aria-label="Avatar de Manu">M</span>
+              </div>
+
+              <!-- Estado / disponibilidad -->
+              <div class="sm-hero__status" aria-label="Estado: disponible para colaborar">
+                <span class="sm-hero__status-dot" aria-hidden="true"></span>
+                Disponible para colaborar
+              </div>
+            </div>
+
+            <!-- Mini tarjetas de contexto -->
+            <div class="sm-hero__cards" aria-hidden="true">
+              <div class="sm-hero__mini-card sm-hero__mini-card--1">
+                <span class="sm-hero__mini-icon">🎓</span>
+                <div>
+                  <p class="sm-hero__mini-label">Estudiando</p>
+                  <p class="sm-hero__mini-value">Ing. Informática</p>
+                </div>
+              </div>
+              <div class="sm-hero__mini-card sm-hero__mini-card--2">
+                <span class="sm-hero__mini-icon">📍</span>
+                <div>
+                  <p class="sm-hero__mini-label">Ubicación</p>
+                  <p class="sm-hero__mini-value">Colombia 🇨🇴</p>
+                </div>
+              </div>
+              <div class="sm-hero__mini-card sm-hero__mini-card--3">
+                <span class="sm-hero__mini-icon">🚀</span>
+                <div>
+                  <p class="sm-hero__mini-label">Modo</p>
+                  <p class="sm-hero__mini-value">Emprendedor</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna derecha: Presentación textual -->
+          <div class="sm-hero__text" data-animate="fade-left">
+
+            <div class="sm-hero__tag-row">
+              <span class="section-tag">Mi historia</span>
+            </div>
+
+            <h1 class="sm-hero__title" id="smHeroTitle">
+              Hola, soy <span class="sm-hero__name">Manu</span>
+            </h1>
+
+            <!-- Texto rotatorio de roles -->
+            <div class="sm-hero__roles" aria-label="Mis roles">
+              <span class="sm-hero__roles-prefix">Soy </span>
+              <span class="sm-hero__roles-text" id="rolesText" aria-live="polite">
+                estudiante de Ingeniería
+              </span>
+            </div>
+
+            <p class="sm-hero__intro">
+              Tengo una visión clara: usar la tecnología como herramienta para construir,
+              servir y crecer. No soy solo un estudiante esperando graduarse —
+              soy un emprendedor en formación que actúa desde hoy.
+            </p>
+
+            <p class="sm-hero__intro">
+              Este sitio web no es un portafolio más. Es la prueba de que cuando
+              algo te apasiona de verdad, encuentras la manera de hacerlo realidad,
+              sin importar los recursos que tengas al inicio.
+            </p>
+
+            <!-- Acciones -->
+            <div class="sm-hero__actions">
+              <a href="#historia" class="btn btn--primary">
+                Conoce mi historia
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </a>
+              <a href="../../index.html#contacto" class="btn btn--ghost">Conectemos</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: LO QUE ME DEFINE
+      Mis pilares. Las cosas que me hacen ser quien soy.
+      Cada tarjeta representa un área fundamental de mi vida.
+    ────────────────────────────────────────────────────────── -->
+    <section class="sm-pillars" id="pilares" aria-labelledby="pillarsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag">Lo que me define</span>
+          <h2 class="section-title" id="pillarsTitle">Mis Pilares</h2>
+          <p class="section-desc">
+            Estas son las áreas que dan forma a mi identidad.
+            No son roles separados — son partes de un mismo Manu.
+          </p>
+        </div>
+
+        <div class="sm-pillars__grid">
+
+          <!-- Pilar: Fe -->
+          <article class="sm-pillar-card" data-animate="fade-up" data-delay="0">
+            <div class="sm-pillar-card__icon">✝</div>
+            <h3 class="sm-pillar-card__title">Fe</h3>
+            <p class="sm-pillar-card__desc">
+              Mi fundamento más profundo. La fe no es solo una parte de mi vida —
+              es el lente con el que veo todo lo demás. Me da propósito,
+              calma en las tormentas y dirección cuando el camino no es claro.
+            </p>
+          </article>
+
+          <!-- Pilar: Tecnología -->
+          <article class="sm-pillar-card sm-pillar-card--featured" data-animate="fade-up" data-delay="1">
+            <div class="sm-pillar-card__icon">⚡</div>
+            <h3 class="sm-pillar-card__title">Tecnología</h3>
+            <p class="sm-pillar-card__desc">
+              Mi herramienta para cambiar el mundo. Aprender a programar
+              no fue una decisión de carrera — fue entender que la tecnología
+              es el idioma del futuro y quiero hablarlo con fluidez.
+            </p>
+          </article>
+
+          <!-- Pilar: Familia y relaciones -->
+          <article class="sm-pillar-card" data-animate="fade-up" data-delay="2">
+            <div class="sm-pillar-card__icon">❤️</div>
+            <h3 class="sm-pillar-card__title">Familia</h3>
+            <p class="sm-pillar-card__desc">
+              El motor humano detrás de todo. Cada línea de código que escribo,
+              cada proyecto que arranco, tiene una historia familiar detrás.
+              Las personas son la razón de fondo.
+            </p>
+          </article>
+
+          <!-- Pilar: Crecimiento -->
+          <article class="sm-pillar-card" data-animate="fade-up" data-delay="3">
+            <div class="sm-pillar-card__icon">🌱</div>
+            <h3 class="sm-pillar-card__title">Crecimiento</h3>
+            <p class="sm-pillar-card__desc">
+              Creo profundamente en el aprendizaje continuo. No me importa
+              donde empiezo, me importa a dónde llego. Cada día es una
+              oportunidad de ser mejor que ayer.
+            </p>
+          </article>
+
+          <!-- Pilar: Gaming -->
+          <article class="sm-pillar-card" data-animate="fade-up" data-delay="4">
+            <div class="sm-pillar-card__icon">🎮</div>
+            <h3 class="sm-pillar-card__title">Gaming</h3>
+            <p class="sm-pillar-card__desc">
+              No es solo entretenimiento — el gaming me enseñó estrategia,
+              perseverancia y trabajo en equipo desde pequeño.
+              Es parte de mi cultura y creatividad.
+            </p>
+          </article>
+
+          <!-- Pilar: Emprendimiento -->
+          <article class="sm-pillar-card" data-animate="fade-up" data-delay="5">
+            <div class="sm-pillar-card__icon">💡</div>
+            <h3 class="sm-pillar-card__title">Emprendimiento</h3>
+            <p class="sm-pillar-card__desc">
+              Desde joven supe que quería construir algo propio.
+              No por dinero, sino por el impacto. Ver una idea crecer
+              desde cero es lo más emocionante que conozco.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: MI HISTORIA — LÍNEA DE TIEMPO
+      Cuento mi recorrido de manera visual con una timeline.
+      Cada evento es un momento que me formó.
+    ────────────────────────────────────────────────────────── -->
+    <section class="sm-timeline" id="historia" aria-labelledby="timelineTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag">Mi recorrido</span>
+          <h2 class="section-title" id="timelineTitle">Mi Historia</h2>
+          <p class="section-desc">
+            Cada etapa me enseñó algo. Aquí comparto los momentos
+            que me llevaron a donde estoy hoy.
+          </p>
+        </div>
+
+        <div class="sm-timeline__track" role="list">
+
+          <!-- Evento 1 -->
+          <div class="sm-timeline__item sm-timeline__item--left" role="listitem" data-animate="fade-right">
+            <div class="sm-timeline__dot" aria-hidden="true">
+              <span>🌱</span>
+            </div>
+            <div class="sm-timeline__content">
+              <span class="sm-timeline__year">El comienzo</span>
+              <h3 class="sm-timeline__event">Nací con curiosidad</h3>
+              <p class="sm-timeline__desc">
+                Desde pequeño me pregunté cómo funcionaban las cosas.
+                Los videojuegos me atraparon no solo por diversión,
+                sino porque me generaban preguntas: ¿cómo se hace esto?
+                ¿quién lo programó?
+              </p>
+            </div>
+          </div>
+
+          <!-- Evento 2 -->
+          <div class="sm-timeline__item sm-timeline__item--right" role="listitem" data-animate="fade-left">
+            <div class="sm-timeline__dot" aria-hidden="true">
+              <span>✝</span>
+            </div>
+            <div class="sm-timeline__content">
+              <span class="sm-timeline__year">Un ancla para todo</span>
+              <h3 class="sm-timeline__event">La fe se vuelve mi base</h3>
+              <p class="sm-timeline__desc">
+                Hubo un momento en que la fe dejó de ser algo externo
+                y se convirtió en mi centro. Eso cambió cómo entiendo
+                el trabajo, las relaciones y el propósito de lo que hago.
+              </p>
+            </div>
+          </div>
+
+          <!-- Evento 3 -->
+          <div class="sm-timeline__item sm-timeline__item--left" role="listitem" data-animate="fade-right">
+            <div class="sm-timeline__dot" aria-hidden="true">
+              <span>💻</span>
+            </div>
+            <div class="sm-timeline__content">
+              <span class="sm-timeline__year">El giro importante</span>
+              <h3 class="sm-timeline__event">Ingeniería Informática</h3>
+              <p class="sm-timeline__desc">
+                Tomé la decisión de estudiar Ingeniería Informática.
+                No fue fácil — los recursos son limitados, el camino
+                es largo. Pero sabía que era la dirección correcta.
+                Aquí empezó todo en serio.
+              </p>
+            </div>
+          </div>
+
+          <!-- Evento 4 -->
+          <div class="sm-timeline__item sm-timeline__item--right" role="listitem" data-animate="fade-left">
+            <div class="sm-timeline__dot" aria-hidden="true">
+              <span>🌍</span>
+            </div>
+            <div class="sm-timeline__content">
+              <span class="sm-timeline__year">La visión se expande</span>
+              <h3 class="sm-timeline__event">Nace El Mundo de Manu</h3>
+              <p class="sm-timeline__desc">
+                Decidí que no iba a esperar graduarme para empezar.
+                Este sitio es mi primer proyecto real como emprendedor digital.
+                Es el inicio de algo mucho más grande que apenas estoy
+                construyendo día a día.
+              </p>
+            </div>
+          </div>
+
+          <!-- Evento 5 — Futuro -->
+          <div class="sm-timeline__item sm-timeline__item--left sm-timeline__item--future" role="listitem"
+            data-animate="fade-right">
+            <div class="sm-timeline__dot" aria-hidden="true">
+              <span>🚀</span>
+            </div>
+            <div class="sm-timeline__content">
+              <span class="sm-timeline__year">Lo que viene</span>
+              <h3 class="sm-timeline__event">Construyendo el futuro</h3>
+              <p class="sm-timeline__desc">
+                Más proyectos, más aprendizaje, más impacto. Quiero
+                construir herramientas que ayuden a otras personas,
+                crear comunidad alrededor de lo que me apasiona
+                y demostrar que sí se puede, sin importar el punto de partida.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: MIS HABILIDADES
+      Muestro mis skills técnicas y blandas con barras animadas
+      y tarjetas visuales. Soy honesto con mi nivel actual.
+    ────────────────────────────────────────────────────────── -->
+    <section class="sm-skills" id="habilidades" aria-labelledby="skillsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag">Lo que sé hacer</span>
+          <h2 class="section-title" id="skillsTitle">Mis Habilidades</h2>
+          <p class="section-desc">
+            Soy honesto con mi nivel: estoy aprendiendo y creciendo con ayuda de la IA.
+            Estas son mis habilidades actuales.
+          </p>
+        </div>
+
+        <div class="sm-skills__inner">
+
+          <!-- Habilidades técnicas con barras de progreso -->
+          <div class="sm-skills__technical" data-animate="fade-right">
+            <h3 class="sm-skills__group-title">
+              <span aria-hidden="true">⚡</span> Técnicas
+            </h3>
+
+            <div class="sm-skills__bars">
+
+              <div class="sm-skill-bar">
+                <div class="sm-skill-bar__header">
+                  <span class="sm-skill-bar__name">HTML5 / CSS3</span>
+                  <span class="sm-skill-bar__level">75%</span>
+                </div>
+                <div class="sm-skill-bar__track" role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                  aria-valuemax="100" aria-label="HTML5 y CSS3: 75%">
+                  <div class="sm-skill-bar__fill" data-width="75"></div>
+                </div>
+              </div>
+
+              <div class="sm-skill-bar">
+                <div class="sm-skill-bar__header">
+                  <span class="sm-skill-bar__name">JavaScript</span>
+                  <span class="sm-skill-bar__level">60%</span>
+                </div>
+                <div class="sm-skill-bar__track" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                  aria-valuemax="100" aria-label="JavaScript: 60%">
+                  <div class="sm-skill-bar__fill" data-width="60"></div>
+                </div>
+              </div>
+
+              <div class="sm-skill-bar">
+                <div class="sm-skill-bar__header">
+                  <span class="sm-skill-bar__name">Python (bases)</span>
+                  <span class="sm-skill-bar__level">45%</span>
+                </div>
+                <div class="sm-skill-bar__track" role="progressbar" aria-valuenow="45" aria-valuemin="0"
+                  aria-valuemax="100" aria-label="Python: 45%">
+                  <div class="sm-skill-bar__fill" data-width="45"></div>
+                </div>
+              </div>
+
+              <div class="sm-skill-bar">
+                <div class="sm-skill-bar__header">
+                  <span class="sm-skill-bar__name">Diseño UI/UX</span>
+                  <span class="sm-skill-bar__level">55%</span>
+                </div>
+                <div class="sm-skill-bar__track" role="progressbar" aria-valuenow="55" aria-valuemin="0"
+                  aria-valuemax="100" aria-label="Diseño UI/UX: 55%">
+                  <div class="sm-skill-bar__fill" data-width="55"></div>
+                </div>
+              </div>
+
+              <div class="sm-skill-bar">
+                <div class="sm-skill-bar__header">
+                  <span class="sm-skill-bar__name">Git / Control de versiones</span>
+                  <span class="sm-skill-bar__level">50%</span>
+                </div>
+                <div class="sm-skill-bar__track" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                  aria-valuemax="100" aria-label="Git: 50%">
+                  <div class="sm-skill-bar__fill" data-width="50"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Habilidades blandas con chips/etiquetas -->
+          <div class="sm-skills__soft" data-animate="fade-left">
+            <h3 class="sm-skills__group-title">
+              <span aria-hidden="true">🧠</span> Personales
+            </h3>
+            <p class="sm-skills__soft-desc">
+              Las habilidades blandas son tan importantes como las técnicas.
+              Estas son las que me identifican:
+            </p>
+            <div class="sm-skills__chips" role="list">
+              <span class="sm-skills__chip" role="listitem">Aprendizaje autónomo</span>
+              <span class="sm-skills__chip" role="listitem">Perseverancia</span>
+              <span class="sm-skills__chip" role="listitem">Pensamiento crítico</span>
+              <span class="sm-skills__chip" role="listitem">Creatividad</span>
+              <span class="sm-skills__chip" role="listitem">Comunicación</span>
+              <span class="sm-skills__chip" role="listitem">Trabajo en equipo</span>
+              <span class="sm-skills__chip" role="listitem">Gestión del tiempo</span>
+              <span class="sm-skills__chip" role="listitem">Liderazgo en formación</span>
+              <span class="sm-skills__chip" role="listitem">Empatía</span>
+              <span class="sm-skills__chip" role="listitem">Resolución de problemas</span>
+            </div>
+
+            <!-- Herramientas que uso -->
+            <h3 class="sm-skills__group-title sm-skills__group-title--tools">
+              <span aria-hidden="true">🛠️</span> Herramientas
+            </h3>
+            <div class="sm-skills__tools" role="list">
+              <div class="sm-skills__tool" role="listitem">
+                <span class="sm-skills__tool-icon" aria-hidden="true">🖥️</span>
+                <span>VS Code</span>
+              </div>
+              <div class="sm-skills__tool" role="listitem">
+                <span class="sm-skills__tool-icon" aria-hidden="true">🐙</span>
+                <span>GitHub</span>
+              </div>
+              <div class="sm-skills__tool" role="listitem">
+                <span class="sm-skills__tool-icon" aria-hidden="true">🎨</span>
+                <span>Figma</span>
+              </div>
+              <div class="sm-skills__tool" role="listitem">
+                <span class="sm-skills__tool-icon" aria-hidden="true">🌐</span>
+                <span>Chrome DevTools</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: MI VISIÓN Y METAS
+      Aquí comparto hacia dónde voy. Mis metas a corto,
+      mediano y largo plazo. Siendo transparente sobre mi sueño.
+    ────────────────────────────────────────────────────────── -->
+    <section class="sm-vision" id="vision" aria-labelledby="visionTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag">Hacia dónde voy</span>
+          <h2 class="section-title" id="visionTitle">Mi Visión</h2>
+        </div>
+
+        <div class="sm-vision__inner">
+
+          <!-- Declaración de visión grande -->
+          <blockquote class="sm-vision__quote" data-animate="fade-up" data-delay="1">
+            <p class="sm-vision__quote-text">
+              "Quiero construir herramientas digitales que den poder
+              a las personas. No importa de dónde vienen —
+              <em>la tecnología puede nivelar el campo de juego.</em>"
+            </p>
+            <footer class="sm-vision__quote-author">
+              — Manu, 2026
+            </footer>
+          </blockquote>
+
+          <!-- Metas por plazo -->
+          <div class="sm-vision__goals" data-animate="fade-up" data-delay="2">
+
+            <div class="sm-vision__goal">
+              <div class="sm-vision__goal-header">
+                <span class="sm-vision__goal-tag sm-vision__goal-tag--short">Corto plazo</span>
+                <span class="sm-vision__goal-icon" aria-hidden="true">⚡</span>
+              </div>
+              <h3 class="sm-vision__goal-title">Terminar este sitio web</h3>
+              <p class="sm-vision__goal-desc">
+                Completar todas las secciones de El Mundo de Manu,
+                aprendiendo cada tecnología que necesito en el camino.
+                Este es mi proyecto formativo número uno.
+              </p>
+            </div>
+
+            <div class="sm-vision__goal">
+              <div class="sm-vision__goal-header">
+                <span class="sm-vision__goal-tag sm-vision__goal-tag--mid">Mediano plazo</span>
+                <span class="sm-vision__goal-icon" aria-hidden="true">🎯</span>
+              </div>
+              <h3 class="sm-vision__goal-title">Primer producto digital</h3>
+              <p class="sm-vision__goal-desc">
+                Lanzar mi primer producto o servicio digital que
+                genere valor real para otras personas. No tiene que ser
+                perfecto — tiene que ser útil y real.
+              </p>
+            </div>
+
+            <div class="sm-vision__goal">
+              <div class="sm-vision__goal-header">
+                <span class="sm-vision__goal-tag sm-vision__goal-tag--long">Largo plazo</span>
+                <span class="sm-vision__goal-icon" aria-hidden="true">🚀</span>
+              </div>
+              <h3 class="sm-vision__goal-title">Emprendimiento con impacto</h3>
+              <p class="sm-vision__goal-desc">
+                Construir una empresa o proyecto digital que genere
+                empleo, sirva a mi comunidad y demuestre que desde
+                Colombia se puede llegar muy lejos con talento y trabajo.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN CTA FINAL — CONECTEMOS
+      Invitación a contactarme o explorar más del sitio.
+    ────────────────────────────────────────────────────────── -->
+    <section class="sm-cta" id="conectar" aria-labelledby="ctaTitle">
+      <div class="container">
+        <div class="sm-cta__inner" data-animate="fade-up">
+          <div class="sm-cta__glow" aria-hidden="true"></div>
+          <span class="section-tag">¿Conectamos?</span>
+          <h2 class="sm-cta__title" id="ctaTitle">
+            Si algo de lo que leíste<br />
+            <span class="sm-cta__highlight">resonó contigo</span>
+          </h2>
+          <p class="sm-cta__desc">
+            Me encantaría conectar. Ya sea para colaborar, aprender juntos
+            o simplemente charlar sobre tecnología, fe o gaming.
+          </p>
+          <div class="sm-cta__actions">
+            <a href="../../index.html#contacto" class="btn btn--primary">
+              Escríbeme →
+            </a>
+            <a href="../../index.html#mundos" class="btn btn--ghost">
+              Explorar mis mundos
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+    FOOTER — Reutilizo el mismo del index
+  ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="../../index.html" class="footer__logo" aria-label="Volver al inicio">
+            <span class="footer__logo-mark">M</span>
+            El Mundo de Manu
+          </a>
+          <p class="footer__tagline">
+            Construyendo mi universo digital, un proyecto a la vez.
+          </p>
+        </div>
+        <nav class="footer__nav" aria-label="Mis mundos">
+          <h4 class="footer__nav-title">Mis Mundos</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../fe/fe.html" class="footer__link">Fe</a></li>
+            <li><a href="../gaming/gaming.html" class="footer__link">Gaming</a></li>
+            <li><a href="../infantil/infantil.html" class="footer__link">Infantil</a></li>
+            <li><a href="../relaciones/relaciones.html" class="footer__link">Relaciones</a></li>
+            <li><a href="../tecnologia/tecnologia.html" class="footer__link">Tecnología</a></li>
+            <li><a href="sobremi.html" class="footer__link footer__link--active">Sobre Mí</a></li>
+          </ul>
+        </nav>
+        <nav class="footer__nav" aria-label="Links del sitio">
+          <h4 class="footer__nav-title">Sitio</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../../index.html#inicio" class="footer__link">Inicio</a></li>
+            <li><a href="../../index.html#proyectos" class="footer__link">Proyectos</a></li>
+            <li><a href="../../index.html#contacto" class="footer__link">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">
+          © <span id="footerYear"></span> El Mundo de Manu. Construido con 💛 y mucho café.
+        </p>
+        <p class="footer__credits">Diseñado y desarrollado por <strong>Manu</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cargo mi script global primero y luego el específico de esta sección -->
+  <script src="../../script.js"></script>
+  <script src="sobremi.js"></script>
+
+</body>
+</html>
