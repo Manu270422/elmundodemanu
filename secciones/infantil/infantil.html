@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  infantil.html — El Mundo de Manu / Infantil
+  ============================================================
+  ¡Bienvenidos al mundo más colorido y alegre de mi sitio!
+  Esta sección está hecha con todo el amor del mundo
+  para los niños. Quiero que cuando la abran, sonrían.
+
+  Aquí encontrarán:
+  - Un hero mágico con nubes y estrellas animadas
+  - Personajes simpáticos que los acompañan
+  - Cuentos cortos para leer y escuchar
+  - Actividades y juegos simples
+  - Sección de valores para los más pequeños
+  - Canciones y rondas infantiles
+  - Mensajes de amor y esperanza
+
+  Estructura de la página:
+  1. Hero mágico de bienvenida
+  2. Nuestros amigos (personajes)
+  3. Cuentitos (historias cortas)
+  4. Aprendo y juego (actividades)
+  5. Valores del corazón
+  6. Canciones y rondas
+  7. Un mensaje especial
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Infantil — El Mundo de Manu. Un espacio mágico y colorido lleno de cuentos, canciones, valores y diversión para los más pequeños." />
+  <meta name="author" content="Manu" />
+
+  <title>🌈 Infantil — El Mundo de Manu</title>
+
+  <!--
+    Uso Nunito para esta sección — es una fuente redondeada,
+    suave y muy legible que los niños disfrutan visualmente.
+    También uso Fredoka One para los títulos grandes porque
+    tiene mucha personalidad y alegría.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&family=Fredoka+One&family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <!-- Primero el CSS global del sitio, luego el mío específico -->
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="infantil.css" />
+</head>
+
+<body class="page-infantil">
+
+  <!--
+    En esta sección NO uso el cursor personalizado —
+    los niños navegan principalmente con táctil o con
+    el cursor normal del sistema. Mantengo todo accesible.
+  -->
+
+  <!-- ============================================================
+    NAVBAR — Versión simplificada y colorida para esta sección
+    Los paths van relativos desde /secciones/infantil/
+  ============================================================ -->
+  <header class="navbar inf-navbar" id="navbar" role="banner">
+    <nav class="navbar__container" aria-label="Navegación principal">
+
+      <a href="../../index.html" class="navbar__logo inf-navbar__logo" aria-label="Volver al inicio">
+        <span class="navbar__logo-mark inf-logo-mark">M</span>
+        <span class="navbar__logo-text">El Mundo de <strong>Manu</strong></span>
+      </a>
+
+      <ul class="navbar__links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__link navbar__link--active">Mis Mundos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__link">Sobre Mí</a></li>
+        <li>
+          <a href="../../index.html#contacto" class="navbar__link navbar__link--cta">
+            Contáctame
+            <span class="navbar__cta-dot" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+
+      <button class="navbar__toggle" id="navToggle"
+        aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </nav>
+
+    <div class="navbar__mobile" id="mobileMenu" aria-hidden="true">
+      <ul class="navbar__mobile-links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__mobile-link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__mobile-link">Mis Mundos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__mobile-link">Sobre Mí</a></li>
+        <li><a href="../../index.html#contacto"  class="navbar__mobile-link navbar__mobile-link--cta">Contáctame</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+
+    <!-- ──────────────────────────────────────────────────────────
+      HERO MÁGICO DE BIENVENIDA
+      El cielo del hero tiene: nubes animadas, estrellas
+      que parpadean, un arcoíris, el sol, y una bienvenida
+      gigante y colorida. Todo se mueve suavemente.
+    ────────────────────────────────────────────────────────── -->
+    <section class="inf-hero" id="inf-inicio" aria-labelledby="infHeroTitle">
+
+      <!-- Fondo: cielo con elementos decorativos SVG -->
+      <div class="inf-hero__sky" aria-hidden="true">
+
+        <!-- Sol animado -->
+        <div class="inf-sun">
+          <div class="inf-sun__core">☀️</div>
+          <div class="inf-sun__rays"></div>
+        </div>
+
+        <!-- Arcoíris -->
+        <div class="inf-rainbow" aria-hidden="true">
+          <div class="inf-rainbow__arc inf-rainbow__arc--1"></div>
+          <div class="inf-rainbow__arc inf-rainbow__arc--2"></div>
+          <div class="inf-rainbow__arc inf-rainbow__arc--3"></div>
+          <div class="inf-rainbow__arc inf-rainbow__arc--4"></div>
+          <div class="inf-rainbow__arc inf-rainbow__arc--5"></div>
+          <div class="inf-rainbow__arc inf-rainbow__arc--6"></div>
+          <div class="inf-rainbow__arc inf-rainbow__arc--7"></div>
+        </div>
+
+        <!-- Nubes flotantes -->
+        <div class="inf-cloud inf-cloud--1" role="img" aria-label="Nube decorativa">
+          <svg viewBox="0 0 120 60" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="60" cy="40" rx="50" ry="20"/>
+            <ellipse cx="40" cy="32" rx="28" ry="22"/>
+            <ellipse cx="75" cy="28" rx="25" ry="20"/>
+          </svg>
+        </div>
+        <div class="inf-cloud inf-cloud--2" role="img" aria-label="Nube decorativa">
+          <svg viewBox="0 0 90 50" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="45" cy="34" rx="38" ry="16"/>
+            <ellipse cx="30" cy="26" rx="22" ry="18"/>
+            <ellipse cx="58" cy="22" rx="20" ry="16"/>
+          </svg>
+        </div>
+        <div class="inf-cloud inf-cloud--3" role="img" aria-label="Nube decorativa">
+          <svg viewBox="0 0 100 55" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="38" rx="42" ry="17"/>
+            <ellipse cx="35" cy="30" rx="24" ry="20"/>
+            <ellipse cx="65" cy="26" rx="22" ry="18"/>
+          </svg>
+        </div>
+
+        <!-- Estrellas parpadeantes (generadas en JS también) -->
+        <div class="inf-stars" id="infStars" aria-hidden="true"></div>
+
+        <!-- Globos flotantes decorativos -->
+        <div class="inf-balloon inf-balloon--red"    aria-hidden="true">🎈</div>
+        <div class="inf-balloon inf-balloon--yellow" aria-hidden="true">🎈</div>
+        <div class="inf-balloon inf-balloon--blue"   aria-hidden="true">🎈</div>
+
+      </div><!-- /.inf-hero__sky -->
+
+      <!-- Contenido central del hero -->
+      <div class="inf-hero__content">
+
+        <!-- Emoji grande animado de bienvenida -->
+        <div class="inf-hero__emoji-row" aria-hidden="true">
+          <span class="inf-emoji-bounce inf-emoji-bounce--1">🦋</span>
+          <span class="inf-emoji-bounce inf-emoji-bounce--2">⭐</span>
+          <span class="inf-emoji-bounce inf-emoji-bounce--3">🎠</span>
+          <span class="inf-emoji-bounce inf-emoji-bounce--4">⭐</span>
+          <span class="inf-emoji-bounce inf-emoji-bounce--5">🌸</span>
+        </div>
+
+        <h1 class="inf-hero__title" id="infHeroTitle">
+          <span class="inf-title-word inf-title-word--1">¡Hola,</span>
+          <span class="inf-title-word inf-title-word--2">pequeño</span>
+          <span class="inf-title-word inf-title-word--3">explorador!</span>
+        </h1>
+
+        <p class="inf-hero__subtitle">
+          Bienvenido a mi mundo mágico lleno de
+          <strong>cuentos</strong>, <strong>canciones</strong>
+          y mucha diversión. 🎉
+        </p>
+
+        <!-- Botones grandes y coloridos — fáciles de tocar -->
+        <div class="inf-hero__buttons">
+          <a href="#inf-cuentos" class="inf-btn inf-btn--green" aria-label="Ver cuentos">
+            📖 ¡Cuentos!
+          </a>
+          <a href="#inf-juegos" class="inf-btn inf-btn--orange" aria-label="Ver juegos">
+            🎮 ¡Juegos!
+          </a>
+          <a href="#inf-canciones" class="inf-btn inf-btn--purple" aria-label="Ver canciones">
+            🎵 ¡Canciones!
+          </a>
+        </div>
+
+      </div><!-- /.inf-hero__content -->
+
+      <!-- Césped y flores del suelo -->
+      <div class="inf-hero__ground" aria-hidden="true">
+        <div class="inf-grass"></div>
+        <div class="inf-flowers">
+          <span class="inf-flower inf-flower--1">🌼</span>
+          <span class="inf-flower inf-flower--2">🌸</span>
+          <span class="inf-flower inf-flower--3">🌻</span>
+          <span class="inf-flower inf-flower--4">🌺</span>
+          <span class="inf-flower inf-flower--5">🌼</span>
+          <span class="inf-flower inf-flower--6">🌷</span>
+          <span class="inf-flower inf-flower--7">🌸</span>
+        </div>
+      </div>
+
+    </section><!-- /.inf-hero -->
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: NUESTROS AMIGOS
+      Personajes simpáticos con nombres y descripciones cortas.
+      Cada uno tiene un emoji grande, un nombre y un mensaje
+      animado. Los niños pueden hacer clic para que
+      el personaje les diga algo divertido.
+    ────────────────────────────────────────────────────────── -->
+    <section class="inf-friends" id="inf-amigos" aria-labelledby="infFriendsTitle">
+      <div class="inf-container">
+
+        <div class="inf-section-header">
+          <span class="inf-section-tag">👫 Conoce a...</span>
+          <h2 class="inf-section-title" id="infFriendsTitle">
+            ¡Nuestros Amigos!
+          </h2>
+          <p class="inf-section-desc">
+            Estos son los amigos que te acompañan en este mundo mágico.
+            ¡Tócalos para que te digan algo divertido! 🤩
+          </p>
+        </div>
+
+        <div class="inf-friends__grid" role="list">
+
+          <!-- Amigo 1: León Leo -->
+          <article class="inf-friend-card" role="listitem"
+            data-messages='["¡Roar! ¡Eres el más valiente!", "¡Juntos somos más fuertes!", "¡Yo te protejo, amigo!", "¡El corazón de un rey está en ser bueno!"]'
+            tabindex="0" aria-label="León Leo — clic para escuchar su mensaje">
+            <div class="inf-friend-card__emoji" aria-hidden="true">🦁</div>
+            <h3 class="inf-friend-card__name">Leo el León</h3>
+            <p class="inf-friend-card__trait">Valiente y protector</p>
+            <div class="inf-friend-card__bubble" aria-live="polite">
+              ¡Tócame! 👆
+            </div>
+          </article>
+
+          <!-- Amigo 2: Mariposa Mía -->
+          <article class="inf-friend-card" role="listitem"
+            data-messages='["¡Vuela alto y sé libre!", "¡Cada día eres más bonito!", "¡Los colores del mundo son para ti!", "¡Nunca dejes de soñar!"]'
+            tabindex="0" aria-label="Mariposa Mía — clic para escuchar su mensaje">
+            <div class="inf-friend-card__emoji" aria-hidden="true">🦋</div>
+            <h3 class="inf-friend-card__name">Mía la Mariposa</h3>
+            <p class="inf-friend-card__trait">Alegre y colorida</p>
+            <div class="inf-friend-card__bubble" aria-live="polite">
+              ¡Tócame! 👆
+            </div>
+          </article>
+
+          <!-- Amigo 3: Elefante Eli -->
+          <article class="inf-friend-card" role="listitem"
+            data-messages='["¡Yo nunca olvido cuánto te quiero!", "¡La familia es lo más importante!", "¡Ser grande no importa, importa ser bueno!", "¡Siempre habrá agua para los dos!"]'
+            tabindex="0" aria-label="Elefante Eli — clic para escuchar su mensaje">
+            <div class="inf-friend-card__emoji" aria-hidden="true">🐘</div>
+            <h3 class="inf-friend-card__name">Eli el Elefante</h3>
+            <p class="inf-friend-card__trait">Sabio y cariñoso</p>
+            <div class="inf-friend-card__bubble" aria-live="polite">
+              ¡Tócame! 👆
+            </div>
+          </article>
+
+          <!-- Amigo 4: Conejo Coco -->
+          <article class="inf-friend-card" role="listitem"
+            data-messages='["¡Salta, que la vida es corta!", "¡Comparte tus zanahorias!", "¡Las orejas largas para escucharte mejor!", "¡Hop hop, tú puedes!"]'
+            tabindex="0" aria-label="Conejo Coco — clic para escuchar su mensaje">
+            <div class="inf-friend-card__emoji" aria-hidden="true">🐰</div>
+            <h3 class="inf-friend-card__name">Coco el Conejo</h3>
+            <p class="inf-friend-card__trait">Rápido y divertido</p>
+            <div class="inf-friend-card__bubble" aria-live="polite">
+              ¡Tócame! 👆
+            </div>
+          </article>
+
+          <!-- Amigo 5: Pez Perla -->
+          <article class="inf-friend-card" role="listitem"
+            data-messages='["¡Brilla como el mar!", "¡Las profundidades no me asustan!", "¡Nada nunca te detiene!", "¡Eres una perla especial!"]'
+            tabindex="0" aria-label="Pez Perla — clic para escuchar su mensaje">
+            <div class="inf-friend-card__emoji" aria-hidden="true">🐠</div>
+            <h3 class="inf-friend-card__name">Perla el Pez</h3>
+            <p class="inf-friend-card__trait">Brillante y curiosa</p>
+            <div class="inf-friend-card__bubble" aria-live="polite">
+              ¡Tócame! 👆
+            </div>
+          </article>
+
+          <!-- Amigo 6: Oso Osito -->
+          <article class="inf-friend-card" role="listitem"
+            data-messages='["¡Un abrazo soluciona todo!", "¡La miel de la vida eres tú!", "¡Soy tu amigo para siempre!", "¡Los abrazos son gratis, toma uno!"]'
+            tabindex="0" aria-label="Oso Osito — clic para escuchar su mensaje">
+            <div class="inf-friend-card__emoji" aria-hidden="true">🐻</div>
+            <h3 class="inf-friend-card__name">Osito el Oso</h3>
+            <p class="inf-friend-card__trait">Tierno y abrazador</p>
+            <div class="inf-friend-card__bubble" aria-live="polite">
+              ¡Tócame! 👆
+            </div>
+          </article>
+
+        </div><!-- /.inf-friends__grid -->
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: CUENTITOS
+      Historias cortas y morales para los niños.
+      Diseño de libro de cuentos con ilustración emoji grande.
+    ────────────────────────────────────────────────────────── -->
+    <section class="inf-stories" id="inf-cuentos" aria-labelledby="infStoriesTitle">
+      <div class="inf-container">
+
+        <div class="inf-section-header">
+          <span class="inf-section-tag">📖 A leer...</span>
+          <h2 class="inf-section-title" id="infStoriesTitle">
+            ¡Cuentitos Mágicos!
+          </h2>
+          <p class="inf-section-desc">
+            Historias cortas con una enseñanza especial.
+            Léelas con alguien que quieras mucho. 💛
+          </p>
+        </div>
+
+        <div class="inf-stories__grid">
+
+          <!-- Cuento 1: El árbol generoso -->
+          <article class="inf-story-card" data-animate="inf-pop">
+            <div class="inf-story-card__cover">
+              <span class="inf-story-card__cover-emoji" aria-hidden="true">🌳</span>
+              <div class="inf-story-card__cover-stars" aria-hidden="true">
+                ⭐⭐⭐
+              </div>
+            </div>
+            <div class="inf-story-card__body">
+              <h3 class="inf-story-card__title">El Árbol Generoso</h3>
+              <p class="inf-story-card__preview">
+                Había una vez un árbol muy alto en el bosque. Todos los animales
+                venían a descansar a su sombra. El árbol nunca pedía nada a cambio...
+              </p>
+              <div class="inf-story-card__moral">
+                <span class="inf-story-card__moral-label">💡 Enseñanza:</span>
+                <span>Dar sin esperar nada a cambio es el mayor regalo.</span>
+              </div>
+              <button class="inf-story-card__btn inf-btn inf-btn--green inf-btn--sm"
+                aria-expanded="false" data-story="arbol">
+                📖 Leer el cuento
+              </button>
+              <!-- Cuento completo expandible -->
+              <div class="inf-story-card__full" id="story-arbol" hidden>
+                <p>
+                  Había una vez un árbol muy alto en el centro del bosque.
+                  Todos los animales venían a descansar a su sombra en los días de calor.
+                  Los pajaritos hacían sus nidos en sus ramas. Las ardillas guardaban
+                  sus nueces entre sus raíces.
+                </p>
+                <p>
+                  Un día, llegó una niña muy cansada. "Árbol, ¿puedo subir a tus ramas?",
+                  preguntó. "¡Claro que sí!", respondió el árbol sonriendo.
+                  La niña subió, jugó y se rió por horas enteras.
+                </p>
+                <p>
+                  Cuando la niña creció, volvió preocupada. "Árbol, necesito madera para
+                  construir una casita." El árbol, sin dudar, ofreció sus ramas.
+                  Años después, el árbol era solo un tronco... pero seguía sonriendo.
+                </p>
+                <p>
+                  Porque dar de verdad no cansa — <strong>llena el corazón.</strong> 🌳
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Cuento 2: La estrella que no brillaba -->
+          <article class="inf-story-card" data-animate="inf-pop">
+            <div class="inf-story-card__cover">
+              <span class="inf-story-card__cover-emoji" aria-hidden="true">⭐</span>
+              <div class="inf-story-card__cover-stars" aria-hidden="true">
+                ⭐⭐⭐
+              </div>
+            </div>
+            <div class="inf-story-card__body">
+              <h3 class="inf-story-card__title">La Estrella Pequeñita</h3>
+              <p class="inf-story-card__preview">
+                En el cielo había miles de estrellas que brillaban con fuerza.
+                Pero había una pequeñita que pensaba que su luz era muy poquita...
+              </p>
+              <div class="inf-story-card__moral">
+                <span class="inf-story-card__moral-label">💡 Enseñanza:</span>
+                <span>Tu luz es única y el mundo la necesita.</span>
+              </div>
+              <button class="inf-story-card__btn inf-btn inf-btn--yellow inf-btn--sm"
+                aria-expanded="false" data-story="estrella">
+                📖 Leer el cuento
+              </button>
+              <div class="inf-story-card__full" id="story-estrella" hidden>
+                <p>
+                  En el cielo brillante de la noche, todas las estrellas competían
+                  por brillar más fuerte. Pero había una pequeña estrellita que solo
+                  tenía una lucecita muy tenue.
+                </p>
+                <p>
+                  "¿Para qué sirvo yo?", se preguntaba tristemente.
+                  Una noche, un niño perdido en el bosque miraba el cielo buscando
+                  orientación. Las estrellas grandes brillaban tanto que lo cegaban...
+                  hasta que vio aquella lucecita suave y perfecta justo en la dirección correcta.
+                </p>
+                <p>
+                  El niño siguió la estrellita pequeña y llegó a casa sano y salvo.
+                  Desde esa noche, la estrellita entendió:
+                  <strong>no necesitas ser la más grande para iluminar el camino de alguien.</strong> ⭐
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Cuento 3: El amigo diferente -->
+          <article class="inf-story-card" data-animate="inf-pop">
+            <div class="inf-story-card__cover">
+              <span class="inf-story-card__cover-emoji" aria-hidden="true">🦓</span>
+              <div class="inf-story-card__cover-stars" aria-hidden="true">
+                ⭐⭐⭐
+              </div>
+            </div>
+            <div class="inf-story-card__body">
+              <h3 class="inf-story-card__title">El Amigo Diferente</h3>
+              <p class="inf-story-card__preview">
+                En la sabana vivía una cebra que tenía rayas al revés de todas las demás.
+                Los otros animales se reían de ella, hasta que llegó el día...
+              </p>
+              <div class="inf-story-card__moral">
+                <span class="inf-story-card__moral-label">💡 Enseñanza:</span>
+                <span>Ser diferente es un superpoder, no un defecto.</span>
+              </div>
+              <button class="inf-story-card__btn inf-btn inf-btn--purple inf-btn--sm"
+                aria-expanded="false" data-story="cebra">
+                📖 Leer el cuento
+              </button>
+              <div class="inf-story-card__full" id="story-cebra" hidden>
+                <p>
+                  Zoe la cebra tenía sus rayas al revés — mientras todas las cebras
+                  tenían rayas negras sobre blanco, ella tenía rayas blancas sobre negro.
+                  Los otros animales se burlaban: "¡Mira la cebra rara!"
+                </p>
+                <p>
+                  Un día llegó al río una manada de leones hambrientos. Todas las cebras
+                  corrían desesperadas... menos Zoe. Ella se quedó quieta cerca de un árbol
+                  y ¡los leones pasaron de largo sin verla! Sus rayas únicas la hacían
+                  invisible en ese lugar.
+                </p>
+                <p>
+                  Zoe salvó a toda la manada usando precisamente lo que creía que era su defecto.
+                  Desde ese día, todos querían tener una amiga con rayas únicas.
+                  <strong>Lo que te hace diferente te hace especial.</strong> 🦓
+                </p>
+              </div>
+            </div>
+          </article>
+
+        </div><!-- /.inf-stories__grid -->
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: APRENDO Y JUEGO
+      Actividades interactivas simples.
+      Un juego de colores, un contador y una adivinanza.
+    ────────────────────────────────────────────────────────── -->
+    <section class="inf-games" id="inf-juegos" aria-labelledby="infGamesTitle">
+      <div class="inf-container">
+
+        <div class="inf-section-header">
+          <span class="inf-section-tag">🎯 ¡A jugar!</span>
+          <h2 class="inf-section-title" id="infGamesTitle">
+            ¡Aprendo y Juego!
+          </h2>
+          <p class="inf-section-desc">
+            Actividades divertidas para aprender jugando.
+            ¡Pregúntale a un adulto si necesitas ayuda! 🙌
+          </p>
+        </div>
+
+        <div class="inf-games__grid">
+
+          <!-- Juego 1: ¿De qué color soy? -->
+          <div class="inf-game-card" data-animate="inf-pop">
+            <div class="inf-game-card__icon" aria-hidden="true">🎨</div>
+            <h3 class="inf-game-card__title">¿Qué color soy?</h3>
+            <p class="inf-game-card__desc">
+              ¡Toca el botón y aprende los colores del arcoíris!
+            </p>
+            <div class="inf-color-display" id="colorDisplay" aria-live="polite">
+              <div class="inf-color-box" id="colorBox" aria-hidden="true"></div>
+              <span class="inf-color-name" id="colorName">¿Cuál soy?</span>
+            </div>
+            <button class="inf-btn inf-btn--pink inf-btn--full" id="colorBtn">
+              🌈 ¡Mostrar color!
+            </button>
+          </div>
+
+          <!-- Juego 2: Contador de animales -->
+          <div class="inf-game-card" data-animate="inf-pop">
+            <div class="inf-game-card__icon" aria-hidden="true">🔢</div>
+            <h3 class="inf-game-card__title">¡Cuento animales!</h3>
+            <p class="inf-game-card__desc">
+              Toca para agregar animales y aprende a contar.
+            </p>
+            <div class="inf-counter" aria-live="polite">
+              <div class="inf-counter__animals" id="counterAnimals" role="img" aria-label="Animales contados"></div>
+              <div class="inf-counter__number">
+                <span id="counterNum">0</span>
+                <span class="inf-counter__label">animales</span>
+              </div>
+            </div>
+            <div class="inf-counter__btns">
+              <button class="inf-btn inf-btn--green inf-btn--icon" id="addAnimalBtn"
+                aria-label="Agregar animal">➕</button>
+              <button class="inf-btn inf-btn--red inf-btn--icon" id="clearAnimalsBtn"
+                aria-label="Limpiar">🗑️</button>
+            </div>
+          </div>
+
+          <!-- Juego 3: Adivinanza -->
+          <div class="inf-game-card" data-animate="inf-pop">
+            <div class="inf-game-card__icon" aria-hidden="true">🤔</div>
+            <h3 class="inf-game-card__title">¡Adivina quién soy!</h3>
+            <p class="inf-game-card__desc">
+              Lee la pista y descubre quién soy. ¡A pensar!
+            </p>
+            <div class="inf-riddle" aria-live="polite">
+              <p class="inf-riddle__text" id="riddleText">
+                "Tengo alas pero no soy pájaro. Duermo de día y vuelo de noche. ¿Quién soy?"
+              </p>
+              <button class="inf-btn inf-btn--orange inf-btn--full" id="riddleBtn">
+                🔍 ¡Ver respuesta!
+              </button>
+              <div class="inf-riddle__answer" id="riddleAnswer" hidden aria-live="assertive">
+                <span class="inf-riddle__answer-emoji">🦇</span>
+                <p>¡Soy el <strong>Murciélago</strong>! ¿Lo sabías? 🌙</p>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.inf-games__grid -->
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: VALORES DEL CORAZÓN
+      Valores fundamentales presentados de forma visual,
+      simple y directa para niños.
+    ────────────────────────────────────────────────────────── -->
+    <section class="inf-values" id="inf-valores" aria-labelledby="infValuesTitle">
+      <div class="inf-container">
+
+        <div class="inf-section-header">
+          <span class="inf-section-tag">💖 Para llevar siempre...</span>
+          <h2 class="inf-section-title" id="infValuesTitle">
+            Valores del Corazón
+          </h2>
+          <p class="inf-section-desc">
+            Estos son los superpoderes más importantes.
+            ¡Guárdalos aquí dentro! 💪
+          </p>
+        </div>
+
+        <div class="inf-values__grid" role="list">
+
+          <div class="inf-value-card inf-value-card--amor" role="listitem" data-animate="inf-pop">
+            <div class="inf-value-card__emoji" aria-hidden="true">❤️</div>
+            <h3 class="inf-value-card__name">Amor</h3>
+            <p class="inf-value-card__desc">Quiero a mi familia, mis amigos y a mí mismo.</p>
+          </div>
+
+          <div class="inf-value-card inf-value-card--respeto" role="listitem" data-animate="inf-pop">
+            <div class="inf-value-card__emoji" aria-hidden="true">🤝</div>
+            <h3 class="inf-value-card__name">Respeto</h3>
+            <p class="inf-value-card__desc">Trato a todos como me gustaría que me trataran.</p>
+          </div>
+
+          <div class="inf-value-card inf-value-card--honestidad" role="listitem" data-animate="inf-pop">
+            <div class="inf-value-card__emoji" aria-hidden="true">💫</div>
+            <h3 class="inf-value-card__name">Honestidad</h3>
+            <p class="inf-value-card__desc">Siempre digo la verdad, aunque sea difícil.</p>
+          </div>
+
+          <div class="inf-value-card inf-value-card--valentía" role="listitem" data-animate="inf-pop">
+            <div class="inf-value-card__emoji" aria-hidden="true">🦁</div>
+            <h3 class="inf-value-card__name">Valentía</h3>
+            <p class="inf-value-card__desc">Aunque tenga miedo, lo intento de todas formas.</p>
+          </div>
+
+          <div class="inf-value-card inf-value-card--gratitud" role="listitem" data-animate="inf-pop">
+            <div class="inf-value-card__emoji" aria-hidden="true">🙏</div>
+            <h3 class="inf-value-card__name">Gratitud</h3>
+            <p class="inf-value-card__desc">Doy gracias por todo lo que tengo cada día.</p>
+          </div>
+
+          <div class="inf-value-card inf-value-card--amistad" role="listitem" data-animate="inf-pop">
+            <div class="inf-value-card__emoji" aria-hidden="true">🌟</div>
+            <h3 class="inf-value-card__name">Amistad</h3>
+            <p class="inf-value-card__desc">Soy buen amigo: escucho, comparto y apoyo.</p>
+          </div>
+
+        </div><!-- /.inf-values__grid -->
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: CANCIONES Y RONDAS
+      Letras de rondas infantiles clásicas con botón
+      para "mostrar" cada canción completa.
+    ────────────────────────────────────────────────────────── -->
+    <section class="inf-songs" id="inf-canciones" aria-labelledby="infSongsTitle">
+      <div class="inf-container">
+
+        <div class="inf-section-header">
+          <span class="inf-section-tag">🎵 ¡A cantar!</span>
+          <h2 class="inf-section-title" id="infSongsTitle">
+            ¡Canciones y Rondas!
+          </h2>
+          <p class="inf-section-desc">
+            Canta, baila y sé feliz. ¡La música alegra el corazón! 🎶
+          </p>
+        </div>
+
+        <div class="inf-songs__grid">
+
+          <!-- Canción 1 -->
+          <div class="inf-song-card" data-animate="inf-pop">
+            <div class="inf-song-card__header">
+              <span class="inf-song-card__emoji" aria-hidden="true">🐢</span>
+              <div>
+                <h3 class="inf-song-card__title">El Patio de Mi Casa</h3>
+                <span class="inf-song-card__type">Ronda tradicional</span>
+              </div>
+              <button class="inf-song-card__play" id="playSong1"
+                aria-expanded="false" aria-label="Mostrar letra de El patio de mi casa">
+                ▶
+              </button>
+            </div>
+            <div class="inf-song-card__lyrics" id="lyrics1" hidden>
+              <p>🎵 El patio de mi casa<br/>
+              es particular.<br/>
+              Cuando llueve se moja<br/>
+              como los demás.</p>
+              <p>🎵 Agáchate<br/>
+              y vuélvete a agachar,<br/>
+              que los agachaditos<br/>
+              no saben bailar.</p>
+              <p>🎵 H, I, J, K, L, M, N, A<br/>
+              que si tú no me quieres<br/>
+              otro niño me querrá. 🎵</p>
+            </div>
+          </div>
+
+          <!-- Canción 2 -->
+          <div class="inf-song-card" data-animate="inf-pop">
+            <div class="inf-song-card__header">
+              <span class="inf-song-card__emoji" aria-hidden="true">🌟</span>
+              <div>
+                <h3 class="inf-song-card__title">Estrellita ¿Dónde Estás?</h3>
+                <span class="inf-song-card__type">Canción de cuna</span>
+              </div>
+              <button class="inf-song-card__play" id="playSong2"
+                aria-expanded="false" aria-label="Mostrar letra de Estrellita">
+                ▶
+              </button>
+            </div>
+            <div class="inf-song-card__lyrics" id="lyrics2" hidden>
+              <p>🎵 Estrellita, ¿dónde estás?<br/>
+              Me pregunto qué serás.<br/>
+              En el cielo o en el mar,<br/>
+              un diamante singular.</p>
+              <p>🎵 Cuando el sol se va a dormir,<br/>
+              tú comienzas a lucir.<br/>
+              Estrellita, ¿dónde estás?<br/>
+              Me pregunto qué serás. 🎵</p>
+            </div>
+          </div>
+
+          <!-- Canción 3 -->
+          <div class="inf-song-card" data-animate="inf-pop">
+            <div class="inf-song-card__header">
+              <span class="inf-song-card__emoji" aria-hidden="true">🦅</span>
+              <div>
+                <h3 class="inf-song-card__title">Los Pollitos Dicen</h3>
+                <span class="inf-song-card__type">Canción tradicional</span>
+              </div>
+              <button class="inf-song-card__play" id="playSong3"
+                aria-expanded="false" aria-label="Mostrar letra de Los pollitos">
+                ▶
+              </button>
+            </div>
+            <div class="inf-song-card__lyrics" id="lyrics3" hidden>
+              <p>🎵 Los pollitos dicen<br/>
+              pío, pío, pío,<br/>
+              cuando tienen hambre,<br/>
+              cuando tienen frío.</p>
+              <p>🎵 La gallina busca<br/>
+              el maíz y el trigo,<br/>
+              les da la comida<br/>
+              y les presta abrigo.</p>
+              <p>🎵 Bajo sus dos alas<br/>
+              acurrucaditos,<br/>
+              hasta el otro día<br/>
+              duermen los pollitos. 🎵</p>
+            </div>
+          </div>
+
+          <!-- Canción 4 -->
+          <div class="inf-song-card" data-animate="inf-pop">
+            <div class="inf-song-card__header">
+              <span class="inf-song-card__emoji" aria-hidden="true">🦆</span>
+              <div>
+                <h3 class="inf-song-card__title">El Pato Ñoño</h3>
+                <span class="inf-song-card__type">Canción divertida</span>
+              </div>
+              <button class="inf-song-card__play" id="playSong4"
+                aria-expanded="false" aria-label="Mostrar letra de El pato ñoño">
+                ▶
+              </button>
+            </div>
+            <div class="inf-song-card__lyrics" id="lyrics4" hidden>
+              <p>🎵 Había un pato<br/>
+              que pataleaba,<br/>
+              que se caía<br/>
+              y se levantaba.</p>
+              <p>🎵 ¡Cuac, cuac, cuac!<br/>
+              decía el patito.<br/>
+              ¡Cuac, cuac, cuac!<br/>
+              qué lindo es bailar. 🎵</p>
+            </div>
+          </div>
+
+        </div><!-- /.inf-songs__grid -->
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      MENSAJE ESPECIAL — CIERRE
+      Un mensaje de amor directo a los niños que visitan
+      esta sección. Simple, cálido y poderoso.
+    ────────────────────────────────────────────────────────── -->
+    <section class="inf-message" id="inf-mensaje" aria-labelledby="infMessageTitle">
+      <div class="inf-container">
+        <div class="inf-message__inner" data-animate="inf-pop">
+
+          <!-- Confetti decorativo -->
+          <div class="inf-confetti" aria-hidden="true" id="confetti"></div>
+
+          <div class="inf-message__emoji-big" aria-hidden="true">💌</div>
+
+          <h2 class="inf-message__title" id="infMessageTitle">
+            Un mensaje para ti
+          </h2>
+
+          <div class="inf-message__text">
+            <p>
+              Seas grande o pequeño, sepas leer mucho o poquito,
+              tengas muchos amigos o pocos — 
+              <strong>eres increíblemente valioso.</strong>
+            </p>
+            <p>
+              Hay un Dios que te creó a propósito, con un plan especial
+              para tu vida. Tienes talentos únicos que el mundo necesita.
+            </p>
+            <p>
+              <strong>¡Sé tú mismo, siempre! 🌈</strong>
+            </p>
+          </div>
+
+          <!-- Botón para lanzar confetti -->
+          <button class="inf-btn inf-btn--rainbow inf-btn--lg" id="confettiBtn"
+            aria-label="Celebrar con confetti">
+            🎉 ¡Celebremos juntos!
+          </button>
+
+          <!-- Links de regreso -->
+          <div class="inf-message__back">
+            <a href="#inf-inicio" class="inf-btn inf-btn--white">
+              ⬆️ Volver arriba
+            </a>
+            <a href="../../index.html#mundos" class="inf-btn inf-btn--white">
+              🌍 Otros mundos
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+    FOOTER — Versión infantil más colorida
+  ============================================================ -->
+  <footer class="footer inf-footer" role="contentinfo">
+    <div class="container">
+      <div class="inf-footer__inner">
+        <div class="footer__brand">
+          <a href="../../index.html" class="footer__logo" aria-label="Volver al inicio">
+            <span class="footer__logo-mark">M</span>
+            El Mundo de Manu
+          </a>
+          <p class="footer__tagline">
+            🌈 Un mundo lleno de magia y color para los más pequeños.
+          </p>
+        </div>
+        <nav class="footer__nav" aria-label="Mis mundos">
+          <h4 class="footer__nav-title">Mis Mundos</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../fe/fe.html"                       class="footer__link">Fe</a></li>
+            <li><a href="../gaming/gaming.html"               class="footer__link">Gaming</a></li>
+            <li><a href="infantil.html"                       class="footer__link footer__link--active">Infantil</a></li>
+            <li><a href="../relaciones/relaciones.html"       class="footer__link">Relaciones</a></li>
+            <li><a href="../tecnologia/tecnologia.html"       class="footer__link">Tecnología</a></li>
+            <li><a href="../sobremi/sobremi.html"             class="footer__link">Sobre Mí</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">
+          © <span id="footerYear"></span> El Mundo de Manu — Hecho con 💛 para los niños
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+  <script src="infantil.js"></script>
+
+</body>
+</html>

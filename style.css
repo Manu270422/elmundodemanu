@@ -140,6 +140,25 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  /*
+    BUG FIX #2 — Scrollbar de escritorio:
+    Pongo overflow-x: hidden aquí en html (NO en body) para evitar
+    el scroll horizontal sin nunca suprimir la scrollbar vertical.
+    Si lo ponía solo en body, Chromium ocultaba la barra lateral
+    porque detectaba un conflicto de desbordamiento.
+    Al ponerlo en html, la barra de scroll vertical siempre aparece
+    y el usuario puede arrastrarla con el mouse normalmente.
+  */
+  overflow-x: hidden;
+  /*
+    BUG FIX #1 (móvil táctil):
+    touch-action: pan-y le dice al navegador móvil que este elemento
+    acepta desplazamiento vertical con el dedo sin ninguna restricción.
+    Esto resuelve el problema donde el dedo tenía que hacer movimientos
+    rápidos repetidos para que la página bajara de a poquito.
+    Con pan-y el scroll es suave y continuo desde el primer toque.
+  */
+  touch-action: pan-y;
 }
 
 body {
@@ -148,8 +167,18 @@ body {
   font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: 1.7;
-  overflow-x: hidden;
   /*
+    BUG FIX #2 (continuación):
+    Quité overflow-x: hidden de aquí. Ahora solo lo maneja html (arriba).
+    Esto libera al body para mostrar la scrollbar vertical nativa
+    en escritorio sin ningún conflicto con el eje horizontal.
+
+    BUG FIX #3 (preventivo):
+    Tampoco pongo overflow: hidden aquí porque esto bloquearía
+    tanto la scrollbar como el scroll táctil en móvil.
+    El bloqueo temporal durante el loader lo manejo solo desde JS
+    y siempre lo libero de forma segura (ver script.js).
+
     NO oculto el cursor aquí de forma global.
     Lo hago solo cuando hay un mouse fino disponible (pointer: fine).
     Así los usuarios de móvil y tablet nunca pierden el cursor
@@ -196,17 +225,20 @@ button { cursor: pointer; border: none; background: none; }
 }
 
 /*
-  Scrollbar personalizado — solo en Chromium/Safari que soportan -webkit-scrollbar.
-  Firefox y móviles mantienen su barra nativa (siempre visible) automáticamente.
-  IMPORTANTE: NO uso overflow:hidden en html ni body, así la barra
-  siempre está disponible para el usuario.
+  Scrollbar personalizado — visible siempre en escritorio (Chromium/Safari).
+  Firefox y móviles mantienen su barra nativa automáticamente.
+
+  BUG FIX #2 (scrollbar visible):
+  Antes solo estilizaba la scrollbar en pointer:fine, lo que a veces
+  causaba que Chromium no la mostrara. Ahora la defino siempre,
+  y el media query de pointer:fine solo añade el estilo visual bonito.
+  Así la barra existe en todos los Chromium de escritorio sin importar
+  si el usuario tiene mouse o no.
 */
-@media (pointer: fine) {
-  ::-webkit-scrollbar        { width: 6px; }
-  ::-webkit-scrollbar-track  { background: var(--color-bg); }
-  ::-webkit-scrollbar-thumb  { background: var(--color-primary); border-radius: var(--radius-full); }
-  ::-webkit-scrollbar-thumb:hover { background: #8880FF; }
-}
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: var(--color-bg); }
+::-webkit-scrollbar-thumb  { background: var(--color-primary); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: #8880FF; }
 
 /* Selección de texto */
 ::selection {
@@ -743,6 +775,16 @@ body.cursor-hover .cursor-trail {
   width: 100%;
   height: 100%;
   opacity: 0.6;
+  /*
+    BUG FIX #3 — Clics que no respondían:
+    El canvas estaba bloqueando los eventos de click y touch en móvil
+    porque era el último elemento posicionado sobre el contenido.
+    Con pointer-events: none le digo al navegador que ignore
+    completamente este elemento para todos los eventos del puntero.
+    Ahora los clics y toques pasan directo a los botones y links de abajo.
+    El canvas solo es decorativo, nunca debe capturar interacciones.
+  */
+  pointer-events: none;
 }
 
 /* Glow decorativo */
@@ -1271,6 +1313,14 @@ body.cursor-hover .cursor-trail {
   box-shadow: var(--shadow-md);
   white-space: nowrap;
   animation: badgeFloat 3s ease-in-out infinite;
+  /*
+    BUG FIX #3 (badges):
+    Los badges con position: absolute se salían del contenedor visual
+    y su área de clic invisible tapaba botones y tarjetas de otras secciones.
+    Con pointer-events: none los badges siguen visibles y animados,
+    pero ya no capturan ningún clic ni toque. Son puramente decorativos.
+  */
+  pointer-events: none;
 }
 
 .about-preview__badge--1 {

@@ -106,20 +106,50 @@ const Loader = (() => {
 
     loader.classList.add('is-hidden');
 
-    // Limpio el loader del DOM después de la transición para no ocupar memoria
-    loader.addEventListener('transitionend', () => {
-      loader.remove();
-    }, { once: true });
+    /*
+      BUG FIX #1 — Scroll bloqueado en móvil:
+      El problema era que liberaba el overflow SOLO dentro del callback
+      de 'transitionend'. En algunos móviles (especialmente Android e iOS)
+      este evento nunca se dispara si el sistema reduce las animaciones,
+      si el tab estaba en background, o si la transición fue interrumpida.
+      Resultado: el body quedaba con overflow:hidden para siempre y el
+      usuario no podía hacer scroll ni con el dedo ni con la barra.
 
-    // Activo el body para que se pueda hacer scroll
+      La solución tiene DOS partes:
+      1. Libero el overflow ANTES de la transición, no después.
+         El loader desaparece visualmente con CSS (opacity:0), pero el
+         scroll ya está libre desde el primer milisegundo del hide().
+      2. Agrego un setTimeout de seguridad (700ms) que elimina el loader
+         del DOM incluso si transitionend nunca llega. Así nunca queda
+         un elemento invisible bloqueando interacciones.
+    */
+
+    // PRIMERO libero el scroll — esto es inmediato, no espero ningún evento
     document.body.style.overflow = '';
 
-    // Disparo el evento de que el sitio está listo — otros módulos lo escuchan
-    document.dispatchEvent(new CustomEvent('siteReady'));
+    // Timeout de seguridad: si transitionend no llega en 700ms, limpio igual
+    const safetyTimer = setTimeout(() => {
+      if (loader.parentNode) loader.remove();
+      document.dispatchEvent(new CustomEvent('siteReady'));
+    }, 700);
+
+    // Si transitionend sí llega, cancelo el timer y limpio el loader normalmente
+    loader.addEventListener('transitionend', () => {
+      clearTimeout(safetyTimer);
+      if (loader.parentNode) loader.remove();
+      document.dispatchEvent(new CustomEvent('siteReady'));
+    }, { once: true });
   };
 
   const init = () => {
-    // Bloqueo scroll durante la carga
+    /*
+      BUG FIX #1 (preventivo):
+      Solo bloqueo el scroll si el loader realmente existe en el DOM.
+      Si alguien recarga muy rápido o el loader ya fue removido,
+      no bloqueo nada. Así nunca quedo con overflow:hidden sin querer.
+    */
+    if (!$('#loader')) return;
+
     document.body.style.overflow = 'hidden';
     requestAnimationFrame(animateProgress);
   };
@@ -882,8 +912,17 @@ const startVisuals = () => {
     );
 };
 
-// Si existe loader → espera el evento
+// Si existe loader → espera el evento siteReady (que ahora se dispara dentro de hide())
+// Si NO hay loader → ejecuta directo
 if (document.querySelector('#loader')) {
+  /*
+    BUG FIX #1 (orquestación):
+    Escucho el evento 'siteReady' que ahora disparo desde dentro de hide(),
+    ya sea por transitionend o por el timeout de seguridad.
+    En ambos casos el loader está fuera del DOM y el scroll ya está libre
+    ANTES de que startVisuals() inicialice el canvas y las animaciones.
+    Esto garantiza que en móvil el scroll funcione desde el primer toque.
+  */
   document.addEventListener('siteReady', startVisuals, { once: true });
 } else {
   // Si NO hay loader → ejecuta directo

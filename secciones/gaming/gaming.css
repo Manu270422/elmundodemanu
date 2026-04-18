@@ -1,0 +1,1046 @@
+/*
+  ============================================================
+  gaming.css — El Mundo de Manu / Gaming
+  ============================================================
+  Estilos específicos para mi sección de Gaming.
+  Esta es la sección más enérgica y visual del sitio.
+
+  Estética: neón agresivo sobre negro profundo.
+  Cyan eléctrico + magenta como colores dominantes.
+  Grid de cuadrícula, líneas de escaneo, tipografía Orbitron.
+  Todo debe sentirse como entrar a un ambiente de gaming
+  de alto nivel — HUD, stats, neón, velocidad.
+
+  Prefijo: gm- (gaming)
+
+  Estructura:
+  01. Variables locales de la sección
+  02. Breadcrumb
+  03. Hero Gaming (HUD, canvas, control SVG)
+  04. Géneros favoritos
+  05. Biblioteca / Juegos
+  06. Lecciones del gaming
+  07. Setup
+  08. CTA final
+  09. Botones propios de Gaming
+  10. Responsive
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+*/
+
+/*
+  BUG FIX ACCESIBILIDAD — Contraste de texto:
+  Cambio mis variables de texto secundario y muted para que
+  toda la sección gaming cumpla con contraste mínimo WCAG AA.
+  Los textos descriptivos pasan de un gris apagado a #b8bcc8
+  y #d1d5db, que son legibles sobre mi fondo oscuro #0A0A0F.
+  Solo afecto a .page-gaming para no tocar el resto del sitio.
+*/
+.page-gaming {
+  --gm-cyan:         #00D4FF;
+  --gm-cyan-dim:     rgba(0, 212, 255, 0.10);
+  --gm-cyan-glow:    rgba(0, 212, 255, 0.30);
+  --gm-magenta:      #FF2D78;
+  --gm-magenta-dim:  rgba(255, 45, 120, 0.10);
+  --gm-magenta-glow: rgba(255, 45, 120, 0.25);
+  --gm-surface:      #0D0D18;
+  --gm-grid-color:   rgba(0, 212, 255, 0.04);
+  --font-gaming:     'Orbitron', 'Syne', sans-serif;
+
+  /*
+    Sobreescribo los colores de texto globales solo dentro de
+    .page-gaming para mejorar el contraste en mi fondo gaming.
+    #d1d5db tiene ratio ~7:1 sobre #0A0A0F — pasa AAA.
+    #b8bcc8 tiene ratio ~5:1 — pasa AA para texto normal.
+  */
+  --color-text-primary:   #F0F0F8;
+  --color-text-secondary: #d1d5db;
+  --color-text-muted:     #b8bcc8;
+}
+
+
+/* ============================================================
+  02. BREADCRUMB
+  ============================================================ */
+.breadcrumb {
+  padding: calc(var(--space-4) + 70px) 0 var(--space-4);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+  background: var(--color-bg);
+}
+.breadcrumb__nav { display: flex; align-items: center; gap: var(--space-2); }
+.breadcrumb__link {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  transition: color var(--transition-base);
+}
+.breadcrumb__link:hover { color: var(--gm-cyan); }
+.breadcrumb__sep    { font-size: var(--text-sm); color: var(--color-text-muted); opacity: 0.4; }
+.breadcrumb__current { font-size: var(--text-sm); color: var(--gm-cyan); font-weight: 600; }
+
+/* Tag específico de Gaming */
+.gm-tag {
+  background: var(--gm-cyan-dim);
+  border-color: rgba(0, 212, 255, 0.2);
+  color: var(--gm-cyan);
+}
+
+
+/* ============================================================
+  03. HERO GAMING
+  ============================================================ */
+.gm-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: var(--space-32) 0 var(--space-20);
+}
+
+/* ── Fondo: grid de cuadrícula + canvas ── */
+.gm-hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Cuadrícula perspectiva estilo gaming HUD */
+.gm-hero__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--gm-grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--gm-grid-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 80%);
+}
+
+/* Canvas de partículas de datos */
+.gm-hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  /*
+    Igual que en mi index.html — el canvas es puramente decorativo
+    y no debe capturar ningún clic ni evento táctil.
+    Con pointer-events: none todos los clics pasan directo
+    a los botones y links que están debajo.
+  */
+  pointer-events: none;
+}
+
+/* Líneas de escaneo CRT — overlay animado */
+.gm-hero__scanline {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 212, 255, 0.015) 2px,
+    rgba(0, 212, 255, 0.015) 4px
+  );
+  pointer-events: none;
+  animation: scanlineScroll 8s linear infinite;
+}
+@keyframes scanlineScroll {
+  from { background-position: 0 0; }
+  to   { background-position: 0 100px; }
+}
+
+/* Destellos neón de esquinas */
+.gm-hero__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+}
+.gm-hero__glow--cyan {
+  width: 500px; height: 500px;
+  top: -100px; left: -150px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.14) 0%, transparent 70%);
+  animation: glowPulse 4s ease-in-out infinite;
+}
+.gm-hero__glow--magenta {
+  width: 400px; height: 400px;
+  bottom: -100px; right: -100px;
+  background: radial-gradient(circle, rgba(255, 45, 120, 0.12) 0%, transparent 70%);
+  animation: glowPulse 4s ease-in-out infinite 2s;
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+
+/* ── HUD Superior decorativo ── */
+.gm-hero__hud-top {
+  position: absolute;
+  top: calc(80px + var(--space-6));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-2) var(--space-8);
+  background: rgba(0, 212, 255, 0.04);
+  border: 1px solid rgba(0, 212, 255, 0.12);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(10px);
+  z-index: 1;
+}
+
+.gm-hud__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.gm-hud__label {
+  font-family: var(--font-gaming);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
+}
+.gm-hud__value {
+  font-family: var(--font-gaming);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--gm-cyan);
+  letter-spacing: 0.08em;
+}
+.gm-hud__value--online {
+  color: #4ADE80;
+  animation: onlinePulse 2s ease-in-out infinite;
+}
+@keyframes onlinePulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+
+/* ── Contenido central del hero ── */
+.gm-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  align-items: center;
+  justify-items: center;
+  padding-top: var(--space-8);
+}
+@media (min-width: 960px) {
+  .gm-hero__inner {
+    grid-template-columns: 1fr auto;
+    justify-items: start;
+    gap: var(--space-16);
+  }
+}
+
+.gm-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 620px;
+}
+
+.gm-hero__tag-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+/* Texto "PRESS START" parpadeante */
+.gm-hero__press-start {
+  font-family: var(--font-gaming);
+  font-size: var(--text-xs);
+  color: var(--gm-magenta);
+  letter-spacing: 0.15em;
+  animation: pressStartBlink 1.5s step-end infinite;
+}
+@keyframes pressStartBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Título principal con fuente Orbitron */
+.gm-hero__title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.gm-hero__title-line {
+  font-family: var(--font-gaming);
+  font-size: clamp(3rem, 9vw, 6rem);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  line-height: 0.9;
+  color: transparent;
+  background: linear-gradient(135deg, #fff 0%, var(--gm-cyan) 60%, #00A8CC 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* Contorno neón con text-shadow */
+  filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.4));
+}
+.gm-hero__title-sub {
+  font-family: var(--font-gaming);
+  font-size: clamp(var(--text-sm), 2vw, var(--text-md));
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--gm-magenta);
+  text-transform: uppercase;
+}
+
+/* ── Stats HUD del jugador ── */
+.gm-hero__stats-hud {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-6);
+  background: rgba(0, 212, 255, 0.03);
+  border: 1px solid rgba(0, 212, 255, 0.12);
+  border-radius: var(--radius-md);
+}
+
+.gm-stat-hud {
+  display: grid;
+  grid-template-columns: 36px 1fr 40px;
+  align-items: center;
+  gap: var(--space-3);
+}
+.gm-stat-hud__label {
+  font-family: var(--font-gaming);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gm-cyan);
+  letter-spacing: 0.1em;
+}
+.gm-stat-hud__bar {
+  height: 5px;
+  background: rgba(0, 212, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.gm-stat-hud__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gm-cyan), #fff);
+  border-radius: var(--radius-full);
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 8px var(--gm-cyan-glow);
+}
+.gm-stat-hud__val {
+  font-family: var(--font-gaming);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  text-align: right;
+}
+
+.gm-hero__desc {
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+}
+
+.gm-hero__actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+/* ── Control SVG decorativo ── */
+.gm-hero__controller {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gm-controller {
+  position: relative;
+  width: 260px;
+  height: 170px;
+  animation: controllerFloat 4s ease-in-out infinite;
+}
+@keyframes controllerFloat {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%       { transform: translateY(-12px) rotate(2deg); }
+}
+.gm-controller__svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 16px rgba(0, 212, 255, 0.4))
+          drop-shadow(0 0 32px rgba(0, 212, 255, 0.2));
+}
+.gm-controller__glow {
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(ellipse at center,
+    rgba(0, 212, 255, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: controllerGlow 3s ease-in-out infinite;
+}
+@keyframes controllerGlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.1); }
+}
+
+/* ── Scroll indicator gaming ── */
+.gm-hero__scroll {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  z-index: 1;
+}
+.gm-hero__scroll-text {
+  font-family: var(--font-gaming);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--color-text-muted);
+}
+.gm-hero__scroll-arrow {
+  font-size: var(--text-sm);
+  color: var(--gm-cyan);
+  animation: scrollArrow 1.5s ease-in-out infinite;
+}
+@keyframes scrollArrow {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50%       { transform: translateY(6px); opacity: 0.5; }
+}
+
+
+/* ============================================================
+  04. GÉNEROS FAVORITOS
+  ============================================================ */
+.gm-genres {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top:  1px solid rgba(0, 212, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.08);
+}
+
+.gm-genres__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 640px)  { .gm-genres__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .gm-genres__grid { grid-template-columns: repeat(4, 1fr); } }
+
+.gm-genre-card {
+  position: relative;
+  /*
+    MEJORA DE AIRE — Géneros:
+    Subo el padding de var(--space-7) a var(--space-8) en todos los lados
+    y agrego un padding-bottom extra para que el medidor de afición
+    nunca quede pegado al borde inferior de la tarjeta.
+    El texto respira mucho más con este ajuste.
+  */
+  padding: var(--space-8) var(--space-8) var(--space-7);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  overflow: hidden;
+  transition: transform var(--transition-slow), border-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+.gm-genre-card:hover {
+  /*
+    HOVER STATE mejorado:
+    Subo más el translateY y agrego un box-shadow cyan pronunciado
+    para que la UI se sienta viva al pasar el mouse.
+  */
+  transform: translateY(-8px);
+  border-color: var(--gm-cyan);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 32px var(--gm-cyan-dim);
+}
+
+/* Tarjeta top — borde cyan más prominente */
+.gm-genre-card--top {
+  border-color: rgba(0, 212, 255, 0.25);
+  background: linear-gradient(135deg,
+    rgba(0, 212, 255, 0.04) 0%, var(--color-bg) 100%);
+}
+
+/* Número de ranking en el fondo */
+.gm-genre-card__rank {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-4);
+  font-family: var(--font-gaming);
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--gm-cyan);
+  opacity: 0.06;
+  line-height: 1;
+  user-select: none;
+  transition: opacity var(--transition-base);
+}
+.gm-genre-card:hover .gm-genre-card__rank { opacity: 0.12; }
+
+.gm-genre-card__icon { font-size: 2.25rem; line-height: 1; }
+
+.gm-genre-card__name {
+  font-family: var(--font-gaming);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--gm-cyan);
+}
+
+.gm-genre-card__desc {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+
+/* Medidor de afición */
+.gm-genre-card__meter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: auto;
+}
+.gm-genre-card__meter-fill {
+  flex: 1;
+  height: 4px;
+  background: rgba(0, 212, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+.gm-genre-card__meter-fill::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gm-cyan), #00F0FF);
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 8px var(--gm-cyan-glow);
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gm-genre-card__meter-fill.is-animated::after {
+  width: var(--meter-width, 0%);
+}
+.gm-genre-card__meter span {
+  font-family: var(--font-gaming);
+  font-size: 10px;
+  color: var(--gm-cyan);
+  min-width: 32px;
+  text-align: right;
+}
+
+/* Glow de fondo de la tarjeta */
+.gm-genre-card__glow {
+  position: absolute;
+  bottom: -40px; right: -40px;
+  width: 120px; height: 120px;
+  background: var(--gm-cyan);
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+  pointer-events: none;
+}
+.gm-genre-card:hover .gm-genre-card__glow { opacity: 0.06; }
+
+
+/* ============================================================
+  05. BIBLIOTECA / JUEGOS
+  ============================================================ */
+.gm-library {
+  padding: var(--space-24) 0;
+}
+
+/* Mis pills de filtrado — contenedor */
+.gm-library__filters {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-10);
+}
+
+/*
+  Mis pills de filtrado — ya son <button> en el HTML (correcto).
+  Mejoro sus hover states para que se sientan más interactivos.
+*/
+.gm-filter {
+  padding: var(--space-2) var(--space-5);
+  font-family: var(--font-gaming);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  /*
+    HOVER STATE mejorado — Filtros:
+    Agrego un ligero lift y resplandor en el hover
+    para que el usuario sienta que son interactivos.
+  */
+}
+.gm-filter:hover {
+  color: var(--gm-cyan);
+  border-color: var(--gm-cyan);
+  background: var(--gm-cyan-dim);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.15);
+}
+.gm-filter:active {
+  transform: translateY(0);
+}
+.gm-filter--active {
+  background: var(--gm-cyan);
+  color: #0A0A0F;
+  border-color: var(--gm-cyan);
+  box-shadow: 0 0 16px var(--gm-cyan-glow);
+  transform: none;
+}
+
+/* Grid de juegos */
+.gm-library__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 640px)  { .gm-library__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .gm-library__grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* Tarjeta de juego */
+.gm-game-card {
+  padding: var(--space-7);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: transform var(--transition-slow), border-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+.gm-game-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gm-cyan);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 16px var(--gm-cyan-dim);
+}
+.gm-game-card--coming { opacity: 0.55; }
+.gm-game-card--coming:hover { opacity: 1; border-color: var(--color-border); transform: none; box-shadow: none; }
+.gm-game-card--hidden { display: none; }
+
+.gm-game-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.gm-game-card__genre {
+  padding: var(--space-1) var(--space-3);
+  background: var(--gm-cyan-dim);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: var(--radius-full);
+  font-family: var(--font-gaming);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gm-cyan);
+}
+.gm-game-card__rating {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-gaming);
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+.gm-game-card__stars {
+  color: var(--gm-cyan);
+  font-size: var(--text-sm);
+  letter-spacing: -2px;
+}
+.gm-game-card__icon { font-size: 2.5rem; line-height: 1; }
+.gm-game-card__title {
+  font-family: var(--font-gaming);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-text-primary);
+}
+.gm-game-card__desc {
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+.gm-game-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: auto;
+}
+/*
+  NUEVA CLASE — gm-game-card__tag:
+  Reemplazo los span genéricos que tenían color: var(--color-text-muted)
+  (prácticamente invisible sobre el fondo oscuro) por esta clase
+  con color #d1d5db sobre un fondo surface con borde cyan semitransparente.
+  El contraste ahora es legible y visualmente coherente con la estética gaming.
+  También mantengo compatibilidad con el span sin clase por si acaso.
+*/
+.gm-game-card__tags span,
+.gm-game-card__tag {
+  padding: var(--space-1) var(--space-3);
+  background: rgba(0, 212, 255, 0.06);
+  border: 1px solid rgba(0, 212, 255, 0.18);
+  border-radius: var(--radius-full);
+  font-family: var(--font-gaming);
+  font-size: 9px;
+  font-weight: 600;
+  color: #d1d5db;
+  letter-spacing: 0.06em;
+  transition: background var(--transition-base), color var(--transition-base),
+              border-color var(--transition-base);
+}
+.gm-game-card:hover .gm-game-card__tags span,
+.gm-game-card:hover .gm-game-card__tag {
+  /*
+    Al hacer hover en la tarjeta, los tags también se iluminan
+    levemente en cyan para reforzar el efecto visual.
+  */
+  background: rgba(0, 212, 255, 0.12);
+  border-color: rgba(0, 212, 255, 0.35);
+  color: #e8ecf0;
+}
+.gm-game-card__placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  text-align: center;
+}
+.gm-game-card__placeholder span { font-size: 2rem; }
+
+/* Estado vacío del filtro */
+.gm-library__empty {
+  text-align: center;
+  padding: var(--space-16) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-muted);
+}
+.gm-library__empty span { font-size: 2.5rem; }
+
+
+/* ============================================================
+  06. LECCIONES DEL GAMING
+  ============================================================ */
+.gm-lessons {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top:  1px solid rgba(0, 212, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.08);
+}
+
+.gm-lessons__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 640px)  { .gm-lessons__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .gm-lessons__grid { grid-template-columns: repeat(3, 1fr); } }
+
+.gm-lesson-card {
+  /*
+    BUG FIX OVERFLOW — Lecciones:
+    El problema de texto cortado venía de que overflow: hidden
+    combinado con un height implícito fijo cortaba el contenido.
+    La solución:
+    1. Quito el height fijo — dejo que la caja crezca con su contenido.
+    2. Cambio a min-height para que nunca sea más pequeña de lo necesario.
+    3. Agrego padding-bottom extra para que el label "Aprendido en:"
+       nunca quede pegado o cortado en el borde inferior.
+    4. Mantengo overflow: visible (o lo elimino) para que el contenido
+       nunca se recorte.
+  */
+  padding: var(--space-7) var(--space-7) var(--space-8);
+  min-height: 0;
+  height: auto;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  /* Quito overflow: hidden para que el texto nunca se corte */
+  overflow: visible;
+  transition: transform var(--transition-slow), border-color var(--transition-base);
+  position: relative;
+}
+.gm-lesson-card:hover {
+  /*
+    HOVER STATE mejorado — Lecciones:
+    Subo más el lift y agrego un brillo sutil en el borde
+    para que la interacción se sienta más premium.
+  */
+  transform: translateY(-6px);
+  border-color: rgba(0, 212, 255, 0.4);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.4), 0 0 20px rgba(0, 212, 255, 0.07);
+}
+/*
+  La línea de acento lateral la recorto solo en el pseudo-elemento,
+  no en la tarjeta entera, usando clip-path en el ::before.
+  Así la línea se anima sin afectar el contenido de la tarjeta.
+*/
+.gm-lesson-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 0%;
+  background: linear-gradient(to bottom, var(--gm-cyan), var(--gm-magenta));
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  transition: height 0.6s ease;
+  /* overflow solo en este pseudo — no afecta al contenido */
+  overflow: hidden;
+}
+.gm-lesson-card:hover::before { height: 100%; }
+
+.gm-lesson-card__icon { font-size: 2rem; line-height: 1; }
+
+.gm-lesson-card__title {
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.gm-lesson-card__desc {
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+
+.gm-lesson-card__game {
+  font-family: var(--font-gaming);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--gm-cyan);
+  opacity: 0.6;
+  margin-top: auto;
+}
+
+
+/* ============================================================
+  07. SETUP
+  ============================================================ */
+.gm-setup {
+  padding: var(--space-24) 0;
+}
+
+.gm-setup__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 640px)  { .gm-setup__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .gm-setup__grid { grid-template-columns: repeat(4, 1fr); } }
+
+.gm-setup__card {
+  padding: var(--space-7);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: transform var(--transition-slow), border-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+.gm-setup__card:hover {
+  /*
+    HOVER STATE mejorado — Setup:
+    Agrego box-shadow cyan además del transform para que
+    la tarjeta se sienta elevada y luminosa al hacer hover.
+  */
+  transform: translateY(-6px);
+  border-color: rgba(0, 212, 255, 0.4);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.4), 0 0 24px rgba(0, 212, 255, 0.08);
+}
+.gm-setup__card--goal {
+  border-color: rgba(255, 45, 120, 0.2);
+  background: linear-gradient(135deg,
+    rgba(255, 45, 120, 0.04) 0%, var(--color-surface) 100%);
+}
+
+.gm-setup__card-icon { font-size: 2.25rem; line-height: 1; }
+
+.gm-setup__card-title {
+  font-family: var(--font-gaming);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gm-cyan);
+}
+.gm-setup__card-value {
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+.gm-setup__card-note {
+  font-size: var(--text-xs);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+.gm-setup__card-badge {
+  display: inline-block;
+  margin-top: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: rgba(255, 45, 120, 0.1);
+  border: 1px solid rgba(255, 45, 120, 0.25);
+  border-radius: var(--radius-full);
+  font-family: var(--font-gaming);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--gm-magenta);
+}
+
+
+/* ============================================================
+  08. CTA FINAL
+  ============================================================ */
+.gm-cta {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid rgba(0, 212, 255, 0.08);
+}
+.gm-cta__inner {
+  position: relative;
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-12);
+  background: var(--color-bg);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+.gm-cta__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%,
+    rgba(0, 212, 255, 0.06) 0%, transparent 100%);
+  pointer-events: none;
+}
+.gm-cta__icon {
+  font-size: 3rem;
+  position: relative;
+  animation: ctaIconBounce 2s ease-in-out infinite;
+}
+@keyframes ctaIconBounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%       { transform: translateY(-6px) rotate(-5deg); }
+  75%       { transform: translateY(-3px) rotate(5deg); }
+}
+.gm-cta__title {
+  font-family: var(--font-gaming);
+  font-size: clamp(var(--text-xl), 4vw, var(--text-3xl));
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-text-primary);
+  position: relative;
+}
+.gm-cta__desc {
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  max-width: 440px;
+  position: relative;
+}
+.gm-cta__actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+}
+
+
+/* ============================================================
+  09. BOTONES PROPIOS DE GAMING
+  El botón primario usa el cyan como color base.
+  ============================================================ */
+.gm-btn--primary {
+  background: var(--gm-cyan);
+  color: #0A0A0F;
+  font-weight: 700;
+  box-shadow: 0 4px 20px var(--gm-cyan-glow);
+}
+.gm-btn--primary:hover {
+  background: #33DEFF;
+  box-shadow: 0 6px 30px rgba(0, 212, 255, 0.5);
+  transform: translateY(-2px);
+  color: #0A0A0F;
+}
+
+.gm-btn--ghost {
+  border-color: rgba(0, 212, 255, 0.25);
+  color: var(--gm-cyan);
+}
+.gm-btn--ghost:hover {
+  border-color: var(--gm-cyan);
+  background: var(--gm-cyan-dim);
+  color: var(--gm-cyan);
+}
+
+
+/* ============================================================
+  10. RESPONSIVE
+  ============================================================ */
+@media (max-width: 640px) {
+  .gm-hero {
+    padding: var(--space-20) 0 var(--space-16);
+    min-height: auto;
+  }
+  .gm-hero__hud-top { display: none; } /* HUD en mobile lo oculto */
+  .gm-hero__title-line { font-size: clamp(2.5rem, 14vw, 4rem); }
+  .gm-hero__actions { flex-direction: column; }
+  .gm-hero__actions .btn { width: 100%; justify-content: center; }
+  .gm-controller { width: 200px; height: 130px; }
+
+  .gm-cta__inner  { padding: var(--space-8) var(--space-5); }
+  .gm-cta__actions { flex-direction: column; align-items: center; width: 100%; }
+  .gm-cta__actions .btn { width: 100%; justify-content: center; }
+}
+
+/* Footer link activo */
+.footer__link--active { color: var(--gm-cyan); }

@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  gaming.html — El Mundo de Manu / Gaming
+  ============================================================
+  Esta es mi sección de gaming. No es solo un hobby — es
+  parte de mi cultura, mi forma de pensar estratégicamente
+  y una de las comunidades que más me ha formado.
+
+  Aquí comparto mis juegos favoritos, mis géneros preferidos,
+  lo que el gaming me ha enseñado y mis experiencias
+  más memorables con el control en la mano.
+
+  Estructura:
+  - Hero: Presentación con estética HUD / neón
+  - Mis géneros favoritos
+  - Mi biblioteca de juegos (destacados)
+  - Lo que el gaming me enseñó
+  - Configuración / Setup
+  - CTA: Juguemos juntos
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Gaming — El Mundo de Manu. Mis juegos favoritos, géneros, setup y lo que la cultura gamer me ha enseñado sobre estrategia y perseverancia." />
+  <meta name="author" content="Manu" />
+
+  <title>Gaming — El Mundo de Manu</title>
+
+  <!--
+    Fuentes: Syne + DM Sans del sistema global.
+    Agrego Orbitron — una fuente de display sci-fi/gaming
+    que le da la identidad visual correcta a esta sección.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Orbitron:wght@400;600;700;900&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="gaming.css" />
+</head>
+
+<body class="page-gaming">
+
+  <!-- Cursor personalizado global -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
+
+  <!-- ============================================================
+    NAVBAR — Paths relativos desde /secciones/gaming/
+  ============================================================ -->
+  <header class="navbar" id="navbar" role="banner">
+    <nav class="navbar__container" aria-label="Navegación principal">
+
+      <a href="../../index.html" class="navbar__logo" aria-label="Volver al inicio">
+        <span class="navbar__logo-mark">M</span>
+        <span class="navbar__logo-text">El Mundo de <strong>Manu</strong></span>
+      </a>
+
+      <ul class="navbar__links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__link navbar__link--active">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__link">Sobre Mí</a></li>
+        <li>
+          <a href="../../index.html#contacto" class="navbar__link navbar__link--cta">
+            Contáctame
+            <span class="navbar__cta-dot" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+
+      <button class="navbar__toggle" id="navToggle"
+        aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </nav>
+
+    <div class="navbar__mobile" id="mobileMenu" aria-hidden="true">
+      <ul class="navbar__mobile-links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__mobile-link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__mobile-link">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__mobile-link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__mobile-link">Sobre Mí</a></li>
+        <li><a href="../../index.html#contacto"  class="navbar__mobile-link navbar__mobile-link--cta">Contáctame</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" aria-label="Ruta de navegación">
+    <div class="container">
+      <nav class="breadcrumb__nav">
+        <a href="../../index.html"        class="breadcrumb__link">Inicio</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="../../index.html#mundos" class="breadcrumb__link">Mis Mundos</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span class="breadcrumb__current" aria-current="page">Gaming</span>
+      </nav>
+    </div>
+  </div>
+
+  <main id="main" role="main">
+
+    <!-- ──────────────────────────────────────────────────────────
+      HERO GAMING
+      Estética HUD de videojuego: grid de cuadrícula en el
+      fondo, líneas de escaneo, contador de "nivel", barra
+      de vida del jugador. Canvas con partículas tipo datos
+      volando. Todo el texto usa Orbitron para máximo impacto.
+    ────────────────────────────────────────────────────────── -->
+    <section class="gm-hero" id="gm-inicio" aria-labelledby="gmHeroTitle">
+
+      <!-- Fondo: cuadrícula + canvas + líneas decorativas -->
+      <div class="gm-hero__bg" aria-hidden="true">
+        <div class="gm-hero__grid"></div>
+        <canvas class="gm-hero__canvas" id="gmCanvas"></canvas>
+        <div class="gm-hero__scanline"></div>
+      </div>
+
+      <!-- Destellos de color neón -->
+      <div class="gm-hero__glow gm-hero__glow--cyan"    aria-hidden="true"></div>
+      <div class="gm-hero__glow gm-hero__glow--magenta" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="gm-hero__inner">
+
+          <!-- HUD superior — decorativo -->
+          <div class="gm-hero__hud-top" aria-hidden="true">
+            <div class="gm-hud__item">
+              <span class="gm-hud__label">JUGADOR</span>
+              <span class="gm-hud__value">MANU_DEV</span>
+            </div>
+            <div class="gm-hud__item">
+              <span class="gm-hud__label">NIVEL</span>
+              <span class="gm-hud__value" id="hudLevel">01</span>
+            </div>
+            <div class="gm-hud__item">
+              <span class="gm-hud__label">ESTADO</span>
+              <span class="gm-hud__value gm-hud__value--online">● ONLINE</span>
+            </div>
+          </div>
+
+          <!-- Contenido central del hero -->
+          <div class="gm-hero__content">
+
+            <div class="gm-hero__tag-row" data-animate="fade-up">
+              <span class="section-tag gm-tag">Player 1</span>
+              <span class="gm-hero__press-start" aria-hidden="true">PRESS START</span>
+            </div>
+
+            <h1 class="gm-hero__title" id="gmHeroTitle" data-animate="fade-up" data-delay="1">
+              <span class="gm-hero__title-line">GAMING</span>
+              <span class="gm-hero__title-sub">Culture &amp; Passion</span>
+            </h1>
+
+            <!-- Barra de "stats" del jugador — decorativa -->
+            <div class="gm-hero__stats-hud" data-animate="fade-up" data-delay="2"
+              aria-label="Estadísticas del jugador">
+              <div class="gm-stat-hud">
+                <span class="gm-stat-hud__label">STR</span>
+                <div class="gm-stat-hud__bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                  <div class="gm-stat-hud__fill" data-width="85"></div>
+                </div>
+                <span class="gm-stat-hud__val">85</span>
+              </div>
+              <div class="gm-stat-hud">
+                <span class="gm-stat-hud__label">INT</span>
+                <div class="gm-stat-hud__bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                  <div class="gm-stat-hud__fill" data-width="90"></div>
+                </div>
+                <span class="gm-stat-hud__val">90</span>
+              </div>
+              <div class="gm-stat-hud">
+                <span class="gm-stat-hud__label">AGI</span>
+                <div class="gm-stat-hud__bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                  <div class="gm-stat-hud__fill" data-width="75"></div>
+                </div>
+                <span class="gm-stat-hud__val">75</span>
+              </div>
+              <div class="gm-stat-hud">
+                <span class="gm-stat-hud__label">END</span>
+                <div class="gm-stat-hud__bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+                  <div class="gm-stat-hud__fill" data-width="95"></div>
+                </div>
+                <span class="gm-stat-hud__val">95</span>
+              </div>
+            </div>
+
+            <p class="gm-hero__desc" data-animate="fade-up" data-delay="3">
+              El gaming no es solo pasar el tiempo. Me enseñó estrategia,
+              paciencia, trabajo en equipo y que los fracasos son
+              parte necesaria del camino hacia dominar algo.
+            </p>
+
+            <div class="gm-hero__actions" data-animate="fade-up" data-delay="4">
+              <a href="#gm-juegos" class="btn gm-btn--primary">
+                Ver mi biblioteca
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a href="#gm-lecciones" class="btn btn--ghost gm-btn--ghost">Lecciones del juego</a>
+            </div>
+
+          </div>
+
+          <!-- Ícono de control decorativo -->
+          <div class="gm-hero__controller" aria-hidden="true">
+            <div class="gm-controller">
+              <!-- Cuerpo del control SVG -->
+              <svg class="gm-controller__svg" viewBox="0 0 200 130" fill="none"
+                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- Cuerpo principal -->
+                <path d="M30 50 Q10 50 10 75 Q10 100 30 110 L60 120 Q80 128 100 128 Q120 128 140 120
+                  L170 110 Q190 100 190 75 Q190 50 170 50 L140 45 Q120 40 100 40 Q80 40 60 45 Z"
+                  fill="var(--gm-surface)" stroke="var(--gm-cyan)" stroke-width="1.5"/>
+                <!-- D-pad izquierdo -->
+                <rect x="42" y="68" width="8" height="24" rx="2" fill="var(--gm-cyan)" opacity="0.6"/>
+                <rect x="36" y="74" width="20" height="8"  rx="2" fill="var(--gm-cyan)" opacity="0.6"/>
+                <!-- Botones derecha -->
+                <circle cx="142" cy="72" r="5" fill="var(--gm-magenta)" opacity="0.8"/>
+                <circle cx="155" cy="80" r="5" fill="var(--gm-cyan)"    opacity="0.8"/>
+                <circle cx="142" cy="88" r="5" fill="var(--gm-cyan)"    opacity="0.6"/>
+                <circle cx="129" cy="80" r="5" fill="var(--gm-magenta)" opacity="0.6"/>
+                <!-- Botones centrales -->
+                <rect x="88" y="74" width="10" height="6" rx="3" fill="var(--gm-cyan)" opacity="0.5"/>
+                <rect x="102" y="74" width="10" height="6" rx="3" fill="var(--gm-cyan)" opacity="0.5"/>
+                <!-- Joysticks -->
+                <circle cx="70"  cy="95" r="9" fill="none" stroke="var(--gm-cyan)" stroke-width="1.5" opacity="0.7"/>
+                <circle cx="130" cy="95" r="9" fill="none" stroke="var(--gm-cyan)" stroke-width="1.5" opacity="0.7"/>
+                <circle cx="70"  cy="95" r="4" fill="var(--gm-cyan)" opacity="0.5"/>
+                <circle cx="130" cy="95" r="4" fill="var(--gm-cyan)" opacity="0.5"/>
+                <!-- Bumpers -->
+                <path d="M35 50 Q45 38 65 42" stroke="var(--gm-cyan)" stroke-width="1.5" opacity="0.5" stroke-linecap="round"/>
+                <path d="M165 50 Q155 38 135 42" stroke="var(--gm-cyan)" stroke-width="1.5" opacity="0.5" stroke-linecap="round"/>
+              </svg>
+              <!-- Efecto de brillo pulsante en el control -->
+              <div class="gm-controller__glow"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Scroll indicator estilo gaming -->
+      <div class="gm-hero__scroll" aria-hidden="true">
+        <span class="gm-hero__scroll-text">SCROLL DOWN</span>
+        <div class="gm-hero__scroll-arrow">▼</div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: MIS GÉNEROS FAVORITOS
+      Tarjetas de géneros de videojuegos que prefiero,
+      con indicador visual de cuánto los juego.
+    ────────────────────────────────────────────────────────── -->
+    <section class="gm-genres" id="gm-generos" aria-labelledby="gmGenresTitle">
+      <div class="container">
+
+        <!--
+          Encabezado de mis géneros.
+          Quité cualquier elemento decorativo suelto que causaba
+          las "viñetas fantasma" visibles a la derecha del título.
+          Solo dejo el tag, el título y la descripción — nada más.
+        -->
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag gm-tag">Mi estilo</span>
+          <h2 class="section-title" id="gmGenresTitle">Mis Géneros</h2>
+          <p class="section-desc">
+            No juego todo — pero lo que juego lo vivo con intensidad.
+            Estos son los géneros que más disfruto y por qué.
+          </p>
+        </div>
+
+        <div class="gm-genres__grid">
+
+          <!-- RPG -->
+          <article class="gm-genre-card gm-genre-card--top" data-animate="fade-up" data-delay="0">
+            <div class="gm-genre-card__rank" aria-hidden="true">#1</div>
+            <div class="gm-genre-card__icon" aria-hidden="true">⚔️</div>
+            <div class="gm-genre-card__info">
+              <h3 class="gm-genre-card__name">RPG</h3>
+              <p class="gm-genre-card__desc">
+                Los RPG son mi género definitivo. Las historias profundas,
+                el desarrollo de personajes y las decisiones morales
+                me enganchan más que cualquier acción rápida.
+              </p>
+            </div>
+            <div class="gm-genre-card__meter" aria-label="Nivel de afición: 95%">
+              <div class="gm-genre-card__meter-fill" data-width="95"></div>
+              <span>95%</span>
+            </div>
+            <div class="gm-genre-card__glow" aria-hidden="true"></div>
+          </article>
+
+          <!-- Estrategia -->
+          <article class="gm-genre-card" data-animate="fade-up" data-delay="1">
+            <div class="gm-genre-card__rank" aria-hidden="true">#2</div>
+            <div class="gm-genre-card__icon" aria-hidden="true">🧠</div>
+            <div class="gm-genre-card__info">
+              <h3 class="gm-genre-card__name">Estrategia</h3>
+              <p class="gm-genre-card__desc">
+                Juegos donde pensar mejor que el oponente es la clave.
+                Me enseñaron a ver el panorama completo y no solo
+                la jugada inmediata — habilidad que uso fuera del juego.
+              </p>
+            </div>
+            <div class="gm-genre-card__meter" aria-label="Nivel de afición: 88%">
+              <div class="gm-genre-card__meter-fill" data-width="88"></div>
+              <span>88%</span>
+            </div>
+            <div class="gm-genre-card__glow" aria-hidden="true"></div>
+          </article>
+
+          <!-- Aventura -->
+          <article class="gm-genre-card" data-animate="fade-up" data-delay="2">
+            <div class="gm-genre-card__rank" aria-hidden="true">#3</div>
+            <div class="gm-genre-card__icon" aria-hidden="true">🗺️</div>
+            <div class="gm-genre-card__info">
+              <h3 class="gm-genre-card__name">Aventura / Open World</h3>
+              <p class="gm-genre-card__desc">
+                Explorar mundos abiertos es una experiencia única.
+                La libertad de decidir hacia dónde ir, descubrir
+                secretos y vivir historias no lineales me fascina.
+              </p>
+            </div>
+            <div class="gm-genre-card__meter" aria-label="Nivel de afición: 82%">
+              <div class="gm-genre-card__meter-fill" data-width="82"></div>
+              <span>82%</span>
+            </div>
+            <div class="gm-genre-card__glow" aria-hidden="true"></div>
+          </article>
+
+          <!-- Survival -->
+          <article class="gm-genre-card" data-animate="fade-up" data-delay="3">
+            <div class="gm-genre-card__rank" aria-hidden="true">#4</div>
+            <div class="gm-genre-card__icon" aria-hidden="true">🏕️</div>
+            <div class="gm-genre-card__info">
+              <h3 class="gm-genre-card__name">Survival</h3>
+              <p class="gm-genre-card__desc">
+                Los juegos de supervivencia me pusieron a prueba.
+                La escasez de recursos, las decisiones bajo presión
+                y el instinto de adaptación son lecciones reales.
+              </p>
+            </div>
+            <div class="gm-genre-card__meter" aria-label="Nivel de afición: 70%">
+              <div class="gm-genre-card__meter-fill" data-width="70"></div>
+              <span>70%</span>
+            </div>
+            <div class="gm-genre-card__glow" aria-hidden="true"></div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: MI BIBLIOTECA DE JUEGOS
+      Los juegos más importantes de mi vida gamer.
+      No una lista exhaustiva — los que me marcaron.
+    ────────────────────────────────────────────────────────── -->
+    <section class="gm-library" id="gm-juegos" aria-labelledby="gmLibraryTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag gm-tag">Mi colección</span>
+          <h2 class="section-title" id="gmLibraryTitle">Juegos que me Marcaron</h2>
+          <p class="section-desc">
+            No es un ranking — es una lista de los juegos que dejaron
+            una huella real en cómo pienso y quién soy.
+          </p>
+        </div>
+
+        <!-- Filtros de la biblioteca -->
+        <div class="gm-library__filters" role="group" aria-label="Filtrar biblioteca">
+          <button class="gm-filter gm-filter--active" data-filter="todos">Todos</button>
+          <button class="gm-filter" data-filter="rpg">RPG</button>
+          <button class="gm-filter" data-filter="estrategia">Estrategia</button>
+          <button class="gm-filter" data-filter="aventura">Aventura</button>
+          <button class="gm-filter" data-filter="survival">Survival</button>
+        </div>
+
+        <div class="gm-library__grid" id="libraryGrid">
+
+          <!-- Juego: The Witcher 3 -->
+          <!--
+            data-category usa palabras clave en minúsculas sin tilde
+            para que mi filtro JS las compare sin problemas de encoding.
+          -->
+          <article class="gm-game-card" data-category="rpg aventura" data-animate="fade-up" data-delay="0">
+            <div class="gm-game-card__header">
+              <span class="gm-game-card__genre">RPG</span>
+              <div class="gm-game-card__rating" aria-label="Calificación: 10/10">
+                <span class="gm-game-card__stars" aria-hidden="true">★★★★★</span>
+                <span>10/10</span>
+              </div>
+            </div>
+            <div class="gm-game-card__icon" aria-hidden="true">⚔️</div>
+            <h3 class="gm-game-card__title">The Witcher 3</h3>
+            <p class="gm-game-card__desc">
+              El estándar oro del RPG. Geralt me enseñó que los héroes
+              también toman decisiones difíciles sin respuestas perfectas.
+              La narrativa más memorable que he vivido en un videojuego.
+            </p>
+            <!-- Mejoré el contraste de mis tags con la clase gm-game-card__tag -->
+            <div class="gm-game-card__tags">
+              <span class="gm-game-card__tag">PC</span>
+              <span class="gm-game-card__tag">Mundo abierto</span>
+              <span class="gm-game-card__tag">Historia épica</span>
+            </div>
+          </article>
+
+          <!-- Juego: Minecraft -->
+          <article class="gm-game-card" data-category="survival aventura" data-animate="fade-up" data-delay="1">
+            <div class="gm-game-card__header">
+              <span class="gm-game-card__genre">Survival</span>
+              <div class="gm-game-card__rating" aria-label="Calificación: 10/10">
+                <span class="gm-game-card__stars" aria-hidden="true">★★★★★</span>
+                <span>10/10</span>
+              </div>
+            </div>
+            <div class="gm-game-card__icon" aria-hidden="true">🏗️</div>
+            <h3 class="gm-game-card__title">Minecraft</h3>
+            <p class="gm-game-card__desc">
+              El primer juego que me enseñó a construir desde cero.
+              La creatividad sin límites, la sensación de logro al
+              ver algo tuyo crecer — paralelo directo con programar.
+            </p>
+            <div class="gm-game-card__tags">
+              <span class="gm-game-card__tag">PC</span>
+              <span class="gm-game-card__tag">Creativo</span>
+              <span class="gm-game-card__tag">Clásico eterno</span>
+            </div>
+          </article>
+
+          <!-- Juego: Clash Royale -->
+          <article class="gm-game-card" data-category="estrategia" data-animate="fade-up" data-delay="2">
+            <div class="gm-game-card__header">
+              <span class="gm-game-card__genre">Estrategia</span>
+              <div class="gm-game-card__rating" aria-label="Calificación: 9/10">
+                <span class="gm-game-card__stars" aria-hidden="true">★★★★☆</span>
+                <span>9/10</span>
+              </div>
+            </div>
+            <div class="gm-game-card__icon" aria-hidden="true">🏰</div>
+            <h3 class="gm-game-card__title">Clash Royale</h3>
+            <p class="gm-game-card__desc">
+              Me obsesioné con este juego. El meta, los mazos,
+              leer al oponente en tiempo real. Me desarrolló
+              pensamiento lateral y toma de decisiones bajo presión.
+            </p>
+            <div class="gm-game-card__tags">
+              <span class="gm-game-card__tag">Móvil</span>
+              <span class="gm-game-card__tag">Competitivo</span>
+              <span class="gm-game-card__tag">PvP</span>
+            </div>
+          </article>
+
+          <!-- Juego: Elden Ring -->
+          <article class="gm-game-card" data-category="rpg aventura" data-animate="fade-up" data-delay="3">
+            <div class="gm-game-card__header">
+              <span class="gm-game-card__genre">RPG / Acción</span>
+              <div class="gm-game-card__rating" aria-label="Calificación: 9/10">
+                <span class="gm-game-card__stars" aria-hidden="true">★★★★☆</span>
+                <span>9/10</span>
+              </div>
+            </div>
+            <div class="gm-game-card__icon" aria-hidden="true">💀</div>
+            <h3 class="gm-game-card__title">Elden Ring</h3>
+            <p class="gm-game-card__desc">
+              Morir una y otra vez hasta aprender el patrón del jefe.
+              Ningún juego me enseñó tanto sobre perseverancia y
+              que el progreso viene después del fracaso.
+            </p>
+            <div class="gm-game-card__tags">
+              <span class="gm-game-card__tag">PC</span>
+              <span class="gm-game-card__tag">Desafiante</span>
+              <span class="gm-game-card__tag">Mundo abierto</span>
+            </div>
+          </article>
+
+          <!-- Juego: FIFA / EA FC -->
+          <article class="gm-game-card" data-category="estrategia" data-animate="fade-up" data-delay="4">
+            <div class="gm-game-card__header">
+              <span class="gm-game-card__genre">Deportes</span>
+              <div class="gm-game-card__rating" aria-label="Calificación: 8/10">
+                <span class="gm-game-card__stars" aria-hidden="true">★★★★☆</span>
+                <span>8/10</span>
+              </div>
+            </div>
+            <div class="gm-game-card__icon" aria-hidden="true">⚽</div>
+            <h3 class="gm-game-card__title">FIFA / EA FC</h3>
+            <p class="gm-game-card__desc">
+              Parte de mi infancia y adolescencia. Los partidos con
+              amigos y familia tienen un valor que ningún juego
+              single-player puede replicar.
+            </p>
+            <div class="gm-game-card__tags">
+              <span class="gm-game-card__tag">Consola</span>
+              <span class="gm-game-card__tag">Multijugador</span>
+              <span class="gm-game-card__tag">Nostalgia</span>
+            </div>
+          </article>
+
+          <!-- Placeholder para más juegos -->
+          <article class="gm-game-card gm-game-card--coming" data-category="todos" data-animate="fade-up" data-delay="5">
+            <div class="gm-game-card__header">
+              <span class="gm-game-card__genre">Próximo</span>
+            </div>
+            <div class="gm-game-card__icon" aria-hidden="true">🎮</div>
+            <h3 class="gm-game-card__title">Continuamente jugando...</h3>
+            <p class="gm-game-card__desc">
+              Mi biblioteca sigue creciendo. Nuevas aventuras,
+              nuevas lecciones. Vuelve pronto para ver qué
+              estoy jugando actualmente.
+            </p>
+            <div class="gm-game-card__placeholder" aria-hidden="true">
+              <span>🕹️</span>
+              <p>En progreso...</p>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Estado vacío para filtros sin resultados -->
+        <div class="gm-library__empty" id="libraryEmpty" hidden aria-live="polite">
+          <span aria-hidden="true">🎮</span>
+          <p>Sin juegos en esta categoría... por ahora.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: LO QUE EL GAMING ME ENSEÑÓ
+      La conexión entre el gaming y la vida real.
+      Lecciones reales de la pantalla al mundo.
+    ────────────────────────────────────────────────────────── -->
+    <section class="gm-lessons" id="gm-lecciones" aria-labelledby="gmLessonsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag gm-tag">Más allá de la pantalla</span>
+          <h2 class="section-title" id="gmLessonsTitle">Lo que el Gaming me Enseñó</h2>
+          <p class="section-desc">
+            Los videojuegos me dieron más que entretenimiento.
+            Aquí están las lecciones reales que aplico en mi vida.
+          </p>
+        </div>
+
+        <div class="gm-lessons__grid">
+
+          <div class="gm-lesson-card" data-animate="fade-up" data-delay="0">
+            <div class="gm-lesson-card__icon" aria-hidden="true">🔄</div>
+            <h3 class="gm-lesson-card__title">El fracaso es información</h3>
+            <p class="gm-lesson-card__desc">
+              Cada muerte en Dark Souls me dio datos: qué hice mal,
+              qué debo cambiar. Aprendí a ver mis errores igual —
+              no como fracasos definitivos sino como datos para mejorar.
+            </p>
+            <div class="gm-lesson-card__game" aria-hidden="true">
+              Aprendido en: Soulsborne games
+            </div>
+          </div>
+
+          <div class="gm-lesson-card" data-animate="fade-up" data-delay="1">
+            <div class="gm-lesson-card__icon" aria-hidden="true">🎯</div>
+            <h3 class="gm-lesson-card__title">Objetivos en capas</h3>
+            <p class="gm-lesson-card__desc">
+              Los RPG me enseñaron a dividir metas grandes en misiones
+              pequeñas. No "terminar el juego" — sino "llegar al siguiente
+              pueblo". Así planifico mis proyectos reales hoy.
+            </p>
+            <div class="gm-lesson-card__game" aria-hidden="true">
+              Aprendido en: RPGs en general
+            </div>
+          </div>
+
+          <div class="gm-lesson-card" data-animate="fade-up" data-delay="2">
+            <div class="gm-lesson-card__icon" aria-hidden="true">🤝</div>
+            <h3 class="gm-lesson-card__title">El equipo importa</h3>
+            <p class="gm-lesson-card__desc">
+              Los juegos cooperativos me enseñaron que el resultado
+              del equipo depende de cada rol cumplido bien.
+              No hay héroe solitario cuando el juego está bien diseñado.
+            </p>
+            <div class="gm-lesson-card__game" aria-hidden="true">
+              Aprendido en: Juegos cooperativos
+            </div>
+          </div>
+
+          <div class="gm-lesson-card" data-animate="fade-up" data-delay="3">
+            <div class="gm-lesson-card__icon" aria-hidden="true">📊</div>
+            <h3 class="gm-lesson-card__title">Gestión de recursos</h3>
+            <p class="gm-lesson-card__desc">
+              Survival games y estrategia me entrenaron para
+              administrar lo que tengo — no gastar todo de una,
+              priorizar, planear para lo que viene.
+            </p>
+            <div class="gm-lesson-card__game" aria-hidden="true">
+              Aprendido en: Minecraft, Clash Royale
+            </div>
+          </div>
+
+          <div class="gm-lesson-card" data-animate="fade-up" data-delay="4">
+            <div class="gm-lesson-card__icon" aria-hidden="true">🧩</div>
+            <h3 class="gm-lesson-card__title">Pensamiento lateral</h3>
+            <p class="gm-lesson-card__desc">
+              Los puzzles y estrategias me forzaron a buscar
+              soluciones no obvias. Ahora cuando enfrento un bug
+              o problema técnico, ese instinto se activa solo.
+            </p>
+            <div class="gm-lesson-card__game" aria-hidden="true">
+              Aprendido en: Puzzle games, estrategia
+            </div>
+          </div>
+
+          <div class="gm-lesson-card" data-animate="fade-up" data-delay="5">
+            <div class="gm-lesson-card__icon" aria-hidden="true">⏰</div>
+            <h3 class="gm-lesson-card__title">Disciplina y consistencia</h3>
+            <p class="gm-lesson-card__desc">
+              Mejorar en cualquier juego requiere práctica diaria.
+              Esa disciplina de "jugar un poco cada día" la trasladé
+              al código, al aprendizaje y a mis proyectos.
+            </p>
+            <div class="gm-lesson-card__game" aria-hidden="true">
+              Aprendido en: Juegos competitivos
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: MI SETUP
+      Mi configuración actual de gaming — honesta
+      y sin pretensiones.
+    ────────────────────────────────────────────────────────── -->
+    <section class="gm-setup" id="gm-setup" aria-labelledby="gmSetupTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag gm-tag">Mi estación</span>
+          <h2 class="section-title" id="gmSetupTitle">Mi Setup</h2>
+          <p class="section-desc">
+            Sin pretensiones — esto es con lo que juego actualmente.
+            El equipo no hace al jugador, pero sí importa.
+          </p>
+        </div>
+
+        <div class="gm-setup__grid" data-animate="fade-up" data-delay="1">
+
+          <div class="gm-setup__card">
+            <div class="gm-setup__card-icon" aria-hidden="true">💻</div>
+            <h3 class="gm-setup__card-title">Computador</h3>
+            <p class="gm-setup__card-value">PC / Laptop</p>
+            <p class="gm-setup__card-note">Mi estación principal de juego y desarrollo</p>
+          </div>
+
+          <div class="gm-setup__card">
+            <div class="gm-setup__card-icon" aria-hidden="true">📱</div>
+            <h3 class="gm-setup__card-title">Móvil</h3>
+            <p class="gm-setup__card-value">Android</p>
+            <p class="gm-setup__card-note">Para gaming casual y estrategia mientras estoy fuera</p>
+          </div>
+
+          <div class="gm-setup__card">
+            <div class="gm-setup__card-icon" aria-hidden="true">🎧</div>
+            <h3 class="gm-setup__card-title">Audio</h3>
+            <p class="gm-setup__card-value">Auriculares</p>
+            <p class="gm-setup__card-note">El sonido ambiental de un buen juego es experiencia pura</p>
+          </div>
+
+          <div class="gm-setup__card gm-setup__card--goal">
+            <div class="gm-setup__card-icon" aria-hidden="true">🎯</div>
+            <h3 class="gm-setup__card-title">Meta futura</h3>
+            <p class="gm-setup__card-value">Setup Completo</p>
+            <p class="gm-setup__card-note">Monitor gaming, periféricos y consola. Paso a paso.</p>
+            <span class="gm-setup__card-badge">En progreso</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      CTA FINAL — JUGUEMOS JUNTOS
+    ────────────────────────────────────────────────────────── -->
+    <section class="gm-cta" id="gm-conectar" aria-labelledby="gmCtaTitle">
+      <div class="container">
+        <div class="gm-cta__inner" data-animate="fade-up">
+          <div class="gm-cta__glow" aria-hidden="true"></div>
+
+          <!-- Ícono pulsante -->
+          <div class="gm-cta__icon" aria-hidden="true">🎮</div>
+
+          <h2 class="gm-cta__title" id="gmCtaTitle">
+            ¿Jugamos una?
+          </h2>
+          <p class="gm-cta__desc">
+            Si eres gamer, tenemos mucho de qué hablar.
+            Cuéntame qué estás jugando, qué géneros te gustan
+            o simplemente recomiéndame algo.
+          </p>
+
+          <div class="gm-cta__actions">
+            <a href="../../index.html#contacto" class="btn gm-btn--primary">
+              Conectemos →
+            </a>
+            <a href="../../index.html#mundos" class="btn btn--ghost gm-btn--ghost">
+              Otros mundos
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer reutilizable -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="../../index.html" class="footer__logo" aria-label="Volver al inicio">
+            <span class="footer__logo-mark">M</span>
+            El Mundo de Manu
+          </a>
+          <p class="footer__tagline">Construyendo mi universo digital, un proyecto a la vez.</p>
+        </div>
+        <nav class="footer__nav" aria-label="Mis mundos">
+          <h4 class="footer__nav-title">Mis Mundos</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../fe/fe.html"                       class="footer__link">Fe</a></li>
+            <li><a href="gaming.html"                         class="footer__link footer__link--active">Gaming</a></li>
+            <li><a href="../infantil/infantil.html"           class="footer__link">Infantil</a></li>
+            <li><a href="../relaciones/relaciones.html"       class="footer__link">Relaciones</a></li>
+            <li><a href="../tecnologia/tecnologia.html"       class="footer__link">Tecnología</a></li>
+            <li><a href="../sobremi/sobremi.html"             class="footer__link">Sobre Mí</a></li>
+          </ul>
+        </nav>
+        <nav class="footer__nav" aria-label="Links del sitio">
+          <h4 class="footer__nav-title">Sitio</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../../index.html#inicio"    class="footer__link">Inicio</a></li>
+            <li><a href="../../index.html#proyectos" class="footer__link">Proyectos</a></li>
+            <li><a href="../../index.html#contacto"  class="footer__link">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© <span id="footerYear"></span> El Mundo de Manu. Construido con 💛 y mucho café.</p>
+        <p class="footer__credits">Diseñado y desarrollado por <strong>Manu</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+  <script src="gaming.js"></script>
+
+</body>
+</html>

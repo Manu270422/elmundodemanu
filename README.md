@@ -89,12 +89,12 @@ elmundodemanu/
     │   ├── fe.css
     │   └── fe.js
     │
-    ├── 🎮 gaming/         🔄 En progreso
+    ├── 🎮 gaming/         ✅ Completada
     │   ├── gaming.html
     │   ├── gaming.css
     │   └── gaming.js
     │
-    ├── 👶 infantil/       ⏳ Pendiente
+    ├── 👶 infantil/       ✅ Completada
     │   ├── infantil.html
     │   ├── infantil.css
     │   └── infantil.js
@@ -183,13 +183,13 @@ http://localhost:8000
 ## 📊 Estado del Proyecto
 
 ```
-Progreso general ████████████░░░░░░░░ 60%
+Progreso general ████████████████░░░░ 83%
 
 ✅ sobremi       ████████████████████ 100%
 ✅ tecnologia    ████████████████████ 100%
 ✅ fe            ████████████████████ 100%
-🔄 gaming        ████████████░░░░░░░░  60%
-⏳ infantil      ░░░░░░░░░░░░░░░░░░░░   0%
+✅ gaming        ████████████████████ 100%
+✅ infantil      ████████████████████ 100%
 ⏳ relaciones    ░░░░░░░░░░░░░░░░░░░░   0%
 🧮 calculadora   ████████████████████ 100%
 ```
@@ -201,8 +201,10 @@ Progreso general ████████████░░░░░░░░ 60
 - [x] Página principal completa con todas las animaciones
 - [x] Secciones: `sobremi`, `tecnologia`, `fe`
 - [x] Proyecto integrado: `calculadora`
-- [ ] Finalizar sección `gaming`
-- [ ] Implementar `infantil` y `relaciones`
+- [x] Finalizar sección `gaming`
+- [x] Finalizar sección `infantil`
+- [x] Corrección de bugs en `index.html`, `style.css` y `script.js`
+- [ ] Implementar `relaciones`
 - [ ] Integrar más proyectos personales
 - [ ] Blog / notas técnicas con soporte Markdown
 - [ ] Optimización SEO y metadatos Open Graph
