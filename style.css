@@ -1553,12 +1553,12 @@ body.cursor-hover .cursor-trail {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-12);
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
 @media (min-width: 768px) {
-  .contact__inner { grid-template-columns: 2fr 1fr; gap: var(--space-16); }
+  .contact__inner { grid-template-columns: 1.6fr 1fr; gap: var(--space-16); }
 }
 
 .contact__form {
@@ -1567,56 +1567,170 @@ body.cursor-hover .cursor-trail {
   gap: var(--space-5);
 }
 
+/* Spinner de carga dentro del botón */
+.contact__spinner {
+  display: inline-block;
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: contactSpin 0.7s linear infinite;
+}
+@keyframes contactSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* Mensaje de éxito */
 .contact__success {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-4);
-  background: rgba(74, 222, 128, 0.1);
-  border: 1px solid rgba(74, 222, 128, 0.3);
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.25);
   border-radius: var(--radius-md);
   color: #4ADE80;
   font-size: var(--text-sm);
   font-weight: 500;
 }
 
+/* Mensaje de error de red */
+.contact__error-net {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background: rgba(248, 113, 113, 0.08);
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  border-radius: var(--radius-md);
+  color: #F87171;
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+/* Panel lateral de redes sociales */
+.contact__info { display: flex; flex-direction: column; gap: var(--space-2); }
+
 .contact__info-title {
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--color-text-secondary);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
 }
 
 .contact__socials {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0; margin: 0;
 }
 
+/* Tarjeta de cada red social */
 .contact__social {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: var(--color-text-secondary);
   padding: var(--space-3) var(--space-4);
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   transition: all var(--transition-base);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
 }
+/* Línea de acento izquierda en hover */
+.contact__social::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+  transform: scaleY(0);
+  transition: transform var(--transition-base);
+}
+.contact__social:hover::before { transform: scaleY(1); }
+
 .contact__social:hover {
-  color: var(--color-primary);
-  border-color: var(--color-primary);
-  background: var(--color-primary-dim);
+  transform: translateX(4px);
+  border-color: currentColor;
 }
 
+/* Icono */
 .contact__social-icon {
   display: flex;
   align-items: center;
-  color: currentColor;
+  justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  transition: background var(--transition-base);
 }
+
+/* Texto de la red */
+.contact__social-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+.contact__social-name {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+.contact__social-handle {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Flecha */
+.contact__social-arrow {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  transition: transform var(--transition-base), color var(--transition-base);
+}
+.contact__social:hover .contact__social-arrow {
+  transform: translateX(3px);
+}
+
+/* ── Colores de marca por red ── */
+.contact__social--github  { color: #e8e8f0; }
+.contact__social--github::before  { background: #e8e8f0; }
+.contact__social--github .contact__social-icon  { background: rgba(232,232,240,0.08); }
+.contact__social--github:hover { border-color: rgba(232,232,240,0.35) !important; }
+
+.contact__social--linkedin  { color: #0A66C2; }
+.contact__social--linkedin::before  { background: #0A66C2; }
+.contact__social--linkedin .contact__social-icon  { background: rgba(10,102,194,0.12); }
+.contact__social--linkedin:hover { border-color: rgba(10,102,194,0.4) !important; }
+
+.contact__social--tiktok  { color: #e8e8f0; }
+.contact__social--tiktok::before  { background: #69C9D0; }
+.contact__social--tiktok .contact__social-icon  { background: rgba(105,201,208,0.10); }
+.contact__social--tiktok:hover { border-color: rgba(105,201,208,0.35) !important; }
+.contact__social--tiktok:hover .contact__social-icon svg { color: #69C9D0; }
+
+.contact__social--instagram { color: #E1306C; }
+.contact__social--instagram::before { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.contact__social--instagram .contact__social-icon { background: rgba(225,48,108,0.10); }
+.contact__social--instagram:hover { border-color: rgba(225,48,108,0.4) !important; }
+
+.contact__social--facebook  { color: #1877F2; }
+.contact__social--facebook::before  { background: #1877F2; }
+.contact__social--facebook .contact__social-icon  { background: rgba(24,119,242,0.10); }
+.contact__social--facebook:hover { border-color: rgba(24,119,242,0.4) !important; }
+
+.contact__social--youtube { color: #FF0000; }
+.contact__social--youtube::before { background: #FF0000; }
+.contact__social--youtube .contact__social-icon { background: rgba(255,0,0,0.08); }
+.contact__social--youtube:hover { border-color: rgba(255,0,0,0.35) !important; }
 
 
 /* ============================================================
@@ -1708,6 +1822,38 @@ body.cursor-hover .cursor-trail {
 .footer__copy, .footer__credits {
   font-size: var(--text-xs);
   color: var(--color-text-muted);
+}
+
+/* Redes sociales en el footer — fila de iconos compactos */
+.footer__socials {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.footer__social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-base);
+}
+.footer__social:hover { transform: translateY(-2px); }
+
+/* Colores en hover por red */
+.footer__social--github:hover    { color: #e8e8f0;  border-color: rgba(232,232,240,0.4); background: rgba(232,232,240,0.06); }
+.footer__social--linkedin:hover  { color: #0A66C2;  border-color: rgba(10,102,194,0.5);  background: rgba(10,102,194,0.10); }
+.footer__social--tiktok:hover    { color: #69C9D0;  border-color: rgba(105,201,208,0.5); background: rgba(105,201,208,0.08); }
+.footer__social--instagram:hover { color: #E1306C;  border-color: rgba(225,48,108,0.5);  background: rgba(225,48,108,0.08); }
+.footer__social--facebook:hover  { color: #1877F2;  border-color: rgba(24,119,242,0.5);  background: rgba(24,119,242,0.08); }
+.footer__social--youtube:hover   { color: #FF0000;  border-color: rgba(255,0,0,0.4);     background: rgba(255,0,0,0.06); }
+
+/* Responsive footer bottom */
+@media (max-width: 640px) {
+  .footer__bottom { flex-direction: column; align-items: center; text-align: center; gap: var(--space-3); }
 }
 
 

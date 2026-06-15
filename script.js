@@ -668,6 +668,7 @@ const ContactForm = (() => {
   const form        = $('#contactForm');
   const submitBtn   = $('#contactSubmit');
   const successMsg  = $('#contactSuccess');
+  const errorNetMsg = $('#contactErrorNet');
 
   /**
    * Valido un campo y muestro/oculto el mensaje de error.
@@ -705,13 +706,31 @@ const ContactForm = (() => {
   };
 
   /**
-   * Simulo el envío del formulario.
-   * Aquí conectaré mi backend o EmailJS cuando esté listo.
+   * Envío real a Formspree usando fetch con JSON.
+   * Formspree acepta application/json y devuelve {ok: true} en éxito.
+   * Uso el endpoint de mi cuenta: https://formspree.io/f/xdavyqol
    */
-  const simulateSend = () => {
-    return new Promise((resolve) => {
-      setTimeout(resolve, 1500); // Simulo 1.5s de tiempo de servidor
+  const sendToFormspree = async (data) => {
+    const response = await fetch('https://formspree.io/f/xdavyqol', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        name:    data.name,
+        email:   data.email,
+        message: data.message,
+      }),
     });
+
+    if (!response.ok) {
+      // Formspree devuelve errores con status 4xx/5xx
+      const errData = await response.json().catch(() => ({}));
+      throw new Error(errData?.error || `Error ${response.status}`);
+    }
+
+    return response.json();
   };
 
   /** Manejo el submit del formulario */
@@ -720,26 +739,45 @@ const ContactForm = (() => {
 
     if (!validateForm()) return;
 
-    // Cambio el botón a estado loading
+    // Oculto mensajes previos
+    successMsg.setAttribute('hidden', '');
+    errorNetMsg.setAttribute('hidden', '');
+
+    // Estado loading
     submitBtn.classList.add('is-loading');
+    submitBtn.disabled = true;
+
+    // Recojo los datos del formulario
+    const formData = {
+      name:    form.querySelector('[name="name"]').value.trim(),
+      email:   form.querySelector('[name="email"]').value.trim(),
+      message: form.querySelector('[name="message"]').value.trim(),
+    };
 
     try {
-      await simulateSend();
+      await sendToFormspree(formData);
 
-      // Éxito — muestro el mensaje y reseteo el form
+      // ✅ Éxito — reseteo el form y muestro confirmación
       form.reset();
       successMsg.removeAttribute('hidden');
+      successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-      // Oculto el mensaje de éxito después de 5 segundos
+      // Oculto el mensaje de éxito después de 6 segundos
       setTimeout(() => {
         successMsg.setAttribute('hidden', '');
-      }, 5000);
+      }, 6000);
 
     } catch (error) {
       console.error('Error al enviar el formulario:', error);
-      // Aquí mostraría un error al usuario en producción
+      // Muestro error al usuario — nunca lo dejo sin feedback
+      errorNetMsg.removeAttribute('hidden');
+      setTimeout(() => {
+        errorNetMsg.setAttribute('hidden', '');
+      }, 6000);
+
     } finally {
       submitBtn.classList.remove('is-loading');
+      submitBtn.disabled = false;
     }
   };
 
