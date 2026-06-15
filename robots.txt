@@ -1,0 +1,15 @@
+# ==============================================================
+# robots.txt — El Mundo de Manu
+# https://elmundodemanu.com/
+#
+# Le indica a los motores de búsqueda qué pueden y no pueden
+# rastrear. En este caso permito TODO el sitio y les señalo
+# dónde está el sitemap para que lo indexen completo.
+# ==============================================================
+
+# Reglas para todos los bots (Google, Bing, etc.)
+User-agent: *
+Allow: /
+
+# Sitemap — ruta absoluta obligatoria
+Sitemap: https://elmundodemanu.com/sitemap.xml

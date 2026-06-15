@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ==============================================================
+  sitemap.xml — El Mundo de Manu
+  https://elmundodemanu.com/
+  
+  Lista todas las URLs públicas del sitio para que Google las
+  encuentre y las indexe correctamente. Los atributos son:
+  
+  <loc>       → URL exacta de la página
+  <lastmod>   → Fecha de última modificación (YYYY-MM-DD)
+  <changefreq>→ Con qué frecuencia cambia el contenido
+  <priority>  → Importancia relativa (0.0 a 1.0)
+               1.0 = página principal
+               0.9 = mundos principales
+               0.8 = subproyectos / herramientas
+               0.6 = páginas secundarias de subproyectos
+  
+  Actualiza <lastmod> cada vez que subas cambios importantes.
+  ==============================================================
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- ══════════════════════════════════════
+    PÁGINA PRINCIPAL
+  ══════════════════════════════════════ -->
+  <url>
+    <loc>https://elmundodemanu.com/</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- ══════════════════════════════════════
+    LOS 12 MUNDOS TEMÁTICOS
+  ══════════════════════════════════════ -->
+
+  <!-- Fe -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/fe/fe.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Gaming -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/gaming/gaming.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Infantil -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/infantil/infantil.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Relaciones -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/relaciones/relaciones.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Tecnología -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/tecnologia/tecnologia.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Sobre Mí -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/sobremi/sobremi.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Educación -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/educacion/educacion.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Bienestar -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/bienestar/bienestar.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Viajes -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/viajes/viajes.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Finanzas -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/finanzas/finanzas.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Música -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/musica/musica.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Barrancabermeja -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/barranca/barranca.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ══════════════════════════════════════
+    SUBPROYECTOS / HERRAMIENTAS INTERACTIVAS
+  ══════════════════════════════════════ -->
+
+  <!-- Calculadora de Independencia Financiera (Mundo Finanzas) -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/finanzas/proyecto-if/index.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Calculadora Académica (Mundo Educación) -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/educacion/calculadora/index.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Mundo Bíblico (Mundo Fe) -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/fe/mundo-biblico/index.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Juego de Fútbol (Mundo Gaming) -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/gaming/juego-futbol/index.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Mundo Curioso — Hub principal (Mundo Infantil) -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/infantil/mundo-curioso/index.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Mundo Curioso — Trivia (Mundo Infantil) -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/infantil/mundo-curioso/trivia.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Mundo Curioso — Memorama (Mundo Infantil) -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/infantil/mundo-curioso/memorama.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Mundo Curioso — Conecta (Mundo Infantil) -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/infantil/mundo-curioso/conecta.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Latidos (Mundo Relaciones) -->
+  <url>
+    <loc>https://elmundodemanu.com/secciones/relaciones/latidos/index.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
