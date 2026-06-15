@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  musica.html — El Mundo de Manu / Música y Sonido
+  ============================================================
+  Esta sección es un mundo temático sobre música: cómo influye
+  en nuestro cerebro, los géneros del mundo, cómo escuchar mejor
+  y herramientas para descubrir nueva música. No habla de mis
+  gustos personales — es contenido cultural y divulgativo sobre
+  el universo de la música para cualquier persona curiosa.
+
+  La música es el lenguaje universal: está en toda cultura,
+  toda época y todo momento importante de la vida. Esta sección
+  explora por qué nos afecta tanto y cómo disfrutarla mejor.
+
+  Estructura:
+  - Hero: la música como lenguaje universal + visualizer
+  - Por qué nos mueve: la ciencia de la música y el cerebro
+  - Géneros del mundo: 6 familias musicales
+  - Guías: 3 artículos sobre escuchar y entender música
+  - Beneficios: lo que la música hace por nosotros
+  - Herramientas: apps para descubrir y disfrutar música
+  - Nota cultural: respeto por los orígenes
+  - CTA: invitación a compartir música
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Música y Sonido — El Mundo de Manu. La ciencia de la música, géneros del mundo, cómo escuchar mejor y herramientas para descubrir nueva música. Cultura musical para todos." />
+  <meta name="author" content="Manu" />
+
+  <title>Música y Sonido — El Mundo de Manu</title>
+
+  <!--
+    Fuentes: Syne + DM Sans globales + Sora para los titulares
+    de género (le da un aire más rítmico y contemporáneo, acorde
+    al tema musical). Sora tiene un carácter geométrico moderno.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Sora:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="musica.css" />
+</head>
+
+<body class="page-musica">
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
+
+  <!-- ============================================================
+    NAVBAR — Estructura global. Paths desde secciones/musica/.
+  ============================================================ -->
+  <header class="navbar" id="navbar" role="banner">
+    <nav class="navbar__container" aria-label="Navegación principal">
+      <a href="../../index.html" class="navbar__logo" aria-label="Volver al inicio">
+        <span class="navbar__logo-mark">M</span>
+        <span class="navbar__logo-text">El Mundo de <strong>Manu</strong></span>
+      </a>
+      <ul class="navbar__links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__link navbar__link--active">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__link">Sobre Mí</a></li>
+        <li>
+          <a href="../../index.html#contacto" class="navbar__link navbar__link--cta">
+            Contáctame
+            <span class="navbar__cta-dot" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+      <button class="navbar__toggle" id="navToggle"
+        aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </nav>
+    <div class="navbar__mobile" id="mobileMenu" aria-hidden="true">
+      <ul class="navbar__mobile-links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__mobile-link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__mobile-link">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__mobile-link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__mobile-link">Sobre Mí</a></li>
+        <li><a href="../../index.html#contacto"  class="navbar__mobile-link navbar__mobile-link--cta">Contáctame</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="breadcrumb" aria-label="Ruta de navegación">
+    <div class="container">
+      <nav class="breadcrumb__nav">
+        <a href="../../index.html"        class="breadcrumb__link">Inicio</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="../../index.html#mundos" class="breadcrumb__link">Mis Mundos</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span class="breadcrumb__current" aria-current="page">Música y Sonido</span>
+      </nav>
+    </div>
+  </div>
+
+  <main id="main" role="main">
+
+    <!-- ──────────────────────────────────────────────────────────
+      HERO DE MÚSICA
+      El canvas es un visualizer de audio: barras de frecuencia
+      que suben y bajan al ritmo de una onda simulada, como un
+      ecualizador. Es el efecto único de esta sección — ninguna
+      otra tiene ondas de sonido.
+    ────────────────────────────────────────────────────────── -->
+    <section class="ms-hero" id="ms-inicio" aria-labelledby="msHeroTitle">
+
+      <canvas class="ms-hero__canvas" id="msCanvas" aria-hidden="true"></canvas>
+
+      <div class="ms-hero__light ms-hero__light--1" aria-hidden="true"></div>
+      <div class="ms-hero__light ms-hero__light--2" aria-hidden="true"></div>
+      <div class="ms-hero__light ms-hero__light--3" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="ms-hero__inner">
+
+          <!-- Símbolo decorativo: nota/onda SVG muy tenue -->
+          <div class="ms-hero__symbol-wrap" aria-hidden="true">
+            <svg class="ms-hero__symbol" viewBox="0 0 100 100" fill="none"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="30" cy="72" r="10" stroke="currentColor" stroke-width="2.5"/>
+              <circle cx="74" cy="62" r="10" stroke="currentColor" stroke-width="2.5"/>
+              <path d="M40 72V28l44-10v44" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M40 38l44-10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div class="ms-hero__content" data-animate="fade-up">
+
+            <div class="ms-hero__tag-row">
+              <span class="section-tag ms-tag">Escuchar · Sentir · Conectar</span>
+            </div>
+
+            <h1 class="ms-hero__title" id="msHeroTitle">
+              Música<span class="ms-hero__title-and">&amp;</span>Sonido
+            </h1>
+
+            <blockquote class="ms-hero__phrase" data-animate="fade-up" data-delay="1">
+              <p class="ms-hero__phrase-text">
+                "La música es el lenguaje universal de la humanidad."
+              </p>
+              <footer class="ms-hero__phrase-ref">— Henry Wadsworth Longfellow</footer>
+            </blockquote>
+
+            <p class="ms-hero__desc" data-animate="fade-up" data-delay="2">
+              No existe cultura sin música. Está en cada celebración, cada duelo,
+              cada momento importante de la vida. Aquí exploramos por qué nos afecta
+              tan profundamente, cómo escucharla mejor y cómo descubrir sonidos nuevos.
+            </p>
+
+            <div class="ms-hero__actions" data-animate="fade-up" data-delay="3">
+              <a href="#ms-generos" class="btn ms-btn--primary">
+                Géneros del mundo
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a href="#ms-guias" class="btn btn--ghost ms-btn--ghost">Guías de escucha</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="ms-hero__scroll" aria-hidden="true">
+        <div class="ms-hero__scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: POR QUÉ NOS MUEVE
+      La ciencia de la música y el cerebro.
+    ────────────────────────────────────────────────────────── -->
+    <section class="ms-why" id="ms-porque" aria-labelledby="msWhyTitle">
+      <div class="container">
+        <div class="ms-why__inner" data-animate="fade-up">
+
+          <div class="ms-why__text">
+            <span class="section-tag ms-tag">La ciencia del sonido</span>
+            <h2 class="ms-why__title" id="msWhyTitle">
+              Por qué la música<br/>nos mueve tanto
+            </h2>
+            <p class="ms-why__desc">
+              Cuando escuchas una canción que te gusta, tu cerebro libera dopamina,
+              el mismo neurotransmisor asociado al placer y la recompensa. Por eso
+              un buen tema puede ponerte la piel de gallina o llevarte hasta las lágrimas.
+            </p>
+            <p class="ms-why__desc">
+              La música activa más zonas del cerebro simultáneamente que casi cualquier
+              otra actividad: las áreas del movimiento, la emoción, la memoria y el
+              lenguaje trabajan juntas. Por eso recordamos canciones de hace décadas
+              aunque olvidemos qué cenamos ayer.
+            </p>
+            <p class="ms-why__desc">
+              No es casualidad que la música acompañe cada cultura humana conocida.
+              Es una de las pocas cosas verdaderamente universales: trasciende idiomas,
+              fronteras y épocas, conectándonos a un nivel que las palabras no alcanzan.
+            </p>
+          </div>
+
+          <div class="ms-why__card">
+            <div class="ms-why__card-icon" aria-hidden="true">🧠</div>
+            <h3 class="ms-why__card-title">La música en tu cerebro</h3>
+            <ul class="ms-why__card-list" role="list">
+              <li class="ms-why__card-item">
+                <span class="ms-why__card-bullet" aria-hidden="true">♪</span>
+                <span><strong>Libera dopamina:</strong> el "químico del placer" se activa
+                con la música que disfrutamos, igual que con la comida o el afecto.</span>
+              </li>
+              <li class="ms-why__card-item">
+                <span class="ms-why__card-bullet" aria-hidden="true">♪</span>
+                <span><strong>Ancla recuerdos:</strong> las canciones se ligan a momentos.
+                Por eso un tema puede transportarte instantáneamente al pasado.</span>
+              </li>
+              <li class="ms-why__card-item">
+                <span class="ms-why__card-bullet" aria-hidden="true">♪</span>
+                <span><strong>Sincroniza cuerpos:</strong> el ritmo nos hace mover y
+                coordinar en grupo. Bailar juntos crea vínculos sociales reales.</span>
+              </li>
+            </ul>
+            <div class="ms-why__card-glow" aria-hidden="true"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: GÉNEROS DEL MUNDO
+      6 grandes familias musicales con su origen y carácter.
+    ────────────────────────────────────────────────────────── -->
+    <section class="ms-genres" id="ms-generos" aria-labelledby="msGenresTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag ms-tag">Un mundo de sonidos</span>
+          <h2 class="section-title" id="msGenresTitle">Géneros del Mundo</h2>
+          <p class="section-desc">
+            Seis grandes familias musicales que han marcado la cultura.
+            Cada una nació de un contexto y cuenta una historia.
+          </p>
+        </div>
+
+        <div class="ms-genres__grid">
+
+          <!-- Género 1: Clásica -->
+          <article class="ms-genre-card" data-animate="fade-up" data-delay="0">
+            <div class="ms-genre-card__wave" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <h3 class="ms-genre-card__title">Clásica</h3>
+            <p class="ms-genre-card__origin">Europa · S. XVII–XIX</p>
+            <p class="ms-genre-card__desc">
+              La tradición de la música orquestal y de cámara. Compositores como
+              Bach, Mozart y Beethoven construyeron obras de una complejidad y belleza
+              que siguen vigentes siglos después. Base de gran parte de la música moderna.
+            </p>
+          </article>
+
+          <!-- Género 2: Jazz -->
+          <article class="ms-genre-card" data-animate="fade-up" data-delay="1">
+            <div class="ms-genre-card__wave" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <h3 class="ms-genre-card__title">Jazz</h3>
+            <p class="ms-genre-card__origin">EE. UU. · Principios S. XX</p>
+            <p class="ms-genre-card__desc">
+              Nacido de las comunidades afroamericanas de Nueva Orleans, el jazz hizo
+              de la improvisación un arte. Libertad, swing y diálogo entre músicos.
+              Influyó en casi todos los géneros populares que vinieron después.
+            </p>
+          </article>
+
+          <!-- Género 3: Rock -->
+          <article class="ms-genre-card" data-animate="fade-up" data-delay="2">
+            <div class="ms-genre-card__wave" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <h3 class="ms-genre-card__title">Rock</h3>
+            <p class="ms-genre-card__origin">EE. UU. / Reino Unido · Años 50</p>
+            <p class="ms-genre-card__desc">
+              De la fusión del blues y el country surgió un género que definió
+              generaciones enteras. Guitarras eléctricas, energía y actitud rebelde.
+              Del rock'n'roll al metal, se ramificó en innumerables estilos.
+            </p>
+          </article>
+
+          <!-- Género 4: Electrónica -->
+          <article class="ms-genre-card" data-animate="fade-up" data-delay="3">
+            <div class="ms-genre-card__wave" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <h3 class="ms-genre-card__title">Electrónica</h3>
+            <p class="ms-genre-card__origin">Global · Años 70–80 en adelante</p>
+            <p class="ms-genre-card__desc">
+              Sintetizadores, cajas de ritmos y computadores abrieron sonidos imposibles
+              con instrumentos tradicionales. Del techno de Detroit al house de Chicago,
+              transformó la música de baile y la producción moderna por completo.
+            </p>
+          </article>
+
+          <!-- Género 5: Hip-hop -->
+          <article class="ms-genre-card" data-animate="fade-up" data-delay="4">
+            <div class="ms-genre-card__wave" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <h3 class="ms-genre-card__title">Hip-hop</h3>
+            <p class="ms-genre-card__origin">Nueva York · Años 70</p>
+            <p class="ms-genre-card__desc">
+              Surgió en el Bronx como voz de comunidades marginadas. Ritmo, rima y
+              palabra como herramienta de expresión y protesta. Hoy es uno de los
+              géneros más escuchados del planeta y un fenómeno cultural global.
+            </p>
+          </article>
+
+          <!-- Género 6: Música latina -->
+          <article class="ms-genre-card" data-animate="fade-up" data-delay="5">
+            <div class="ms-genre-card__wave" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <h3 class="ms-genre-card__title">Música latina</h3>
+            <p class="ms-genre-card__origin">América Latina · Raíces diversas</p>
+            <p class="ms-genre-card__desc">
+              Salsa, cumbia, vallenato, reggaetón, bachata y mucho más. Una riqueza
+              que mezcla raíces africanas, indígenas y europeas. La música latina
+              conquistó el mundo con su ritmo, sabor e identidad inconfundibles.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: GUÍAS DE ESCUCHA
+      3 artículos sobre cómo escuchar y entender música mejor.
+    ────────────────────────────────────────────────────────── -->
+    <section class="ms-guides" id="ms-guias" aria-labelledby="msGuidesTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag ms-tag">Escucha con intención</span>
+          <h2 class="section-title" id="msGuidesTitle">Guías de Escucha</h2>
+          <p class="section-desc">
+            Pequeños cambios en cómo escuchas pueden transformar por completo
+            tu experiencia con la música.
+          </p>
+        </div>
+
+        <div class="ms-guides__grid">
+
+          <!-- Guía 1: Escucha activa -->
+          <article class="ms-guide-card ms-guide-card--featured" data-animate="fade-up" data-delay="0">
+            <div class="ms-guide-card__header">
+              <span class="ms-guide-card__tag">Escucha activa</span>
+              <span class="ms-guide-card__read">5 min</span>
+            </div>
+            <h3 class="ms-guide-card__title">
+              El arte perdido de escuchar música de verdad
+            </h3>
+            <p class="ms-guide-card__body">
+              Hoy la música suele ser fondo: suena mientras hacemos otras cosas. Pero
+              escuchar activamente —dedicarle toda tu atención— revela capas que de
+              otra forma te pierdes por completo. Es una experiencia totalmente distinta.
+            </p>
+            <div class="ms-guide-card__inset">
+              <h4 class="ms-guide-card__inset-title">Cómo practicar la escucha activa</h4>
+              <ul class="ms-guide-card__list" role="list">
+                <li><strong>Sin distracciones:</strong> dedica una canción entera solo a
+                escuchar, sin teléfono ni otras tareas. Cierra los ojos si ayuda.</li>
+                <li><strong>Sigue un instrumento:</strong> concéntrate en el bajo, o en la batería,
+                o en una voz secundaria. Descubrirás detalles que estaban ocultos.</li>
+                <li><strong>Usa buenos audífonos:</strong> revelan matices que los parlantes
+                de un teléfono jamás reproducen. La diferencia es enorme.</li>
+                <li><strong>Escucha el álbum completo:</strong> muchos discos cuentan una historia
+                con un orden pensado. Las playlists fragmentan esa intención.</li>
+              </ul>
+            </div>
+            <p class="ms-guide-card__highlight">
+              Una canción que has oído cien veces de fondo puede sorprenderte cuando
+              por fin la escuchas con toda tu atención.
+            </p>
+          </article>
+
+          <!-- Guía 2: Ampliar gustos -->
+          <article class="ms-guide-card" data-animate="fade-up" data-delay="1">
+            <div class="ms-guide-card__header">
+              <span class="ms-guide-card__tag">Descubrimiento</span>
+              <span class="ms-guide-card__read">4 min</span>
+            </div>
+            <h3 class="ms-guide-card__title">
+              Cómo salir de tu burbuja musical
+            </h3>
+            <p class="ms-guide-card__body">
+              Los algoritmos nos recomiendan más de lo que ya nos gusta, encerrándonos
+              en una burbuja. Explorar fuera de ella amplía tu mundo y te regala
+              descubrimientos que de otra forma nunca habrías encontrado.
+            </p>
+            <div class="ms-guide-card__inset">
+              <h4 class="ms-guide-card__inset-title">Maneras de descubrir música nueva</h4>
+              <ul class="ms-guide-card__list" role="list">
+                <li><strong>Explora otras décadas:</strong> sumérgete en la música de los 60,
+                70 u 80. Encontrarás joyas que inspiraron lo que escuchas hoy.</li>
+                <li><strong>Viaja con los oídos:</strong> escucha música de otros países e idiomas.
+                No necesitas entender la letra para sentir la emoción.</li>
+                <li><strong>Sigue las raíces:</strong> investiga qué influyó a tus artistas
+                favoritos. Cada género tiene padres y abuelos que vale la pena conocer.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Guía 3: Entender una canción -->
+          <article class="ms-guide-card" data-animate="fade-up" data-delay="2">
+            <div class="ms-guide-card__header">
+              <span class="ms-guide-card__tag">Comprensión</span>
+              <span class="ms-guide-card__read">4 min</span>
+            </div>
+            <h3 class="ms-guide-card__title">
+              Anatomía de una canción: qué hace que funcione
+            </h3>
+            <p class="ms-guide-card__body">
+              Entender cómo está construida una canción aumenta el placer de escucharla.
+              No necesitas ser músico — basta reconocer las piezas básicas que casi
+              toda música popular comparte.
+            </p>
+            <div class="ms-guide-card__inset">
+              <h4 class="ms-guide-card__inset-title">Las partes de una canción</h4>
+              <ul class="ms-guide-card__list" role="list">
+                <li><strong>El verso:</strong> cuenta la historia, suele repetir melodía
+                con letra distinta. Construye la tensión hacia el coro.</li>
+                <li><strong>El coro:</strong> el corazón pegadizo de la canción, la parte
+                que recuerdas y cantas. Concentra el mensaje y la emoción central.</li>
+                <li><strong>El puente:</strong> el contraste que rompe la repetición, suele
+                aparecer una vez para refrescar antes del coro final.</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: BENEFICIOS
+      Lo que la música hace por nosotros. Grid de 4 con stats.
+    ────────────────────────────────────────────────────────── -->
+    <section class="ms-benefits" id="ms-beneficios" aria-labelledby="msBenefitsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag ms-tag">Más que entretenimiento</span>
+          <h2 class="section-title" id="msBenefitsTitle">El Poder de la Música</h2>
+          <p class="section-desc">
+            La música no solo suena bien — tiene efectos reales y medibles
+            en nuestra mente y cuerpo.
+          </p>
+        </div>
+
+        <div class="ms-benefits__grid" data-animate="fade-up" data-delay="1">
+
+          <div class="ms-benefit-card">
+            <div class="ms-benefit-card__icon" aria-hidden="true">😌</div>
+            <h3 class="ms-benefit-card__title">Reduce el estrés</h3>
+            <p class="ms-benefit-card__desc">
+              La música relajante baja los niveles de cortisol, la hormona del estrés.
+              Escuchar música tranquila puede reducir la ansiedad de forma comparable
+              a técnicas de relajación.
+            </p>
+          </div>
+
+          <div class="ms-benefit-card">
+            <div class="ms-benefit-card__icon" aria-hidden="true">💪</div>
+            <h3 class="ms-benefit-card__title">Mejora el rendimiento</h3>
+            <p class="ms-benefit-card__desc">
+              La música motivadora durante el ejercicio aumenta la resistencia y hace
+              que el esfuerzo se sienta menor. Por algo casi todos entrenamos con
+              audífonos puestos.
+            </p>
+          </div>
+
+          <div class="ms-benefit-card">
+            <div class="ms-benefit-card__icon" aria-hidden="true">🎯</div>
+            <h3 class="ms-benefit-card__title">Potencia el enfoque</h3>
+            <p class="ms-benefit-card__desc">
+              Para muchas personas, la música instrumental o ambiental ayuda a
+              concentrarse en tareas. El sonido constante puede bloquear distracciones
+              del entorno.
+            </p>
+          </div>
+
+          <div class="ms-benefit-card">
+            <div class="ms-benefit-card__icon" aria-hidden="true">❤️‍🩹</div>
+            <h3 class="ms-benefit-card__title">Sana emociones</h3>
+            <p class="ms-benefit-card__desc">
+              La musicoterapia se usa en hospitales y tratamientos reales. La música
+              ayuda a procesar el duelo, acompañar la recuperación y dar voz a
+              emociones difíciles de expresar.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: HERRAMIENTAS
+      Apps y recursos para descubrir y disfrutar música.
+    ────────────────────────────────────────────────────────── -->
+    <section class="ms-tools" id="ms-herramientas" aria-labelledby="msToolsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag ms-tag">Tu kit musical</span>
+          <h2 class="section-title" id="msToolsTitle">Herramientas para Melómanos</h2>
+          <p class="section-desc">
+            Apps y plataformas que enriquecen cómo descubres, escuchas
+            y entiendes la música. Ninguna patrocinada.
+          </p>
+        </div>
+
+        <div class="ms-tools__grid">
+
+          <div class="ms-tool-card" data-animate="fade-up" data-delay="0">
+            <div class="ms-tool-card__icon" aria-hidden="true">🎧</div>
+            <div class="ms-tool-card__info">
+              <span class="ms-tool-card__type">Streaming</span>
+              <h3 class="ms-tool-card__title">Spotify / YouTube Music</h3>
+              <p class="ms-tool-card__desc">
+                Acceso a millones de canciones y descubrimiento por algoritmo.
+                Explora sus playlists de géneros para salir de tu zona conocida.
+              </p>
+            </div>
+          </div>
+
+          <div class="ms-tool-card" data-animate="fade-up" data-delay="1">
+            <div class="ms-tool-card__icon" aria-hidden="true">🔍</div>
+            <div class="ms-tool-card__info">
+              <span class="ms-tool-card__type">Identificación</span>
+              <h3 class="ms-tool-card__title">Shazam</h3>
+              <p class="ms-tool-card__desc">
+                ¿Suena una canción y no sabes cuál es? Shazam la identifica en segundos
+                escuchando unos pocos compases. Perfecto para no perder un descubrimiento.
+              </p>
+            </div>
+          </div>
+
+          <div class="ms-tool-card" data-animate="fade-up" data-delay="2">
+            <div class="ms-tool-card__icon" aria-hidden="true">📊</div>
+            <div class="ms-tool-card__info">
+              <span class="ms-tool-card__type">Estadísticas</span>
+              <h3 class="ms-tool-card__title">Last.fm</h3>
+              <p class="ms-tool-card__desc">
+                Registra todo lo que escuchas y te da estadísticas detalladas de tus
+                gustos. Ideal para conocer tus patrones y descubrir artistas similares.
+              </p>
+            </div>
+          </div>
+
+          <div class="ms-tool-card" data-animate="fade-up" data-delay="3">
+            <div class="ms-tool-card__icon" aria-hidden="true">📝</div>
+            <div class="ms-tool-card__info">
+              <span class="ms-tool-card__type">Letras y significado</span>
+              <h3 class="ms-tool-card__title">Genius</h3>
+              <p class="ms-tool-card__desc">
+                Letras anotadas con explicaciones del significado, referencias y
+                contexto. Entender qué dice una canción cambia cómo la sientes.
+              </p>
+            </div>
+          </div>
+
+          <div class="ms-tool-card" data-animate="fade-up" data-delay="4">
+            <div class="ms-tool-card__icon" aria-hidden="true">🌐</div>
+            <div class="ms-tool-card__info">
+              <span class="ms-tool-card__type">Base de datos</span>
+              <h3 class="ms-tool-card__title">RateYourMusic / Discogs</h3>
+              <p class="ms-tool-card__desc">
+                Comunidades que catalogan, reseñan y puntúan música de toda la historia.
+                Una mina de oro para descubrir clásicos y joyas ocultas por género.
+              </p>
+            </div>
+          </div>
+
+          <div class="ms-tool-card" data-animate="fade-up" data-delay="5">
+            <div class="ms-tool-card__icon" aria-hidden="true">🎹</div>
+            <div class="ms-tool-card__info">
+              <span class="ms-tool-card__type">Aprender música</span>
+              <h3 class="ms-tool-card__title">Yousician / MuseScore</h3>
+              <p class="ms-tool-card__desc">
+                Si quieres pasar de escuchar a crear: Yousician enseña instrumentos
+                de forma interactiva y MuseScore ofrece partituras gratuitas.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      NOTA CULTURAL
+    ────────────────────────────────────────────────────────── -->
+    <section class="ms-note" id="ms-nota" aria-label="Nota cultural">
+      <div class="container">
+        <div class="ms-note__inner" data-animate="fade-up">
+          <div class="ms-note__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M7 15a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0zM7 15V5l9-2v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 11a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <p class="ms-note__text">
+            <strong>Con respeto y curiosidad:</strong> cada género nació de un contexto cultural,
+            muchas veces de comunidades que enfrentaron dificultades. Disfrutar la música del
+            mundo va de la mano con conocer y honrar sus orígenes. Escuchar con respeto es
+            también una forma de celebrar la diversidad que nos enriquece a todos.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      CTA FINAL
+    ────────────────────────────────────────────────────────── -->
+    <section class="ms-cta" id="ms-conectar" aria-labelledby="msCtaTitle">
+      <div class="container">
+        <div class="ms-cta__inner" data-animate="fade-up">
+          <div class="ms-cta__glow" aria-hidden="true"></div>
+          <div class="ms-cta__icon" aria-hidden="true">🎵</div>
+          <h2 class="ms-cta__title" id="msCtaTitle">
+            ¿Qué suena en<br/>
+            <span class="ms-cta__highlight">tus audífonos?</span>
+          </h2>
+          <p class="ms-cta__desc">
+            La música se disfruta más cuando se comparte. Si quieres recomendar
+            un artista que el mundo debería conocer, descubrir nuevos géneros o
+            simplemente hablar de música, escríbeme. Los mejores descubrimientos
+            llegan de boca en boca.
+          </p>
+          <div class="ms-cta__actions">
+            <a href="../../index.html#contacto" class="btn ms-btn--primary">Escríbeme →</a>
+            <a href="../../index.html#mundos" class="btn btn--ghost ms-btn--ghost">Otros mundos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+    FOOTER — con Música añadido y marcado activo
+  ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+
+        <div class="footer__brand">
+          <a href="../../index.html" class="footer__logo" aria-label="Volver al inicio">
+            <span class="footer__logo-mark">M</span>
+            El Mundo de Manu
+          </a>
+          <p class="footer__tagline">Construyendo mi universo digital, un proyecto a la vez.</p>
+        </div>
+
+        <nav class="footer__nav" aria-label="Mis mundos">
+          <h4 class="footer__nav-title">Mis Mundos</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../fe/fe.html"                 class="footer__link">Fe</a></li>
+            <li><a href="../gaming/gaming.html"         class="footer__link">Gaming</a></li>
+            <li><a href="../infantil/infantil.html"     class="footer__link">Infantil</a></li>
+            <li><a href="../relaciones/relaciones.html" class="footer__link">Relaciones</a></li>
+            <li><a href="../tecnologia/tecnologia.html" class="footer__link">Tecnología</a></li>
+            <li><a href="../educacion/educacion.html"   class="footer__link">Educación</a></li>
+            <li><a href="../bienestar/bienestar.html"   class="footer__link">Bienestar</a></li>
+            <li><a href="../viajes/viajes.html"         class="footer__link">Viajes</a></li>
+            <li><a href="../finanzas/finanzas.html"     class="footer__link">Finanzas</a></li>
+            <li><a href="musica.html"                   class="footer__link footer__link--active">Música</a></li>
+            <li><a href="../sobremi/sobremi.html"       class="footer__link">Sobre Mí</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__nav" aria-label="Links del sitio">
+          <h4 class="footer__nav-title">Sitio</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../../index.html#inicio"    class="footer__link">Inicio</a></li>
+            <li><a href="../../index.html#proyectos" class="footer__link">Proyectos</a></li>
+            <li><a href="../../index.html#contacto"  class="footer__link">Contacto</a></li>
+          </ul>
+        </nav>
+
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© <span id="footerYear"></span> El Mundo de Manu. Construido con 💛 y mucho café.</p>
+        <p class="footer__credits">Diseñado y desarrollado por <strong>Manu</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+  <script src="musica.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1305 @@
+/*
+  ============================================================
+  educacion.css — El Mundo de Manu / Educación
+  ============================================================
+  Estilos específicos para mi sección de Educación.
+  Heredan variables y componentes globales de style.css.
+
+  Dirección estética: fresca, académica, en crecimiento.
+  Paleta verde esmeralda-turquesa sobre oscuro frío. Fuente
+  Space Grotesk para las citas — carácter técnico-editorial
+  que diferencia esta sección de la Playfair Display de Fe.
+  Sin efectos recargados — claridad, estructura y movimiento
+  suave que invita a seguir leyendo.
+
+  Prefijo: edu- (educacion)
+
+  Estructura:
+  01. Variables locales de la sección
+  02. Breadcrumb
+  03. Hero de Educación (canvas + luces + cita central)
+  04. ¿Por qué comparto esto?
+  05. Áreas de estudio
+  06. Proyectos educativos (Calculadora de Notas)
+  07. Reflexiones de aprendizaje
+  08. Citas que me inspiran
+  09. Recursos
+  10. Banner: Campus Manu
+  11. CTA final
+  12. Botones propios de esta sección
+  13. Responsive
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+*/
+
+
+/* ============================================================
+  01. VARIABLES LOCALES
+  El color principal de esta sección es el verde esmeralda.
+  No choca con el dorado de Fe (#F0A500) ni con el índigo
+  global. El fondo es ligeramente más frío que el de Fe
+  para reforzar la diferencia de atmósfera.
+  ============================================================ */
+.page-educacion {
+  --edu-green:       #1A8C6E;
+  --edu-green-light: #5DD9B4;
+  --edu-green-dim:   rgba(26, 140, 110, 0.10);
+  --edu-green-glow:  rgba(26, 140, 110, 0.28);
+  --edu-accent:      #2CB8A0;
+  --edu-cool-bg:     #0A0F0E;   /* Fondo ligeramente más frío que el de Fe */
+  --font-grotesk:    'Space Grotesk', 'DM Sans', sans-serif;
+}
+
+
+/* ============================================================
+  02. BREADCRUMB
+  Reutilizo la misma estructura de fe.css pero con el color
+  de acento verde. Solo sobreescribo lo que cambia.
+  ============================================================ */
+.breadcrumb {
+  padding: calc(var(--space-4) + 70px) 0 var(--space-4);
+  border-bottom: 1px solid rgba(26, 140, 110, 0.12);
+  background: var(--color-bg);
+}
+.breadcrumb__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.breadcrumb__link {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  transition: color var(--transition-base);
+}
+.breadcrumb__link:hover { color: var(--edu-green); }
+.breadcrumb__sep {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  opacity: 0.4;
+}
+.breadcrumb__current {
+  font-size: var(--text-sm);
+  color: var(--edu-green);
+  font-weight: 500;
+}
+
+/* Tag verde específico de esta sección */
+.edu-tag {
+  background: var(--edu-green-dim);
+  border-color: rgba(26, 140, 110, 0.22);
+  color: var(--edu-green-light);
+}
+
+
+/* ============================================================
+  03. HERO DE EDUCACIÓN
+  Fondo oscuro frío con canvas de grid de puntos animados.
+  Tres destellos de luz en verde posicionados asimétricamente
+  para dar profundidad. Cita central con tipografía Space
+  Grotesk — académica pero con carácter propio.
+  ============================================================ */
+.edu-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: var(--space-32) 0 var(--space-20);
+  background: var(--edu-cool-bg);
+}
+
+/* Canvas del grid de puntos — cubre todo el fondo del hero */
+.edu-hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Destellos de luz decorativos en verde esmeralda */
+.edu-hero__light {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  pointer-events: none;
+  animation: eduLightBreath 7s ease-in-out infinite;
+}
+.edu-hero__light--1 {
+  width: 500px; height: 350px;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(26, 140, 110, 0.13) 0%, transparent 70%);
+  animation-delay: 0s;
+}
+.edu-hero__light--2 {
+  width: 280px; height: 280px;
+  bottom: 15%; right: 8%;
+  background: radial-gradient(circle, rgba(93, 217, 180, 0.08) 0%, transparent 70%);
+  animation-delay: 2.5s;
+  animation-name: eduLightBreathSimple;
+}
+.edu-hero__light--3 {
+  width: 220px; height: 220px;
+  top: 25%; left: 4%;
+  background: radial-gradient(circle, rgba(26, 140, 110, 0.07) 0%, transparent 70%);
+  animation-delay: 4.5s;
+  animation-name: eduLightBreathSimple;
+}
+
+/* La luz 1 tiene translateX, las demás no — las separo para no romper la propiedad */
+@keyframes eduLightBreath {
+  0%, 100% { opacity: 1;    transform: scale(1) translateX(-50%); }
+  50%       { opacity: 0.6; transform: scale(1.1) translateX(-50%); }
+}
+@keyframes eduLightBreathSimple {
+  0%, 100% { opacity: 1;    transform: scale(1); }
+  50%       { opacity: 0.55; transform: scale(1.12); }
+}
+
+/* Símbolo decorativo SVG — libro abierto estilizado, muy tenue al fondo */
+.edu-hero__symbol-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0.03;
+}
+.edu-hero__symbol {
+  width: 340px;
+  height: 340px;
+  color: var(--edu-green-light);
+}
+
+/* Contenido central del hero — centrado con flex */
+.edu-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.edu-hero__content {
+  max-width: 760px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  padding: 0 var(--space-6);
+}
+
+.edu-hero__tag-row {
+  display: flex;
+  justify-content: center;
+}
+
+/* Título principal — degradado verde-turquesa */
+.edu-hero__title {
+  font-size: clamp(4.5rem, 14vw, 9.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: transparent;
+  background: linear-gradient(135deg, var(--edu-green-light) 0%, var(--edu-green) 55%, #0D5C47 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: none;
+}
+
+/*
+  Cita central en Space Grotesk — diferente al Playfair Display de Fe.
+  El tono es más directo, menos lírico, más académico-reflexivo.
+  El borde izquierdo verde es el detalle que lo ancla visualmente.
+*/
+.edu-hero__quote {
+  max-width: 580px;
+  padding: var(--space-7) var(--space-9);
+  border: 1px solid rgba(26, 140, 110, 0.20);
+  border-left: 3px solid var(--edu-green);
+  border-radius: var(--radius-xl);
+  background: rgba(26, 140, 110, 0.04);
+  position: relative;
+  text-align: left;
+}
+
+/* Comillas decorativas grandes */
+.edu-hero__quote::before {
+  content: '"';
+  position: absolute;
+  top: -16px; left: 18px;
+  font-family: var(--font-grotesk);
+  font-size: 7rem;
+  color: var(--edu-green);
+  opacity: 0.10;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.edu-hero__quote-text {
+  font-family: var(--font-grotesk);
+  font-weight: 300;
+  font-size: clamp(var(--text-base), 2vw, var(--text-md));
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+
+.edu-hero__quote-ref {
+  display: block;
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--edu-green-light);
+  letter-spacing: 0.03em;
+  font-family: var(--font-grotesk);
+}
+
+.edu-hero__desc {
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+  max-width: 500px;
+}
+
+.edu-hero__actions {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Indicador de scroll — línea verde que baja */
+.edu-hero__scroll {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: eduScrollBounce 2.5s ease-in-out infinite;
+  z-index: 1;
+}
+.edu-hero__scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--edu-green), transparent);
+  order: -1;
+}
+@keyframes eduScrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(7px); }
+}
+
+
+/* ============================================================
+  04. ¿POR QUÉ COMPARTO ESTO?
+  Layout 2 columnas en desktop: texto reflexivo a la izquierda,
+  tarjeta de filosofía de aprendizaje a la derecha.
+  La tarjeta tiene un diseño propio con lista de principios.
+  ============================================================ */
+.edu-why {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid rgba(26, 140, 110, 0.10);
+  border-bottom: 1px solid rgba(26, 140, 110, 0.10);
+}
+
+.edu-why__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .edu-why__inner { grid-template-columns: 1.5fr 1fr; gap: var(--space-16); }
+}
+
+.edu-why__title {
+  font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl));
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  margin: var(--space-4) 0;
+  line-height: 1.15;
+}
+
+.edu-why__desc {
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+.edu-why__desc:last-child { margin-bottom: 0; }
+
+/* Tarjeta de filosofía de aprendizaje */
+.edu-why__card {
+  position: relative;
+  padding: var(--space-10) var(--space-8);
+  background: linear-gradient(135deg,
+    rgba(26, 140, 110, 0.07) 0%,
+    var(--color-bg) 100%
+  );
+  border: 1px solid rgba(26, 140, 110, 0.22);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.edu-why__card-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.edu-why__card-title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+}
+
+/* Lista de principios de aprendizaje */
+.edu-why__card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.edu-why__card-item {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.edu-why__card-item-icon {
+  color: var(--edu-green-light);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: var(--text-sm);
+}
+
+.edu-why__card-item strong {
+  color: var(--color-text-primary);
+}
+
+/* Glow verde en el fondo de la tarjeta */
+.edu-why__card-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 110%,
+    var(--edu-green-dim) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+
+/* ============================================================
+  05. ÁREAS DE ESTUDIO
+  Grid de 4 tarjetas — 2 columnas en tablet, 2 en desktop.
+  Cada tarjeta muestra: número decorativo, ícono SVG propio,
+  nivel, título, descripción y tags de temas.
+  Efecto hover: elevación + borde verde + glow sutil.
+  ============================================================ */
+.edu-areas {
+  padding: var(--space-24) 0;
+}
+
+.edu-areas__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 640px)  { .edu-areas__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1200px) { .edu-areas__grid { grid-template-columns: repeat(2, 1fr); } }
+
+.edu-area-card {
+  position: relative;
+  padding: var(--space-8);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: transform var(--transition-slow), border-color var(--transition-base),
+              box-shadow var(--transition-base);
+  overflow: hidden;
+}
+.edu-area-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(26, 140, 110, 0.40);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.35), 0 0 24px var(--edu-green-dim);
+}
+
+/* Número grande decorativo al fondo — muy tenue */
+.edu-area-card__number {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-5);
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--edu-green);
+  opacity: 0.05;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+.edu-area-card:hover .edu-area-card__number { opacity: 0.09; }
+
+/* Wrapper del ícono SVG con fondo verde tenue */
+.edu-area-card__icon-wrap {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--edu-green-dim);
+  border: 1px solid rgba(26, 140, 110, 0.18);
+  border-radius: var(--radius-md);
+  color: var(--edu-green-light);
+  flex-shrink: 0;
+}
+
+/* Etiqueta de nivel — pill pequeño */
+.edu-area-card__level {
+  display: inline-flex;
+  padding: var(--space-1) var(--space-3);
+  background: var(--edu-green-dim);
+  border: 1px solid rgba(26, 140, 110, 0.20);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--edu-green-light);
+  width: fit-content;
+}
+
+.edu-area-card__title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.25;
+}
+
+.edu-area-card__desc {
+  font-size: var(--text-sm);
+  line-height: 1.78;
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+
+/* Tags de temas — fila de pills en la parte inferior */
+.edu-area-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.edu-area-card__tag {
+  padding: 3px var(--space-3);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-weight: 500;
+  transition: border-color var(--transition-base), color var(--transition-base);
+}
+.edu-area-card:hover .edu-area-card__tag {
+  border-color: rgba(26, 140, 110, 0.25);
+  color: var(--edu-green-light);
+}
+
+
+/* ============================================================
+  06. PROYECTOS EDUCATIVOS
+  Tarjeta tipo "ficha de app" para mostrar herramientas que
+  ya construí y que están disponibles para usar. Reutilizo
+  el lenguaje visual de las tarjetas de Áreas (mismo radio,
+  mismo borde, mismo hover) pero con su propia estructura
+  interna: header con icono + estado, descripción, bloque
+  "Acerca de" con specs en formato definición (dt/dd) y
+  un botón de acción que destaca al final.
+
+  El grid está pensado para 1 columna por ahora (1 proyecto),
+  pero ya queda preparado en 'auto-fit' para que si agrego
+  una segunda herramienta, se acomode sola en 2 columnas
+  en pantallas grandes sin que yo tenga que tocar el CSS.
+  ============================================================ */
+.edu-projects {
+  padding: var(--space-24) 0;
+}
+
+.edu-projects__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 900px) {
+  .edu-projects__grid {
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  }
+}
+
+.edu-project-card {
+  position: relative;
+  padding: var(--space-8);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  transition: transform var(--transition-slow), border-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+.edu-project-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(26, 140, 110, 0.40);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.35), 0 0 24px var(--edu-green-dim);
+}
+
+/* Header: icono + nombre/tagline + estado, en fila en desktop */
+.edu-project-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.edu-project-card__icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--edu-green-dim);
+  border: 1px solid rgba(26, 140, 110, 0.18);
+  border-radius: var(--radius-lg);
+  color: var(--edu-green-light);
+}
+
+.edu-project-card__heading {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.edu-project-card__title {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+}
+
+.edu-project-card__tagline {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Badge "Disponible" — mismo lenguaje visual del badge de Campus Manu */
+.edu-project-card__status {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--edu-green-dim);
+  border: 1px solid rgba(26, 140, 110, 0.22);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--edu-green-light);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.edu-project-card__status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--edu-green-light);
+  animation: eduDotPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.edu-project-card__desc {
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+
+/* Bloque "Acerca de esta herramienta" — separado visualmente
+   con un borde superior sutil, como una sub-tarjeta interna */
+.edu-project-card__about {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.edu-project-card__about-title {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--edu-green-light);
+}
+
+/* Lista de specs en formato definición — etiqueta + valor,
+   como una ficha técnica real */
+.edu-project-card__specs {
+  display: grid;
+  gap: var(--space-3);
+}
+.edu-project-card__spec {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: var(--space-3);
+  align-items: start;
+}
+.edu-project-card__spec dt {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-tertiary);
+  padding-top: 0.15em;
+}
+.edu-project-card__spec dd {
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+}
+
+/* Tags de tecnología — mismo patrón visual que las tags de Áreas */
+.edu-project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.edu-project-card__tag {
+  padding: var(--space-1) var(--space-3);
+  background: var(--edu-green-dim);
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  transition: border-color var(--transition-base), color var(--transition-base);
+}
+.edu-project-card:hover .edu-project-card__tag {
+  border-color: rgba(26, 140, 110, 0.25);
+  color: var(--edu-green-light);
+}
+
+/* Botón de acción — alineado a la izquierda en desktop,
+   ancho completo en móvil vía la media query general */
+.edu-project-card__actions {
+  display: flex;
+}
+.edu-project-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.edu-project-card__cta svg {
+  transition: transform var(--transition-base);
+}
+.edu-project-card__cta:hover svg {
+  transform: translateX(3px);
+}
+
+
+/* ============================================================
+  07. REFLEXIONES DE APRENDIZAJE
+  Tarjetas tipo blog: header con etiqueta + fecha, título,
+  cuerpo del texto y un cierre con insight resaltado.
+  La etiqueta y el insight usan el verde como acento.
+  ============================================================ */
+.edu-reflections {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.edu-reflections__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  margin-bottom: var(--space-10);
+}
+@media (min-width: 768px) {
+  .edu-reflections__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.edu-reflection-card {
+  padding: var(--space-8);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: transform var(--transition-slow), border-color var(--transition-base);
+}
+.edu-reflection-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(26, 140, 110, 0.32);
+}
+
+.edu-reflection-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Tag de categoría de la reflexión */
+.edu-reflection-card__tag {
+  padding: var(--space-1) var(--space-3);
+  background: var(--edu-green-dim);
+  border: 1px solid rgba(26, 140, 110, 0.22);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--edu-green-light);
+}
+
+.edu-reflection-card__date {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.edu-reflection-card__title {
+  font-size: var(--text-md);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--color-text-primary);
+}
+
+.edu-reflection-card__body {
+  font-size: var(--text-sm);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+
+/* Insight al pie — borde izquierdo verde, tono Space Grotesk */
+.edu-reflection-card__footer {
+  padding-top: var(--space-2);
+}
+.edu-reflection-card__insight {
+  display: block;
+  font-family: var(--font-grotesk);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--edu-green-light);
+  padding: var(--space-3) var(--space-4);
+  background: var(--edu-green-dim);
+  border-left: 2px solid var(--edu-green);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  line-height: 1.55;
+}
+
+/* Nota de más reflexiones por venir */
+.edu-reflections__more {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+.edu-reflections__more-tag {
+  padding: var(--space-2) var(--space-5);
+  background: var(--edu-green-dim);
+  border: 1px dashed rgba(26, 140, 110, 0.28);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  color: var(--edu-green-light);
+  font-weight: 600;
+}
+
+
+/* ============================================================
+  08. CITAS QUE ME INSPIRAN
+  Galería de blockquotes tipo bento grid. Tipografía Space
+  Grotesk para diferenciar del tono de Fe. Glow verde al
+  hover/touch, manejado por JS (QuoteGlow).
+  Misma estructura de grid que fe-verses__grid.
+  ============================================================ */
+.edu-quotes {
+  padding: var(--space-24) 0;
+}
+
+.edu-quotes__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+@media (min-width: 640px) {
+  .edu-quotes__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .edu-quotes__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Tarjeta de cita estándar */
+.edu-quote-card {
+  padding: var(--space-8) var(--space-7);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-5);
+  transition: transform var(--transition-slow), border-color var(--transition-base),
+              box-shadow var(--transition-base);
+  min-height: 160px;
+}
+.edu-quote-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(26, 140, 110, 0.32);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.30), 0 0 18px var(--edu-green-dim);
+}
+
+/* Cita acento — fondo verde muy suave */
+.edu-quote-card--accent {
+  background: linear-gradient(135deg,
+    rgba(26, 140, 110, 0.08) 0%,
+    var(--color-surface) 100%
+  );
+  border-color: rgba(26, 140, 110, 0.22);
+}
+
+/* Cita ancha — ocupa toda la fila en desktop */
+@media (min-width: 1024px) {
+  .edu-quote-card--wide { grid-column: span 2; }
+}
+
+/* Texto de la cita en Space Grotesk */
+.edu-quote-card__text {
+  font-family: var(--font-grotesk);
+  font-weight: 300;
+  font-size: clamp(var(--text-sm), 1.5vw, var(--text-base));
+  line-height: 1.75;
+  color: var(--color-text-primary);
+  flex: 1;
+}
+
+/* Autor de la cita */
+.edu-quote-card__ref {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  font-style: normal;
+  color: var(--edu-green-light);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-family: var(--font-grotesk);
+}
+
+
+/* ============================================================
+  09. RECURSOS
+  Grid de 2 columnas con tarjetas horizontales (ícono + info).
+  Misma estructura que fe-resources pero con acento verde.
+  Efecto hover: deslizamiento a la derecha + borde verde.
+  ============================================================ */
+.edu-resources {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.edu-resources__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 768px) {
+  .edu-resources__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.edu-resource-card {
+  display: flex;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  transition: transform var(--transition-slow), border-color var(--transition-base);
+}
+.edu-resource-card:hover {
+  transform: translateX(4px);
+  border-color: rgba(26, 140, 110, 0.32);
+}
+
+/* Ícono emoji del recurso */
+.edu-resource-card__icon {
+  font-size: 2.25rem;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.edu-resource-card__info { flex: 1; }
+
+.edu-resource-card__type {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--edu-green-light);
+  margin-bottom: var(--space-1);
+}
+
+.edu-resource-card__title {
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.edu-resource-card__desc {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+
+/* ============================================================
+  10. BANNER: CAMPUS MANU
+  Tarjeta horizontal destacada para la sub-sección futura.
+  A diferencia del "Mundo Bíblico" (que ya existe y es un link),
+  esta tarjeta es informativa con badge de "En desarrollo".
+  El glow verde está posicionado a la derecha para variar.
+  ============================================================ */
+.edu-campus {
+  padding: var(--space-16) 0;
+}
+
+.edu-campus__card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-8);
+  background: var(--color-surface);
+  border: 1px solid rgba(26, 140, 110, 0.20);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: border-color var(--transition-base), box-shadow var(--transition-slow);
+}
+.edu-campus__card:hover {
+  border-color: rgba(26, 140, 110, 0.40);
+  box-shadow: 0 8px 36px rgba(26, 140, 110, 0.08);
+}
+
+/* Glow desde la derecha — diferente posición al "Mundo Bíblico" */
+.edu-campus__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 50% 80% at 100% 50%,
+    rgba(26, 140, 110, 0.09) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.edu-campus__icon {
+  flex-shrink: 0;
+  font-size: 2.5rem;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--edu-green-dim);
+  border: 1px solid rgba(26, 140, 110, 0.18);
+  border-radius: var(--radius-lg);
+  position: relative;
+}
+
+.edu-campus__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  position: relative;
+}
+
+.edu-campus__title {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+}
+
+.edu-campus__desc {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  max-width: 58ch;
+}
+
+/* Badge de "En desarrollo" — reemplaza la flecha del Mundo Bíblico */
+.edu-campus__badge {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--edu-green-dim);
+  border: 1px solid rgba(26, 140, 110, 0.22);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--edu-green-light);
+  letter-spacing: 0.04em;
+  position: relative;
+  white-space: nowrap;
+}
+
+/* Punto parpadeante de "En desarrollo" */
+.edu-campus__badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--edu-green-light);
+  animation: eduDotPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes eduDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.75); }
+}
+
+
+/* ============================================================
+  11. CTA FINAL
+  Tarjeta centrada de llamada a la acción. Icono de libro
+  con glow pulsante, título con highlight verde, descripción
+  y dos botones: contacto + otros mundos.
+  ============================================================ */
+.edu-cta {
+  padding: var(--space-24) 0;
+}
+
+.edu-cta__inner {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-14) var(--space-10);
+  background: var(--color-surface);
+  border: 1px solid rgba(26, 140, 110, 0.20);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.edu-cta__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 65% 65% at 50% 50%,
+    rgba(26, 140, 110, 0.06) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.edu-cta__icon {
+  font-size: 3rem;
+  position: relative;
+  animation: eduIconGlow 3.5s ease-in-out infinite;
+}
+@keyframes eduIconGlow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(26, 140, 110, 0.4)); }
+  50%       { filter: drop-shadow(0 0 20px rgba(93, 217, 180, 0.65)); }
+}
+
+.edu-cta__title {
+  font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl));
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  position: relative;
+}
+
+.edu-cta__highlight {
+  color: transparent;
+  background: linear-gradient(135deg, var(--edu-green-light), var(--edu-green));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.edu-cta__desc {
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  max-width: 480px;
+  position: relative;
+}
+
+.edu-cta__actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+}
+
+
+/* ============================================================
+  12. BOTONES PROPIOS DE ESTA SECCIÓN
+  El botón primario de Educación usa el verde como color base.
+  El texto es oscuro sobre el verde para máximo contraste.
+  El ghost usa borde y texto verde.
+  ============================================================ */
+.edu-btn--primary {
+  background: var(--edu-green);
+  color: #04221A;   /* Texto muy oscuro sobre verde para contraste WCAG AA */
+  font-weight: 700;
+  box-shadow: 0 4px 20px var(--edu-green-glow);
+}
+.edu-btn--primary:hover {
+  background: var(--edu-accent);
+  box-shadow: 0 6px 28px rgba(26, 140, 110, 0.48);
+  transform: translateY(-2px);
+  color: #04221A;
+}
+
+.edu-btn--ghost {
+  border-color: rgba(26, 140, 110, 0.28);
+  color: var(--edu-green-light);
+}
+.edu-btn--ghost:hover {
+  border-color: var(--edu-green);
+  background: var(--edu-green-dim);
+  color: var(--edu-green-light);
+}
+
+
+/* ============================================================
+  13. RESPONSIVE — AJUSTES ADICIONALES PARA MÓVIL
+  Mobile-first complementario. Corrijo lo que el grid no
+  resuelve automáticamente en pantallas pequeñas.
+  ============================================================ */
+@media (max-width: 640px) {
+
+  .edu-hero {
+    padding: var(--space-20) 0 var(--space-16);
+    min-height: auto;
+  }
+  .edu-hero__title { font-size: clamp(3.5rem, 20vw, 5.5rem); }
+  .edu-hero__quote {
+    padding: var(--space-6) var(--space-5);
+    text-align: left;
+  }
+  .edu-hero__quote::before { font-size: 4.5rem; }
+  .edu-hero__actions {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .edu-hero__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* En móvil la tarjeta de Campus Manu se apila verticalmente */
+  .edu-campus__card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-6);
+    gap: var(--space-5);
+  }
+  .edu-campus__badge { align-self: flex-start; }
+
+  /* Tarjeta de proyecto: en móvil el badge de estado pasa
+     a su propia línea debajo del título, y el botón de
+     "Abrir Calculadora" ocupa todo el ancho para que sea
+     fácil tocarlo con el dedo */
+  .edu-project-card {
+    padding: var(--space-6);
+  }
+  .edu-project-card__status {
+    align-self: flex-start;
+  }
+  .edu-project-card__spec {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+  .edu-project-card__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .edu-cta__inner { padding: var(--space-10) var(--space-6); }
+  .edu-cta__actions {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .edu-cta__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .edu-why__card { padding: var(--space-7) var(--space-6); }
+  .edu-area-card { padding: var(--space-6); }
+  .edu-project-card__icon { width: 50px; height: 50px; }
+  .edu-reflection-card { padding: var(--space-6); }
+  .edu-quote-card { padding: var(--space-6) var(--space-5); min-height: auto; }
+}
+
+/* Footer link activo — verde de esta sección */
+.footer__link--active { color: var(--edu-green-light); }

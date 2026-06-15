@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trivia Curiosa 🧠 — Mundo Curioso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       HEADER FIJO CON BOTÓN DE VOLVER
+       Este header siempre está visible en pantalla
+       para que el niño siempre pueda volver al hub.
+  ══════════════════════════════════════════════ -->
+  <header class="game-header">
+    <a href="index.html" class="game-header__back" onclick="playClick()">
+      ← Inicio
+    </a>
+    <div class="game-header__title">🧠 Trivia Curiosa</div>
+    <div class="game-header__score-box">
+      <span>⭐</span>
+      <span class="game-header__score-num" id="scoreDisplay">0</span>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       PANTALLA 1: SELECTOR DE CATEGORÍA Y DIFICULTAD
+       Primera pantalla que ve el jugador.
+       Aquí elige qué tema y nivel quiere.
+  ══════════════════════════════════════════════ -->
+  <div id="screenSelector" class="selector-screen">
+
+    <div>
+      <h1 class="selector-screen__title">¿Sobre qué aprendemos? 🤔</h1>
+      <p class="selector-screen__subtitle">Elige una categoría para empezar</p>
+    </div>
+
+    <!-- Grid de categorías — se genera dinámicamente desde TRIVIA_DATA -->
+    <div class="selector-grid" id="categoriaGrid">
+      <!-- Aquí inserto las tarjetas de categoría con JS -->
+    </div>
+
+    <div>
+      <h2 class="selector-screen__title" style="font-size: 1.5rem;">¿Cuál es tu nivel? 🎯</h2>
+      <p class="selector-screen__subtitle">Elige tu dificultad</p>
+    </div>
+
+    <!-- Grid de dificultades -->
+    <div class="selector-grid" id="dificultadGrid" style="max-width: 500px;">
+      <!-- Aquí inserto las dificultades con JS -->
+    </div>
+
+    <!-- Botón de inicio — deshabilitado hasta seleccionar los dos -->
+    <button class="btn-primary" id="btnIniciar" disabled onclick="iniciarTrivia()">
+      ¡Empezar! 🚀
+    </button>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANTALLA 2: EL JUEGO EN SÍ
+  ══════════════════════════════════════════════ -->
+  <div id="screenGame" class="trivia-layout hidden">
+
+    <!-- Barra de progreso de preguntas -->
+    <div class="trivia-progress">
+      <div class="trivia-progress__bar">
+        <div class="trivia-progress__fill" id="triviaProgressFill" style="width: 0%"></div>
+      </div>
+      <span class="trivia-progress__text" id="triviaProgressText">0 / 0</span>
+    </div>
+
+    <!-- Tarjeta de la pregunta activa -->
+    <div class="trivia-question-card" id="questionCard">
+
+      <!-- Badge de categoría -->
+      <div class="trivia-category-badge" id="questionCategory">🐾 Animales</div>
+
+      <!-- Texto de la pregunta -->
+      <div class="trivia-question-text" id="questionText">
+        ¿Cargando pregunta...?
+      </div>
+
+      <!-- Opciones de respuesta — se generan dinámicamente -->
+      <div class="trivia-options" id="optionsGrid">
+        <!-- Las opciones se insertan aquí con JS -->
+      </div>
+
+    </div>
+
+    <!-- Panel de dato curioso — aparece después de responder -->
+    <div class="trivia-fact-panel hidden" id="factPanel">
+      <div class="trivia-fact-label">
+        <span>💡</span>
+        <span>¿Sabías que...?</span>
+      </div>
+      <div class="trivia-fact-text" id="factText"></div>
+      <button class="trivia-next-btn" id="btnSiguiente" onclick="siguientePregunta()">
+        Siguiente pregunta →
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANTALLA 3: FIN DE LA TRIVIA
+  ══════════════════════════════════════════════ -->
+  <div id="screenEnd" class="trivia-layout hidden">
+
+    <div class="trivia-end-screen" id="endScreen">
+
+      <!-- Emoji según desempeño — lo cambio con JS según el puntaje -->
+      <div class="trivia-end-screen__emoji" id="endEmoji">🏆</div>
+
+      <h2 class="trivia-end-screen__title" id="endTitle">¡Excelente trabajo!</h2>
+      <p id="endMsg" style="color: var(--color-text-muted); font-weight: 600;">
+        Completaste la trivia
+      </p>
+
+      <!-- Estadísticas finales -->
+      <div class="trivia-end-screen__stats">
+        <div class="trivia-stat">
+          <div class="trivia-stat__value" id="endCorrect">0</div>
+          <div class="trivia-stat__label">✅ Correctas</div>
+        </div>
+        <div class="trivia-stat">
+          <div class="trivia-stat__value" id="endWrong">0</div>
+          <div class="trivia-stat__label">❌ Incorrectas</div>
+        </div>
+        <div class="trivia-stat">
+          <div class="trivia-stat__value" id="endScore">0 ⭐</div>
+          <div class="trivia-stat__label">Puntos ganados</div>
+        </div>
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="trivia-end-screen__actions">
+        <button class="btn-primary" onclick="repetirTrivia()">
+          🔄 Jugar de nuevo
+        </button>
+        <a href="index.html" class="btn-secondary" onclick="playClick()">
+          🏠 Volver al inicio
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       ANIMACIÓN DE CELEBRACIÓN (overlay)
+       Aparece brevemente al acertar
+  ══════════════════════════════════════════════ -->
+  <div class="celebration-overlay" id="celebrationOverlay" aria-hidden="true">
+    <div class="celebration-overlay__burst" id="celebrationBurst">🎉</div>
+  </div>
+
+  <!-- Toast de mensaje -->
+  <div class="toast" id="toastMsg" role="alert" aria-live="polite"></div>
+
+  <!-- Scripts — primero los datos, luego audio, luego lógica -->
+  <script src="js/audio.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/trivia.js"></script>
+
+</body>
+</html>

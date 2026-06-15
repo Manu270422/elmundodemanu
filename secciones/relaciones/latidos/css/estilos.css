@@ -1,0 +1,612 @@
+/* ============================================================
+   Latidos: Modo Pareja — estilos.css
+   Aquí defino toda la identidad visual de mi juego.
+   Quise una paleta nocturna-romántica: vino profundo de fondo
+   con rosa neón y dorado suave, para que se sienta como una
+   cita de noche y no como una app genérica.
+   ============================================================ */
+
+:root {
+  /* Estos son mis tokens de color. Los centralizo aquí para poder
+     crear "temas desbloqueables" más adelante comprándolos con corazones. */
+  --fondo: #1a0b14;
+  --fondo-tarjeta: #2b1220;
+  --rosa: #ff4f8b;
+  --rosa-suave: #ff9ebc;
+  --dorado: #ffd166;
+  --texto: #fff0f5;
+  --novio: #4fc3f7;
+  --novia: #ff7eb3;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Bloqueo la selección de texto porque en la Carrera del Beso
+   los toques rápidos seleccionaban todo y se veía horrible. */
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: radial-gradient(circle at 50% 20%, #341324, var(--fondo) 70%);
+  color: var(--texto);
+  min-height: 100vh;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ===== Sistema de pantallas =====
+   Manejo cada pantalla como una sección apilada. Solo la que tenga
+   la clase .activa se muestra. Mi navegacion.js controla esto. */
+.pantalla {
+  display: none;
+  position: fixed;
+  inset: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  z-index: 1;
+}
+.pantalla.activa { display: flex; animation: aparecer .4s ease; }
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Partículas de corazones =====
+   Genero los corazones flotantes desde JS y aquí solo los animo.
+   Los dejo detrás de todo con z-index 0. */
+#particulas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.particula {
+  position: absolute;
+  bottom: -40px;
+  animation: flotar linear forwards;
+  opacity: .35;
+}
+@keyframes flotar {
+  to { transform: translateY(-110vh) rotate(40deg); opacity: 0; }
+}
+
+/* ===== Pantalla de inicio ===== */
+.corazon-hero { font-size: 96px; animation: latir 1.1s infinite ease-in-out; }
+/* Esta animación de latido es la firma de mi juego: por eso se llama Latidos. */
+@keyframes latir {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.22); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.14); }
+}
+.titulo-juego {
+  font-size: 56px;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, var(--rosa), var(--dorado));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.subtitulo-juego { letter-spacing: 8px; text-transform: uppercase; color: var(--rosa-suave); font-size: 14px; }
+.frase-inicio { margin: 18px 0 28px; opacity: .8; }
+
+/* ===== Botones ===== */
+.boton-principal {
+  background: linear-gradient(135deg, var(--rosa), #ff2e74);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 16px 34px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(255, 79, 139, .45);
+  transition: transform .15s;
+}
+.boton-principal:active { transform: scale(.94); }
+
+.boton-volver {
+  background: var(--fondo-tarjeta);
+  color: var(--texto);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 12px;
+  font-size: 20px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+/* ===== Pantalla de nombres ===== */
+.titulo-seccion { font-size: 26px; margin-bottom: 20px; }
+.tarjeta-jugador {
+  background: var(--fondo-tarjeta);
+  border-radius: 18px;
+  padding: 16px 22px;
+  margin: 10px 0;
+  width: min(340px, 90vw);
+  border: 2px solid transparent;
+}
+/* Le doy a cada jugador su color propio: azul para él, rosa para ella.
+   Ese código de color lo repito en todos los minijuegos. */
+.tarjeta-jugador.novio { border-color: var(--novio); }
+.tarjeta-jugador.novia { border-color: var(--novia); }
+.emoji-jugador { font-size: 34px; }
+.tarjeta-jugador label { display: block; font-size: 13px; opacity: .7; margin: 4px 0; }
+.tarjeta-jugador input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255,255,255,.25);
+  color: var(--texto);
+  font-size: 18px;
+  text-align: center;
+  padding: 6px;
+  outline: none;
+}
+#boton-guardar-nombres { margin-top: 22px; }
+
+/* ===== Barra superior ===== */
+.barra-superior {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+}
+.contador-corazones {
+  background: var(--fondo-tarjeta);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-weight: 700;
+  color: var(--dorado);
+}
+.nombres-pareja { font-size: 14px; opacity: .85; }
+
+/* ===== Mapa de mundos estilo Duolingo =====
+   Hago un camino vertical con nodos alternados a izquierda y derecha,
+   como el camino de lecciones de Duolingo pero romántico. */
+.camino-mundos {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  margin-top: 10px;
+  max-height: 62vh;
+  overflow-y: auto;
+  padding: 10px 0 30px;
+  width: min(380px, 92vw);
+}
+.nodo-mundo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--fondo-tarjeta);
+  border-radius: 20px;
+  padding: 14px 18px;
+  cursor: pointer;
+  border: 2px solid rgba(255,255,255,.08);
+  transition: transform .15s;
+  text-align: left;
+}
+.nodo-mundo:active { transform: scale(.97); }
+/* Alterno los nodos para dar la sensación de camino serpenteante. */
+.nodo-mundo:nth-child(even) { transform: translateX(22px); }
+.nodo-mundo:nth-child(even):active { transform: translateX(22px) scale(.97); }
+.nodo-mundo.bloqueado { filter: grayscale(1); opacity: .55; }
+.emoji-mundo { font-size: 40px; }
+.info-mundo h3 { font-size: 17px; }
+.info-mundo p { font-size: 12px; opacity: .7; }
+.costo-mundo { margin-left: auto; color: var(--dorado); font-weight: 700; font-size: 13px; }
+
+/* ===== Lista de minijuegos dentro de un mundo ===== */
+.descripcion-mundo { opacity: .75; margin-bottom: 18px; max-width: 320px; }
+.lista-minijuegos { display: flex; flex-direction: column; gap: 12px; width: min(360px, 92vw); }
+.tarjeta-minijuego {
+  background: var(--fondo-tarjeta);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,.1);
+  text-align: left;
+}
+.tarjeta-minijuego.proximamente { opacity: .45; cursor: default; }
+.emoji-minijuego { font-size: 30px; }
+.tarjeta-minijuego h4 { font-size: 16px; }
+.tarjeta-minijuego p { font-size: 12px; opacity: .7; }
+
+/* ===== Carrera del Beso =====
+   Divido la pantalla en dos mitades enfrentadas. Roto la zona de la novia
+   180° para que cada uno vea su barra de frente sosteniendo el teléfono entre ambos. */
+#pantalla-carrera { padding: 0; justify-content: stretch; }
+.zona-carrera {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  cursor: pointer;
+}
+.zona-novia { background: linear-gradient(180deg, rgba(255,126,179,.25), transparent); transform: rotate(180deg); }
+.zona-novio { background: linear-gradient(0deg, rgba(79,195,247,.25), transparent); }
+.nombre-zona { font-size: 22px; font-weight: 800; }
+.zona-novia .nombre-zona { color: var(--novia); }
+.zona-novio .nombre-zona { color: var(--novio); }
+.instruccion-zona { opacity: .7; font-size: 14px; }
+
+.barra-progreso {
+  width: 70%;
+  height: 26px;
+  background: rgba(255,255,255,.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.relleno-barra {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  transition: width .08s linear;
+}
+#barra-novia { background: linear-gradient(90deg, var(--novia), #ff4f8b); }
+#barra-novio { background: linear-gradient(90deg, var(--novio), #2196f3); }
+
+.centro-carrera {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+/* Cuenta regresiva gigante antes de arrancar la carrera. */
+.cuenta-regresiva { font-size: 80px; font-weight: 900; color: var(--dorado); animation: latir .9s infinite; }
+
+/* ===== Modal de resultados ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+.modal.oculto { display: none; }
+.contenido-modal {
+  background: var(--fondo-tarjeta);
+  border-radius: 24px;
+  padding: 32px 26px;
+  width: min(340px, 88vw);
+  text-align: center;
+  border: 2px solid var(--rosa);
+  animation: aparecer .3s ease;
+}
+.emoji-modal { font-size: 64px; margin-bottom: 8px; }
+.contenido-modal h3 { font-size: 24px; margin-bottom: 8px; color: var(--rosa-suave); }
+.contenido-modal p { opacity: .85; margin-bottom: 6px; }
+.premio-modal { color: var(--dorado); font-weight: 800; font-size: 18px; margin: 12px 0 16px; }
+
+/* Respeto la preferencia de movimiento reducido del sistema. */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ============================================================
+   FASE 2 — Estilos de los minijuegos nuevos.
+   ============================================================ */
+
+/* ===== Corazón Equilibrado =====
+   Divido el escenario en dos mitades verticales (él izquierda, ella derecha)
+   y dejo el corazón flotando por encima con position absolute,
+   porque su posición la calcula mi motor de física en JS. */
+.escenario-equilibrio {
+  position: fixed;
+  inset: 0;
+  display: flex;
+}
+.lado-equilibrio {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 60px;
+  gap: 8px;
+  cursor: pointer;
+}
+.lado-novio { background: linear-gradient(90deg, rgba(79,195,247,.18), transparent); }
+.lado-novia { background: linear-gradient(270deg, rgba(255,126,179,.18), transparent); }
+.lado-novio .nombre-zona { color: var(--novio); }
+.lado-novia .nombre-zona { color: var(--novia); }
+
+.corazon-flotante {
+  position: absolute;
+  left: 50%;
+  bottom: 45%;
+  transform: translateX(-50%);
+  font-size: 70px;
+  z-index: 4;
+  pointer-events: none; /* Los toques deben caer en los lados, no en el corazón. */
+  filter: drop-shadow(0 6px 18px rgba(255,79,139,.5));
+  transition: bottom .05s linear, left .05s linear, transform .05s linear;
+}
+
+/* ===== ¿Quién Me Conoce Más? ===== */
+.instruccion-conoce {
+  background: var(--fondo-tarjeta);
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-size: 14px;
+  opacity: .9;
+  max-width: 340px;
+  margin-bottom: 18px;
+  border: 1px dashed var(--rosa);
+}
+.pregunta-conoce { font-size: 22px; max-width: 340px; margin-bottom: 22px; }
+.opciones-conoce {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(340px, 90vw);
+}
+/* Mis botones de opción: grandes y cómodos para el pulgar,
+   con el mismo lenguaje visual de las tarjetas del juego. */
+.boton-opcion {
+  background: var(--fondo-tarjeta);
+  color: var(--texto);
+  border: 2px solid rgba(255,255,255,.14);
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform .12s, border-color .12s;
+}
+.boton-opcion:active { transform: scale(.96); border-color: var(--rosa); }
+
+/* ============================================================
+   FASE 3 — Estilos de Atrapa el Amor, Ruleta y Estadísticas.
+   Solo agrego al final, sin tocar mis estilos globales.
+   ============================================================ */
+
+/* ===== Atrapa el Amor ===== */
+.zona-lluvia { position: fixed; inset: 0; overflow: hidden; }
+/* La línea punteada marca la frontera: izquierda de él, derecha de ella. */
+.linea-divisoria {
+  position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  border-left: 2px dashed rgba(255,255,255,.2);
+}
+.marcador-atrapa {
+  position: absolute;
+  top: 70px;
+  z-index: 3;
+  text-align: center;
+}
+.marcador-novio { left: 12%; }
+.marcador-novia { right: 12%; }
+.marcador-novio .nombre-zona { color: var(--novio); font-size: 16px; }
+.marcador-novia .nombre-zona { color: var(--novia); font-size: 16px; }
+.puntos-atrapa { font-size: 34px; font-weight: 900; color: var(--dorado); }
+
+/* Cada corazón cae con su propia animación. Le doy área táctil
+   generosa con padding porque en Android los dedos no son precisos. */
+.corazon-cayendo {
+  position: absolute;
+  top: -60px;
+  font-size: 40px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 2;
+  animation: caer linear forwards;
+}
+.corazon-cayendo.dorado { font-size: 46px; filter: drop-shadow(0 0 12px var(--dorado)); }
+.corazon-cayendo.roto { filter: grayscale(.4); }
+@keyframes caer { to { transform: translateY(115vh); } }
+
+/* Chispas de captura: vuelan hacia --dx/--dy que calculo en JS. */
+.chispa {
+  position: fixed;
+  font-size: 16px;
+  z-index: 60;
+  pointer-events: none;
+  animation: chispear .65s ease-out forwards;
+}
+@keyframes chispear {
+  to { transform: translate(var(--dx), var(--dy)) scale(.3); opacity: 0; }
+}
+
+/* Banner del combo romántico de 3 dorados seguidos. */
+.banner-combo {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--dorado), #ffb347);
+  color: #4a2c00;
+  font-weight: 800;
+  padding: 12px 20px;
+  border-radius: 999px;
+  z-index: 10;
+  width: max-content;
+  max-width: 90vw;
+  text-align: center;
+  animation: aparecer .3s ease;
+  box-shadow: 0 8px 24px rgba(255, 209, 102, .5);
+}
+
+/* ===== Ruleta de Pareja ===== */
+.contenedor-ruleta { position: relative; margin: 6px 0 10px; }
+.rueda {
+  width: min(280px, 70vw);
+  height: min(280px, 70vw);
+  border-radius: 50%;
+  border: 6px solid var(--fondo-tarjeta);
+  box-shadow: 0 0 30px rgba(255,79,139,.35);
+  /* Esta transición es mi desaceleración de ruleta real:
+     arranca rápido y frena suave durante 4 segundos. */
+  transition: transform 4s cubic-bezier(.12, .8, .16, 1);
+}
+.flecha-ruleta {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  color: var(--dorado);
+  z-index: 5;
+  text-shadow: 0 2px 6px rgba(0,0,0,.6);
+}
+.centro-rueda {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--fondo-tarjeta);
+  border-radius: 50%;
+  width: 64px; height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  border: 3px solid var(--rosa);
+  z-index: 4;
+}
+.emojis-rueda { letter-spacing: 6px; opacity: .8; margin-bottom: 10px; }
+
+/* Tarjeta de resultado: su borde toma el color de la categoría desde JS. */
+.resultado-ruleta {
+  background: var(--fondo-tarjeta);
+  border: 2px solid var(--rosa);
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  width: min(340px, 90vw);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  animation: aparecer .3s ease;
+}
+.resultado-ruleta.oculto { display: none; }
+.emoji-resultado { font-size: 34px; }
+
+/* ===== Panel de estadísticas de pareja ===== */
+.lista-estadisticas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(360px, 92vw);
+}
+.fila-estadistica {
+  background: var(--fondo-tarjeta);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255,255,255,.1);
+  font-size: 14px;
+  text-align: left;
+}
+.fila-estadistica b { color: var(--dorado); text-align: right; }
+
+/* ============================================================
+   FASE FINAL — Estilos del Mundo 5: Para Siempre.
+   Solo agrego al final, como en las fases anteriores.
+   ============================================================ */
+
+/* Contenedor genérico de las pantallas del Mundo 5. */
+.bloque-mundo5 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: min(380px, 92vw);
+  margin-top: 40px;
+}
+.bloque-mundo5.oculto { display: none; }
+.oculto { display: none; }
+.lista-scroll { max-height: 76vh; overflow-y: auto; padding-bottom: 30px; }
+
+/* Campos de formulario del Mundo 5: selects, fecha y textarea
+   con el mismo lenguaje visual de mis tarjetas. */
+.campo-mundo5 {
+  width: 100%;
+  background: var(--fondo-tarjeta);
+  color: var(--texto);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+}
+.campo-mundo5:focus { border-color: var(--rosa); }
+.area-texto { min-height: 110px; resize: vertical; }
+/* Permito seleccionar/escribir texto SOLO en los campos, porque
+   el body tiene user-select: none por los minijuegos táctiles. */
+.campo-mundo5 { user-select: text; -webkit-user-select: text; }
+
+.fila-botones { display: flex; gap: 10px; align-items: center; }
+.boton-pequeno { padding: 12px 22px; font-size: 15px; }
+.texto-vacio { opacity: .6; font-size: 14px; padding: 14px; }
+.resumen-cofre { font-size: 14px; opacity: .85; margin-bottom: 8px; }
+
+/* Vitrina de los 25 logros: cuadrícula de 4 columnas. */
+.subtitulo-cofre { margin: 18px 0 8px; font-size: 16px; color: var(--rosa-suave); }
+.vitrina-logros {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+.celda-logro {
+  background: var(--fondo-tarjeta);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px;
+  padding: 10px 4px;
+  text-align: center;
+  cursor: pointer;
+}
+.celda-logro span { font-size: 24px; }
+.celda-logro p { font-size: 9px; opacity: .8; margin-top: 4px; }
+.celda-logro.bloqueado { filter: grayscale(1); opacity: .45; }
+
+/* Toast de logro desbloqueado: aparece arriba sin interrumpir el juego. */
+.toast-logro {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--dorado), #ffb347);
+  color: #4a2c00;
+  border-radius: 16px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(255,209,102,.5);
+  animation: bajar-toast .35s ease;
+  max-width: 90vw;
+}
+.toast-logro span { font-size: 28px; }
+.toast-logro b { font-size: 13px; display: block; }
+.toast-logro p { font-size: 12px; }
+@keyframes bajar-toast {
+  from { transform: translate(-50%, -80px); opacity: 0; }
+  to   { transform: translate(-50%, 0); opacity: 1; }
+}
+
+/* Escena final. */
+.titulo-final { font-size: 40px; }
+.nombres-final { font-size: 20px; font-weight: 800; color: var(--rosa-suave); }
+.frase-final { font-size: 14px; opacity: .85; max-width: 330px; }
+
+/* ============================================================
+   TIENDA DE DECORACIONES — Estilos.
+   ============================================================ */
+
+/* Resalto con borde rosa lo que la pareja tiene en uso. */
+.tarjeta-tienda.activo-tienda { border-color: var(--rosa); }
+.tarjeta-tienda .costo-mundo { white-space: nowrap; }

@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  bienestar.html — El Mundo de Manu / Salud y Bienestar
+  ============================================================
+  Esta sección es un mundo temático sobre salud y bienestar
+  integral: mente, cuerpo y emociones. El contenido es
+  informativo, basado en evidencia y pensado para cualquier
+  visitante que quiera mejorar sus hábitos de vida.
+
+  No habla de mí — habla del tema. Es una revista/blog
+  de bienestar dentro del ecosistema de El Mundo de Manu.
+
+  Estructura:
+  - Hero: frase potente + canvas de ondas de respiración
+  - ¿Qué encontrarás aquí?: presentación del enfoque
+  - Pilares del bienestar: 6 áreas fundamentales
+  - Artículos: 3 contenidos reales y útiles
+  - Tips rápidos: 4 micro-consejos aplicables hoy
+  - Recursos recomendados: apps, libros, podcasts
+  - Disclaimer: nota de responsabilidad
+  - CTA: invitación a conversar sobre bienestar
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Salud y Bienestar — El Mundo de Manu. Hábitos saludables, bienestar mental, alimentación consciente, sueño, movimiento y manejo del estrés. Contenido informativo basado en evidencia." />
+  <meta name="author" content="Manu" />
+
+  <title>Salud y Bienestar — El Mundo de Manu</title>
+
+  <!--
+    Fuentes: Syne + DM Sans del sitio principal.
+    No agrego fuente nueva — el sistema tipográfico global
+    ya tiene todo lo necesario. La identidad de esta sección
+    viene de la paleta menta y los layouts, no de otra fuente.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet" />
+
+  <!-- CSS global del sitio, luego el específico de Bienestar -->
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="bienestar.css" />
+</head>
+
+<body class="page-bienestar">
+
+  <!-- Cursor personalizado global -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
+
+  <!-- ============================================================
+    NAVBAR — Misma estructura global.
+    Paths relativos desde secciones/bienestar/.
+    El link activo es "Mis Mundos" porque esta página
+    pertenece a esa categoría dentro del sitio.
+  ============================================================ -->
+  <header class="navbar" id="navbar" role="banner">
+    <nav class="navbar__container" aria-label="Navegación principal">
+
+      <a href="../../index.html" class="navbar__logo" aria-label="Volver al inicio">
+        <span class="navbar__logo-mark">M</span>
+        <span class="navbar__logo-text">El Mundo de <strong>Manu</strong></span>
+      </a>
+
+      <ul class="navbar__links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__link navbar__link--active">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__link">Sobre Mí</a></li>
+        <li>
+          <a href="../../index.html#contacto" class="navbar__link navbar__link--cta">
+            Contáctame
+            <span class="navbar__cta-dot" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+
+      <button class="navbar__toggle" id="navToggle"
+        aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </nav>
+
+    <div class="navbar__mobile" id="mobileMenu" aria-hidden="true">
+      <ul class="navbar__mobile-links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__mobile-link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__mobile-link">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__mobile-link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__mobile-link">Sobre Mí</a></li>
+        <li><a href="../../index.html#contacto"  class="navbar__mobile-link navbar__mobile-link--cta">Contáctame</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Breadcrumb de navegación -->
+  <div class="breadcrumb" aria-label="Ruta de navegación">
+    <div class="container">
+      <nav class="breadcrumb__nav">
+        <a href="../../index.html"        class="breadcrumb__link">Inicio</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="../../index.html#mundos" class="breadcrumb__link">Mis Mundos</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span class="breadcrumb__current" aria-current="page">Salud y Bienestar</span>
+      </nav>
+    </div>
+  </div>
+
+  <main id="main" role="main">
+
+    <!-- ──────────────────────────────────────────────────────────
+      HERO DE BIENESTAR
+      Diseño orgánico y sereno. El canvas de ondas concéntricas
+      simula el ritmo de la respiración — inhala 4s, exhala 4s.
+      La metáfora visual refuerza el tema antes de leer nada.
+      Fondo oscuro con toque orgánico verdoso.
+    ────────────────────────────────────────────────────────── -->
+    <section class="bn-hero" id="bn-inicio" aria-labelledby="bnHeroTitle">
+
+      <!-- Canvas de ondas de respiración -->
+      <canvas class="bn-hero__canvas" id="bnCanvas" aria-hidden="true"></canvas>
+
+      <!-- Destellos de luz decorativos en menta -->
+      <div class="bn-hero__light bn-hero__light--1" aria-hidden="true"></div>
+      <div class="bn-hero__light bn-hero__light--2" aria-hidden="true"></div>
+      <div class="bn-hero__light bn-hero__light--3" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="bn-hero__inner">
+
+          <!-- Símbolo decorativo: hoja/planta SVG muy tenue al fondo -->
+          <div class="bn-hero__symbol-wrap" aria-hidden="true">
+            <svg class="bn-hero__symbol" viewBox="0 0 80 100" fill="none"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Tallo -->
+              <path d="M40 95 L40 30" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round"/>
+              <!-- Hoja izquierda -->
+              <path d="M40 55 C30 45 14 42 10 28 C24 22 38 30 40 45"
+                stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.3"
+                stroke-linejoin="round"/>
+              <!-- Hoja derecha -->
+              <path d="M40 40 C50 30 66 27 70 13 C56 7 42 15 40 30"
+                stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.3"
+                stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <!-- Contenido central del hero -->
+          <div class="bn-hero__content" data-animate="fade-up">
+
+            <div class="bn-hero__tag-row">
+              <span class="section-tag bn-tag">Mente · Cuerpo · Emociones</span>
+            </div>
+
+            <h1 class="bn-hero__title" id="bnHeroTitle">
+              Salud y<br/>Bienestar
+            </h1>
+
+            <!-- Frase potente sobre bienestar integral -->
+            <blockquote class="bn-hero__phrase" data-animate="fade-up" data-delay="1">
+              <p class="bn-hero__phrase-text">
+                "La salud no es solo la ausencia de enfermedad.
+                Es el equilibrio dinámico entre cuerpo, mente
+                y entorno — un estado que se construye
+                con decisiones cotidianas."
+              </p>
+              <footer class="bn-hero__phrase-ref">— Basado en la definición integral de la OMS</footer>
+            </blockquote>
+
+            <p class="bn-hero__desc" data-animate="fade-up" data-delay="2">
+              Aquí encontrarás información útil, práctica y basada en evidencia
+              sobre los hábitos que más impactan tu bienestar. Sin dietas extremas,
+              sin promesas milagrosas — solo ciencia aplicada a la vida real.
+            </p>
+
+            <div class="bn-hero__actions" data-animate="fade-up" data-delay="3">
+              <a href="#bn-pilares" class="btn bn-btn--primary">
+                Ver pilares
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a href="#bn-articulos" class="btn btn--ghost bn-btn--ghost">Leer artículos</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Indicador de scroll -->
+      <div class="bn-hero__scroll" aria-hidden="true">
+        <div class="bn-hero__scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: ¿QUÉ ENCONTRARÁS AQUÍ?
+      Presentación honesta del enfoque de la sección.
+      Grid 2 col: texto + tarjeta de principios del bienestar.
+      Quiero que el visitante entienda desde el principio que
+      esto es contenido informativo serio, no pseudociencia.
+    ────────────────────────────────────────────────────────── -->
+    <section class="bn-intro" id="bn-enfoque" aria-labelledby="bnIntroTitle">
+      <div class="container">
+        <div class="bn-intro__inner" data-animate="fade-up">
+
+          <div class="bn-intro__text">
+            <span class="section-tag bn-tag">El enfoque</span>
+            <h2 class="bn-intro__title" id="bnIntroTitle">
+              ¿Qué encontrarás<br/>en esta sección?
+            </h2>
+            <p class="bn-intro__desc">
+              Vivimos en una época saturada de consejos de salud contradictorios:
+              dietas de moda, suplementos milagrosos, gurús de bienestar en redes
+              sociales. Aquí tomamos otro camino.
+            </p>
+            <p class="bn-intro__desc">
+              Todo el contenido está respaldado por fuentes científicas confiables
+              — OMS, investigaciones publicadas en revistas revisadas por pares,
+              recomendaciones de organismos de salud reconocidos. Lo traducimos
+              a un lenguaje claro y aplicable.
+            </p>
+            <p class="bn-intro__desc">
+              Encontrarás artículos sobre sueño, alimentación, movimiento,
+              salud mental, estrés y conexión social. El objetivo es simple:
+              que salgas con algo concreto que puedas aplicar hoy.
+            </p>
+          </div>
+
+          <!-- Tarjeta de principios del bienestar integral -->
+          <div class="bn-intro__card">
+            <div class="bn-intro__card-icon" aria-hidden="true">🌿</div>
+            <h3 class="bn-intro__card-title">Tres principios que guían este espacio</h3>
+
+            <ul class="bn-intro__card-list" role="list">
+              <li class="bn-intro__card-item">
+                <span class="bn-intro__card-bullet" aria-hidden="true">01</span>
+                <div>
+                  <strong>Basado en evidencia.</strong>
+                  <span>No publicamos lo que está de moda sino lo que la ciencia
+                  ha demostrado repetidamente en estudios con metodología sólida.</span>
+                </div>
+              </li>
+              <li class="bn-intro__card-item">
+                <span class="bn-intro__card-bullet" aria-hidden="true">02</span>
+                <div>
+                  <strong>Integral, no fragmentado.</strong>
+                  <span>El cuerpo, la mente y las emociones no son departamentos
+                  separados. Los abordamos como lo que son: un sistema.</span>
+                </div>
+              </li>
+              <li class="bn-intro__card-item">
+                <span class="bn-intro__card-bullet" aria-hidden="true">03</span>
+                <div>
+                  <strong>Aplicable sin recursos infinitos.</strong>
+                  <span>Los hábitos más poderosos para la salud son gratuitos:
+                  dormir bien, moverse, respirar, conectar con otros.</span>
+                </div>
+              </li>
+            </ul>
+
+            <div class="bn-intro__card-glow" aria-hidden="true"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: PILARES DEL BIENESTAR
+      Las 6 áreas fundamentales que la ciencia identifica
+      como pilares de la salud integral. Cada tarjeta tiene
+      ícono SVG propio, descripción útil y un dato basado
+      en evidencia que ancla el contenido en lo concreto.
+    ────────────────────────────────────────────────────────── -->
+    <section class="bn-pillars" id="bn-pilares" aria-labelledby="bnPillarsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag bn-tag">Los fundamentos</span>
+          <h2 class="section-title" id="bnPillarsTitle">Pilares del Bienestar</h2>
+          <p class="section-desc">
+            Seis áreas que la evidencia científica identifica como determinantes
+            clave de la salud integral. Descuidar una afecta a las demás.
+          </p>
+        </div>
+
+        <div class="bn-pillars__grid">
+
+          <!-- Pilar 1: Sueño -->
+          <article class="bn-pillar-card" data-animate="fade-up" data-delay="0">
+            <div class="bn-pillar-card__number" aria-hidden="true">01</div>
+            <div class="bn-pillar-card__icon-wrap" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M22 14.5A9 9 0 1 1 13.5 6a6.5 6.5 0 0 0 8.5 8.5z"
+                  stroke="currentColor" stroke-width="1.8"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="bn-pillar-card__title">Sueño reparador</h3>
+            <p class="bn-pillar-card__desc">
+              Durante el sueño el cerebro consolida memorias, el sistema
+              inmune se fortalece y las células se reparan. No es tiempo
+              perdido — es mantenimiento esencial del sistema.
+            </p>
+            <div class="bn-pillar-card__stat">
+              <span class="bn-pillar-card__stat-num">7–9 h</span>
+              <span class="bn-pillar-card__stat-label">recomendadas por noche en adultos (National Sleep Foundation)</span>
+            </div>
+          </article>
+
+          <!-- Pilar 2: Alimentación -->
+          <article class="bn-pillar-card" data-animate="fade-up" data-delay="1">
+            <div class="bn-pillar-card__number" aria-hidden="true">02</div>
+            <div class="bn-pillar-card__icon-wrap" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M14 4C9.6 4 6 7.6 6 12c0 5 4.5 10 8 12 3.5-2 8-7 8-12 0-4.4-3.6-8-8-8z"
+                  stroke="currentColor" stroke-width="1.8"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14 9v7M11 12h6" stroke="currentColor" stroke-width="1.8"
+                  stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="bn-pillar-card__title">Alimentación consciente</h3>
+            <p class="bn-pillar-card__desc">
+              Lo que comemos afecta no solo el peso sino la energía,
+              el estado de ánimo y la concentración. La microbiota
+              intestinal produce neurotransmisores que regulan el bienestar.
+            </p>
+            <div class="bn-pillar-card__stat">
+              <span class="bn-pillar-card__stat-num">80%</span>
+              <span class="bn-pillar-card__stat-label">de la serotonina se produce en el intestino (Johns Hopkins)</span>
+            </div>
+          </article>
+
+          <!-- Pilar 3: Movimiento -->
+          <article class="bn-pillar-card" data-animate="fade-up" data-delay="2">
+            <div class="bn-pillar-card__number" aria-hidden="true">03</div>
+            <div class="bn-pillar-card__icon-wrap" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="14" cy="6" r="2.5" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M14 9v8M10 13l4 4 4-4M10 17l-2 5M18 17l2 5"
+                  stroke="currentColor" stroke-width="1.8"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="bn-pillar-card__title">Movimiento diario</h3>
+            <p class="bn-pillar-card__desc">
+              El cuerpo humano evolucionó para moverse. El sedentarismo
+              es un factor de riesgo independiente para enfermedades
+              crónicas, más allá del peso corporal o la dieta.
+            </p>
+            <div class="bn-pillar-card__stat">
+              <span class="bn-pillar-card__stat-num">150 min</span>
+              <span class="bn-pillar-card__stat-label">de actividad moderada por semana recomendados (OMS 2020)</span>
+            </div>
+          </article>
+
+          <!-- Pilar 4: Salud mental -->
+          <article class="bn-pillar-card" data-animate="fade-up" data-delay="3">
+            <div class="bn-pillar-card__number" aria-hidden="true">04</div>
+            <div class="bn-pillar-card__icon-wrap" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M14 5C9.03 5 5 9.03 5 14s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9z"
+                  stroke="currentColor" stroke-width="1.8"/>
+                <path d="M10 13.5c0-1 .8-2 2-2s2 1 2 2-.8 2-2 2"
+                  stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M16 11.5v5" stroke="currentColor" stroke-width="1.8"
+                  stroke-linecap="round"/>
+                <circle cx="16" cy="10" r="0.8" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3 class="bn-pillar-card__title">Salud mental</h3>
+            <p class="bn-pillar-card__desc">
+              La salud mental determina cómo pensamos, sentimos y actuamos.
+              No es un lujo ni señal de debilidad cuidarla —
+              es tan fundamental como mantener el corazón sano.
+            </p>
+            <div class="bn-pillar-card__stat">
+              <span class="bn-pillar-card__stat-num">1 de 4</span>
+              <span class="bn-pillar-card__stat-label">personas experimentará un trastorno mental en su vida (OMS)</span>
+            </div>
+          </article>
+
+          <!-- Pilar 5: Conexión social -->
+          <article class="bn-pillar-card" data-animate="fade-up" data-delay="4">
+            <div class="bn-pillar-card__number" aria-hidden="true">05</div>
+            <div class="bn-pillar-card__icon-wrap" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="10" cy="10" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="20" cy="10" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M4 22c0-3.3 2.7-6 6-6h8c3.3 0 6 2.7 6 6"
+                  stroke="currentColor" stroke-width="1.8"
+                  stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="bn-pillar-card__title">Conexión social</h3>
+            <p class="bn-pillar-card__desc">
+              Los vínculos sociales sólidos reducen el riesgo de mortalidad
+              prematura más que dejar de fumar. La soledad crónica es
+              reconocida hoy como un problema de salud pública.
+            </p>
+            <div class="bn-pillar-card__stat">
+              <span class="bn-pillar-card__stat-num">50%</span>
+              <span class="bn-pillar-card__stat-label">mayor probabilidad de supervivencia con relaciones sociales fuertes (Holt-Lunstad)</span>
+            </div>
+          </article>
+
+          <!-- Pilar 6: Manejo del estrés -->
+          <article class="bn-pillar-card" data-animate="fade-up" data-delay="5">
+            <div class="bn-pillar-card__number" aria-hidden="true">06</div>
+            <div class="bn-pillar-card__icon-wrap" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                   xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M14 5v4M14 19v4M5 14h4M19 14h4"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <circle cx="14" cy="14" r="5.5" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="14" cy="14" r="2" fill="currentColor" opacity="0.5"/>
+              </svg>
+            </div>
+            <h3 class="bn-pillar-card__title">Manejo del estrés</h3>
+            <p class="bn-pillar-card__desc">
+              El estrés agudo es adaptativo — nos mantiene alerta.
+              El estrés crónico, sin gestión, daña el sistema cardiovascular,
+              el inmune y el cognitivo. Aprender a regularlo es una habilidad.
+            </p>
+            <div class="bn-pillar-card__stat">
+              <span class="bn-pillar-card__stat-num">77%</span>
+              <span class="bn-pillar-card__stat-label">de personas reportan síntomas físicos causados por el estrés (APA)</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: ARTÍCULOS
+      Tres contenidos reales, útiles y bien fundamentados.
+      No son placeholders — tienen información concreta
+      que cualquier persona puede leer y aplicar.
+      El primero tiene variante --featured para darle peso visual.
+    ────────────────────────────────────────────────────────── -->
+    <section class="bn-articles" id="bn-articulos" aria-labelledby="bnArticlesTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag bn-tag">Contenido</span>
+          <h2 class="section-title" id="bnArticlesTitle">Artículos</h2>
+          <p class="section-desc">
+            Información práctica y respaldada por la ciencia.
+            Para leer, entender y aplicar — no para memorizar.
+          </p>
+        </div>
+
+        <div class="bn-articles__grid">
+
+          <!-- Artículo 1: Sueño (destacado) -->
+          <article class="bn-article-card bn-article-card--featured"
+                   data-animate="fade-up" data-delay="0">
+            <div class="bn-article-card__header">
+              <span class="bn-article-card__tag">Sueño · Ciencia aplicada</span>
+              <span class="bn-article-card__read">6 min de lectura</span>
+            </div>
+
+            <h3 class="bn-article-card__title">
+              El sueño no es opcional: lo que le pasa a tu cerebro cuando no duermes bien
+            </h3>
+
+            <p class="bn-article-card__body">
+              Dormir parece la actividad más pasiva del mundo, pero el cerebro durante
+              el sueño está más activo de lo que imaginamos. En la fase de sueño profundo
+              se consolidan los recuerdos del día: lo que aprendiste pasa de la memoria
+              de corto plazo al almacenamiento de largo plazo. En la fase REM el cerebro
+              procesa emociones y resuelve problemas de forma creativa.
+            </p>
+
+            <div class="bn-article-card__inset">
+              <h4 class="bn-article-card__inset-title">¿Qué pasa con solo una noche mal dormida?</h4>
+              <ul class="bn-article-card__list" role="list">
+                <li>La atención y el tiempo de reacción caen al nivel de alguien con 0.08% de alcohol en sangre</li>
+                <li>La producción de células T del sistema inmune se reduce hasta un 70%</li>
+                <li>El cortisol (hormona del estrés) aumenta y el metabolismo de glucosa se altera</li>
+                <li>La amígdala cerebral se vuelve hasta 60% más reactiva emocionalmente</li>
+              </ul>
+            </div>
+
+            <div class="bn-article-card__tips">
+              <h4 class="bn-article-card__tips-title">Higiene del sueño: qué sí funciona</h4>
+              <div class="bn-article-card__tip-row">
+                <span class="bn-article-card__tip-icon" aria-hidden="true">🌡️</span>
+                <span><strong>Temperatura:</strong> La habitación entre 16–19 °C favorece el sueño profundo.
+                El cuerpo necesita bajar su temperatura central para dormir.</span>
+              </div>
+              <div class="bn-article-card__tip-row">
+                <span class="bn-article-card__tip-icon" aria-hidden="true">📱</span>
+                <span><strong>Luz azul:</strong> Las pantallas emiten luz en la frecuencia que inhibe
+                la melatonina. Evítalas al menos 60 minutos antes de dormir.</span>
+              </div>
+              <div class="bn-article-card__tip-row">
+                <span class="bn-article-card__tip-icon" aria-hidden="true">⏰</span>
+                <span><strong>Horario constante:</strong> Levantarte a la misma hora todos los días
+                — incluso fines de semana — es el hábito más potente para regular el sueño.</span>
+              </div>
+              <div class="bn-article-card__tip-row">
+                <span class="bn-article-card__tip-icon" aria-hidden="true">☕</span>
+                <span><strong>Cafeína:</strong> Tiene una vida media de 5–7 horas. Un café a las 3 pm
+                tiene la mitad de su efecto a las 8–10 pm. Eso explica por qué cuesta dormirse.</span>
+              </div>
+            </div>
+
+            <p class="bn-article-card__myth">
+              <strong>Mito desmentido:</strong> "El fin de semana recupero el sueño de la semana."
+              El sueño perdido no se recupera en su totalidad. El daño cognitivo acumulado
+              por privación crónica persiste incluso después de noches de sueño extendido.
+            </p>
+          </article>
+
+          <!-- Artículo 2: Estrés -->
+          <article class="bn-article-card" data-animate="fade-up" data-delay="1">
+            <div class="bn-article-card__header">
+              <span class="bn-article-card__tag">Estrés · Herramientas prácticas</span>
+              <span class="bn-article-card__read">5 min de lectura</span>
+            </div>
+
+            <h3 class="bn-article-card__title">
+              Manejo del estrés: técnicas respaldadas por la ciencia que puedes usar hoy
+            </h3>
+
+            <p class="bn-article-card__body">
+              El estrés no es el enemigo — la respuesta de estrés es una de las herramientas
+              de supervivencia más sofisticadas que tenemos. El problema es cuando esa
+              respuesta se activa de forma crónica ante amenazas que no son reales
+              (una reunión difícil, un plazo de entrega, una discusión en redes sociales).
+              El cortisol en dosis sostenidas deteriora la memoria, la inmunidad y el corazón.
+            </p>
+
+            <div class="bn-article-card__inset">
+              <h4 class="bn-article-card__inset-title">Tres técnicas con respaldo científico</h4>
+              <ul class="bn-article-card__list" role="list">
+                <li><strong>Respiración 4-7-8:</strong> Inhala 4 s, sostén 7 s, exhala 8 s.
+                Activa el nervio vago y el sistema nervioso parasimpático en menos de 2 minutos.</li>
+                <li><strong>Box breathing (cuadrada):</strong> Inhala 4 s, sostén 4 s, exhala 4 s,
+                sostén 4 s. Usada por Navy SEALs y equipos de emergencias para recuperar calma bajo presión.</li>
+                <li><strong>Movimiento físico agudo:</strong> 10–20 minutos de caminata rápida
+                metaboliza el cortisol y la adrenalina más eficientemente que cualquier suplemento.</li>
+              </ul>
+            </div>
+
+            <div class="bn-article-card__tips">
+              <h4 class="bn-article-card__tips-title">El estrés de las tareas: por qué funciona el Pomodoro</h4>
+              <div class="bn-article-card__tip-row">
+                <span class="bn-article-card__tip-icon" aria-hidden="true">🍅</span>
+                <span>La técnica Pomodoro (25 min de trabajo + 5 min de pausa) no es solo
+                gestión del tiempo — es gestión del estrés cognitivo. El cerebro trabaja
+                mejor en bloques con recuperación activa que en sesiones largas sin descanso.</span>
+              </div>
+              <div class="bn-article-card__tip-row">
+                <span class="bn-article-card__tip-icon" aria-hidden="true">📝</span>
+                <span>Escribir en papel las preocupaciones durante 10 minutos antes de dormir
+                reduce significativamente la rumiación nocturna, según estudios del Journal
+                of Experimental Psychology.</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 3: Alimentación -->
+          <article class="bn-article-card" data-animate="fade-up" data-delay="2">
+            <div class="bn-article-card__header">
+              <span class="bn-article-card__tag">Alimentación · Hábitos</span>
+              <span class="bn-article-card__read">5 min de lectura</span>
+            </div>
+
+            <h3 class="bn-article-card__title">
+              Alimentación consciente: comer mejor sin dietas extremas ni culpa
+            </h3>
+
+            <p class="bn-article-card__body">
+              La industria de las dietas genera billones de dólares anuales con una
+              tasa de fracaso del 95% a largo plazo. El problema no es la fuerza de
+              voluntad — es que las dietas restrictivas activan mecanismos evolutivos
+              de supervivencia que aumentan el apetito y reducen el metabolismo.
+              La alimentación consciente (mindful eating) propone otra vía.
+            </p>
+
+            <div class="bn-article-card__inset">
+              <h4 class="bn-article-card__inset-title">El plato saludable de Harvard: guía simple</h4>
+              <ul class="bn-article-card__list" role="list">
+                <li><strong>½ del plato:</strong> vegetales y frutas variados — variedad de colores
+                implica variedad de nutrientes y fitoquímicos</li>
+                <li><strong>¼ del plato:</strong> proteína de calidad — legumbres, huevo, pescado,
+                pollo o carnes magras con moderación</li>
+                <li><strong>¼ del plato:</strong> granos integrales — avena, arroz integral,
+                quinua — no cereales refinados de caja</li>
+                <li><strong>Aceites saludables</strong> en cantidad moderada — oliva, aguacate, nueces</li>
+              </ul>
+            </div>
+
+            <div class="bn-article-card__tips">
+              <h4 class="bn-article-card__tips-title">Conexión intestino-cerebro: lo que los ultraprocesados hacen</h4>
+              <div class="bn-article-card__tip-row">
+                <span class="bn-article-card__tip-icon" aria-hidden="true">🧫</span>
+                <span>Los alimentos ultraprocesados deterioran la microbiota intestinal — la comunidad
+                de bacterias que produce hasta el 80% de la serotonina del cuerpo. Menos diversidad
+                microbiana se asocia con mayor ansiedad y depresión.</span>
+              </div>
+              <div class="bn-article-card__tip-row">
+                <span class="bn-article-card__tip-icon" aria-hidden="true">💧</span>
+                <span><strong>Hidratación y concentración:</strong> Una deshidratación de apenas el 2%
+                del peso corporal reduce el rendimiento cognitivo hasta en un 20%. Antes de un café,
+                prueba un vaso de agua.</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: TIPS RÁPIDOS
+      Franja con 4 micro-consejos aplicables hoy mismo.
+      Formato compacto para escaneado visual rápido.
+      Aquí no profundizo — solo entrego valor inmediato.
+    ────────────────────────────────────────────────────────── -->
+    <section class="bn-tips" id="bn-tips" aria-labelledby="bnTipsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag bn-tag">Acción inmediata</span>
+          <h2 class="section-title" id="bnTipsTitle">4 Hábitos que puedes empezar hoy</h2>
+        </div>
+
+        <div class="bn-tips__grid" data-animate="fade-up" data-delay="1">
+
+          <div class="bn-tip-item">
+            <div class="bn-tip-item__icon" aria-hidden="true">☀️</div>
+            <h3 class="bn-tip-item__title">Luz solar al despertar</h3>
+            <p class="bn-tip-item__desc">
+              Exponte a luz natural en los primeros 30–60 minutos del día.
+              Ancla tu ritmo circadiano y mejora la calidad del sueño esa misma noche.
+            </p>
+          </div>
+
+          <div class="bn-tip-item">
+            <div class="bn-tip-item__icon" aria-hidden="true">🚶</div>
+            <h3 class="bn-tip-item__title">Camina 10 minutos</h3>
+            <p class="bn-tip-item__desc">
+              Una caminata de solo 10 minutos después de comer reduce el pico
+              de glucosa en sangre hasta un 30% y mejora el estado de ánimo.
+            </p>
+          </div>
+
+          <div class="bn-tip-item">
+            <div class="bn-tip-item__icon" aria-hidden="true">📵</div>
+            <h3 class="bn-tip-item__title">Primera hora sin pantallas</h3>
+            <p class="bn-tip-item__desc">
+              Evitar el teléfono la primera hora del día protege el foco mental
+              y reduce la activación del eje del estrés desde temprano.
+            </p>
+          </div>
+
+          <div class="bn-tip-item">
+            <div class="bn-tip-item__icon" aria-hidden="true">🫁</div>
+            <h3 class="bn-tip-item__title">Respira antes de reaccionar</h3>
+            <p class="bn-tip-item__desc">
+              Ante una situación estresante, toma 3 respiraciones profundas
+              antes de responder. Literalmente le das tiempo a tu corteza
+              prefrontal de tomar el control de la amígdala.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: RECURSOS RECOMENDADOS
+      Apps, libros y podcasts que considero genuinamente útiles.
+      Sin afiliados, sin patrocinios — solo lo que aporta valor
+      real para quien quiera profundizar en bienestar.
+    ────────────────────────────────────────────────────────── -->
+    <section class="bn-resources" id="bn-recursos" aria-labelledby="bnResourcesTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag bn-tag">Para profundizar</span>
+          <h2 class="section-title" id="bnResourcesTitle">Recursos Recomendados</h2>
+          <p class="section-desc">
+            Herramientas, libros y contenido que amplían lo que aquí se resume.
+            Ninguno está patrocinado — los recomiendo porque valen la pena.
+          </p>
+        </div>
+
+        <div class="bn-resources__grid">
+
+          <!-- Recurso: Por qué dormimos -->
+          <div class="bn-resource-card" data-animate="fade-up" data-delay="0">
+            <div class="bn-resource-card__icon" aria-hidden="true">📚</div>
+            <div class="bn-resource-card__info">
+              <span class="bn-resource-card__type">Libro</span>
+              <h3 class="bn-resource-card__title">Por qué dormimos — Matthew Walker</h3>
+              <p class="bn-resource-card__desc">
+                El libro más completo y accesible sobre la ciencia del sueño.
+                Walker es neurocientífico de UC Berkeley. Cambia para siempre
+                cómo ves las 8 horas de descanso.
+              </p>
+            </div>
+          </div>
+
+          <!-- Recurso: Headspace / Calm -->
+          <div class="bn-resource-card" data-animate="fade-up" data-delay="1">
+            <div class="bn-resource-card__icon" aria-hidden="true">📱</div>
+            <div class="bn-resource-card__info">
+              <span class="bn-resource-card__type">Apps</span>
+              <h3 class="bn-resource-card__title">Headspace / Calm</h3>
+              <p class="bn-resource-card__desc">
+                Las dos apps más respaldadas por evidencia para meditación
+                y manejo del estrés. Headspace tiene más contenido estructurado;
+                Calm es más relajante y cuenta con contenido para dormir.
+              </p>
+            </div>
+          </div>
+
+          <!-- Recurso: Huberman Lab -->
+          <div class="bn-resource-card" data-animate="fade-up" data-delay="2">
+            <div class="bn-resource-card__icon" aria-hidden="true">🎙️</div>
+            <div class="bn-resource-card__info">
+              <span class="bn-resource-card__type">Podcast</span>
+              <h3 class="bn-resource-card__title">Huberman Lab</h3>
+              <p class="bn-resource-card__desc">
+                Andrew Huberman, neurocientífico de Stanford, explica ciencia
+                aplicada al bienestar en episodios profundos. En español busca
+                "Huberman Lab traducido" en YouTube.
+              </p>
+            </div>
+          </div>
+
+          <!-- Recurso: Atomic Habits -->
+          <div class="bn-resource-card" data-animate="fade-up" data-delay="3">
+            <div class="bn-resource-card__icon" aria-hidden="true">📖</div>
+            <div class="bn-resource-card__info">
+              <span class="bn-resource-card__type">Libro</span>
+              <h3 class="bn-resource-card__title">Hábitos Atómicos — James Clear</h3>
+              <p class="bn-resource-card__desc">
+                El marco práctico más completo para construir hábitos de salud
+                que duren. No habla de fuerza de voluntad — habla de sistemas,
+                identidad y cambios pequeños con impacto compuesto.
+              </p>
+            </div>
+          </div>
+
+          <!-- Recurso: Nike Run Club / Strava -->
+          <div class="bn-resource-card" data-animate="fade-up" data-delay="4">
+            <div class="bn-resource-card__icon" aria-hidden="true">🏃</div>
+            <div class="bn-resource-card__info">
+              <span class="bn-resource-card__type">Apps de movimiento</span>
+              <h3 class="bn-resource-card__title">Nike Run Club / Strava</h3>
+              <p class="bn-resource-card__desc">
+                Para comenzar a moverse sin excusas. NRC tiene planes guiados
+                de audio desde 0 hasta carrera continua. Strava añade comunidad
+                y registro — el factor social aumenta la adherencia.
+              </p>
+            </div>
+          </div>
+
+          <!-- Recurso: OMS / Minsal -->
+          <div class="bn-resource-card" data-animate="fade-up" data-delay="5">
+            <div class="bn-resource-card__icon" aria-hidden="true">🏛️</div>
+            <div class="bn-resource-card__info">
+              <span class="bn-resource-card__type">Fuentes primarias</span>
+              <h3 class="bn-resource-card__title">OMS + Ministerios de Salud</h3>
+              <p class="bn-resource-card__desc">
+                Para contrastar información: who.int ofrece guías actualizadas
+                sobre actividad física, nutrición y salud mental. Son la fuente
+                más confiable y están disponibles en español.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      DISCLAIMER
+      Nota de responsabilidad discreta pero visible.
+      El diseño es sobrio para no alarmar pero sí informar.
+      El rol "note" con aria-label lo hace accesible
+      para lectores de pantalla sin interrumpir el flujo.
+    ────────────────────────────────────────────────────────── -->
+    <section class="bn-disclaimer" id="bn-nota" aria-label="Nota de responsabilidad">
+      <div class="container">
+        <div class="bn-disclaimer__inner" data-animate="fade-up">
+          <div class="bn-disclaimer__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="10" cy="10" r="8.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 6v5M10 13.5v.5" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="bn-disclaimer__text">
+            <strong>Nota importante:</strong> El contenido de esta sección tiene fines
+            informativos y educativos exclusivamente. No reemplaza la consulta, diagnóstico
+            ni tratamiento médico profesional. Si tienes dudas sobre tu salud, consulta
+            a un profesional de la salud calificado. La información aquí presentada
+            está basada en fuentes científicas reconocidas, pero cada persona es diferente.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      CTA FINAL — INVITACIÓN A COMPARTIR
+    ────────────────────────────────────────────────────────── -->
+    <section class="bn-cta" id="bn-conectar" aria-labelledby="bnCtaTitle">
+      <div class="container">
+        <div class="bn-cta__inner" data-animate="fade-up">
+
+          <!-- Fondo luminoso menta -->
+          <div class="bn-cta__glow" aria-hidden="true"></div>
+
+          <div class="bn-cta__icon" aria-hidden="true">🌿</div>
+
+          <h2 class="bn-cta__title" id="bnCtaTitle">
+            ¿Tienes preguntas o<br/>
+            <span class="bn-cta__highlight">experiencias que compartir?</span>
+          </h2>
+
+          <p class="bn-cta__desc">
+            El bienestar se construye mejor en comunidad. Si tienes preguntas
+            sobre algún tema de salud, quieres compartir un hábito que te
+            haya cambiado la vida, o simplemente quieres conversar sobre
+            esto, escríbeme. Siempre hay algo que aprender del otro.
+          </p>
+
+          <div class="bn-cta__actions">
+            <a href="../../index.html#contacto" class="btn bn-btn--primary">
+              Escríbeme →
+            </a>
+            <a href="../../index.html#mundos" class="btn btn--ghost bn-btn--ghost">
+              Otros mundos
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+    FOOTER — Estructura idéntica a fe.html con Bienestar añadido
+    y marcado como activo. Rutas relativas desde secciones/bienestar/.
+  ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+
+        <div class="footer__brand">
+          <a href="../../index.html" class="footer__logo" aria-label="Volver al inicio">
+            <span class="footer__logo-mark">M</span>
+            El Mundo de Manu
+          </a>
+          <p class="footer__tagline">Construyendo mi universo digital, un proyecto a la vez.</p>
+        </div>
+
+        <nav class="footer__nav" aria-label="Mis mundos">
+          <h4 class="footer__nav-title">Mis Mundos</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../fe/fe.html"                     class="footer__link">Fe</a></li>
+            <li><a href="../gaming/gaming.html"             class="footer__link">Gaming</a></li>
+            <li><a href="../infantil/infantil.html"         class="footer__link">Infantil</a></li>
+            <li><a href="../relaciones/relaciones.html"     class="footer__link">Relaciones</a></li>
+            <li><a href="../tecnologia/tecnologia.html"     class="footer__link">Tecnología</a></li>
+            <li><a href="../educacion/educacion.html"       class="footer__link">Educación</a></li>
+            <li><a href="bienestar.html"                    class="footer__link footer__link--active">Bienestar</a></li>
+            <li><a href="../sobremi/sobremi.html"           class="footer__link">Sobre Mí</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__nav" aria-label="Links del sitio">
+          <h4 class="footer__nav-title">Sitio</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../../index.html#inicio"    class="footer__link">Inicio</a></li>
+            <li><a href="../../index.html#proyectos" class="footer__link">Proyectos</a></li>
+            <li><a href="../../index.html#contacto"  class="footer__link">Contacto</a></li>
+          </ul>
+        </nav>
+
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© <span id="footerYear"></span> El Mundo de Manu. Construido con 💛 y mucho café.</p>
+        <p class="footer__credits">Diseñado y desarrollado por <strong>Manu</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+  <script src="bienestar.js"></script>
+
+</body>
+</html>

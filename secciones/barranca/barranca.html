@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  barranca.html — El Mundo de Manu / Barrancabermeja
+  ============================================================
+  Esta es la sección más especial de todas porque es mi ciudad.
+  Barrancabermeja — La Capital Petrolera de Colombia, la "Bella
+  Hija del Sol", la "Ciudad Entre Aguas". Aquí nací, aquí crecí
+  y desde aquí construyo todo lo que soy.
+
+  No es hablar de mí — es honrar a mi ciudad con la información
+  que merece: su historia real desde la conquista, la refinería
+  más grande del país, el río Magdalena, sus ciénagas, su gente
+  y su futuro como Distrito Especial. Todo verificado en fuentes
+  oficiales (Alcaldía de Barrancabermeja, Wikipedia, Ecopetrol,
+  Señal Memoria, Vanguardia).
+
+  Estructura:
+  - Hero: efecto 3D tipo HUD industrial + canvas de petróleo
+  - Identidad: quién es Barrancabermeja (datos oficiales)
+  - Línea de tiempo: hitos históricos desde 1536
+  - La Refinería: el corazón energético del país
+  - El Río y las Ciénagas: naturaleza e identidad
+  - Datos del Distrito: estadísticas y categorías oficiales
+  - Turismo: lugares y experiencias de la ciudad
+  - CTA: orgullo barranqueño
+
+  Datos verificados en:
+  - https://www.barrancabermeja.gov.co/publicaciones/11/historia/
+  - https://www.barrancabermeja.gov.co/publicaciones/4/nuestro-distrito/
+  - Wikipedia: Barrancabermeja
+  - Señal Memoria (Rtvc)
+  - Vanguardia: Centenario Refinería 2022
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Barrancabermeja — El Mundo de Manu. La Capital Petrolera de Colombia: su historia desde 1536, la Refinería de Ecopetrol, el Río Magdalena, las ciénagas y la identidad de la Bella Hija del Sol." />
+  <meta name="author" content="Manu" />
+
+  <title>Barrancabermeja — El Mundo de Manu</title>
+
+  <!--
+    Fuentes: Syne + DM Sans globales.
+    Agrego Bebas Neue para los títulos de datos estadísticos —
+    su carácter fuerte y compacto refuerza la identidad industrial
+    de una ciudad petrolera. Y Barlow Condensed para los labels
+    de la línea de tiempo, evocando placas de señalización.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="barranca.css" />
+</head>
+
+<body class="page-barranca">
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
+
+  <!-- ============================================================
+    NAVBAR
+  ============================================================ -->
+  <header class="navbar" id="navbar" role="banner">
+    <nav class="navbar__container" aria-label="Navegación principal">
+      <a href="../../index.html" class="navbar__logo" aria-label="Volver al inicio">
+        <span class="navbar__logo-mark">M</span>
+        <span class="navbar__logo-text">El Mundo de <strong>Manu</strong></span>
+      </a>
+      <ul class="navbar__links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__link navbar__link--active">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__link">Sobre Mí</a></li>
+        <li>
+          <a href="../../index.html#contacto" class="navbar__link navbar__link--cta">
+            Contáctame
+            <span class="navbar__cta-dot" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+      <button class="navbar__toggle" id="navToggle"
+        aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </nav>
+    <div class="navbar__mobile" id="mobileMenu" aria-hidden="true">
+      <ul class="navbar__mobile-links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__mobile-link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__mobile-link">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__mobile-link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__mobile-link">Sobre Mí</a></li>
+        <li><a href="../../index.html#contacto"  class="navbar__mobile-link navbar__mobile-link--cta">Contáctame</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="breadcrumb" aria-label="Ruta de navegación">
+    <div class="container">
+      <nav class="breadcrumb__nav">
+        <a href="../../index.html"        class="breadcrumb__link">Inicio</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="../../index.html#mundos" class="breadcrumb__link">Mis Mundos</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span class="breadcrumb__current" aria-current="page">Barrancabermeja</span>
+      </nav>
+    </div>
+  </div>
+
+  <main id="main" role="main">
+
+    <!-- ──────────────────────────────────────────────────────────
+      HERO DE BARRANCABERMEJA
+      El efecto más épico del sitio: canvas 3D con partículas
+      que fluyen como crudo en una tubería, líneas de cuadrícula
+      tipo HUD industrial y un scan-line diagonal que recorre
+      el hero. El título usa perspectiva CSS 3D. El fondo es
+      casi negro con un tinte ámbar profundo.
+    ────────────────────────────────────────────────────────── -->
+    <section class="bq-hero" id="bq-inicio" aria-labelledby="bqHeroTitle">
+
+      <!-- Canvas 3D de flujo de crudo -->
+      <canvas class="bq-hero__canvas" id="bqCanvas" aria-hidden="true"></canvas>
+
+      <!-- Grid HUD — cuadrícula tipo pantalla de control industrial -->
+      <div class="bq-hero__hud-grid" aria-hidden="true"></div>
+
+      <!-- Scan line diagonal que recorre toda la pantalla -->
+      <div class="bq-hero__scanline" aria-hidden="true"></div>
+
+      <!-- Luces de atardecer ámbar sobre el río -->
+      <div class="bq-hero__light bq-hero__light--1" aria-hidden="true"></div>
+      <div class="bq-hero__light bq-hero__light--2" aria-hidden="true"></div>
+      <div class="bq-hero__light bq-hero__light--3" aria-hidden="true"></div>
+
+      <!-- Anillo decorativo tipo ojo de buey industrial -->
+      <div class="bq-hero__ring bq-hero__ring--1" aria-hidden="true"></div>
+      <div class="bq-hero__ring bq-hero__ring--2" aria-hidden="true"></div>
+      <div class="bq-hero__ring bq-hero__ring--3" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="bq-hero__inner">
+
+          <div class="bq-hero__content">
+
+            <!-- Badge de coordenadas reales (dato oficial) -->
+            <div class="bq-hero__coord-badge" data-animate="fade-up" aria-label="Coordenadas geográficas">
+              <span class="bq-hero__coord-icon" aria-hidden="true">◉</span>
+              <span class="bq-hero__coord-text">7° 04′ N · 73° 52′ O · 75.94 msnm</span>
+            </div>
+
+            <!-- Supertítulo en 3D -->
+            <div class="bq-hero__pretitle" data-animate="fade-up" data-delay="1" aria-hidden="true">
+              Santander · Colombia · Magdalena Medio
+            </div>
+
+            <h1 class="bq-hero__title" id="bqHeroTitle" data-animate="fade-up" data-delay="1">
+              <span class="bq-hero__title-line bq-hero__title-line--1">Barranc</span><span class="bq-hero__title-accent">a</span><span class="bq-hero__title-line bq-hero__title-line--2">bermeja</span>
+            </h1>
+
+            <!-- Subtítulos oficiales de la ciudad -->
+            <div class="bq-hero__nicknames" data-animate="fade-up" data-delay="2">
+              <span class="bq-hero__nickname">La Capital Petrolera</span>
+              <span class="bq-hero__nickname-sep" aria-hidden="true">·</span>
+              <span class="bq-hero__nickname">Bella Hija del Sol</span>
+              <span class="bq-hero__nickname-sep" aria-hidden="true">·</span>
+              <span class="bq-hero__nickname">Ciudad Entre Aguas</span>
+            </div>
+
+            <!-- Dato épico central: año y fundación -->
+            <div class="bq-hero__headline-stat" data-animate="fade-up" data-delay="2">
+              <div class="bq-hero__stat-block">
+                <span class="bq-hero__stat-num" data-count-bq="1536">0</span>
+                <span class="bq-hero__stat-sub">Avistamiento por Quesada</span>
+              </div>
+              <div class="bq-hero__stat-divider" aria-hidden="true"></div>
+              <div class="bq-hero__stat-block">
+                <span class="bq-hero__stat-num" data-count-bq="1922">0</span>
+                <span class="bq-hero__stat-sub">Elevada a Municipio</span>
+              </div>
+              <div class="bq-hero__stat-divider" aria-hidden="true"></div>
+              <div class="bq-hero__stat-block">
+                <span class="bq-hero__stat-num" data-count-bq="252">0</span>
+                <span class="bq-hero__stat-sub">Mil barriles/día refinados</span>
+              </div>
+            </div>
+
+            <div class="bq-hero__actions" data-animate="fade-up" data-delay="3">
+              <a href="#bq-historia" class="btn bq-btn--primary">
+                Ver su historia
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a href="#bq-refineria" class="btn btn--ghost bq-btn--ghost">La Refinería →</a>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="bq-hero__scroll" aria-hidden="true">
+        <div class="bq-hero__scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: IDENTIDAD
+      Presentación oficial de Barrancabermeja con datos clave.
+      Fuente: barrancabermeja.gov.co y Wikipedia verificado.
+    ────────────────────────────────────────────────────────── -->
+    <section class="bq-identity" id="bq-identidad" aria-labelledby="bqIdentityTitle">
+      <div class="container">
+
+        <div class="bq-identity__inner" data-animate="fade-up">
+          <div class="bq-identity__text">
+            <span class="section-tag bq-tag">Quién es Barrancabermeja</span>
+            <h2 class="bq-identity__title" id="bqIdentityTitle">
+              La ciudad que mueve<br/>
+              <span class="bq-identity__title-oil">el petróleo de Colombia</span>
+            </h2>
+            <p class="bq-identity__desc">
+              Barrancabermeja es un distrito colombiano ubicado a orillas del río
+              Magdalena, en la parte occidental del departamento de Santander, a
+              114 km al occidente de Bucaramanga. Es la ciudad industrial más
+              importante de Santander y la sede de la refinería de petróleo más
+              grande del país, operada por Ecopetrol.
+            </p>
+            <p class="bq-identity__desc">
+              Declarada <strong>Distrito Especial, Portuario, Biodiverso, Industrial
+              y Turístico</strong> mediante el Acto Legislativo de 2018, es la capital
+              de la Provincia de Yariguíes y la ciudad más grande del Magdalena Medio.
+              Está rodeada de ciénagas y el pueblo la llama con orgullo la
+              <em>"Ciudad entre aguas"</em>.
+            </p>
+            <p class="bq-identity__desc">
+              Su historia es inseparable del petróleo. El primer pozo del país
+              brotó aquí el 29 de abril de 1918 en el corregimiento El Centro, y
+              desde entonces la ciudad ha generado el 81,5% de las ventas legales
+              de combustible de Colombia y produce el 100% de los petroquímicos
+              nacionales.
+            </p>
+          </div>
+
+          <!-- Cards de datos oficiales -->
+          <div class="bq-identity__cards">
+            <div class="bq-identity__card">
+              <span class="bq-identity__card-icon" aria-hidden="true">🗺️</span>
+              <div>
+                <span class="bq-identity__card-label">Departamento</span>
+                <span class="bq-identity__card-value">Santander</span>
+              </div>
+            </div>
+            <div class="bq-identity__card">
+              <span class="bq-identity__card-icon" aria-hidden="true">👥</span>
+              <div>
+                <span class="bq-identity__card-label">Población aprox.</span>
+                <span class="bq-identity__card-value">+216,000 hab.</span>
+              </div>
+            </div>
+            <div class="bq-identity__card">
+              <span class="bq-identity__card-icon" aria-hidden="true">🌡️</span>
+              <div>
+                <span class="bq-identity__card-label">Temp. media</span>
+                <span class="bq-identity__card-value">27.6°C</span>
+              </div>
+            </div>
+            <div class="bq-identity__card">
+              <span class="bq-identity__card-icon" aria-hidden="true">📏</span>
+              <div>
+                <span class="bq-identity__card-label">Altitud</span>
+                <span class="bq-identity__card-value">75.94 msnm</span>
+              </div>
+            </div>
+            <div class="bq-identity__card">
+              <span class="bq-identity__card-icon" aria-hidden="true">🏛️</span>
+              <div>
+                <span class="bq-identity__card-label">Categoría</span>
+                <span class="bq-identity__card-value">Distrito Especial</span>
+              </div>
+            </div>
+            <div class="bq-identity__card">
+              <span class="bq-identity__card-icon" aria-hidden="true">🌊</span>
+              <div>
+                <span class="bq-identity__card-label">Ciénagas</span>
+                <span class="bq-identity__card-value">6 ciénagas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: LÍNEA DE TIEMPO HISTÓRICA
+      Hitos verificados en fuentes oficiales, en orden cronológico.
+      Diseño tipo "pipeline" — tubo horizontal de crudo con nodos.
+    ────────────────────────────────────────────────────────── -->
+    <section class="bq-timeline" id="bq-historia" aria-labelledby="bqTimelineTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag bq-tag">Historia oficial</span>
+          <h2 class="section-title" id="bqTimelineTitle">De La Tora a Distrito Especial</h2>
+          <p class="section-desc">
+            Casi 500 años de historia documentada — desde el paso de los conquistadores
+            españoles hasta la ciudad industrial que es hoy.
+          </p>
+        </div>
+
+        <div class="bq-timeline__track" role="list">
+
+          <!-- Nodo 1536 -->
+          <div class="bq-tnode" role="listitem" data-animate="fade-up" data-delay="0">
+            <div class="bq-tnode__year-wrap">
+              <span class="bq-tnode__year">1536</span>
+            </div>
+            <div class="bq-tnode__dot" aria-hidden="true"></div>
+            <div class="bq-tnode__card">
+              <h3 class="bq-tnode__card-title">El descubrimiento español</h3>
+              <p class="bq-tnode__card-desc">
+                El 12 de octubre de 1536, la expedición del conquistador
+                <strong>Gonzalo Jiménez de Quesada</strong>, enviado por el gobernador
+                Pedro Fernández de Lugo con 700 infantes y 80 caballeros, divisa a lo
+                lejos unas <em>"Barrancas Bermejas"</em> sobre el río Yuma — hoy
+                río Magdalena. El lugar indígena se llamaba <strong>La Tora</strong>.
+              </p>
+              <span class="bq-tnode__card-source">Fuente: Alcaldía de Barrancabermeja</span>
+            </div>
+          </div>
+
+          <!-- Nodo Yariguíes -->
+          <div class="bq-tnode bq-tnode--alt" role="listitem" data-animate="fade-up" data-delay="1">
+            <div class="bq-tnode__year-wrap">
+              <span class="bq-tnode__year">S. XVI–XIX</span>
+            </div>
+            <div class="bq-tnode__dot" aria-hidden="true"></div>
+            <div class="bq-tnode__card">
+              <h3 class="bq-tnode__card-title">Los Yariguíes: guardianes del territorio</h3>
+              <p class="bq-tnode__card-desc">
+                Los <strong>Yariguíes</strong>, etnia indígena de la familia lingüística
+                Caribe, habitaron la región y se resistieron ferozmente a la invasión
+                española. Altos y fornidos, según las crónicas, defendieron su territorio
+                hasta el siglo XIX. El nombre de la <strong>Provincia de Yariguíes</strong>
+                y el aeropuerto los honran hasta hoy.
+              </p>
+              <span class="bq-tnode__card-source">Fuente: Señal Memoria / Alcaldía</span>
+            </div>
+          </div>
+
+          <!-- Nodo 1918 -->
+          <div class="bq-tnode" role="listitem" data-animate="fade-up" data-delay="2">
+            <div class="bq-tnode__year-wrap">
+              <span class="bq-tnode__year">1918</span>
+            </div>
+            <div class="bq-tnode__dot" aria-hidden="true"></div>
+            <div class="bq-tnode__card">
+              <h3 class="bq-tnode__card-title">El primer petróleo de Colombia</h3>
+              <p class="bq-tnode__card-desc">
+                El <strong>29 de abril de 1918</strong>, emanó por primera vez petróleo
+                en el corregimiento El Centro, a 20 km de Barrancabermeja, en el Campo
+                <strong>La Cira-Infantas</strong>. Este fue el primer pozo petrolero de
+                Colombia, operado por la Tropical Oil Company bajo la Concesión De Mares,
+                e inició el camino que convertiría a la ciudad en capital del oro negro.
+              </p>
+              <span class="bq-tnode__card-source">Fuente: Biblioteca Virtual Cervantes</span>
+            </div>
+          </div>
+
+          <!-- Nodo 1922a — Refinería -->
+          <div class="bq-tnode bq-tnode--alt" role="listitem" data-animate="fade-up" data-delay="3">
+            <div class="bq-tnode__year-wrap">
+              <span class="bq-tnode__year">18 Feb 1922</span>
+            </div>
+            <div class="bq-tnode__dot" aria-hidden="true"></div>
+            <div class="bq-tnode__card">
+              <h3 class="bq-tnode__card-title">Nace la Refinería</h3>
+              <p class="bq-tnode__card-desc">
+                El <strong>18 de febrero de 1922</strong>, llegaron por el río Magdalena,
+                desde Talará (Perú), los primeros alambiques para refinar crudo. Arrancó
+                así la primera refinería de Colombia, operada por la Tropical Oil Company.
+                Este es el inicio de un complejo industrial que hoy refina
+                <strong>252.000 barriles por día</strong>.
+              </p>
+              <span class="bq-tnode__card-source">Fuente: Vanguardia / Biblioteca Cervantes</span>
+            </div>
+          </div>
+
+          <!-- Nodo 26 Abr 1922 — Municipio -->
+          <div class="bq-tnode" role="listitem" data-animate="fade-up" data-delay="4">
+            <div class="bq-tnode__year-wrap">
+              <span class="bq-tnode__year">26 Abr 1922</span>
+            </div>
+            <div class="bq-tnode__dot" aria-hidden="true"></div>
+            <div class="bq-tnode__card">
+              <h3 class="bq-tnode__card-title">Fundación oficial del Municipio</h3>
+              <p class="bq-tnode__card-desc">
+                El <strong>26 de abril de 1922</strong>, mediante la Ley 5 del Congreso,
+                se erige en municipio el corregimiento de Barrancabermeja, que hasta
+                entonces dependía de San Vicente de Chucurí. El primer alcalde nombrado
+                fue <strong>Bautista Reyes</strong>. El nombre viene de las barrancas
+                rojizas —bermejas— que divisó Quesada en 1536.
+              </p>
+              <span class="bq-tnode__card-source">Fuente: Alcaldía de Barrancabermeja (oficial)</span>
+            </div>
+          </div>
+
+          <!-- Nodo 1951 — Reversión -->
+          <div class="bq-tnode bq-tnode--alt" role="listitem" data-animate="fade-up" data-delay="5">
+            <div class="bq-tnode__year-wrap">
+              <span class="bq-tnode__year">25 Ago 1951</span>
+            </div>
+            <div class="bq-tnode__dot" aria-hidden="true"></div>
+            <div class="bq-tnode__card">
+              <h3 class="bq-tnode__card-title">La Reversión: nace Ecopetrol</h3>
+              <p class="bq-tnode__card-desc">
+                La <strong>Reversión de la Concesión De Mares</strong> al Estado
+                colombiano es el momento más trascendental de la historia petrolera
+                del país. Al vencer el contrato con la Tropical Oil Company, todos
+                sus activos pasan a la nación. Nace así la
+                <strong>Empresa Colombiana de Petróleos — Ecopetrol</strong>, la
+                primera empresa estatal de su género en Colombia.
+              </p>
+              <span class="bq-tnode__card-source">Fuente: Señal Memoria / Ecopetrol</span>
+            </div>
+          </div>
+
+          <!-- Nodo 1954 — Nueva Refinería -->
+          <div class="bq-tnode" role="listitem" data-animate="fade-up" data-delay="6">
+            <div class="bq-tnode__year-wrap">
+              <span class="bq-tnode__year">1954</span>
+            </div>
+            <div class="bq-tnode__dot" aria-hidden="true"></div>
+            <div class="bq-tnode__card">
+              <h3 class="bq-tnode__card-title">La nueva Refinería de Ecopetrol</h3>
+              <p class="bq-tnode__card-desc">
+                El presidente <strong>Gustavo Rojas Pinilla</strong> inaugura el
+                27 de agosto de 1954 la nueva refinería de Ecopetrol, modernizando
+                las instalaciones heredadas de la Tropical Oil Company. También se
+                construye el aeropuerto <strong>Yariguíes</strong>, inaugurado en 1956,
+                conectando a Barrancabermeja con el resto del país.
+              </p>
+              <span class="bq-tnode__card-source">Fuente: Señal Memoria (Radiodifusora Nacional)</span>
+            </div>
+          </div>
+
+          <!-- Nodo 2018 — Distrito -->
+          <div class="bq-tnode bq-tnode--alt" role="listitem" data-animate="fade-up" data-delay="7">
+            <div class="bq-tnode__year-wrap">
+              <span class="bq-tnode__year">2018</span>
+            </div>
+            <div class="bq-tnode__dot" aria-hidden="true"></div>
+            <div class="bq-tnode__card">
+              <h3 class="bq-tnode__card-title">Distrito Especial</h3>
+              <p class="bq-tnode__card-desc">
+                Mediante el <strong>Acto Legislativo N.º 269 de 2018</strong>,
+                Barrancabermeja es declarada
+                <strong>Distrito Especial, Portuario, Biodiverso, Industrial
+                y Turístico</strong>. Un reconocimiento a su peso estratégico para
+                Colombia: motor económico, puerto fluvial clave, reserva biodiversa
+                y destino turístico del Magdalena Medio.
+              </p>
+              <span class="bq-tnode__card-source">Fuente: Wikipedia / Congreso de Colombia</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: LA REFINERÍA
+      El corazón energético del país. Datos oficiales.
+    ────────────────────────────────────────────────────────── -->
+    <section class="bq-refinery" id="bq-refineria" aria-labelledby="bqRefineryTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag bq-tag">El corazón energético</span>
+          <h2 class="section-title" id="bqRefineryTitle">La Refinería de Barrancabermeja</h2>
+          <p class="section-desc">
+            La refinería más grande de Colombia, con más de un siglo de operaciones
+            ininterrumpidas. El mayor complejo industrial del país.
+          </p>
+        </div>
+
+        <!-- Métricas clave en estilo HUD / pantalla de control -->
+        <div class="bq-refinery__hud" data-animate="fade-up" data-delay="1">
+
+          <div class="bq-refinery__hud-metric">
+            <div class="bq-refinery__hud-value">
+              <span data-count-bq="252" class="bq-counter">0</span>
+              <span class="bq-refinery__hud-unit">K</span>
+            </div>
+            <span class="bq-refinery__hud-label">Barriles/día refinados</span>
+            <div class="bq-refinery__hud-bar">
+              <div class="bq-refinery__hud-fill" style="--fill: 85%"></div>
+            </div>
+          </div>
+
+          <div class="bq-refinery__hud-metric">
+            <div class="bq-refinery__hud-value">
+              <span data-count-bq="100" class="bq-counter">0</span>
+              <span class="bq-refinery__hud-unit">%</span>
+            </div>
+            <span class="bq-refinery__hud-label">De petroquímicos de Colombia</span>
+            <div class="bq-refinery__hud-bar">
+              <div class="bq-refinery__hud-fill" style="--fill: 100%"></div>
+            </div>
+          </div>
+
+          <div class="bq-refinery__hud-metric">
+            <div class="bq-refinery__hud-value">
+              <span data-count-bq="81" class="bq-counter">0</span>
+              <span class="bq-refinery__hud-unit">.5%</span>
+            </div>
+            <span class="bq-refinery__hud-label">De ventas de combustible legal</span>
+            <div class="bq-refinery__hud-bar">
+              <div class="bq-refinery__hud-fill" style="--fill: 81.5%"></div>
+            </div>
+          </div>
+
+          <div class="bq-refinery__hud-metric">
+            <div class="bq-refinery__hud-value">
+              <span data-count-bq="102" class="bq-counter">0</span>
+              <span class="bq-refinery__hud-unit">+</span>
+            </div>
+            <span class="bq-refinery__hud-label">Años de operación continua</span>
+            <div class="bq-refinery__hud-bar">
+              <div class="bq-refinery__hud-fill" style="--fill: 100%"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Artículo explicativo sobre la refinería -->
+        <div class="bq-refinery__article" data-animate="fade-up" data-delay="2">
+
+          <div class="bq-refinery__article-col">
+            <h3 class="bq-refinery__article-title">Una historia de 100 años</h3>
+            <p class="bq-refinery__article-desc">
+              El 18 de febrero de 1922, los primeros alambiques llegaron por el río
+              Magdalena desde Talará, Perú. Bajo las llamas de leña se procesó el crudo
+              del Campo La Cira-Infantas, dando inicio a la industria petrolera colombiana.
+            </p>
+            <p class="bq-refinery__article-desc">
+              En 1928 la planta alcanzó su capacidad máxima inicial. Tras la reversión
+              de 1951, Ecopetrol modernizó el complejo. Entre 1963 y 1979 una segunda
+              ampliación incrementó la producción en un 163% e incorporó la
+              petroquímica. Hoy el complejo es uno de los referentes en el contexto
+              latinoamericano.
+            </p>
+          </div>
+
+          <div class="bq-refinery__article-col">
+            <h3 class="bq-refinery__article-title">El futuro: transición energética</h3>
+            <p class="bq-refinery__article-desc">
+              La refinería está comprometida con la apuesta de Ecopetrol de alcanzar
+              cero emisiones en 2050. El proyecto de modernización ROA busca producir
+              gasolina de 10 partes por millón de azufre, reducir en 4.5 millones
+              de toneladas de CO₂ anuales y hacer compatible a Barrancabermeja con
+              la era de los vehículos de nueva generación.
+            </p>
+            <p class="bq-refinery__article-desc">
+              El plan de modernización busca que una empresa británica y 1.500
+              trabajadores de la refinería transformen en los próximos años el
+              corazón del complejo industrial para los retos del siglo XXI.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: EL RÍO Y LAS CIÉNAGAS
+      La naturaleza de Barrancabermeja — "Ciudad Entre Aguas".
+    ────────────────────────────────────────────────────────── -->
+    <section class="bq-nature" id="bq-naturaleza" aria-labelledby="bqNatureTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag bq-tag">Ciudad Entre Aguas</span>
+          <h2 class="section-title" id="bqNatureTitle">El Río y las Ciénagas</h2>
+          <p class="section-desc">
+            Barrancabermeja no es solo petróleo. Es naturaleza, agua y biodiversidad.
+            El río que la vio nacer sigue siendo su alma.
+          </p>
+        </div>
+
+        <div class="bq-nature__grid">
+
+          <div class="bq-nature-card bq-nature-card--featured" data-animate="fade-up" data-delay="0">
+            <div class="bq-nature-card__icon" aria-hidden="true">🌊</div>
+            <h3 class="bq-nature-card__title">El Río Magdalena</h3>
+            <p class="bq-nature-card__subtitle">El gran padre de aguas</p>
+            <p class="bq-nature-card__desc">
+              El río Magdalena —llamado <strong>Yuma</strong> por los indígenas— es
+              el eje sobre el que se construyó Barrancabermeja. Por él llegaron los
+              alambiques que encendieron la primera refinería. Por él fluye el comercio
+              a través del <strong>Puerto Fluvial Impala</strong>, conectando el
+              interior del país con los mercados nacionales e internacionales.
+            </p>
+            <p class="bq-nature-card__desc">
+              El malecón sobre el río es hoy el paseo peatonal más icónico de la ciudad,
+              con vista al puente y al imponente horizonte del Magdalena Medio.
+            </p>
+          </div>
+
+          <div class="bq-nature-card" data-animate="fade-up" data-delay="1">
+            <div class="bq-nature-card__icon" aria-hidden="true">🦆</div>
+            <h3 class="bq-nature-card__title">Ciénaga San Silvestre</h3>
+            <p class="bq-nature-card__desc">
+              La <strong>reserva natural más importante</strong> de Barrancabermeja.
+              Un ecosistema lacustre donde se puede navegar en bote, practicar
+              esquí acuático, observar aves y disfrutar como balneario. Es también
+              la fuente de agua de la ciudad.
+            </p>
+          </div>
+
+          <div class="bq-nature-card" data-animate="fade-up" data-delay="2">
+            <div class="bq-nature-card__icon" aria-hidden="true">🐦</div>
+            <h3 class="bq-nature-card__title">Biodiversidad y Aviturismo</h3>
+            <p class="bq-nature-card__desc">
+              El distrito ofrece <strong>aviturismo, ecoturismo y turismo comunitario</strong>
+              como carta de presentación ante el mundo. Las 6 ciénagas que rodean la
+              ciudad son refugio de aves migratorias y especies endémicas del
+              Magdalena Medio.
+            </p>
+          </div>
+
+          <div class="bq-nature-card" data-animate="fade-up" data-delay="3">
+            <div class="bq-nature-card__icon" aria-hidden="true">🐟</div>
+            <h3 class="bq-nature-card__title">La mesa barranqueña</h3>
+            <p class="bq-nature-card__desc">
+              El río Magdalena regala los sabores que definen a Barrancabermeja:
+              <strong>bocachico, bagre y nicuro</strong>. El bollo y el mote de
+              queso completan la identidad culinaria de una ciudad que come con
+              orgullo lo que su entorno le da.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: TURISMO Y LUGARES ICÓNICOS
+    ────────────────────────────────────────────────────────── -->
+    <section class="bq-tourism" id="bq-turismo" aria-labelledby="bqTourismTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag bq-tag">Descubre Barrancabermeja</span>
+          <h2 class="section-title" id="bqTourismTitle">Lugares Icónicos</h2>
+          <p class="section-desc">
+            Más allá del petróleo, la ciudad tiene lugares que no puedes dejar de conocer.
+          </p>
+        </div>
+
+        <div class="bq-tourism__grid">
+
+          <div class="bq-spot" data-animate="fade-up" data-delay="0">
+            <div class="bq-spot__num" aria-hidden="true">01</div>
+            <div class="bq-spot__info">
+              <h3 class="bq-spot__title">Malecón del Cristo Petrolero</h3>
+              <p class="bq-spot__desc">
+                El paseo icónico a orillas del río Magdalena con la figura del
+                Cristo Petrolero — símbolo de la identidad y fe de la ciudad. Vista
+                panorámica al río y punto de encuentro de toda Barrancabermeja.
+              </p>
+              <span class="bq-spot__type">📍 Turismo cultural y recreativo</span>
+            </div>
+          </div>
+
+          <div class="bq-spot" data-animate="fade-up" data-delay="1">
+            <div class="bq-spot__num" aria-hidden="true">02</div>
+            <div class="bq-spot__info">
+              <h3 class="bq-spot__title">Museo del Petróleo</h3>
+              <p class="bq-spot__desc">
+                Un espacio que revive la historia del oro negro en Colombia.
+                Maquinaria original, piezas históricas de la Tropical Oil Company
+                y Ecopetrol, y una narrativa de cómo el petróleo construyó una ciudad.
+              </p>
+              <span class="bq-spot__type">📍 Turismo histórico e industrial</span>
+            </div>
+          </div>
+
+          <div class="bq-spot" data-animate="fade-up" data-delay="2">
+            <div class="bq-spot__num" aria-hidden="true">03</div>
+            <div class="bq-spot__info">
+              <h3 class="bq-spot__title">Ciénaga San Silvestre</h3>
+              <p class="bq-spot__desc">
+                La reserva natural más importante del distrito. Navegación en
+                bote, avistamiento de aves, actividades acuáticas y la paz de
+                un espejo de agua rodeado de naturaleza del Magdalena Medio.
+              </p>
+              <span class="bq-spot__type">📍 Ecoturismo y aviturismo</span>
+            </div>
+          </div>
+
+          <div class="bq-spot" data-animate="fade-up" data-delay="3">
+            <div class="bq-spot__num" aria-hidden="true">04</div>
+            <div class="bq-spot__info">
+              <h3 class="bq-spot__title">Puerto Fluvial Impala</h3>
+              <p class="bq-spot__desc">
+                El corazón logístico de la ciudad sobre el río Magdalena. Desde
+                aquí se conectan las áreas de producción y consumo del país, y
+                es testimonio vivo del papel portuario de Barrancabermeja.
+              </p>
+              <span class="bq-spot__type">📍 Turismo industrial y portuario</span>
+            </div>
+          </div>
+
+          <div class="bq-spot" data-animate="fade-up" data-delay="4">
+            <div class="bq-spot__num" aria-hidden="true">05</div>
+            <div class="bq-spot__info">
+              <h3 class="bq-spot__title">Estadio Daniel Villa Zapata</h3>
+              <p class="bq-spot__desc">
+                El máximo escenario deportivo de la ciudad, con capacidad para
+                10.400 espectadores. Inaugurado oficialmente el 17 de julio de 1960
+                con un triangular histórico. Hogar del fútbol barranqueño.
+              </p>
+              <span class="bq-spot__type">📍 Deporte y cultura</span>
+            </div>
+          </div>
+
+          <div class="bq-spot" data-animate="fade-up" data-delay="5">
+            <div class="bq-spot__num" aria-hidden="true">06</div>
+            <div class="bq-spot__info">
+              <h3 class="bq-spot__title">Aeropuerto Yariguíes</h3>
+              <p class="bq-spot__desc">
+                Inaugurado en 1956 por el gobierno de Rojas Pinilla, conecta a
+                Barrancabermeja con las principales ciudades del país. Su nombre
+                rinde homenaje a los indígenas que habitaron estas tierras.
+              </p>
+              <span class="bq-spot__type">📍 Punto de entrada al Magdalena Medio</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: DATOS DEL DISTRITO
+      Estadísticas y categorías oficiales como Distrito Especial.
+    ────────────────────────────────────────────────────────── -->
+    <section class="bq-district" id="bq-distrito" aria-labelledby="bqDistrictTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag bq-tag">Barrancabermeja oficial</span>
+          <h2 class="section-title" id="bqDistrictTitle">Distrito Especial</h2>
+          <p class="section-desc">
+            Desde 2018, las 5 categorías que definen oficialmente a Barrancabermeja.
+          </p>
+        </div>
+
+        <div class="bq-district__pillars" data-animate="fade-up" data-delay="1">
+
+          <div class="bq-pillar">
+            <div class="bq-pillar__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M7 24V13l7-9 7 9v11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M11 24v-6h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4 24h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="bq-pillar__title">Portuario</h3>
+            <p class="bq-pillar__desc">
+              Puerto fluvial Impala sobre el río Magdalena, eje logístico que conecta
+              el interior del país con los mercados nacionales.
+            </p>
+          </div>
+
+          <div class="bq-pillar">
+            <div class="bq-pillar__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="14" cy="10" r="6" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M4 24c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="bq-pillar__title">Biodiverso</h3>
+            <p class="bq-pillar__desc">
+              6 ciénagas, el Río Magdalena, la Serranía de los Yariguíes y un
+              ecosistema único del Magdalena Medio con fauna y flora endémicas.
+            </p>
+          </div>
+
+          <div class="bq-pillar">
+            <div class="bq-pillar__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="4" y="12" width="5" height="12" rx="1" stroke="currentColor" stroke-width="1.8"/>
+                <rect x="11.5" y="7" width="5" height="17" rx="1" stroke="currentColor" stroke-width="1.8"/>
+                <rect x="19" y="4" width="5" height="20" rx="1" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <h3 class="bq-pillar__title">Industrial</h3>
+            <p class="bq-pillar__desc">
+              La refinería más grande del país, el 81.5% del combustible legal y el
+              100% de los petroquímicos de Colombia nacen aquí.
+            </p>
+          </div>
+
+          <div class="bq-pillar">
+            <div class="bq-pillar__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M14 4l2.5 7.5H24l-6.5 4.8 2.5 7.7L14 19.5l-6 4.5 2.5-7.7L4 11.5h7.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="bq-pillar__title">Turístico</h3>
+            <p class="bq-pillar__desc">
+              Malecón del Cristo Petrolero, Museo del Petróleo, ciénagas, gastronomía
+              del Magdalena y una identidad cultural única en Colombia.
+            </p>
+          </div>
+
+          <div class="bq-pillar">
+            <div class="bq-pillar__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="14" cy="14" r="10" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M8 14h12M14 8v12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M10 10c2-2 6-2 8 0M10 18c2 2 6 2 8 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="bq-pillar__title">Especial</h3>
+            <p class="bq-pillar__desc">
+              Sede de la Policía del Magdalena Medio, la Corporación del Río
+              Grande Magdalena y la Diócesis de Barrancabermeja. Capital del
+              Magdalena Medio.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      CTA FINAL — ORGULLO BARRANQUEÑO
+    ────────────────────────────────────────────────────────── -->
+    <section class="bq-cta" id="bq-orgullo" aria-labelledby="bqCtaTitle">
+      <div class="container">
+        <div class="bq-cta__inner" data-animate="fade-up">
+          <div class="bq-cta__glow" aria-hidden="true"></div>
+          <div class="bq-cta__bg-text" aria-hidden="true">BARRANCA</div>
+          <div class="bq-cta__icon" aria-hidden="true">🛢️</div>
+          <h2 class="bq-cta__title" id="bqCtaTitle">
+            Orgullo de ser<br/>
+            <span class="bq-cta__highlight">Barranqueño</span>
+          </h2>
+          <p class="bq-cta__desc">
+            Esta ciudad lo tiene todo: historia, petróleo, río, naturaleza y gente
+            que construye con tesón. Desde las costas del Magdalena Medio, Barrancabermeja
+            mueve la economía de Colombia y sigue escribiendo su historia con cada
+            barril, cada atardecer sobre el río y cada familia que la llama hogar.
+          </p>
+          <div class="bq-cta__actions">
+            <a href="https://www.barrancabermeja.gov.co" target="_blank" rel="noopener noreferrer"
+               class="btn bq-btn--primary">
+              Alcaldía oficial →
+            </a>
+            <a href="../../index.html#mundos" class="btn btn--ghost bq-btn--ghost">Otros mundos</a>
+          </div>
+          <p class="bq-cta__sources">
+            Información verificada en: Alcaldía de Barrancabermeja · Señal Memoria (RTVC) ·
+            Wikipedia · Vanguardia · Biblioteca Virtual Cervantes
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+    FOOTER — con Barrancabermeja añadido
+  ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+
+        <div class="footer__brand">
+          <a href="../../index.html" class="footer__logo" aria-label="Volver al inicio">
+            <span class="footer__logo-mark">M</span>
+            El Mundo de Manu
+          </a>
+          <p class="footer__tagline">Construyendo mi universo digital, un proyecto a la vez.</p>
+        </div>
+
+        <nav class="footer__nav" aria-label="Mis mundos">
+          <h4 class="footer__nav-title">Mis Mundos</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../fe/fe.html"                 class="footer__link">Fe</a></li>
+            <li><a href="../gaming/gaming.html"         class="footer__link">Gaming</a></li>
+            <li><a href="../infantil/infantil.html"     class="footer__link">Infantil</a></li>
+            <li><a href="../relaciones/relaciones.html" class="footer__link">Relaciones</a></li>
+            <li><a href="../tecnologia/tecnologia.html" class="footer__link">Tecnología</a></li>
+            <li><a href="../educacion/educacion.html"   class="footer__link">Educación</a></li>
+            <li><a href="../bienestar/bienestar.html"   class="footer__link">Bienestar</a></li>
+            <li><a href="../viajes/viajes.html"         class="footer__link">Viajes</a></li>
+            <li><a href="../finanzas/finanzas.html"     class="footer__link">Finanzas</a></li>
+            <li><a href="../musica/musica.html"         class="footer__link">Música</a></li>
+            <li><a href="barranca.html"                 class="footer__link footer__link--active">Barrancabermeja</a></li>
+            <li><a href="../sobremi/sobremi.html"       class="footer__link">Sobre Mí</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__nav" aria-label="Links del sitio">
+          <h4 class="footer__nav-title">Sitio</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../../index.html#inicio"    class="footer__link">Inicio</a></li>
+            <li><a href="../../index.html#proyectos" class="footer__link">Proyectos</a></li>
+            <li><a href="../../index.html#contacto"  class="footer__link">Contacto</a></li>
+          </ul>
+        </nav>
+
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© <span id="footerYear"></span> El Mundo de Manu. Construido con 💛 y mucho café.</p>
+        <p class="footer__credits">Diseñado y desarrollado por <strong>Manu</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+  <script src="barranca.js"></script>
+
+</body>
+</html>

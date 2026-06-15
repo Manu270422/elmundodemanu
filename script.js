@@ -929,3 +929,58 @@ if (document.querySelector('#loader')) {
   startVisuals();
 }
 });
+
+/* ============================================================
+  MÓDULO FILTROS DE PROYECTOS
+  Controla los botones "Todos / Gratuitos / De pago" en la
+  sección de proyectos. Al hacer clic en un filtro:
+  - Marco el botón como activo (aria-pressed + clase CSS)
+  - Oculto las tarjetas que no coincidan con su data-type
+  - Las que sí coinciden las muestro con animación escalonada
+  ============================================================ */
+const ProjectFilters = (() => {
+
+  const init = () => {
+    /* Solo busco estos elementos si existen en la página actual */
+    const filters = $$('[data-filter]');
+    const cards   = $$('.pj-card');
+    if (!filters.length || !cards.length) return;
+
+    filters.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const type = btn.dataset.filter;
+
+        /* Actualizo el estado visual y ARIA de todos los botones */
+        filters.forEach((f) => {
+          f.classList.toggle('pj-filter--active', f === btn);
+          f.setAttribute('aria-pressed', String(f === btn));
+        });
+
+        /* Muestro u oculto cada tarjeta según su data-type */
+        cards.forEach((card, i) => {
+          const match = type === 'all' || card.dataset.type === type;
+
+          if (match) {
+            /*
+              Retraso escalonado para que las tarjetas aparezcan
+              en cascada, no todas al mismo tiempo de golpe.
+            */
+            card.classList.remove('is-hidden');
+            card.style.transitionDelay = `${i * 60}ms`;
+          } else {
+            card.classList.add('is-hidden');
+            card.style.transitionDelay = '0ms';
+          }
+        });
+      });
+    });
+  };
+
+  return { init };
+
+})();
+
+/* Inicializo el módulo de filtros cuando el DOM esté listo */
+onReady(() => {
+  ProjectFilters.init();
+});

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  index.html — Calculadora de Independencia Financiera
+  ============================================================
+  Este es el proyecto interactivo de mi mundo de Finanzas.
+  Una herramienta gratuita que le muestra a cualquier persona
+  cuándo puede alcanzar la independencia financiera — el punto
+  donde tus inversiones generan suficiente dinero para vivir
+  sin necesidad de trabajar por obligación.
+
+  Uso la Regla del 4% (4% Safe Withdrawal Rate), validada
+  por el estudio Trinity de 1998, y la fórmula de interés
+  compuesto para calcular el crecimiento real del patrimonio.
+
+  No es asesoría financiera — es educación visual interactiva
+  para que la gente entienda el poder del ahorro e inversión.
+
+  Features:
+  - Sliders interactivos con feedback visual en tiempo real
+  - Gráfico de proyección animado (Canvas 2D)
+  - Cálculo por interés compuesto + regla del 4%
+  - Indicadores: años hasta IF, patrimonio objetivo, tasa ahorro
+  - Hitos de progreso: 25%, 50%, 75%, 100% del objetivo
+  - Modo de escenarios: conservador / moderado / optimista
+  - Compartir resultado como imagen (canvas export)
+  - 100% offline, sin servidor, sin cookies
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  Proyecto: El Mundo de Manu — Mundo Finanzas
+  ============================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Calculadora gratuita de independencia financiera. Descubre cuántos años necesitas para que tus inversiones te den libertad financiera total. Basada en la Regla del 4%." />
+  <meta name="author" content="Carlos Manuel Turizo Hernández — El Mundo de Manu" />
+  <meta name="theme-color" content="#0A100D" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="¿Cuándo serás libre? — Calculadora de IF" />
+  <meta property="og:description" content="Calcula tu camino hacia la independencia financiera. Gratis, sin registro." />
+  <meta property="og:type" content="website" />
+
+  <title>¿Cuándo serás libre? — Calculadora de Independencia Financiera</title>
+
+  <!--
+    Tipografía: Inter para los datos numéricos (legibilidad
+    en tablas y cifras) + Syne para los titulares (mi sistema
+    de diseño de El Mundo de Manu). IBM Plex Mono para los
+    valores numéricos destacados — refuerza la sensación de
+    "terminal financiero", algo único a este proyecto.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+    HEADER MINIMAL
+    Solo la identidad del proyecto y el link de vuelta al mundo.
+  ============================================================ -->
+  <header class="site-header" role="banner">
+    <div class="site-header__inner">
+      <a href="../index.html" class="site-header__back" aria-label="Volver al Mundo Finanzas">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M10 13L5 8l5-5" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Finanzas
+      </a>
+
+      <div class="site-header__brand">
+        <span class="site-header__dot" aria-hidden="true"></span>
+        <span class="site-header__name">El Mundo de Manu</span>
+      </div>
+
+      <button class="site-header__share" id="shareBtn"
+        aria-label="Compartir mi resultado">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+          <path d="M11 1.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM4 5.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM11 9.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M9 3.5L6 6.5M6 8.5l3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        Compartir
+      </button>
+    </div>
+  </header>
+
+
+  <main id="main" role="main">
+
+    <!-- ============================================================
+      HERO
+      La pregunta que engancha al usuario desde el primer segundo.
+    ============================================================ -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero__bg-grid" aria-hidden="true"></div>
+      <div class="hero__glow" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <div class="hero__eyebrow">
+          <span class="hero__badge">
+            <span class="hero__badge-dot" aria-hidden="true"></span>
+            Gratis · Sin registro · Basado en la Regla del 4%
+          </span>
+        </div>
+
+        <h1 class="hero__title" id="heroTitle">
+          ¿Cuándo serás<br/>
+          <span class="hero__title-free">financieramente<br/>libre?</span>
+        </h1>
+
+        <p class="hero__subtitle">
+          Ingresa tus datos y la calculadora te muestra exactamente cuántos años
+          necesitas para que tus inversiones generen suficiente dinero para vivir
+          sin depender de un salario. Sin tecnicismos — solo tu número.
+        </p>
+
+        <a href="#calculator" class="hero__cta">
+          Calcular mi libertad
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+      CALCULADORA PRINCIPAL
+    ============================================================ -->
+    <section class="calculator" id="calculator" aria-labelledby="calcTitle">
+      <div class="calculator__inner">
+
+        <!-- ── PANEL IZQUIERDO: INPUTS ── -->
+        <div class="calculator__panel calculator__panel--inputs" role="form"
+          aria-label="Formulario de datos financieros">
+
+          <div class="calc-panel-header">
+            <h2 class="calc-panel-header__title" id="calcTitle">Tus datos</h2>
+            <p class="calc-panel-header__sub">Ajusta cada valor con el slider</p>
+          </div>
+
+          <!-- Selector de moneda/país -->
+          <div class="currency-selector" role="group" aria-label="Selecciona tu moneda">
+            <button class="currency-btn currency-btn--active" data-currency="COP" aria-pressed="true">
+              🇨🇴 COP
+            </button>
+            <button class="currency-btn" data-currency="USD" aria-pressed="false">
+              🇺🇸 USD
+            </button>
+            <button class="currency-btn" data-currency="EUR" aria-pressed="false">
+              🇪🇺 EUR
+            </button>
+          </div>
+
+
+          <!-- SLIDER 1: Ahorros actuales -->
+          <div class="input-group" id="group-savings">
+            <div class="input-group__header">
+              <label class="input-group__label" for="savings">
+                Ahorros e inversiones actuales
+                <button class="input-group__info" aria-label="Información sobre este campo"
+                  data-tip="Todo el dinero que ya tienes ahorrado o invertido hoy. Si es cero, empieza por cero.">
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                    <circle cx="6.5" cy="6.5" r="5.5" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M6.5 5.5v4M6.5 3.8v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </label>
+              <output class="input-group__value" id="savings-output" aria-live="polite">
+                $10,000,000
+              </output>
+            </div>
+            <div class="slider-track">
+              <input type="range" class="slider" id="savings"
+                min="0" max="500000000" step="1000000"
+                value="10000000"
+                aria-valuemin="0" aria-valuemax="500000000"
+                aria-valuenow="10000000"
+                aria-label="Ahorros actuales" />
+              <div class="slider-fill" id="savings-fill"></div>
+            </div>
+            <div class="slider-labels" aria-hidden="true">
+              <span>$0</span><span>$500M</span>
+            </div>
+          </div>
+
+
+          <!-- SLIDER 2: Ingresos mensuales -->
+          <div class="input-group" id="group-income">
+            <div class="input-group__header">
+              <label class="input-group__label" for="income">
+                Ingresos mensuales netos
+                <button class="input-group__info" aria-label="Información sobre este campo"
+                  data-tip="Lo que recibes cada mes después de impuestos. Tu sueldo u otros ingresos regulares.">
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                    <circle cx="6.5" cy="6.5" r="5.5" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M6.5 5.5v4M6.5 3.8v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </label>
+              <output class="input-group__value" id="income-output" aria-live="polite">
+                $2,500,000
+              </output>
+            </div>
+            <div class="slider-track">
+              <input type="range" class="slider" id="income"
+                min="500000" max="50000000" step="100000"
+                value="2500000"
+                aria-valuemin="500000" aria-valuemax="50000000"
+                aria-valuenow="2500000"
+                aria-label="Ingresos mensuales" />
+              <div class="slider-fill" id="income-fill"></div>
+            </div>
+            <div class="slider-labels" aria-hidden="true">
+              <span>$500K</span><span>$50M</span>
+            </div>
+          </div>
+
+
+          <!-- SLIDER 3: Gastos mensuales -->
+          <div class="input-group" id="group-expenses">
+            <div class="input-group__header">
+              <label class="input-group__label" for="expenses">
+                Gastos mensuales totales
+                <button class="input-group__info" aria-label="Información sobre este campo"
+                  data-tip="Todo lo que gastas al mes: arriendo, comida, transporte, entretenimiento, etc.">
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                    <circle cx="6.5" cy="6.5" r="5.5" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M6.5 5.5v4M6.5 3.8v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </label>
+              <output class="input-group__value" id="expenses-output" aria-live="polite">
+                $2,000,000
+              </output>
+            </div>
+            <div class="slider-track">
+              <input type="range" class="slider" id="expenses"
+                min="300000" max="50000000" step="100000"
+                value="2000000"
+                aria-valuemin="300000" aria-valuemax="50000000"
+                aria-valuenow="2000000"
+                aria-label="Gastos mensuales" />
+              <div class="slider-fill" id="expenses-fill"></div>
+            </div>
+            <div class="slider-labels" aria-hidden="true">
+              <span>$300K</span><span>$50M</span>
+            </div>
+          </div>
+
+
+          <!-- SLIDER 4: Tasa de rendimiento anual -->
+          <div class="input-group" id="group-return">
+            <div class="input-group__header">
+              <label class="input-group__label" for="return-rate">
+                Rendimiento anual esperado
+                <button class="input-group__info" aria-label="Información sobre este campo"
+                  data-tip="Retorno anual promedio de tus inversiones. Fondos indexados históricamente: 7-10% real. Conservador: 4-6%.">
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                    <circle cx="6.5" cy="6.5" r="5.5" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M6.5 5.5v4M6.5 3.8v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </label>
+              <output class="input-group__value" id="return-output" aria-live="polite">
+                7.0%
+              </output>
+            </div>
+            <div class="slider-track">
+              <input type="range" class="slider" id="return-rate"
+                min="1" max="15" step="0.5"
+                value="7"
+                aria-valuemin="1" aria-valuemax="15"
+                aria-valuenow="7"
+                aria-label="Rendimiento anual" />
+              <div class="slider-fill" id="return-fill"></div>
+            </div>
+            <div class="slider-labels" aria-hidden="true">
+              <span>1%</span><span>15%</span>
+            </div>
+            <!-- Mini preset buttons de escenarios -->
+            <div class="scenario-btns" role="group" aria-label="Escenarios de rendimiento">
+              <button class="scenario-btn" data-value="4" aria-label="Escenario conservador 4%">
+                Conservador<br/><strong>4%</strong>
+              </button>
+              <button class="scenario-btn scenario-btn--active" data-value="7" aria-label="Escenario moderado 7%">
+                Moderado<br/><strong>7%</strong>
+              </button>
+              <button class="scenario-btn" data-value="10" aria-label="Escenario optimista 10%">
+                Optimista<br/><strong>10%</strong>
+              </button>
+            </div>
+          </div>
+
+
+          <!-- SLIDER 5: Edad actual -->
+          <div class="input-group" id="group-age">
+            <div class="input-group__header">
+              <label class="input-group__label" for="age">
+                Tu edad actual
+                <button class="input-group__info" aria-label="Información sobre este campo"
+                  data-tip="Tu edad hoy. Sirve para calcular a qué edad alcanzarías la independencia financiera.">
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                    <circle cx="6.5" cy="6.5" r="5.5" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M6.5 5.5v4M6.5 3.8v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </label>
+              <output class="input-group__value" id="age-output" aria-live="polite">
+                25 años
+              </output>
+            </div>
+            <div class="slider-track">
+              <input type="range" class="slider" id="age"
+                min="16" max="65" step="1"
+                value="25"
+                aria-valuemin="16" aria-valuemax="65"
+                aria-valuenow="25"
+                aria-label="Edad actual" />
+              <div class="slider-fill" id="age-fill"></div>
+            </div>
+            <div class="slider-labels" aria-hidden="true">
+              <span>16</span><span>65</span>
+            </div>
+          </div>
+
+          <!-- Nota metodológica -->
+          <p class="calc-note">
+            Los cálculos usan interés compuesto y la
+            <strong>Regla del 4%</strong> (estudio Trinity, 1998) —
+            el porcentaje que puedes retirar anualmente con alta probabilidad
+            de no agotar tu patrimonio en 30+ años.
+          </p>
+
+        </div>
+
+
+        <!-- ── PANEL DERECHO: RESULTADOS ── -->
+        <div class="calculator__panel calculator__panel--results">
+
+          <!-- ── KPIs PRINCIPALES ── -->
+          <div class="kpis" role="region" aria-label="Resultados de tu plan financiero" aria-live="polite">
+
+            <div class="kpi kpi--hero">
+              <span class="kpi__label">Años hasta la libertad</span>
+              <span class="kpi__value" id="kpi-years">
+                <span class="kpi__number" id="years-number">--</span>
+                <span class="kpi__unit">años</span>
+              </span>
+              <span class="kpi__age" id="kpi-age-label">A los -- años</span>
+            </div>
+
+            <div class="kpis__secondary">
+              <div class="kpi kpi--secondary">
+                <span class="kpi__label">Patrimonio objetivo</span>
+                <span class="kpi__value kpi__value--mono" id="kpi-target">--</span>
+                <span class="kpi__sub" id="kpi-target-sub">Para vivir de rentas</span>
+              </div>
+
+              <div class="kpi kpi--secondary">
+                <span class="kpi__label">Tasa de ahorro</span>
+                <span class="kpi__value kpi__value--mono" id="kpi-rate">--%</span>
+                <span class="kpi__sub" id="kpi-rate-sub">de tus ingresos</span>
+              </div>
+
+              <div class="kpi kpi--secondary">
+                <span class="kpi__label">Ahorro mensual</span>
+                <span class="kpi__value kpi__value--mono" id="kpi-monthly">--</span>
+                <span class="kpi__sub">aporte mensual</span>
+              </div>
+
+              <div class="kpi kpi--secondary">
+                <span class="kpi__label">Intereses generados</span>
+                <span class="kpi__value kpi__value--mono" id="kpi-interest">--</span>
+                <span class="kpi__sub">gana el compuesto</span>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- ── GRÁFICO DE PROYECCIÓN ── -->
+          <div class="chart-section" role="region" aria-label="Gráfico de proyección patrimonial">
+            <div class="chart-header">
+              <h3 class="chart-header__title">Proyección de tu patrimonio</h3>
+              <div class="chart-legend" aria-hidden="true">
+                <span class="chart-legend__item chart-legend__item--growth">Crecimiento total</span>
+                <span class="chart-legend__item chart-legend__item--contributions">Solo aportes</span>
+                <span class="chart-legend__item chart-legend__item--target">Meta IF</span>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="projectionChart"
+                role="img"
+                aria-label="Gráfico que muestra el crecimiento de tu patrimonio en el tiempo">
+              </canvas>
+              <!-- Tooltip del gráfico -->
+              <div class="chart-tooltip" id="chartTooltip" role="tooltip" aria-hidden="true">
+                <span class="chart-tooltip__year">Año --</span>
+                <span class="chart-tooltip__value">--</span>
+                <span class="chart-tooltip__contribs">Aportes: --</span>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ── HITOS DE PROGRESO ── -->
+          <div class="milestones" role="region" aria-label="Hitos en tu camino hacia la independencia">
+            <h3 class="milestones__title">Hitos del camino</h3>
+            <div class="milestones__track">
+
+              <div class="milestone" id="milestone-25">
+                <div class="milestone__dot" aria-hidden="true"></div>
+                <div class="milestone__info">
+                  <span class="milestone__pct">25%</span>
+                  <span class="milestone__name">Primer cuarto</span>
+                  <span class="milestone__when" id="m25-when">-- años</span>
+                </div>
+              </div>
+
+              <div class="milestone" id="milestone-50">
+                <div class="milestone__dot" aria-hidden="true"></div>
+                <div class="milestone__info">
+                  <span class="milestone__pct">50%</span>
+                  <span class="milestone__name">A mitad de camino</span>
+                  <span class="milestone__when" id="m50-when">-- años</span>
+                </div>
+              </div>
+
+              <div class="milestone" id="milestone-75">
+                <div class="milestone__dot" aria-hidden="true"></div>
+                <div class="milestone__info">
+                  <span class="milestone__pct">75%</span>
+                  <span class="milestone__name">Recta final</span>
+                  <span class="milestone__when" id="m75-when">-- años</span>
+                </div>
+              </div>
+
+              <div class="milestone milestone--goal" id="milestone-100">
+                <div class="milestone__dot" aria-hidden="true">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                    <path d="M2 5.5l2 2 4-4" stroke="currentColor" stroke-width="1.5"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="milestone__info">
+                  <span class="milestone__pct">100%</span>
+                  <span class="milestone__name">¡Independencia financiera!</span>
+                  <span class="milestone__when" id="m100-when">-- años</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- ── INSIGHTS PERSONALIZADOS ── -->
+          <div class="insights" role="region" aria-label="Consejos personalizados">
+            <h3 class="insights__title">Tu situación</h3>
+            <div class="insights__list" id="insightsList" aria-live="polite">
+              <!-- Generado por JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+      SECCIÓN EDUCATIVA: Cómo funciona
+    ============================================================ -->
+    <section class="explainer" aria-labelledby="explainerTitle">
+      <div class="explainer__inner">
+
+        <div class="explainer__header">
+          <span class="explainer__eyebrow">La ciencia detrás del número</span>
+          <h2 class="explainer__title" id="explainerTitle">Cómo funciona la calculadora</h2>
+        </div>
+
+        <div class="explainer__cards">
+
+          <div class="explainer-card">
+            <div class="explainer-card__num" aria-hidden="true">01</div>
+            <h3 class="explainer-card__title">La Regla del 4%</h3>
+            <p class="explainer-card__desc">
+              El estudio Trinity (1998) demostró que si retiras el 4% de tu
+              patrimonio anualmente, hay más del 95% de probabilidad de que
+              no lo agotes en 30 años. Tu meta: acumular 25 veces tus gastos
+              anuales (100% ÷ 4%).
+            </p>
+            <div class="explainer-card__formula" aria-label="Fórmula">
+              Meta = Gastos anuales × 25
+            </div>
+          </div>
+
+          <div class="explainer-card">
+            <div class="explainer-card__num" aria-hidden="true">02</div>
+            <h3 class="explainer-card__title">Interés compuesto</h3>
+            <p class="explainer-card__desc">
+              Cuando inviertes, tus ganancias generan más ganancias. Con el
+              tiempo, la mayor parte de tu patrimonio no vendrá de lo que
+              aportaste, sino de los intereses de tus intereses. Este efecto
+              crece exponencialmente — por eso empezar antes cambia todo.
+            </p>
+            <div class="explainer-card__formula" aria-label="Fórmula">
+              FV = PV(1+r)ⁿ + PMT × [(1+r)ⁿ - 1] / r
+            </div>
+          </div>
+
+          <div class="explainer-card">
+            <div class="explainer-card__num" aria-hidden="true">03</div>
+            <h3 class="explainer-card__title">Tasa de ahorro</h3>
+            <p class="explainer-card__desc">
+              Es el porcentaje de tus ingresos que inviertes. Una tasa del
+              10% puede tardar 40+ años en alcanzar IF. Una del 50% puede
+              lograrlo en 17. Ahorrar más acelera el camino por dos vías:
+              acumulas más rápido y necesitas menos para vivir.
+            </p>
+            <div class="explainer-card__formula" aria-label="Fórmula">
+              Tasa = (Ingresos − Gastos) ÷ Ingresos
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer" role="note">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M8 5v4M8 10.5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          <p>
+            Esta calculadora es una herramienta educativa, no asesoría financiera profesional.
+            Los resultados son proyecciones basadas en supuestos constantes — la realidad implica
+            inflación, cambios en ingresos y volatilidad de mercados. Consulta a un asesor
+            financiero certificado antes de tomar decisiones importantes.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+      CTA FOOTER
+    ============================================================ -->
+    <section class="cta-footer" aria-label="Volver al Mundo Finanzas">
+      <div class="cta-footer__inner">
+        <p class="cta-footer__text">
+          Aprender sobre dinero es la inversión más rentable que existe.
+        </p>
+        <a href="../finanzas.html" class="cta-footer__link">
+          ← Volver a Finanzas
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+    TOOLTIP FLOTANTE (para los botones de info)
+  ============================================================ -->
+  <div class="floating-tip" id="floatingTip" role="tooltip" aria-hidden="true">
+    <span id="tipText"></span>
+    <div class="floating-tip__arrow" aria-hidden="true"></div>
+  </div>
+
+
+  <!-- ============================================================
+    TOAST DE COMPARTIR
+  ============================================================ -->
+  <div class="toast" id="shareToast" role="status" aria-live="polite" aria-atomic="true">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M2 7.5l3 3 7-7" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    ¡Resultado copiado al portapapeles!
+  </div>
+
+  <script src="app.js"></script>
+
+</body>
+</html>

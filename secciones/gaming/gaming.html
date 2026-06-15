@@ -14,6 +14,7 @@
   Estructura:
   - Hero: Presentación con estética HUD / neón
   - Mis géneros favoritos
+  - Mis creaciones: juegos que desarrollé (Fútbol)
   - Mi biblioteca de juegos (destacados)
   - Lo que el gaming me enseñó
   - Configuración / Setup
@@ -366,6 +367,134 @@
         </div>
       </div>
     </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: MIS CREACIONES — JUEGOS QUE DESARROLLÉ
+      A diferencia de "Mi biblioteca" (juegos que jugué y me
+      marcaron), aquí muestro los juegos que YO programé.
+      Cada tarjeta funciona como una ficha de app: icono,
+      estado (Gratis/De pago), descripción, "Acerca de este
+      juego" con detalles técnicos, tags de tecnología y un
+      botón directo para jugar.
+
+      El grid usa auto-fit para que, cuando agregue un nuevo
+      juego, se acomode solo en 2 columnas en pantallas
+      grandes sin que tenga que tocar el CSS.
+    ────────────────────────────────────────────────────────── -->
+    <section class="gm-creations" id="gm-creaciones" aria-labelledby="gmCreationsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag gm-tag">Mis desarrollos</span>
+          <h2 class="section-title" id="gmCreationsTitle">Juegos que Desarrollé</h2>
+          <p class="section-desc">
+            Aquí no hablo de lo que jugué — hablo de lo que construí.
+            Mis propios juegos, hechos desde cero, disponibles para
+            que los pruebes ahora mismo.
+          </p>
+        </div>
+
+        <div class="gm-creations__grid" id="creationsGrid">
+
+          <!-- Juego propio: Fútbol -->
+          <article class="gm-creation-card" data-animate="fade-up" data-delay="0">
+
+            <!-- Encabezado tipo ficha de app: icono + nombre + estado -->
+            <div class="gm-creation-card__header">
+              <div class="gm-creation-card__icon" aria-hidden="true">⚽</div>
+
+              <div class="gm-creation-card__heading">
+                <h3 class="gm-creation-card__title">Fútbol — El Mundo de Manu</h3>
+                <p class="gm-creation-card__tagline">
+                  Mi propio juego de fútbol, jugable desde el navegador
+                </p>
+              </div>
+
+              <span class="gm-creation-card__status" aria-label="Estado: Gratis">
+                <span class="gm-creation-card__status-dot" aria-hidden="true"></span>
+                Gratis
+              </span>
+            </div>
+
+            <!-- Descripción general -->
+            <p class="gm-creation-card__desc">
+              Programé este juego de fútbol desde cero como mi forma de unir
+              dos cosas que amo: el desarrollo de software y el balón.
+              Está pensado para jugarse directo desde el navegador, sin
+              instalar nada. Sigue en evolución — ya tengo planeadas
+              actualizaciones para sumar más modos y mejoras de jugabilidad.
+            </p>
+
+            <!-- "Acerca de este juego" — ficha técnica estilo Play Store -->
+            <div class="gm-creation-card__about">
+              <h4 class="gm-creation-card__about-title">Acerca de este juego</h4>
+
+              <dl class="gm-creation-card__specs">
+                <div class="gm-creation-card__spec">
+                  <dt>Género</dt>
+                  <dd>Deportes — Fútbol</dd>
+                </div>
+                <div class="gm-creation-card__spec">
+                  <dt>Precio</dt>
+                  <dd>Gratis. Por ahora no tengo planes de monetizar mis juegos.</dd>
+                </div>
+                <div class="gm-creation-card__spec">
+                  <dt>Plataforma</dt>
+                  <dd>Navegador — jugable desde computador, tablet o celular.</dd>
+                </div>
+                <div class="gm-creation-card__spec">
+                  <dt>Estado</dt>
+                  <dd>Jugable y en desarrollo activo. Vienen más actualizaciones.</dd>
+                </div>
+              </dl>
+
+              <!-- Tags de tecnología, mismo patrón visual que las tags de biblioteca -->
+              <div class="gm-creation-card__tags" aria-label="Tecnologías usadas">
+                <span class="gm-creation-card__tag">HTML</span>
+                <span class="gm-creation-card__tag">CSS</span>
+                <span class="gm-creation-card__tag">JavaScript</span>
+              </div>
+            </div>
+
+            <!-- Acción principal: jugar -->
+            <div class="gm-creation-card__actions">
+              <a href="juego-futbol/index.html" class="btn gm-btn--primary gm-creation-card__cta">
+                Jugar ahora
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+
+          </article>
+
+          <!-- Placeholder para futuros juegos propios -->
+          <article class="gm-creation-card gm-creation-card--coming" data-animate="fade-up" data-delay="1">
+            <div class="gm-creation-card__header">
+              <div class="gm-creation-card__icon" aria-hidden="true">🛠️</div>
+              <div class="gm-creation-card__heading">
+                <h3 class="gm-creation-card__title">Próximo desarrollo...</h3>
+                <p class="gm-creation-card__tagline">
+                  Siempre estoy programando algo nuevo
+                </p>
+              </div>
+            </div>
+            <p class="gm-creation-card__desc">
+              Este espacio está reservado para mi próximo juego. Vuelve
+              pronto para ver qué estoy construyendo.
+            </p>
+            <div class="gm-creation-card__placeholder" aria-hidden="true">
+              <span>🎮</span>
+              <p>En desarrollo...</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
 
     <!-- ──────────────────────────────────────────────────────────
       SECCIÓN: MI BIBLIOTECA DE JUEGOS

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conecta y Aprende 🔗 — Mundo Curioso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       HEADER FIJO — siempre visible para volver
+  ══════════════════════════════════════════════ -->
+  <header class="game-header">
+    <a href="index.html" class="game-header__back" onclick="playClick()">
+      ← Inicio
+    </a>
+    <div class="game-header__title">🔗 Conecta y Aprende</div>
+    <div class="game-header__score-box">
+      <span>⭐</span>
+      <span class="game-header__score-num" id="scoreDisplay">0</span>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       PANTALLA 1: SELECTOR DE TEMA
+       El niño elige el set de conexiones que quiere.
+       Cada set tiene su propio tema y emoji.
+  ══════════════════════════════════════════════ -->
+  <div id="screenSelector" class="selector-screen">
+
+    <div>
+      <h1 class="selector-screen__title">¡A conectar ideas! 🔗</h1>
+      <p class="selector-screen__subtitle">¿Sobre qué tema quieres conectar?</p>
+    </div>
+
+    <!-- Las tarjetas de tema se generan dinámicamente desde CONECTA_DATA -->
+    <div class="selector-grid" id="temaGrid" style="max-width: 640px;">
+      <!-- JS las inserta aquí -->
+    </div>
+
+    <button class="btn-primary" id="btnIniciar" disabled onclick="iniciarConecta()">
+      ¡Conectar! 🔗
+    </button>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANTALLA 2: EL JUEGO
+       Layout de dos columnas: izquierda (términos)
+       y derecha (definiciones). El jugador arrastra
+       desde la izquierda hacia la derecha, o en
+       móvil toca izquierda luego toca derecha.
+  ══════════════════════════════════════════════ -->
+  <div id="screenGame" class="con-layout hidden">
+
+    <!-- Encabezado del tema activo -->
+    <div class="con-tema-header">
+      <span class="con-tema-header__emoji" id="temaEmoji">🔊</span>
+      <div>
+        <div class="con-tema-header__label">Tema actual</div>
+        <div class="con-tema-header__title" id="temaTitulo">Cargando...</div>
+      </div>
+      <div class="con-tema-header__progreso">
+        <span id="conexionesDisplay">0</span> / <span id="conexionesTotalDisplay">0</span>
+        <span style="font-size: 0.8rem; color: var(--color-text-muted)"> conexiones</span>
+      </div>
+    </div>
+
+    <!-- Instrucción contextual — diferente en desktop vs móvil -->
+    <p class="con-instruccion" id="instruccion">
+      🖱️ <strong>Arrastra</strong> una tarjeta de la izquierda y <strong>suéltala</strong> sobre su par de la derecha
+    </p>
+
+    <!-- Tablero de dos columnas -->
+    <div class="con-board" id="conBoard">
+
+      <!-- Columna izquierda: los "términos" (lado que se arrastra/selecciona) -->
+      <div class="con-col con-col--left" id="colLeft" role="list" aria-label="Términos para conectar">
+        <!-- JS inserta las tarjetas aquí -->
+      </div>
+
+      <!-- Columna central: líneas de conexión SVG -->
+      <div class="con-lines-container" aria-hidden="true">
+        <svg class="con-lines-svg" id="linesSvg" xmlns="http://www.w3.org/2000/svg">
+          <!-- Las líneas de conexión se dibujan aquí con JS -->
+        </svg>
+      </div>
+
+      <!-- Columna derecha: las "definiciones" (los destinos) -->
+      <div class="con-col con-col--right" id="colRight" role="list" aria-label="Definiciones para conectar">
+        <!-- JS inserta las tarjetas aquí -->
+      </div>
+
+    </div>
+
+    <!-- Botón de verificar — se activa cuando se hicieron todas las conexiones -->
+    <div class="con-actions">
+      <button class="btn-primary" id="btnVerificar" disabled onclick="verificarConexiones()">
+        ✅ Verificar respuestas
+      </button>
+      <button class="btn-secondary" onclick="reiniciarConexiones()">
+        🔄 Borrar y reintentar
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANTALLA 3: RESULTADOS DEL SET ACTUAL
+       Después de verificar, muestro cuáles acertó
+       y cuáles falló antes de pasar al siguiente set.
+  ══════════════════════════════════════════════ -->
+  <div id="screenResultSet" class="con-layout hidden">
+
+    <div class="con-result-screen">
+
+      <div class="trivia-end-screen__emoji" id="setResultEmoji">🌟</div>
+      <h2 class="trivia-end-screen__title" id="setResultTitle">¡Buen set!</h2>
+      <p id="setResultMsg" style="color: var(--color-text-muted); font-weight: 600;"></p>
+
+      <!-- Resumen de cada conexión (correctas e incorrectas) -->
+      <div class="con-result-lista" id="resultLista">
+        <!-- JS inserta aquí el resumen de aciertos/errores -->
+      </div>
+
+      <div class="trivia-end-screen__actions">
+        <button class="btn-primary" id="btnSiguienteSet" onclick="siguienteSet()">
+          Siguiente tema →
+        </button>
+        <button class="btn-secondary" onclick="repetirSet()">
+          🔄 Intentar de nuevo
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANTALLA 4: FINAL DEL JUEGO COMPLETO
+  ══════════════════════════════════════════════ -->
+  <div id="screenEnd" class="con-layout hidden">
+
+    <div class="trivia-end-screen">
+
+      <div class="trivia-end-screen__emoji" id="conEndEmoji">🏆</div>
+      <h2 class="trivia-end-screen__title" id="conEndTitle">¡Lo conectaste todo!</h2>
+      <p id="conEndMsg" style="color: var(--color-text-muted); font-weight: 600;"></p>
+
+      <div class="trivia-end-screen__stats">
+        <div class="trivia-stat">
+          <div class="trivia-stat__value" id="conEndCorrectas">0</div>
+          <div class="trivia-stat__label">✅ Correctas</div>
+        </div>
+        <div class="trivia-stat">
+          <div class="trivia-stat__value" id="conEndFallos">0</div>
+          <div class="trivia-stat__label">❌ Fallidas</div>
+        </div>
+        <div class="trivia-stat">
+          <div class="trivia-stat__value" id="conEndScore">0 ⭐</div>
+          <div class="trivia-stat__label">Puntos totales</div>
+        </div>
+      </div>
+
+      <div class="trivia-end-screen__actions">
+        <button class="btn-primary" onclick="repetirJuego()">
+          🔄 Jugar de nuevo
+        </button>
+        <a href="index.html" class="btn-secondary" onclick="playClick()">
+          🏠 Volver al inicio
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Overlay de celebración -->
+  <div class="celebration-overlay" id="celebrationOverlay" aria-hidden="true">
+    <div class="celebration-overlay__burst" id="celebrationBurst">🎉</div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toastMsg" role="alert" aria-live="polite"></div>
+
+  <!-- Línea de arrastre visual (sigue al cursor mientras arrastra) -->
+  <svg class="con-drag-line hidden" id="dragLineSvg" xmlns="http://www.w3.org/2000/svg">
+    <line id="dragLine" x1="0" y1="0" x2="0" y2="0"
+          stroke="var(--color-conecta)" stroke-width="3"
+          stroke-dasharray="8 4" stroke-linecap="round"/>
+  </svg>
+
+  <script src="js/audio.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/conecta.js"></script>
+
+</body>
+</html>

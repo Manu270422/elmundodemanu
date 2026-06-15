@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Aquí configuro la base de mi juego "Latidos: Modo Pareja". -->
+  <!-- Decidí usar HTML + CSS + JS vanilla para poder desarrollarlo 100% en VS Code -->
+  <!-- y empaquetarlo después con Capacitor para Android sin cambiar nada del código. -->
+  <meta charset="UTF-8">
+  <!-- Bloqueo el zoom porque mis minijuegos usan toques rápidos en pantalla -->
+  <!-- y no quiero que el doble tap haga zoom y arruine la "Carrera del Beso". -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Latidos: Modo Pareja 💕</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- Esta es mi capa de partículas de fondo. La dejo fija detrás de todo -->
+  <!-- para que floten corazoncitos en todas las pantallas del juego. -->
+  <div id="particulas" aria-hidden="true"></div>
+
+  <!-- ============ PANTALLA: INICIO ============ -->
+  <!-- Aquí creo la pantalla principal. Quiero que lo primero que vea la pareja -->
+  <!-- sea un corazón latiendo gigante, porque ese es el alma del juego. -->
+  <section id="pantalla-inicio" class="pantalla activa">
+    <div class="corazon-hero" id="corazon-hero">💗</div>
+    <h1 class="titulo-juego">Latidos</h1>
+    <p class="subtitulo-juego">modo pareja</p>
+    <p class="frase-inicio">Un juego solo para ustedes dos.</p>
+    <button class="boton-principal" data-ir="pantalla-nombres">Jugar 💞</button>
+  </section>
+
+  <!-- ============ PANTALLA: NOMBRES ============ -->
+  <!-- En esta pantalla registro a los dos únicos jugadores que existen: -->
+  <!-- el novio y la novia. No hay más jugadores, así lo diseñé a propósito. -->
+  <section id="pantalla-nombres" class="pantalla">
+    <h2 class="titulo-seccion">¿Quiénes juegan hoy?</h2>
+    <div class="tarjeta-jugador novio">
+      <span class="emoji-jugador">🤵</span>
+      <label for="input-novio">Novio</label>
+      <input id="input-novio" type="text" maxlength="14" placeholder="Su nombre...">
+    </div>
+    <div class="tarjeta-jugador novia">
+      <span class="emoji-jugador">👰</span>
+      <label for="input-novia">Novia</label>
+      <input id="input-novia" type="text" maxlength="14" placeholder="Su nombre...">
+    </div>
+    <button class="boton-principal" id="boton-guardar-nombres">Empezar nuestra historia 💌</button>
+  </section>
+
+  <!-- ============ PANTALLA: MAPA DE MUNDOS ============ -->
+  <!-- Aquí construyo mi mapa de progreso estilo Duolingo. -->
+  <!-- Los mundos se generan desde JavaScript, así puedo agregar más sin tocar el HTML. -->
+  <section id="pantalla-mapa" class="pantalla">
+    <header class="barra-superior">
+      <span class="nombres-pareja" id="texto-pareja"></span>
+      <button class="boton-volver" id="boton-tienda" title="Tienda de Amor">🛍️</button>
+      <button class="boton-volver" id="boton-sonido" title="Sonido">🔊</button>
+      <button class="boton-volver" id="boton-estadisticas" title="Estadísticas de pareja">📊</button>
+      <span class="contador-corazones" id="contador-corazones">❤️ 0</span>
+    </header>
+    <h2 class="titulo-seccion">Su camino juntos</h2>
+    <div id="lista-mundos" class="camino-mundos"></div>
+  </section>
+
+  <!-- ============ PANTALLA: DETALLE DE MUNDO ============ -->
+  <!-- En esta pantalla muestro los minijuegos del mundo seleccionado. -->
+  <section id="pantalla-mundo" class="pantalla">
+    <header class="barra-superior">
+      <button class="boton-volver" data-ir="pantalla-mapa">←</button>
+      <span class="contador-corazones" id="contador-corazones-mundo">❤️ 0</span>
+    </header>
+    <h2 class="titulo-seccion" id="titulo-mundo"></h2>
+    <p class="descripcion-mundo" id="descripcion-mundo"></p>
+    <div id="lista-minijuegos" class="lista-minijuegos"></div>
+  </section>
+
+  <!-- ============ PANTALLA: CARRERA DEL BESO ============ -->
+  <!-- Mi primer minijuego. Cada jugador toca su mitad de la pantalla -->
+  <!-- lo más rápido posible. El perdedor le debe un beso al ganador. -->
+  <section id="pantalla-carrera" class="pantalla">
+    <div class="zona-carrera zona-novia" id="zona-novia">
+      <p class="nombre-zona" id="nombre-zona-novia">Novia</p>
+      <div class="barra-progreso"><div class="relleno-barra" id="barra-novia"></div></div>
+      <p class="instruccion-zona">¡Toca rápido! 👆</p>
+    </div>
+    <div class="centro-carrera" id="centro-carrera">
+      <button class="boton-principal" id="boton-iniciar-carrera">¡A besar se dijo! 💋</button>
+    </div>
+    <div class="zona-carrera zona-novio" id="zona-novio">
+      <p class="nombre-zona" id="nombre-zona-novio">Novio</p>
+      <div class="barra-progreso"><div class="relleno-barra" id="barra-novio"></div></div>
+      <p class="instruccion-zona">¡Toca rápido! 👆</p>
+    </div>
+  </section>
+
+  <!-- ============ PANTALLA: CORAZÓN EQUILIBRADO ============ -->
+  <!-- Minijuego cooperativo: él empuja desde la izquierda, ella desde la derecha. -->
+  <!-- Si el corazón cae o se voltea, pierden los dos. Pura coordinación de pareja. -->
+  <section id="pantalla-equilibrio" class="pantalla">
+    <header class="barra-superior">
+      <button class="boton-volver" data-ir="pantalla-mapa">←</button>
+      <span class="contador-corazones" id="tiempo-equilibrio">0 / 30s</span>
+    </header>
+    <div class="escenario-equilibrio">
+      <div class="corazon-flotante" id="corazon-flotante">💗</div>
+      <div class="lado-equilibrio lado-novio" id="lado-equilibrio-novio">
+        <p class="nombre-zona" id="nombre-equilibrio-novio">Novio</p>
+        <p class="instruccion-zona">Toca para impulsar ⬆️</p>
+      </div>
+      <div class="lado-equilibrio lado-novia" id="lado-equilibrio-novia">
+        <p class="nombre-zona" id="nombre-equilibrio-novia">Novia</p>
+        <p class="instruccion-zona">Toca para impulsar ⬆️</p>
+      </div>
+      <div class="centro-carrera" id="centro-equilibrio"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANTALLA: ¿QUIÉN ME CONOCE MÁS? ============ -->
+  <!-- Juego de teléfono compartido: uno responde la verdad en secreto -->
+  <!-- y el otro intenta adivinar. Al final calculo su nivel de química. -->
+  <section id="pantalla-conoce" class="pantalla">
+    <header class="barra-superior">
+      <button class="boton-volver" data-ir="pantalla-mapa">←</button>
+      <span class="contador-corazones" id="ronda-conoce">Ronda 1 / 5</span>
+    </header>
+    <p class="instruccion-conoce" id="instruccion-conoce"></p>
+    <h2 class="pregunta-conoce" id="pregunta-conoce"></h2>
+    <div class="opciones-conoce" id="opciones-conoce"></div>
+  </section>
+
+  <!-- ============ PANTALLA: ATRAPA EL AMOR ============ -->
+  <!-- Lluvia de corazones de 45 segundos. Él atrapa en la izquierda, -->
+  <!-- ella en la derecha. Dorados +3, normales +1, rotos -1. -->
+  <section id="pantalla-atrapa" class="pantalla">
+    <header class="barra-superior">
+      <button class="boton-volver" data-ir="pantalla-mapa">←</button>
+      <span class="contador-corazones" id="reloj-atrapa">⏱️ 45s</span>
+    </header>
+    <div id="zona-lluvia" class="zona-lluvia">
+      <div class="marcador-atrapa marcador-novio">
+        <p class="nombre-zona" id="nombre-atrapa-novio">Novio</p>
+        <p class="puntos-atrapa" id="puntos-atrapa-novio">0</p>
+      </div>
+      <div class="marcador-atrapa marcador-novia">
+        <p class="nombre-zona" id="nombre-atrapa-novia">Novia</p>
+        <p class="puntos-atrapa" id="puntos-atrapa-novia">0</p>
+      </div>
+      <div class="linea-divisoria"></div>
+      <div class="centro-carrera" id="centro-atrapa"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANTALLA: RULETA DE PAREJA ============ -->
+  <!-- La ruleta gira con desaceleración real y entrega retos, besos, -->
+  <!-- confesiones y premios. Nunca repite el resultado anterior. -->
+  <section id="pantalla-ruleta" class="pantalla">
+    <header class="barra-superior">
+      <button class="boton-volver" data-ir="pantalla-mapa">←</button>
+      <span class="contador-corazones" id="contador-corazones-ruleta">❤️</span>
+    </header>
+    <h2 class="titulo-seccion">Ruleta de Pareja 🎡</h2>
+    <div class="contenedor-ruleta">
+      <div class="flecha-ruleta">▼</div>
+      <div id="rueda" class="rueda"></div>
+      <div class="centro-rueda">💞</div>
+    </div>
+    <p class="emojis-rueda" id="emojis-rueda"></p>
+    <div id="resultado-ruleta" class="resultado-ruleta oculto">
+      <span class="emoji-resultado" id="emoji-resultado">💋</span>
+      <p id="texto-resultado"></p>
+    </div>
+    <button class="boton-principal" id="boton-girar">Girar 🎡</button>
+  </section>
+
+  <!-- ============ PANTALLA: ESTADÍSTICAS DE PAREJA ============ -->
+  <!-- El historial de amor de la pareja: racha, favorito, récords. -->
+  <section id="pantalla-estadisticas" class="pantalla">
+    <header class="barra-superior">
+      <button class="boton-volver" data-ir="pantalla-mapa">←</button>
+    </header>
+    <h2 class="titulo-seccion">Su historia en números 📊</h2>
+    <div id="lista-estadisticas" class="lista-estadisticas"></div>
+  </section>
+
+  <!-- ============ PANTALLA: CARTAS ROMÁNTICAS ============ -->
+  <!-- El buzón de la pareja: cartas editables guardadas para siempre. -->
+  <section id="pantalla-cartas" class="pantalla">
+    <header class="barra-superior">
+      <button class="boton-volver" data-ir="pantalla-mapa">←</button>
+      <span class="contador-corazones" id="contador-corazones-cartas">❤️</span>
+    </header>
+    <div id="vista-cartas" class="bloque-mundo5">
+      <h2 class="titulo-seccion">Su buzón de amor 💌</h2>
+      <div id="lista-cartas" class="lista-minijuegos lista-scroll"></div>
+      <button class="boton-principal" id="boton-nueva-carta">Escribir carta nueva ✍️</button>
+    </div>
+    <div id="editor-carta" class="bloque-mundo5 oculto">
+      <h2 class="titulo-seccion">Nueva carta ✍️</h2>
+      <select id="autor-carta" class="campo-mundo5"></select>
+      <select id="categoria-carta" class="campo-mundo5"></select>
+      <textarea id="texto-carta" class="campo-mundo5 area-texto" maxlength="600" placeholder="Escribe aquí lo que tu corazón quiera decir..."></textarea>
+      <div class="fila-botones">
+        <button class="boton-principal boton-pequeno" id="boton-guardar-carta">Sellar carta 💌</button>
+        <button class="boton-volver" id="boton-cancelar-carta">Cancelar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PANTALLA: CÁPSULA DEL TIEMPO ============ -->
+  <!-- Mensajes sellados que solo se pueden abrir cuando llega la fecha. -->
+  <section id="pantalla-capsula" class="pantalla">
+    <header class="barra-superior">
+      <button class="boton-volver" data-ir="pantalla-mapa">←</button>
+      <span class="contador-corazones" id="contador-corazones-capsula">❤️</span>
+    </header>
+    <div class="bloque-mundo5">
+      <h2 class="titulo-seccion">Cápsula del Tiempo ⏳</h2>
+      <textarea id="texto-capsula" class="campo-mundo5 area-texto" maxlength="600" placeholder="Mensaje para su yo del futuro..."></textarea>
+      <input type="date" id="fecha-capsula" class="campo-mundo5">
+      <button class="boton-principal boton-pequeno" id="boton-sellar-capsula">Sellar hasta esa fecha 🔒</button>
+      <div id="lista-capsulas" class="lista-minijuegos lista-scroll"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANTALLA: COFRE DE RECUERDOS ============ -->
+  <!-- El museo de su historia: estadísticas, logros, cartas y fechas. -->
+  <section id="pantalla-cofre" class="pantalla">
+    <header class="barra-superior">
+      <button class="boton-volver" data-ir="pantalla-mapa">←</button>
+      <span class="contador-corazones" id="cofre-contador-logros">0 / 25</span>
+    </header>
+    <div class="bloque-mundo5 lista-scroll">
+      <h2 class="titulo-seccion">Cofre de Recuerdos 🗝️</h2>
+      <h3 class="subtitulo-cofre">📊 Su historia en números</h3>
+      <div id="cofre-estadisticas" class="lista-estadisticas"></div>
+      <h3 class="subtitulo-cofre">🏆 Logros de pareja</h3>
+      <div id="cofre-logros" class="vitrina-logros"></div>
+      <h3 class="subtitulo-cofre">💌 Cartas guardadas</h3>
+      <div id="cofre-cartas"></div>
+      <h3 class="subtitulo-cofre">📅 Fechas especiales</h3>
+      <div id="cofre-fechas" class="lista-estadisticas"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANTALLA: ESCENA FINAL ============ -->
+  <!-- El cierre de Latidos: solo para parejas que completaron el mapa. -->
+  <section id="pantalla-final" class="pantalla">
+    <div class="bloque-mundo5 lista-scroll">
+      <div class="corazon-hero">💞</div>
+      <h2 class="titulo-juego titulo-final">Lo lograron</h2>
+      <p class="nombres-final" id="final-pareja"></p>
+      <p class="frase-final">Completaron juntos cada mundo de Latidos. Pero su historia real apenas comienza: este juego solo fue una excusa para mirarse más.</p>
+      <div id="final-estadisticas" class="lista-estadisticas"></div>
+      <button class="boton-principal" data-ir="pantalla-mapa">Seguir jugando juntos 💕</button>
+    </div>
+  </section>
+
+  <!-- ============ PANTALLA: TIENDA DE DECORACIONES ============ -->
+  <!-- Aquí la pareja gasta sus corazones en temas, avatares y partículas. -->
+  <section id="pantalla-tienda" class="pantalla">
+    <header class="barra-superior">
+      <button class="boton-volver" data-ir="pantalla-mapa">←</button>
+      <span class="contador-corazones" id="contador-corazones-tienda">❤️ 0</span>
+    </header>
+    <div class="bloque-mundo5 lista-scroll">
+      <h2 class="titulo-seccion">Tienda de Amor 🛍️</h2>
+      <h3 class="subtitulo-cofre">🎨 Temas del juego</h3>
+      <div id="seccion-temas" class="lista-minijuegos"></div>
+      <h3 class="subtitulo-cofre">😍 Avatares de pareja</h3>
+      <div id="seccion-avatares" class="lista-minijuegos"></div>
+      <h3 class="subtitulo-cofre">✨ Partículas del fondo</h3>
+      <div id="seccion-particulas" class="lista-minijuegos"></div>
+    </div>
+  </section>
+
+  <!-- ============ MODAL DE RESULTADOS ============ -->
+  <!-- Uso un solo modal reutilizable para anunciar ganadores, premios y castigos románticos. -->
+  <div id="modal" class="modal oculto">
+    <div class="contenido-modal">
+      <div class="emoji-modal" id="emoji-modal">💋</div>
+      <h3 id="titulo-modal"></h3>
+      <p id="mensaje-modal"></p>
+      <p class="premio-modal" id="premio-modal"></p>
+      <button class="boton-principal" id="boton-cerrar-modal">Continuar 💕</button>
+    </div>
+  </div>
+
+  <!-- Cargo mis módulos en orden de dependencia: primero el estado, -->
+  <!-- luego los datos, luego la navegación y al final la app que conecta todo. -->
+  <script src="js/estado.js"></script>
+  <script src="js/datos-mundos.js"></script>
+  <script src="js/navegacion.js"></script>
+  <script src="js/minijuegos/carrera-del-beso.js"></script>
+  <script src="js/minijuegos/corazon-equilibrado.js"></script>
+  <script src="js/minijuegos/quien-me-conoce.js"></script>
+  <script src="js/minijuegos/atrapa-el-amor.js"></script>
+  <script src="js/minijuegos/ruleta-de-pareja.js"></script>
+  <!-- estadisticas.js debe cargarse DESPUÉS de todos los minijuegos -->
+  <!-- porque envuelve sus funciones para registrar las estadísticas. -->
+  <script src="js/estadisticas.js"></script>
+  <!-- Módulos del Mundo 5: Para Siempre. -->
+  <script src="js/mundo5/cartas-romanticas.js"></script>
+  <script src="js/mundo5/capsula-del-tiempo.js"></script>
+  <script src="js/mundo5/cofre-de-recuerdos.js"></script>
+  <!-- logros.js va de último porque envuelve a Estado y Estadisticas. -->
+  <script src="js/mundo5/logros.js"></script>
+  <!-- Tienda y sonidos: van después de todo lo que envuelven y antes de app.js. -->
+  <script src="js/tienda.js"></script>
+  <script src="js/sonidos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

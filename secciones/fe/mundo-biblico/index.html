@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mundo Bíblico | El Mundo de Manu — Fe, Biblia y crecimiento espiritual</title>
+  <meta name="description" content="Tu espacio gratuito de fe: versículo del día, oraciones para cada momento, modo SOS espiritual, devocionales, carta a Dios y más. 100% gratis, siempre.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="cielo" aria-hidden="true"></div>
+
+  <nav>
+    <a class="logo" href="#inicio">✝️ <span>Mundo&nbsp;Bíblico</span>
+      <small>El Mundo de Manu</small>
+    </a>
+    <button class="menu-btn" aria-label="Abrir menú" onclick="document.querySelector('.nav-links').classList.toggle('abierto')">☰</button>
+    <ul class="nav-links">
+      <li><a href="#versiculo">Versículo</a></li>
+      <li><a href="#orar">Orar</a></li>
+      <li><a href="#crecer">Crecer</a></li>
+      <li><a href="#multimedia">Multimedia</a></li> <li><a href="#experiencias">Experiencias</a></li>
+      <li><a href="#velas">Altar</a></li>
+    </ul>
+  </nav>
+
+  <button class="sos-flotante" onclick="abrirModal('modal-sos')" aria-label="Abrir modo SOS espiritual">🕊️ SOS Espiritual</button>
+
+  <header class="hero" id="inicio">
+    <p class="eyebrow">Fe · Biblia · Esperanza</p>
+    <h1>Hay una luz que te espera, <em>incluso en tu noche más oscura.</em></h1>
+    <p>Un espacio católico para reflexionar, orar y volver a empezar. Versículos que hablan a tu vida real: la ansiedad, el perdón, la familia, la esperanza.</p>
+    <div class="hero-cta">
+      <a class="btn btn-oro" href="#versiculo">Recibe tu versículo de hoy</a>
+      <button class="btn btn-fantasma" onclick="abrirModal('modal-sos')">Necesito paz ahora 🕊️</button>
+    </div>
+    <p class="gratis-badge">✦ 100% gratuito, hoy y siempre. La fe no se cobra.</p>
+    <span class="scroll-hint" aria-hidden="true">↓</span>
+  </header>
+
+<!-- Versículo -->
+
+  <section id="versiculo">
+    <div class="sec-head">
+      <p class="eyebrow">Pan de cada día</p>
+      <h2>Tu versículo de hoy</h2>
+    </div>
+    <div class="verso-card">
+      <p class="verso-texto" id="verso-texto"></p>
+      <p class="verso-ref" id="verso-ref"></p>
+      <p class="verso-reflexion" id="verso-reflexion"></p>
+      <div class="verso-acciones">
+        <button class="btn-mini" onclick="copiarVersiculo()">📋 Copiar</button>
+        <button class="btn-mini" onclick="compartirVersiculo()">📤 Compartir</button>
+        <button class="btn-mini" onclick="otroVersiculo()">✨ Otro versículo</button>
+      </div>
+    </div>
+  </section>
+
+<!-- Orar -->
+ 
+  <section id="orar">
+    <div class="sec-head">
+      <p class="eyebrow">Orar</p>
+      <h2>Una oración para tu momento</h2>
+      <p>Elige cómo está tu corazón hoy. Dios entiende todos los idiomas, especialmente el del corazón.</p>
+    </div>
+    <div class="grid" id="grid-oraciones"></div>
+  </section>
+
+  <section id="crecer">
+    <div class="sec-head">
+      <p class="eyebrow">Crecer</p>
+      <h2>Devocional del día</h2>
+    </div>
+    <div class="verso-card">
+      <h3 class="serif" style="color:var(--lumen-suave);font-size:1.4rem" id="devo-titulo"></h3>
+      <p class="verso-reflexion" id="devo-cuerpo" style="margin-top:18px;font-size:1.02rem;max-width:680px"></p>
+      <p class="verso-ref" id="devo-pregunta" style="font-style:italic;font-weight:500;color:var(--turquesa)"></p>
+    </div>
+  </section>
+
+<!-- Multimedia: sección de audios y videos -->
+
+  <section id="multimedia">
+    <div class="sec-head">
+      <p class="eyebrow">Contenido Audiovisual</p>
+      <h2>Reflexiones en Audio y Video</h2>
+      <p>Escucha y visualiza la Palabra. Un respiro de fe adaptado para acompañar tu día.</p>
+    </div>
+
+<!--Aquí agrego para añadir AUDIOS -->
+    
+    <div class="grid">
+      <div class="media-card">
+        <span class="media-icono">🎙️</span>
+        <h3>El odio del mundo y la persecución</h3>
+        <p class="media-sub">Juan 15:18-16:4</p>
+        
+        <audio controls class="reproductor-audio">
+          <source src="audio/juan-15-18.mp3" type="audio/mpeg">
+          Tu navegador no soporta la reproducción de audio.
+        </audio>
+        
+        <div class="media-frase">
+          <p>"Si el mundo los odia, recuerden que a mí me odió primero. Si pertenecieran al mundo, el mundo los amaría como a uno 
+            de los suyos, pero ustedes ya no forman parte del mundo. Yo los elegí para que salieran del mundo; por eso el mundo los odia. 
+            ¿Recuerdan lo que les dije? El esclavo no es superior a su amo. Ya que me persiguieron a mí, también a ustedes 
+            los perseguirán; y si me hubieran escuchado a mí, también los escucharían a ustedes. 
+            Les harán todo eso a causa de mí, porque han rechazado a aquel que me envió.
+"</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎙️</span>
+        <h3>Hermosa reflexión</h3>
+        <p class="media-sub">Mateo 6:33</p>
+        
+        <audio controls class="reproductor-audio">
+          <source src="audio/mateo-6-33.mp3" type="audio/mpeg">
+          Tu navegador no soporta la reproducción de audio.
+        </audio>
+        
+        <div class="media-frase">
+          <p>"Pongan a Dios primero y todo lo demás vendrá. Si tienen hambre de justicia, serán saciados a través de mí. Él dijo: "Pidan y se les dará."</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎙️</span> <h3>Vence el mal con el bien</h3>
+        <p class="media-sub">Romanos 12:17-21</p>
+        
+        <audio controls class="reproductor-audio">
+          <source src="audio/romanos-12-17-21.mp3" type="audio/mpeg">
+          Tu navegador no soporta la reproducción de audio.
+        </audio>
+        
+        <div class="media-frase">
+          <p>
+Nunca devuelvan a nadie mal por mal.<br>
+Compórtense de tal manera que todo el mundo vea que ustedes son personas honradas.<br>
+Hagan todo lo posible por vivir en paz con todos.<br><br>
+
+Queridos amigos, nunca tomen venganza.<br>
+Dejen que se encargue la justa ira de Dios.<br>
+Pues dicen las Escrituras: «Yo tomaré venganza; yo les pagaré lo que se merecen», dice el Señor.<br><br>
+
+En cambio: «Si tus enemigos tienen hambre, dales de comer.<br>
+Si tienen sed, dales de beber.<br>
+Al hacer eso, amontonarás carbones encendidos de vergüenza sobre su cabeza».<br><br>
+
+No dejen que el mal los venza; más bien, venzan el mal haciendo el bien.
+</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎙️</span> <h3>Aquí va el título de mi nuevo audio</h3>
+        <p class="media-sub">Breve descripción o categoría</p>
+        
+        <audio controls class="reproductor-audio">
+          <source src="audio/mi-audio.mp3" type="audio/mpeg">
+          Tu navegador no soporta la reproducción de audio.
+        </audio>
+        
+        <div class="media-frase">
+          <p>"Aquí escribes la frase, verso o reflexión corta que quieres que salga centrada debajo del reproductor."</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎙️</span> <h3>Aquí va el título de mi nuevo audio</h3>
+        <p class="media-sub">Breve descripción o categoría</p>
+        
+        <audio controls class="reproductor-audio">
+          <source src="audio/mi-audio.mp3" type="audio/mpeg">
+          Tu navegador no soporta la reproducción de audio.
+        </audio>
+        
+        <div class="media-frase">
+          <p>"Aquí escribes la frase, verso o reflexión corta que quieres que salga centrada debajo del reproductor."</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎙️</span> <h3>Aquí va el título de mi nuevo audio</h3>
+        <p class="media-sub">Breve descripción o categoría</p>
+        
+        <audio controls class="reproductor-audio">
+          <source src="audio/mi-audio.mp3" type="audio/mpeg">
+          Tu navegador no soporta la reproducción de audio.
+        </audio>
+        
+        <div class="media-frase">
+          <p>"Aquí escribes la frase, verso o reflexión corta que quieres que salga centrada debajo del reproductor."</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎙️</span> <h3>Aquí va el título de mi nuevo audio</h3>
+        <p class="media-sub">Breve descripción o categoría</p>
+        
+        <audio controls class="reproductor-audio">
+          <source src="audio/mi-audio.mp3" type="audio/mpeg">
+          Tu navegador no soporta la reproducción de audio.
+        </audio>
+        
+        <div class="media-frase">
+          <p>"Aquí escribes la frase, verso o reflexión corta que quieres que salga centrada debajo del reproductor."</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎙️</span> <h3>Aquí va el título de mi nuevo audio</h3>
+        <p class="media-sub">Breve descripción o categoría</p>
+        
+        <audio controls class="reproductor-audio">
+          <source src="audio/mi-audio.mp3" type="audio/mpeg">
+          Tu navegador no soporta la reproducción de audio.
+        </audio>
+        
+        <div class="media-frase">
+          <p>"Aquí escribes la frase, verso o reflexión corta que quieres que salga centrada debajo del reproductor."</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎙️</span> <h3>Aquí va el título de mi nuevo audio</h3>
+        <p class="media-sub">Breve descripción o categoría</p>
+        
+        <audio controls class="reproductor-audio">
+          <source src="audio/mi-audio.mp3" type="audio/mpeg">
+          Tu navegador no soporta la reproducción de audio.
+        </audio>
+        
+        <div class="media-frase">
+          <p>"Aquí escribes la frase, verso o reflexión corta que quieres que salga centrada debajo del reproductor."</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎙️</span> <h3>Aquí va el título de mi nuevo audio</h3>
+        <p class="media-sub">Breve descripción o categoría</p>
+        
+        <audio controls class="reproductor-audio">
+          <source src="audio/mi-audio.mp3" type="audio/mpeg">
+          Tu navegador no soporta la reproducción de audio.
+        </audio>
+        
+        <div class="media-frase">
+          <p>"Aquí escribes la frase, verso o reflexión corta que quieres que salga centrada debajo del reproductor."</p>
+        </div>
+      </div>
+
+<!-- ========================================================= -->
+<!-- AQUÍ AGREGO TODOS MIS VIDEOS                             -->
+<!-- Cada video debe estar dentro de una tarjeta media-card   -->
+<!-- Si quiero otro video, simplemente copio una tarjeta      -->
+<!-- completa y la pego debajo de la anterior.                -->
+<!-- ========================================================= -->
+
+      <div class="media-card">
+        <span class="media-icono">🎬</span>
+        <h3>Video: Mensaje de Esperanza</h3>
+        <p class="media-sub">Aprende a conectar profundamente</p>
+        
+        <div class="video-container">
+          <video controls preload="metadata" poster="images/poster-mensaje-esperanza.jpg">
+            <source src="video/mensaje-esperanza.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+          </video>
+        </div>
+        
+        <div class="media-frase">
+          <p>"En este mundo, los huesos aún se rompen, los corazones aún se rompen, pero al final, la luz logrará vencer a la oscuridad."</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎬</span>
+        <h3>Video: Mensaje de Esperanza</h3>
+        <p class="media-sub">Aprende a conectar profundamente</p>
+        
+        <div class="video-container">
+          <video controls preload="metadata" poster="images/poster-mensaje-esperanza.jpg">
+            <source src="video/mensaje-esperanza.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+          </video>
+        </div>
+        
+        <div class="media-frase">
+          <p>"En este mundo, los huesos aún se rompen, los corazones aún se rompen, pero al final, la luz logrará vencer a la oscuridad."</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎬</span>
+        <h3>Video: Mensaje de Esperanza</h3>
+        <p class="media-sub">Aprende a conectar profundamente</p>
+        
+        <div class="video-container">
+          <video controls preload="metadata" poster="images/poster-mensaje-esperanza.jpg">
+            <source src="video/mensaje-esperanza.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+          </video>
+        </div>
+        
+        <div class="media-frase">
+          <p>"En este mundo, los huesos aún se rompen, los corazones aún se rompen, pero al final, la luz logrará vencer a la oscuridad."</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎬</span>
+        <h3>Video: Mensaje de Esperanza</h3>
+        <p class="media-sub">Aprende a conectar profundamente</p>
+        
+        <div class="video-container">
+          <video controls preload="metadata" poster="images/poster-mensaje-esperanza.jpg">
+            <source src="video/mensaje-esperanza.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+          </video>
+        </div>
+        
+        <div class="media-frase">
+          <p>"En este mundo, los huesos aún se rompen, los corazones aún se rompen, pero al final, la luz logrará vencer a la oscuridad."</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎬</span>
+        <h3>Video: Mensaje de Esperanza</h3>
+        <p class="media-sub">Aprende a conectar profundamente</p>
+        
+        <div class="video-container">
+          <video controls preload="metadata" poster="images/poster-mensaje-esperanza.jpg">
+            <source src="video/mensaje-esperanza.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+          </video>
+        </div>
+        
+        <div class="media-frase">
+          <p>"En este mundo, los huesos aún se rompen, los corazones aún se rompen, pero al final, la luz logrará vencer a la oscuridad."</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎬</span>
+        <h3>Video: Mensaje de Esperanza</h3>
+        <p class="media-sub">Aprende a conectar profundamente</p>
+        
+        <div class="video-container">
+          <video controls preload="metadata" poster="images/poster-mensaje-esperanza.jpg">
+            <source src="video/mensaje-esperanza.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+          </video>
+        </div>
+        
+        <div class="media-frase">
+          <p>"En este mundo, los huesos aún se rompen, los corazones aún se rompen, pero al final, la luz logrará vencer a la oscuridad."</p>
+        </div>
+      </div>      
+
+      <div class="media-card">
+        <span class="media-icono">🎬</span>
+        <h3>Video: Mensaje de Esperanza</h3>
+        <p class="media-sub">Aprende a conectar profundamente</p>
+        
+        <div class="video-container">
+          <video controls preload="metadata" poster="images/poster-mensaje-esperanza.jpg">
+            <source src="video/mensaje-esperanza.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+          </video>
+        </div>
+        
+        <div class="media-frase">
+          <p>"En este mundo, los huesos aún se rompen, los corazones aún se rompen, pero al final, la luz logrará vencer a la oscuridad."</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎬</span>
+        <h3>Video: Mensaje de Esperanza</h3>
+        <p class="media-sub">Aprende a conectar profundamente</p>
+        
+        <div class="video-container">
+          <video controls preload="metadata" poster="images/poster-mensaje-esperanza.jpg">
+            <source src="video/mensaje-esperanza.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+          </video>
+        </div>
+        
+        <div class="media-frase">
+          <p>"En este mundo, los huesos aún se rompen, los corazones aún se rompen, pero al final, la luz logrará vencer a la oscuridad."</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎬</span>
+        <h3>Video: Mensaje de Esperanza</h3>
+        <p class="media-sub">Aprende a conectar profundamente</p>
+        
+        <div class="video-container">
+          <video controls preload="metadata" poster="images/poster-mensaje-esperanza.jpg">
+            <source src="video/mensaje-esperanza.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+          </video>
+        </div>
+        
+        <div class="media-frase">
+          <p>"En este mundo, los huesos aún se rompen, los corazones aún se rompen, pero al final, la luz logrará vencer a la oscuridad."</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <span class="media-icono">🎬</span>
+        <h3>Video: Mensaje de Esperanza</h3>
+        <p class="media-sub">Aprende a conectar profundamente</p>
+        
+        <div class="video-container">
+          <video controls preload="metadata" poster="images/poster-mensaje-esperanza.jpg">
+            <source src="video/mensaje-esperanza.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+          </video>
+        </div>
+        
+        <div class="media-frase">
+          <p>"En este mundo, los huesos aún se rompen, los corazones aún se rompen, pero al final, la luz logrará vencer a la oscuridad."</p>
+        </div>
+      </div>      
+
+    </div>
+  </section>
+
+
+
+
+
+
+
+<!-- Experiencias -->
+
+  <section id="experiencias">
+    <div class="sec-head">
+      <p class="eyebrow">Experiencias</p>
+      <h2>Vive tu fe, no solo la leas</h2>
+    </div>
+    <div class="grid">
+      <div class="card" tabindex="0" role="button" onclick="abrirModal('modal-carta')" onkeydown="if(event.key==='Enter')abrirModal('modal-carta')">
+        <span class="icono">💌</span><h3>Carta para Dios</h3>
+        <p>Escríbele lo que llevas dentro. Es solo entre tú y Él: nadie más la leerá.</p>
+        <span class="tag">Privado · Gratis</span>
+      </div>
+      <div class="card" tabindex="0" role="button" onclick="iniciarTrivia()" onkeydown="if(event.key==='Enter')iniciarTrivia()">
+        <span class="icono">🎮</span><h3>Trivia bíblica</h3>
+        <p>Pon a prueba cuánto conoces la Palabra. Aprende jugando, sin presión.</p>
+        <span class="tag">Juego · Gratis</span>
+      </div>
+      <div class="card" tabindex="0" role="button" onclick="abrirModal('modal-sos')" onkeydown="if(event.key==='Enter')abrirModal('modal-sos')">
+        <span class="icono">🕊️</span><h3>SOS Espiritual</h3>
+        <p>3 minutos de respiración, Palabra y oración para cuando la ansiedad aprieta.</p>
+        <span class="tag">Paz inmediata</span>
+      </div>
+      <div class="card" tabindex="0" role="button" onclick="document.getElementById('velas').scrollIntoView({behavior:'smooth'})" onkeydown="if(event.key==='Enter')document.getElementById('velas').scrollIntoView()">
+        <span class="icono">🕯️</span><h3>Enciende una vela</h3>
+        <p>Pon una intención en el altar. Tu vela arderá junto a las de otros corazones.</p>
+        <span class="tag">Comunidad</span>
+      </div>
+    </div>
+  </section>
+
+<!-- Altar -->
+
+  <section id="velas">
+    <div class="sec-head">
+      <p class="eyebrow">Altar</p>
+      <h2>Velas por nuestras intenciones</h2>
+      <p>Escribe tu intención y enciende una vela. Cada flama es una oración que sigue ardiendo.</p>
+    </div>
+    <div style="display:flex;gap:10px;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center">
+      <input id="intencion" maxlength="40" placeholder="Tu intención (ej: por mi familia)" aria-label="Escribe tu intención"
+        style="flex:1;min-width:220px;padding:13px 18px;border-radius:999px;border:1px solid var(--borde);background:var(--vidrio);color:var(--alba);font-family:inherit">
+      <button class="btn btn-oro" style="padding:13px 24px" onclick="encenderVela()">Encender 🕯️</button>
+    </div>
+    <div class="altar" id="altar" aria-live="polite"></div>
+  </section>
+
+  <div class="modal" id="modal-oracion" role="dialog" aria-modal="true">
+    <div class="modal-caja">
+      <button class="cerrar" onclick="cerrarModal('modal-oracion')" aria-label="Cerrar">✕</button>
+      <h3 id="mo-titulo"></h3>
+      <p class="oracion-texto" id="mo-texto"></p>
+      <p class="verso-apoyo" id="mo-verso"></p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-sos" role="dialog" aria-modal="true">
+    <div class="modal-caja">
+      <button class="cerrar" onclick="cerrarModal('modal-sos')" aria-label="Cerrar">✕</button>
+      <h3>🕊️ Respira. Dios está aquí.</h3>
+      <div class="respira" aria-hidden="true"><span id="respira-txt">Inhala…</span></div>
+      <p class="sos-paso" id="sos-verso" style="font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;color:var(--alba)"></p>
+      <p class="sos-paso">Inhala 4 segundos mientras el círculo crece · exhala 4 mientras se encoge.<br>Quédate aquí el tiempo que necesites.</p>
+      <p class="verso-apoyo">"La paz les dejo, mi paz les doy" — Juan 14, 27</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-carta" role="dialog" aria-modal="true">
+    <div class="modal-caja">
+      <button class="cerrar" onclick="cerrarModal('modal-carta')" aria-label="Cerrar">✕</button>
+      <h3>💌 Carta para Dios</h3>
+      <p style="color:var(--texto-suave);font-size:.9rem;margin-bottom:16px">Escríbele con confianza. Esta carta se guarda solo en tu dispositivo: nadie más puede leerla.</p>
+      <textarea class="carta-area" id="carta-texto" placeholder="Querido Dios…"></textarea>
+      <div style="margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-oro" onclick="enviarCarta()">Entregar carta ✨</button>
+        <button class="btn-mini" onclick="verCartas()">Mis cartas anteriores</button>
+      </div>
+      <div id="cartas-lista" style="margin-top:18px;text-align:left"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-trivia" role="dialog" aria-modal="true">
+    <div class="modal-caja">
+      <button class="cerrar" onclick="cerrarModal('modal-trivia')" aria-label="Cerrar">✕</button>
+      <h3>🎮 Trivia bíblica</h3>
+      <div id="trivia-zona" style="text-align:left"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <footer>
+    <a class="logo" href="#inicio">✝️ <span>Mundo Bíblico</span></a>
+    <p class="nota-fe">Contenido inspirado en la fe católica y fiel a la enseñanza de la Iglesia. Este espacio es y será siempre 100% gratuito.</p>
+    <p>Hecho con fe y ☕ por <span class="manu">El Mundo de Manu</span> · Barrancabermeja, Colombia · 2026</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

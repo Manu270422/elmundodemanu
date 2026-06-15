@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  finanzas.html — El Mundo de Manu / Finanzas Personales
+  ============================================================
+  Esta sección es un mundo temático sobre educación financiera:
+  cómo manejar el dinero de forma inteligente, ahorrar, salir
+  de deudas e invertir con cabeza. No habla de mis finanzas
+  personales — es contenido educativo para cualquier persona
+  que quiera mejorar su relación con el dinero.
+
+  La educación financiera no se enseña en los colegios y eso
+  deja a mucha gente vulnerable. Esta sección busca cerrar
+  un poco esa brecha con información clara y aplicable.
+
+  Estructura:
+  - Hero: el dinero como herramienta + canvas de gráfico
+  - Por qué importa: la brecha de educación financiera
+  - Conceptos clave: 6 fundamentos del dinero
+  - Guías prácticas: 3 artículos sobre manejo del dinero
+  - Mitos vs realidad: desmontando creencias dañinas
+  - Recursos: libros, apps y canales recomendados
+  - Disclaimer: no es asesoría financiera profesional
+  - CTA: invitación a aprender juntos sobre dinero
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Finanzas Personales — El Mundo de Manu. Educación financiera clara y práctica: ahorro, presupuesto, deudas, inversión y hábitos de dinero inteligentes para todos." />
+  <meta name="author" content="Manu" />
+
+  <title>Finanzas Personales — El Mundo de Manu</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="finanzas.css" />
+</head>
+
+<body class="page-finanzas">
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
+
+  <!-- ============================================================
+    NAVBAR — Estructura global. Paths desde secciones/finanzas/.
+  ============================================================ -->
+  <header class="navbar" id="navbar" role="banner">
+    <nav class="navbar__container" aria-label="Navegación principal">
+      <a href="../../index.html" class="navbar__logo" aria-label="Volver al inicio">
+        <span class="navbar__logo-mark">M</span>
+        <span class="navbar__logo-text">El Mundo de <strong>Manu</strong></span>
+      </a>
+      <ul class="navbar__links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__link navbar__link--active">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__link">Sobre Mí</a></li>
+        <li>
+          <a href="../../index.html#contacto" class="navbar__link navbar__link--cta">
+            Contáctame
+            <span class="navbar__cta-dot" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+      <button class="navbar__toggle" id="navToggle"
+        aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </nav>
+    <div class="navbar__mobile" id="mobileMenu" aria-hidden="true">
+      <ul class="navbar__mobile-links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__mobile-link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__mobile-link">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__mobile-link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__mobile-link">Sobre Mí</a></li>
+        <li><a href="../../index.html#contacto"  class="navbar__mobile-link navbar__mobile-link--cta">Contáctame</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="breadcrumb" aria-label="Ruta de navegación">
+    <div class="container">
+      <nav class="breadcrumb__nav">
+        <a href="../../index.html"        class="breadcrumb__link">Inicio</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="../../index.html#mundos" class="breadcrumb__link">Mis Mundos</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span class="breadcrumb__current" aria-current="page">Finanzas Personales</span>
+      </nav>
+    </div>
+  </div>
+
+  <main id="main" role="main">
+
+    <!-- ──────────────────────────────────────────────────────────
+      HERO DE FINANZAS
+      El canvas dibuja un gráfico de líneas ascendente animado
+      (como un mercado creciendo) con barras sutiles de fondo.
+      Verde dinero como color, evocando crecimiento y prosperidad.
+    ────────────────────────────────────────────────────────── -->
+    <section class="fn-hero" id="fn-inicio" aria-labelledby="fnHeroTitle">
+
+      <canvas class="fn-hero__canvas" id="fnCanvas" aria-hidden="true"></canvas>
+
+      <div class="fn-hero__light fn-hero__light--1" aria-hidden="true"></div>
+      <div class="fn-hero__light fn-hero__light--2" aria-hidden="true"></div>
+      <div class="fn-hero__light fn-hero__light--3" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="fn-hero__inner">
+
+          <!-- Símbolo decorativo: moneda/gráfico SVG muy tenue -->
+          <div class="fn-hero__symbol-wrap" aria-hidden="true">
+            <svg class="fn-hero__symbol" viewBox="0 0 100 100" fill="none"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
+              <path d="M50 26v48M40 36h16a8 8 0 0 1 0 16H44a8 8 0 0 0 0 16h16"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <div class="fn-hero__content" data-animate="fade-up">
+
+            <div class="fn-hero__tag-row">
+              <span class="section-tag fn-tag">Ahorrar · Crecer · Prosperar</span>
+            </div>
+
+            <h1 class="fn-hero__title" id="fnHeroTitle">
+              Finanzas<br/>Personales
+            </h1>
+
+            <blockquote class="fn-hero__phrase" data-animate="fade-up" data-delay="1">
+              <p class="fn-hero__phrase-text">
+                "No se trata de cuánto dinero ganas, sino de cuánto
+                conservas, cuánto trabaja para ti y por cuántas
+                generaciones lo mantienes."
+              </p>
+              <footer class="fn-hero__phrase-ref">— Robert Kiyosaki</footer>
+            </blockquote>
+
+            <p class="fn-hero__desc" data-animate="fade-up" data-delay="2">
+              La educación financiera no se enseña en la escuela, y eso nos deja
+              a muchos aprendiendo por las malas. Aquí encontrarás los conceptos
+              que de verdad importan, explicados claro y sin jerga complicada.
+            </p>
+
+            <div class="fn-hero__actions" data-animate="fade-up" data-delay="3">
+              <a href="#fn-conceptos" class="btn fn-btn--primary">
+                Conceptos clave
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a href="#fn-guias" class="btn btn--ghost fn-btn--ghost">Guías prácticas</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="fn-hero__scroll" aria-hidden="true">
+        <div class="fn-hero__scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: POR QUÉ IMPORTA
+      La brecha de educación financiera y su impacto real.
+    ────────────────────────────────────────────────────────── -->
+    <section class="fn-why" id="fn-porque" aria-labelledby="fnWhyTitle">
+      <div class="container">
+        <div class="fn-why__inner" data-animate="fade-up">
+
+          <div class="fn-why__text">
+            <span class="section-tag fn-tag">La brecha invisible</span>
+            <h2 class="fn-why__title" id="fnWhyTitle">
+              Lo que nadie<br/>nos enseñó sobre dinero
+            </h2>
+            <p class="fn-why__desc">
+              Pasamos años aprendiendo álgebra, historia y química — pero salimos
+              del colegio sin saber cómo hacer un presupuesto, qué es el interés
+              compuesto o cómo funciona una tarjeta de crédito. Esa brecha tiene
+              consecuencias reales en la vida de las personas.
+            </p>
+            <p class="fn-why__desc">
+              La falta de educación financiera está detrás de muchos problemas:
+              endeudamiento que asfixia, decisiones impulsivas, caer en estafas,
+              llegar a la vejez sin ahorros. No es falta de inteligencia — es
+              falta de información que debió ser básica.
+            </p>
+            <p class="fn-why__desc">
+              La buena noticia: estos conceptos se pueden aprender a cualquier edad,
+              y dominarlos cambia por completo la relación con el dinero. No se
+              necesita ser rico para empezar — se necesita empezar para construir.
+            </p>
+          </div>
+
+          <div class="fn-why__card">
+            <div class="fn-why__card-icon" aria-hidden="true">📊</div>
+            <h3 class="fn-why__card-title">El dato que lo cambia todo</h3>
+            <div class="fn-why__card-stat">
+              <span class="fn-why__card-stat-num">72%</span>
+              <span class="fn-why__card-stat-label">de los adultos en el mundo no son financieramente alfabetizados según el estudio S&amp;P Global FinLit</span>
+            </div>
+            <p class="fn-why__card-text">
+              No es un problema individual — es estructural. Por eso compartir
+              esta información de forma gratuita y accesible no es solo útil,
+              es necesario. El conocimiento financiero debería ser un derecho,
+              no un privilegio de pocos.
+            </p>
+            <div class="fn-why__card-glow" aria-hidden="true"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: CONCEPTOS CLAVE
+      6 fundamentos que todo el mundo debería conocer.
+    ────────────────────────────────────────────────────────── -->
+    <section class="fn-concepts" id="fn-conceptos" aria-labelledby="fnConceptsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag fn-tag">Los fundamentos</span>
+          <h2 class="section-title" id="fnConceptsTitle">Conceptos Clave</h2>
+          <p class="section-desc">
+            Seis ideas que, una vez las entiendes, cambian para siempre
+            cómo tomas decisiones con tu dinero.
+          </p>
+        </div>
+
+        <div class="fn-concepts__grid">
+
+          <!-- Concepto 1: Presupuesto -->
+          <article class="fn-concept-card" data-animate="fade-up" data-delay="0">
+            <div class="fn-concept-card__top">
+              <div class="fn-concept-card__icon-wrap" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <rect x="4" y="6" width="18" height="15" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M4 10h18M8 15h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="fn-concept-card__index" aria-hidden="true">01</span>
+            </div>
+            <h3 class="fn-concept-card__title">El presupuesto</h3>
+            <p class="fn-concept-card__desc">
+              Saber exactamente cuánto entra y cuánto sale. Sin esto, todo lo demás
+              es adivinanza. La regla 50/30/20 es un buen punto de partida: 50%
+              necesidades, 30% deseos, 20% ahorro e inversión.
+            </p>
+          </article>
+
+          <!-- Concepto 2: Fondo de emergencia -->
+          <article class="fn-concept-card" data-animate="fade-up" data-delay="1">
+            <div class="fn-concept-card__top">
+              <div class="fn-concept-card__icon-wrap" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M13 3l8 3v6c0 5-3.5 8.5-8 10.5C8.5 20.5 5 17 5 12V6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                  <path d="M10 12.5l2 2 4-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="fn-concept-card__index" aria-hidden="true">02</span>
+            </div>
+            <h3 class="fn-concept-card__title">Fondo de emergencia</h3>
+            <p class="fn-concept-card__desc">
+              De 3 a 6 meses de gastos guardados para imprevistos: una enfermedad,
+              perder el empleo, una reparación urgente. Es tu colchón de seguridad
+              que evita que un problema se convierta en una deuda.
+            </p>
+          </article>
+
+          <!-- Concepto 3: Interés compuesto -->
+          <article class="fn-concept-card" data-animate="fade-up" data-delay="2">
+            <div class="fn-concept-card__top">
+              <div class="fn-concept-card__icon-wrap" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M4 20L9 13l4 4 9-11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M22 6v6h-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="fn-concept-card__index" aria-hidden="true">03</span>
+            </div>
+            <h3 class="fn-concept-card__title">Interés compuesto</h3>
+            <p class="fn-concept-card__desc">
+              Einstein lo llamó "la octava maravilla del mundo". Es cuando tus
+              intereses generan más intereses. Empezar a invertir temprano, aunque
+              sea poco, vence a empezar tarde con mucho. El tiempo es el factor clave.
+            </p>
+          </article>
+
+          <!-- Concepto 4: Deuda buena vs mala -->
+          <article class="fn-concept-card" data-animate="fade-up" data-delay="3">
+            <div class="fn-concept-card__top">
+              <div class="fn-concept-card__icon-wrap" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M13 4v18M7 8h9a3 3 0 0 1 0 6H10a3 3 0 0 0 0 6h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="fn-concept-card__index" aria-hidden="true">04</span>
+            </div>
+            <h3 class="fn-concept-card__title">Deuda buena vs mala</h3>
+            <p class="fn-concept-card__desc">
+              No toda deuda es igual. La deuda "buena" financia activos que crecen
+              o generan ingresos (educación, vivienda). La "mala" financia consumo
+              que pierde valor. Las tarjetas de crédito con intereses altos son
+              la trampa más común.
+            </p>
+          </article>
+
+          <!-- Concepto 5: Diversificación -->
+          <article class="fn-concept-card" data-animate="fade-up" data-delay="4">
+            <div class="fn-concept-card__top">
+              <div class="fn-concept-card__icon-wrap" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <circle cx="13" cy="13" r="9" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M13 4v9l6 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M13 13L7 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="fn-concept-card__index" aria-hidden="true">05</span>
+            </div>
+            <h3 class="fn-concept-card__title">Diversificación</h3>
+            <p class="fn-concept-card__desc">
+              "No pongas todos los huevos en una canasta." Repartir el dinero entre
+              distintos tipos de inversión reduce el riesgo. Si una falla, las otras
+              te protegen. Es el principio más básico de la inversión inteligente.
+            </p>
+          </article>
+
+          <!-- Concepto 6: Inflación -->
+          <article class="fn-concept-card" data-animate="fade-up" data-delay="5">
+            <div class="fn-concept-card__top">
+              <div class="fn-concept-card__icon-wrap" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M4 6L22 6M4 13h14M4 20h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                  <path d="M20 16l3 3-3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="fn-concept-card__index" aria-hidden="true">06</span>
+            </div>
+            <h3 class="fn-concept-card__title">La inflación</h3>
+            <p class="fn-concept-card__desc">
+              El dinero guardado bajo el colchón pierde valor cada año. Lo que hoy
+              cuesta 100, en unos años costará más. Por eso ahorrar no basta:
+              el dinero debe crecer al menos al ritmo de la inflación para no perder
+              poder adquisitivo.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: GUÍAS PRÁCTICAS
+      3 artículos aplicables sobre manejo del dinero.
+    ────────────────────────────────────────────────────────── -->
+    <section class="fn-guides" id="fn-guias" aria-labelledby="fnGuidesTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag fn-tag">Pon en práctica</span>
+          <h2 class="section-title" id="fnGuidesTitle">Guías Prácticas</h2>
+          <p class="section-desc">
+            Pasos concretos que puedes empezar a aplicar desde hoy,
+            sin importar cuánto ganes.
+          </p>
+        </div>
+
+        <div class="fn-guides__grid">
+
+          <!-- Guía 1: Ahorro -->
+          <article class="fn-guide-card fn-guide-card--featured" data-animate="fade-up" data-delay="0">
+            <div class="fn-guide-card__header">
+              <span class="fn-guide-card__tag">Ahorro</span>
+              <span class="fn-guide-card__read">5 min</span>
+            </div>
+            <h3 class="fn-guide-card__title">
+              Cómo empezar a ahorrar aunque sientas que no te alcanza
+            </h3>
+            <p class="fn-guide-card__body">
+              "Ahorraría si me sobrara dinero" es la frase que mantiene a la gente
+              sin ahorros toda la vida. El secreto es invertir el orden: ahorra
+              primero, gasta después. Y empezar con cantidades tan pequeñas que
+              no las sientas.
+            </p>
+            <div class="fn-guide-card__inset">
+              <h4 class="fn-guide-card__inset-title">Estrategias que funcionan</h4>
+              <ul class="fn-guide-card__list" role="list">
+                <li><strong>Págate primero:</strong> apenas recibes ingresos, aparta el ahorro
+                automáticamente antes de gastar en cualquier otra cosa.</li>
+                <li><strong>Empieza con el 1%:</strong> si el 20% suena imposible, comienza con
+                el 1% de tus ingresos y súbelo gradualmente. El hábito importa más que el monto.</li>
+                <li><strong>Automatiza:</strong> programa una transferencia automática a una cuenta
+                de ahorro el día que recibes tu sueldo. Lo que no ves, no lo gastas.</li>
+                <li><strong>Reto de las 52 semanas:</strong> ahorra una cantidad creciente cada
+                semana. Al final del año tendrás un fondo considerable sin haberlo sentido.</li>
+              </ul>
+            </div>
+            <p class="fn-guide-card__highlight">
+              El mejor momento para empezar a ahorrar fue hace diez años.
+              El segundo mejor momento es hoy.
+            </p>
+          </article>
+
+          <!-- Guía 2: Salir de deudas -->
+          <article class="fn-guide-card" data-animate="fade-up" data-delay="1">
+            <div class="fn-guide-card__header">
+              <span class="fn-guide-card__tag">Deudas</span>
+              <span class="fn-guide-card__read">4 min</span>
+            </div>
+            <h3 class="fn-guide-card__title">
+              Dos métodos probados para salir de deudas
+            </h3>
+            <p class="fn-guide-card__body">
+              Las deudas con intereses altos pueden sentirse como un pozo sin fondo.
+              Pero hay estrategias estructuradas que funcionan. Las dos más conocidas
+              atacan el problema desde ángulos distintos.
+            </p>
+            <div class="fn-guide-card__inset">
+              <h4 class="fn-guide-card__inset-title">Bola de nieve vs Avalancha</h4>
+              <ul class="fn-guide-card__list" role="list">
+                <li><strong>Bola de nieve:</strong> paga primero la deuda más pequeña sin importar
+                el interés. Las victorias rápidas motivan a seguir. Ideal si necesitas impulso psicológico.</li>
+                <li><strong>Avalancha:</strong> paga primero la deuda con el interés más alto.
+                Matemáticamente ahorras más dinero. Ideal si tienes disciplina y paciencia.</li>
+                <li><strong>Lo esencial en ambos:</strong> dejar de generar deuda nueva mientras
+                pagas la existente, o estarás llenando un balde con hueco.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Guía 3: Primeros pasos inversión -->
+          <article class="fn-guide-card" data-animate="fade-up" data-delay="2">
+            <div class="fn-guide-card__header">
+              <span class="fn-guide-card__tag">Inversión</span>
+              <span class="fn-guide-card__read">5 min</span>
+            </div>
+            <h3 class="fn-guide-card__title">
+              Primeros pasos para invertir sin morir en el intento
+            </h3>
+            <p class="fn-guide-card__body">
+              Invertir suena intimidante, reservado para expertos en traje. La realidad
+              es que hoy cualquiera puede empezar con poco dinero. Lo importante es
+              entender lo básico antes de poner un solo peso.
+            </p>
+            <div class="fn-guide-card__inset">
+              <h4 class="fn-guide-card__inset-title">Antes de invertir tu primer peso</h4>
+              <ul class="fn-guide-card__list" role="list">
+                <li><strong>Ten tu fondo de emergencia primero:</strong> nunca inviertas dinero
+                que podrías necesitar pronto. La inversión es para el largo plazo.</li>
+                <li><strong>Entiende lo que compras:</strong> nunca inviertas en algo que no
+                comprendes. Si no puedes explicarlo en una frase, aún no estás listo.</li>
+                <li><strong>Desconfía de las promesas:</strong> "duplica tu dinero en un mes"
+                es la frase favorita de las estafas. La inversión real es lenta y aburrida.</li>
+                <li><strong>Empieza simple:</strong> los fondos indexados diversificados son
+                la recomendación de la mayoría de expertos para principiantes.</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: MITOS VS REALIDAD
+      Desmontando creencias dañinas sobre el dinero.
+      Formato de dos columnas: mito tachado / realidad.
+    ────────────────────────────────────────────────────────── -->
+    <section class="fn-myths" id="fn-mitos" aria-labelledby="fnMythsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag fn-tag">Desmontando creencias</span>
+          <h2 class="section-title" id="fnMythsTitle">Mitos vs Realidad</h2>
+          <p class="section-desc">
+            Creencias muy extendidas sobre el dinero que, en realidad,
+            te frenan más de lo que te ayudan.
+          </p>
+        </div>
+
+        <div class="fn-myths__grid">
+
+          <div class="fn-myth-card" data-animate="fade-up" data-delay="0">
+            <div class="fn-myth-card__myth">
+              <span class="fn-myth-card__label fn-myth-card__label--myth" aria-hidden="true">Mito</span>
+              <p>"Necesito ganar mucho más para poder ahorrar."</p>
+            </div>
+            <div class="fn-myth-card__reality">
+              <span class="fn-myth-card__label fn-myth-card__label--real" aria-hidden="true">Realidad</span>
+              <p>El ahorro depende más del hábito que del monto. Hay gente de altos
+              ingresos sin ahorros y gente de ingresos modestos con buen patrimonio.
+              Lo que importa es la diferencia entre lo que ganas y lo que gastas.</p>
+            </div>
+          </div>
+
+          <div class="fn-myth-card" data-animate="fade-up" data-delay="1">
+            <div class="fn-myth-card__myth">
+              <span class="fn-myth-card__label fn-myth-card__label--myth" aria-hidden="true">Mito</span>
+              <p>"Invertir es como apostar, es muy arriesgado."</p>
+            </div>
+            <div class="fn-myth-card__reality">
+              <span class="fn-myth-card__label fn-myth-card__label--real" aria-hidden="true">Realidad</span>
+              <p>Apostar es azar; invertir con conocimiento es gestión de riesgo.
+              Lo verdaderamente arriesgado es no hacer nada y dejar que la inflación
+              consuma tus ahorros año tras año.</p>
+            </div>
+          </div>
+
+          <div class="fn-myth-card" data-animate="fade-up" data-delay="2">
+            <div class="fn-myth-card__myth">
+              <span class="fn-myth-card__label fn-myth-card__label--myth" aria-hidden="true">Mito</span>
+              <p>"El dinero es la raíz de todos los males."</p>
+            </div>
+            <div class="fn-myth-card__reality">
+              <span class="fn-myth-card__label fn-myth-card__label--real" aria-hidden="true">Realidad</span>
+              <p>El dinero es una herramienta neutral. Amplifica lo que ya eres:
+              puede hacer mucho bien o mucho daño según quién lo use. Manejarlo
+              bien te da libertad para vivir según tus valores.</p>
+            </div>
+          </div>
+
+          <div class="fn-myth-card" data-animate="fade-up" data-delay="3">
+            <div class="fn-myth-card__myth">
+              <span class="fn-myth-card__label fn-myth-card__label--myth" aria-hidden="true">Mito</span>
+              <p>"Es muy tarde para mí, ya debí empezar antes."</p>
+            </div>
+            <div class="fn-myth-card__reality">
+              <span class="fn-myth-card__label fn-myth-card__label--real" aria-hidden="true">Realidad</span>
+              <p>Nunca es tarde para mejorar tu relación con el dinero. Cada decisión
+              financiera buena que tomas hoy mejora tu futuro. El pasado no se cambia,
+              pero el futuro se construye desde ahora.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: RECURSOS
+    ────────────────────────────────────────────────────────── -->
+    <section class="fn-resources" id="fn-recursos" aria-labelledby="fnResourcesTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag fn-tag">Para seguir aprendiendo</span>
+          <h2 class="section-title" id="fnResourcesTitle">Recursos Recomendados</h2>
+          <p class="section-desc">
+            Libros, apps y canales que enseñan finanzas de forma clara.
+            Ninguno patrocinado — solo lo que aporta valor real.
+          </p>
+        </div>
+
+        <div class="fn-resources__grid">
+
+          <div class="fn-resource-card" data-animate="fade-up" data-delay="0">
+            <div class="fn-resource-card__icon" aria-hidden="true">📕</div>
+            <div class="fn-resource-card__info">
+              <span class="fn-resource-card__type">Libro clásico</span>
+              <h3 class="fn-resource-card__title">Padre Rico, Padre Pobre</h3>
+              <p class="fn-resource-card__desc">
+                El libro que despierta la mentalidad financiera de millones.
+                Robert Kiyosaki explica la diferencia entre activos y pasivos
+                de forma simple y memorable. Ideal para empezar.
+              </p>
+            </div>
+          </div>
+
+          <div class="fn-resource-card" data-animate="fade-up" data-delay="1">
+            <div class="fn-resource-card__icon" aria-hidden="true">📗</div>
+            <div class="fn-resource-card__info">
+              <span class="fn-resource-card__type">Libro práctico</span>
+              <h3 class="fn-resource-card__title">El Hombre Más Rico de Babilonia</h3>
+              <p class="fn-resource-card__desc">
+                Principios atemporales de ahorro e inversión contados como
+                parábolas. George Clason resume en historias simples lo que
+                funciona desde hace siglos. Lectura rápida y poderosa.
+              </p>
+            </div>
+          </div>
+
+          <div class="fn-resource-card" data-animate="fade-up" data-delay="2">
+            <div class="fn-resource-card__icon" aria-hidden="true">📱</div>
+            <div class="fn-resource-card__info">
+              <span class="fn-resource-card__type">Apps de presupuesto</span>
+              <h3 class="fn-resource-card__title">Fintonic / Mobills</h3>
+              <p class="fn-resource-card__desc">
+                Para registrar gastos y ver a dónde se va tu dinero. Lo que se
+                mide se puede mejorar. Empezar a registrar gastos es el primer
+                paso que más impacto tiene.
+              </p>
+            </div>
+          </div>
+
+          <div class="fn-resource-card" data-animate="fade-up" data-delay="3">
+            <div class="fn-resource-card__icon" aria-hidden="true">🎥</div>
+            <div class="fn-resource-card__info">
+              <span class="fn-resource-card__type">Canales en español</span>
+              <h3 class="fn-resource-card__title">YouTube financiero</h3>
+              <p class="fn-resource-card__desc">
+                Canales como "Value School", "Tu Dinero Cuenta" o creadores
+                de educación financiera latinoamericanos explican conceptos
+                complejos de forma accesible y gratuita.
+              </p>
+            </div>
+          </div>
+
+          <div class="fn-resource-card" data-animate="fade-up" data-delay="4">
+            <div class="fn-resource-card__icon" aria-hidden="true">📘</div>
+            <div class="fn-resource-card__info">
+              <span class="fn-resource-card__type">Libro de hábitos</span>
+              <h3 class="fn-resource-card__title">Los Secretos de la Mente Millonaria</h3>
+              <p class="fn-resource-card__desc">
+                T. Harv Eker trabaja la psicología del dinero: cómo tus creencias
+                heredadas afectan tus resultados financieros. Útil para identificar
+                bloqueos mentales sobre la riqueza.
+              </p>
+            </div>
+          </div>
+
+          <div class="fn-resource-card" data-animate="fade-up" data-delay="5">
+            <div class="fn-resource-card__icon" aria-hidden="true">🏛️</div>
+            <div class="fn-resource-card__info">
+              <span class="fn-resource-card__type">Fuentes oficiales</span>
+              <h3 class="fn-resource-card__title">Bancos centrales y reguladores</h3>
+              <p class="fn-resource-card__desc">
+                En Colombia, la Superintendencia Financiera y el Banco de la
+                República publican guías de educación financiera gratuitas y
+                confiables. Siempre verifica con fuentes oficiales.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: HERRAMIENTA INTERACTIVA
+      Enlace al proyecto "¿Cuándo serás libre?" — Calculadora de
+      Independencia Financiera. Vive en proyecto-if/index.html.
+      La presento como una card llamativa que interrumpe el flujo
+      de contenido editorial con algo que el usuario puede hacer.
+    ────────────────────────────────────────────────────────── -->
+    <section class="fn-tool" id="fn-herramienta" aria-labelledby="fnToolTitle">
+      <div class="container">
+        <div class="fn-tool__inner" data-animate="fade-up">
+
+          <!-- Glow decorativo -->
+          <div class="fn-tool__glow" aria-hidden="true"></div>
+
+          <!-- Badge de gratuito -->
+          <div class="fn-tool__badge">
+            <span class="fn-tool__badge-dot" aria-hidden="true"></span>
+            Herramienta gratuita · Sin registro · Funciona offline
+          </div>
+
+          <!-- Mini gráfico decorativo SVG — simula la curva de interés compuesto -->
+          <div class="fn-tool__chart-deco" aria-hidden="true">
+            <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Área bajo la curva -->
+              <path d="M0 55 C30 55 40 45 60 38 C80 31 90 22 120 16 C145 11 165 8 200 5 L200 60 L0 60Z"
+                fill="rgba(45,186,119,0.10)"/>
+              <!-- Línea de solo aportes (punteada) -->
+              <path d="M0 55 L200 20" stroke="rgba(45,186,119,0.30)" stroke-width="1.5"
+                stroke-dasharray="4 3"/>
+              <!-- Curva principal de crecimiento -->
+              <path d="M0 55 C30 55 40 45 60 38 C80 31 90 22 120 16 C145 11 165 8 200 5"
+                stroke="#2DBA77" stroke-width="2" stroke-linecap="round"/>
+              <!-- Punto final -->
+              <circle cx="200" cy="5" r="4" fill="#2DBA77"/>
+              <circle cx="200" cy="5" r="8" fill="rgba(45,186,119,0.20)"/>
+            </svg>
+          </div>
+
+          <h2 class="fn-tool__title" id="fnToolTitle">
+            ¿Cuándo serás<br/>
+            <span class="fn-tool__title-highlight">financieramente libre?</span>
+          </h2>
+
+          <p class="fn-tool__desc">
+            Construí una calculadora interactiva que te muestra exactamente cuántos años
+            necesitas para que tus inversiones generen suficiente para vivir sin depender
+            de un salario. Ingresa tus datos, mueve los sliders y ve el resultado en tiempo
+            real — con gráfico animado, hitos de progreso e insights personalizados.
+          </p>
+
+          <!-- Tres puntos clave de la herramienta -->
+          <div class="fn-tool__features">
+            <div class="fn-tool__feature">
+              <span class="fn-tool__feature-icon" aria-hidden="true">📊</span>
+              <span>Gráfico de proyección animado con interés compuesto real</span>
+            </div>
+            <div class="fn-tool__feature">
+              <span class="fn-tool__feature-icon" aria-hidden="true">🎯</span>
+              <span>Basada en la Regla del 4% (Estudio Trinity, 1998)</span>
+            </div>
+            <div class="fn-tool__feature">
+              <span class="fn-tool__feature-icon" aria-hidden="true">💡</span>
+              <span>Insights personalizados según tu situación financiera</span>
+            </div>
+          </div>
+
+          <a href="proyecto-if/index.html" class="fn-tool__cta" aria-label="Abrir calculadora de independencia financiera">
+            Calcular mi libertad financiera
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      DISCLAIMER
+    ────────────────────────────────────────────────────────── -->
+    <section class="fn-disclaimer" id="fn-nota" aria-label="Nota de responsabilidad">
+      <div class="container">
+        <div class="fn-disclaimer__inner" data-animate="fade-up">
+          <div class="fn-disclaimer__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="10" cy="10" r="8.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 6v5M10 13.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="fn-disclaimer__text">
+            <strong>Nota importante:</strong> El contenido de esta sección es educativo e
+            informativo. No constituye asesoría financiera, de inversión ni recomendación
+            de compra o venta de ningún producto financiero. Cada situación es distinta —
+            antes de tomar decisiones importantes con tu dinero, consulta a un asesor
+            financiero certificado. Invertir siempre implica riesgo de pérdida.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      CTA FINAL
+    ────────────────────────────────────────────────────────── -->
+    <section class="fn-cta" id="fn-conectar" aria-labelledby="fnCtaTitle">
+      <div class="container">
+        <div class="fn-cta__inner" data-animate="fade-up">
+          <div class="fn-cta__glow" aria-hidden="true"></div>
+          <div class="fn-cta__icon" aria-hidden="true">💡</div>
+          <h2 class="fn-cta__title" id="fnCtaTitle">
+            El conocimiento es<br/>
+            <span class="fn-cta__highlight">tu mejor inversión</span>
+          </h2>
+          <p class="fn-cta__desc">
+            Aprender sobre dinero es uno de los hábitos que más impacto tiene
+            en la vida. Si tienes dudas sobre algún concepto, quieres compartir
+            una estrategia que te funcionó o discutir ideas, escríbeme.
+            Hablar de dinero sin tabúes nos hace a todos más libres.
+          </p>
+          <div class="fn-cta__actions">
+            <a href="../../index.html#contacto" class="btn fn-btn--primary">Escríbeme →</a>
+            <a href="../../index.html#mundos" class="btn btn--ghost fn-btn--ghost">Otros mundos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+    FOOTER — con Finanzas añadido y marcado activo
+  ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+
+        <div class="footer__brand">
+          <a href="../../index.html" class="footer__logo" aria-label="Volver al inicio">
+            <span class="footer__logo-mark">M</span>
+            El Mundo de Manu
+          </a>
+          <p class="footer__tagline">Construyendo mi universo digital, un proyecto a la vez.</p>
+        </div>
+
+        <nav class="footer__nav" aria-label="Mis mundos">
+          <h4 class="footer__nav-title">Mis Mundos</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../fe/fe.html"                 class="footer__link">Fe</a></li>
+            <li><a href="../gaming/gaming.html"         class="footer__link">Gaming</a></li>
+            <li><a href="../infantil/infantil.html"     class="footer__link">Infantil</a></li>
+            <li><a href="../relaciones/relaciones.html" class="footer__link">Relaciones</a></li>
+            <li><a href="../tecnologia/tecnologia.html" class="footer__link">Tecnología</a></li>
+            <li><a href="../educacion/educacion.html"   class="footer__link">Educación</a></li>
+            <li><a href="../bienestar/bienestar.html"   class="footer__link">Bienestar</a></li>
+            <li><a href="../viajes/viajes.html"         class="footer__link">Viajes</a></li>
+            <li><a href="finanzas.html"                 class="footer__link footer__link--active">Finanzas</a></li>
+            <li><a href="../sobremi/sobremi.html"       class="footer__link">Sobre Mí</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__nav" aria-label="Links del sitio">
+          <h4 class="footer__nav-title">Sitio</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../../index.html#inicio"    class="footer__link">Inicio</a></li>
+            <li><a href="../../index.html#proyectos" class="footer__link">Proyectos</a></li>
+            <li><a href="../../index.html#contacto"  class="footer__link">Contacto</a></li>
+          </ul>
+        </nav>
+
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© <span id="footerYear"></span> El Mundo de Manu. Construido con 💛 y mucho café.</p>
+        <p class="footer__credits">Diseñado y desarrollado por <strong>Manu</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+  <script src="finanzas.js"></script>
+
+</body>
+</html>

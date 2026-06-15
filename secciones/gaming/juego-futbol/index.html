@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!-- Aquí yo, Manu, declaro mi documento HTML5 de la versión 3 de mi juego -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>El Mundo de Manu - Fútbol Arcade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!-- Aquí yo enlazo mi hoja de estilos externa -->
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<div id="app">
+<button class="btn-mute" id="btnMute">🔊</button>
+<div class="toast-logro" id="toastLogro"><span class="toast-icono">🏆</span><div><div class="toast-titulo">¡Logro desbloqueado!</div><div class="toast-nombre">—</div></div></div>
+
+<div class="pantalla activa" id="pantallaMenu">
+  <div class="fondo-estadio"></div>
+  <svg class="fondo-lineas" viewBox="0 0 100 50" preserveAspectRatio="none">
+    <rect x="2" y="2" width="96" height="46" fill="none" stroke="#fff" stroke-width="0.4"/>
+    <line x1="50" y1="2" x2="50" y2="48" stroke="#fff" stroke-width="0.4"/>
+    <circle cx="50" cy="25" r="8" fill="none" stroke="#fff" stroke-width="0.4"/>
+    <rect x="2" y="14" width="14" height="22" fill="none" stroke="#fff" stroke-width="0.4"/>
+    <rect x="84" y="14" width="14" height="22" fill="none" stroke="#fff" stroke-width="0.4"/>
+  </svg>
+  <div class="contenido">
+    <h1 class="titulo-juego">EL MUNDO DE MANU</h1>
+    <div class="subtitulo">⚽ Fútbol Arcade ⚽</div>
+    <div class="coins-badge">🪙 <span id="menuCoins">0</span> monedas</div>
+    <div class="banner-evento" id="bannerEvento">
+      <span class="titulo-evento">🏆 Evento Activo</span>
+      <span id="textoEvento">¡Marca 3 goles hoy y gana la Copa Manu!</span>
+      <div class="barra-evento"><span id="barraEvento" style="width:0%"></span></div>
+    </div>
+    <div class="panel-perfil" id="panelPerfil">
+      <h3>👤 Mi Perfil</h3>
+      <div class="fila-club">
+        <div class="camiseta-mini" id="camisetaMini"></div>
+        <div><div class="nombre-club" id="perfilClub">Sin Club</div><div class="liga-actual" id="perfilLiga">Liga Barrial</div></div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-celda"><div class="num" id="statVictorias">0</div><div class="lbl">Victorias</div></div>
+        <div class="stat-celda"><div class="num" id="statEmpates">0</div><div class="lbl">Empates</div></div>
+        <div class="stat-celda"><div class="num" id="statDerrotas">0</div><div class="lbl">Derrotas</div></div>
+        <div class="stat-celda"><div class="num" id="statGoles">0</div><div class="lbl">Goles</div></div>
+        <div class="stat-celda"><div class="num" id="statPartidos">0</div><div class="lbl">Partidos</div></div>
+        <div class="stat-celda"><div class="num" id="statNivel">1</div><div class="lbl">Nivel</div></div>
+      </div>
+      <div class="trofeos" id="trofeos"></div>
+    </div>
+    <button class="btn dorado" id="btnJugarLiga">🏆 Jugar Liga</button>
+    <button class="btn" id="btnVsAmigo">👥 Vs Amigo (mismo dispositivo)</button>
+    <button class="btn secundario" id="btnTienda">🛒 Tienda</button>
+    <button class="btn secundario" id="btnLogros">🏆 Logros</button>
+    <button class="btn secundario" id="btnVerLiga">📊 Tabla de Liga</button>
+    <button class="btn secundario" id="btnEditarPerfil">✏️ Editar Club / Opciones</button>
+    <p class="texto-mini">Hecho con ❤️ por El Mundo de Manu</p>
+  </div>
+</div>
+
+<!-- GOOGLE ADSENSE AD UNIT HERE -->
+<!--
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+-->
+
+<div class="pantalla" id="pantallaJuego">
+  <div class="contenido">
+    <div class="scoreboard">
+      <span class="equipo-nombre" id="sbLocal">Mi Club</span>
+      <span class="marcador" id="sbGolesLocal">0</span>
+      <span class="reloj" id="sbReloj">5:00</span>
+      <span class="marcador" id="sbGolesCpu">0</span>
+      <span class="equipo-nombre" id="sbCpu">CPU</span>
+      <span class="powerup-activo" id="sbPowerup"></span>
+      <span class="tarjetas-cpu" id="sbTarjetas"></span>
+    </div>
+    <div id="contenedorCanvas"><canvas id="gameCanvas" width="640" height="400"></canvas></div>
+    <div class="controles-movil">
+      <div class="joystick-zona"><div class="joystick-base" id="joystickBase"><div class="joystick-knob" id="joystickKnob"></div></div></div>
+      <div class="acciones-movil">
+        <button class="btn-accion btn-disparo" id="btnDisparoMovil">DISPARO</button>
+        <button class="btn-accion btn-pase" id="btnPaseMovil">PASE</button>
+      </div>
+    </div>
+  </div>
+  <div id="flashGol"></div>
+  <div id="textoGol">¡GOOOL!</div>
+</div>
+
+<div class="pantalla" id="pantallaResultado">
+  <div class="fondo-estadio"></div>
+  <div class="contenido">
+    <h1 class="titulo-juego" id="resultadoTitulo" style="font-size:clamp(30px,8vw,52px)">¡VICTORIA!</h1>
+    <div class="badge-liga" id="resultadoLiga">Liga Barrial</div>
+    <div class="marcador-final">
+      <span class="eq" id="rfLocal">Mi Club</span>
+      <span class="gr" id="rfMarcador">0 - 0</span>
+      <span class="eq" id="rfCpu">CPU</span>
+    </div>
+    <div class="coins-resultado" id="coinsResultado"></div>
+    <div class="progreso-liga" id="progresoLiga"></div>
+    <div class="tabs-stats" id="tabsStats"></div>
+    <div id="contenedorStats" style="width:100%; display:flex; flex-direction:column; align-items:center;"></div>
+    <button class="btn dorado" id="btnCompartir" style="display:none">📲 Comparte tu victoria</button>
+    <div class="fila-botones">
+      <button class="btn" id="btnSiguientePartido">▶️ Siguiente</button>
+      <button class="btn secundario" id="btnVolverMenu">🏠 Menú</button>
+    </div>
+  </div>
+</div>
+
+<div class="pantalla" id="pantallaTabla">
+  <div class="fondo-estadio"></div>
+  <div class="contenido">
+    <h1 class="titulo-juego" style="font-size:clamp(26px,7vw,46px)">📊 Tabla de Liga</h1>
+    <div class="badge-liga" id="tablaLigaNombre">Liga Barrial</div>
+    <table class="tabla-liga" id="tablaPosiciones"></table>
+    <button class="btn secundario" id="btnTablaVolver">🏠 Volver al Menú</button>
+  </div>
+</div>
+
+<div class="pantalla" id="pantallaLogros">
+  <div class="fondo-estadio"></div>
+  <div class="contenido">
+    <h1 class="titulo-juego" style="font-size:clamp(26px,7vw,46px)">🏆 Logros</h1>
+    <div class="logros-grid" id="logrosGrid"></div>
+    <button class="btn secundario" id="btnLogrosVolver">🏠 Volver al Menú</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalClub">
+  <div class="modal-caja">
+    <h2>⚽ Crea tu Club</h2>
+    <label>Nombre del Club</label>
+    <input type="text" id="inputClub" placeholder="Ej: Manu FC" maxlength="18">
+    <label>Nombre del Manager</label>
+    <input type="text" id="inputManager" placeholder="Ej: Manu" maxlength="18">
+    <label>Color de Camiseta</label>
+    <div class="selector-color" id="selectorColor"></div>
+    <label>Duración del Partido</label>
+    <div class="selector-color" id="selectorDuracion" style="gap:8px">
+      <button class="btn secundario opcion-dur" data-min="2" style="width:auto;flex:1;margin:4px">2 min</button>
+      <button class="btn secundario opcion-dur" data-min="3" style="width:auto;flex:1;margin:4px">3 min</button>
+      <button class="btn secundario opcion-dur" data-min="5" style="width:auto;flex:1;margin:4px">5 min</button>
+    </div>
+    <button class="btn dorado" id="btnGuardarClub" style="margin-top:18px">✅ Guardar y Continuar</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalTienda">
+  <div class="modal-caja">
+    <h2>🛒 Tienda Manu</h2>
+    <div class="coins-tienda">🪙 <span id="tiendaCoins">0</span> monedas</div>
+    <div id="tiendaItems"></div>
+    <button class="btn secundario" id="btnCerrarTienda" style="margin-top:10px">Cerrar</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalAd">
+  <div class="modal-caja ad-modal">
+    <h2>🎁 Anuncio Recompensado</h2>
+    <div class="ad-box">📺 Espacio de Anuncio<br>(Rewarded Ad Placeholder)</div>
+    <div class="contador-ad" id="contadorAd">5</div>
+    <button class="btn" id="btnCerrarAd" disabled style="opacity:.5">Espera...</button>
+  </div>
+</div>
+
+</div>
+
+<!-- Aquí yo enlazo mi lógica de juego externa (al final para que el DOM exista) -->
+<script src="script.js"></script>
+</body>
+</html>

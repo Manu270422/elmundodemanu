@@ -59,6 +59,12 @@
   --color-relaciones:  #4ECDC4;
   --color-tecnologia:  #6C63FF;
   --color-sobremi:     #FF7F50;
+  --color-educacion:   #1A8C6E;
+  --color-bienestar:   #38B597;
+  --color-viajes:      #FF7E47;
+  --color-finanzas:    #2DBA77;
+  --color-musica:      #B14EFF;
+  --color-barranca:    #D4820A;
 
   /* — Texto — */
   --color-text-primary:   #E8E8F0;
@@ -1050,6 +1056,12 @@ body.cursor-hover .cursor-trail {
 .world-card--relaciones{ --world-color: var(--color-relaciones); }
 .world-card--tecnologia{ --world-color: var(--color-tecnologia); }
 .world-card--sobremi   { --world-color: var(--color-sobremi); }
+.world-card--educacion { --world-color: var(--color-educacion); }
+.world-card--bienestar { --world-color: var(--color-bienestar); }
+.world-card--viajes    { --world-color: var(--color-viajes); }
+.world-card--finanzas  { --world-color: var(--color-finanzas); }
+.world-card--musica    { --world-color: var(--color-musica); }
+.world-card--barranca  { --world-color: var(--color-barranca); }
 
 .world-card:hover { border-color: var(--world-color); }
 .world-card__glow { background: var(--world-color); }
@@ -1098,6 +1110,9 @@ body.cursor-hover .cursor-trail {
 /* ============================================================
   13. SECCIÓN PROYECTOS
   ============================================================ */
+/* ============================================================
+  SECCIÓN PROYECTOS DESTACADOS
+  ============================================================ */
 .projects {
   padding: var(--space-24) 0;
   background: var(--color-surface);
@@ -1105,46 +1120,117 @@ body.cursor-hover .cursor-trail {
   border-bottom: 1px solid var(--color-border);
 }
 
-.projects__grid {
+/* ── Filtros de tipo (Todos / Gratuito / De pago) ── */
+.pj-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
+}
+
+.pj-filter {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color var(--transition-base),
+              border-color var(--transition-base),
+              background var(--transition-base);
+}
+.pj-filter:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.pj-filter--active {
+  background: var(--color-primary-dim);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* ── Grid de proyectos: 1 col → 2 col en tablet+ ── */
+.pj-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-5);
+  margin-bottom: var(--space-8);
 }
-
 @media (min-width: 768px) {
-  .projects__grid { grid-template-columns: 2fr 1fr 1fr; }
+  .pj-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* Tarjeta de proyecto */
+/* Oculto tarjetas según el filtro activo */
+.pj-card.is-hidden {
+  display: none;
+}
+
+/* ── Tarjeta base ── */
 .project-card {
-  padding: var(--space-8);
+  position: relative;
+  padding: var(--space-7) var(--space-6);
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  transition: transform var(--transition-slow), border-color var(--transition-base);
+  transition: transform var(--transition-slow),
+              border-color var(--transition-base),
+              box-shadow var(--transition-base);
+  overflow: hidden;
 }
 .project-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   border-color: var(--color-primary);
+  box-shadow: 0 12px 40px rgba(108, 99, 255, 0.10);
 }
 
+/* Tarjeta destacada con fondo degradado sutil */
 .project-card--featured {
-  background: linear-gradient(135deg,
-    rgba(108,99,255,0.05) 0%,
-    var(--color-bg) 100%
+  background: linear-gradient(140deg,
+    rgba(108,99,255,0.06) 0%,
+    var(--color-bg) 60%
   );
 }
 
+/* ── Insignia de tipo (pago / gratuito) ── */
+.pj-badge {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.pj-badge--paid {
+  background: rgba(240, 165, 0, 0.12);
+  color: #F0A500;
+  border: 1px solid rgba(240, 165, 0, 0.25);
+}
+.pj-badge--free {
+  background: rgba(74, 222, 128, 0.10);
+  color: #4ADE80;
+  border: 1px solid rgba(74, 222, 128, 0.20);
+}
+
+/* ── Ícono grande de la tarjeta ── */
+.pj-card__icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+/* ── Meta: tag de categoría + estado ── */
 .project-card__meta {
   display: flex;
   align-items: center;
   gap: var(--space-3);
   flex-wrap: wrap;
 }
-
 .project-card__tag {
   padding: var(--space-1) var(--space-3);
   background: var(--color-primary-dim);
@@ -1156,7 +1242,6 @@ body.cursor-hover .cursor-trail {
   text-transform: uppercase;
   color: var(--color-primary);
 }
-
 .project-card__status {
   font-size: var(--text-xs);
   font-weight: 600;
@@ -1169,62 +1254,145 @@ body.cursor-hover .cursor-trail {
   width: 6px; height: 6px;
   border-radius: 50%;
   background: currentColor;
+  animation: pj-pulse 2s ease-in-out infinite;
 }
 .project-card__status--active { color: #4ADE80; }
 
+@keyframes pj-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.85); }
+}
+
+/* ── Título y descripción ── */
 .project-card__title {
   font-size: var(--text-xl);
   font-weight: 700;
   color: var(--color-text-primary);
+  line-height: 1.3;
 }
-
 .project-card__desc {
   font-size: var(--text-sm);
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--color-text-secondary);
   flex: 1;
 }
 
+/* ── Detalles (precio, plataforma, etc.) ── */
+.pj-card__details {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  padding: var(--space-3) var(--space-4);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+.pj-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pj-detail__label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.pj-detail__value {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+.pj-detail__value--highlight {
+  color: #F0A500;
+  font-weight: 700;
+}
+
+/* ── Stack técnico ── */
 .project-card__stack {
   display: flex;
   gap: var(--space-2);
   flex-wrap: wrap;
 }
-
 .project-card__tech {
   padding: var(--space-1) var(--space-3);
-  background: var(--color-surface-2);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
   font-size: var(--text-xs);
   color: var(--color-text-secondary);
   font-weight: 500;
 }
 
-.project-card__link {
+/* ── Botones dentro de la tarjeta ── */
+.pj-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+.pj-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--color-primary);
-  transition: letter-spacing var(--transition-base);
-  margin-top: auto;
+  text-decoration: none;
+  transition: transform var(--transition-base),
+              box-shadow var(--transition-base),
+              background var(--transition-base);
+  cursor: pointer;
+  border: none;
 }
-.project-card__link:hover { letter-spacing: 0.02em; }
+.pj-btn--primary {
+  background: linear-gradient(135deg, var(--color-primary), #5a52d5);
+  color: #FFFFFF;
+  box-shadow: 0 4px 18px var(--color-primary-glow);
+}
+.pj-btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px var(--color-primary-glow);
+}
+.pj-btn--secondary {
+  background: var(--color-primary-dim);
+  color: var(--color-primary);
+  border: 1px solid rgba(108, 99, 255, 0.25);
+}
+.pj-btn--secondary:hover {
+  background: rgba(108, 99, 255, 0.18);
+  transform: translateY(-1px);
+}
+.pj-btn--ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+.pj-btn--ghost:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
 
-.project-card--coming { opacity: 0.6; }
-.project-card--coming:hover { opacity: 1; border-color: var(--color-border); }
+/* ── Nota de cierre de la sección ── */
+.pj-footer-note {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  padding-top: var(--space-4);
+}
 
+/* Compatibilidad: clases antiguas que ya no uso pero por si acaso */
+.project-card--coming { opacity: 0.65; }
 .project-card__placeholder {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: var(--space-2);
   padding: var(--space-8);
   border: 2px dashed var(--color-border);
   border-radius: var(--radius-lg);
   color: var(--color-text-muted);
-  font-size: var(--text-xs);
-  text-align: center;
+  font-size: var(--text-xs); text-align: center;
 }
 .project-card__placeholder span { font-size: 2rem; }
 

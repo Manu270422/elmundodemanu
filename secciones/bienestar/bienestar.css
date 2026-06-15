@@ -1,0 +1,1083 @@
+/*
+  ============================================================
+  bienestar.css — El Mundo de Manu / Salud y Bienestar
+  ============================================================
+  Estilos específicos para mi sección de Salud y Bienestar.
+  Heredan variables y componentes globales de style.css.
+
+  Dirección estética: orgánica, serena, clínica sin ser fría.
+  Paleta menta (#38B597) sobre oscuro con toque verde muy
+  sutil. Sin ruido visual — espacios amplios, tipografía
+  limpia, movimiento suave que evoca la respiración.
+
+  Decidí no agregar fuente nueva: DM Sans ya transmite
+  claridad y modernidad, que es exactamente lo que esta
+  sección necesita. La identidad viene del color y el layout.
+
+  Prefijo: bn- (bienestar)
+
+  Estructura:
+  01. Variables locales de la sección
+  02. Breadcrumb
+  03. Hero de Bienestar (canvas de respiración + luces)
+  04. ¿Qué encontrarás aquí?
+  05. Pilares del bienestar
+  06. Artículos
+  07. Tips rápidos
+  08. Recursos recomendados
+  09. Disclaimer
+  10. CTA final
+  11. Botones propios de esta sección
+  12. Responsive
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+*/
+
+
+/* ============================================================
+  01. VARIABLES LOCALES
+  El color principal de esta sección es el menta #38B597.
+  Verifiqué que no choca con ninguno de los mundos existentes:
+  dorado Fe, cian Gaming, rosa Infantil, turquesa Relaciones,
+  índigo Tecnología, coral Sobre Mí, esmeralda Educación.
+  El menta tiene su propio territorio: más suave que el
+  turquesa de Relaciones, más brillante que el esmeralda
+  de Educación. Transmite calma, salud y naturaleza.
+  ============================================================ */
+.page-bienestar {
+  --bn-mint:       #38B597;
+  --bn-mint-light: #7ED8C0;
+  --bn-mint-deep:  #2A9E82;
+  --bn-mint-dim:   rgba(56, 181, 151, 0.10);
+  --bn-mint-glow:  rgba(56, 181, 151, 0.28);
+  --bn-cool-bg:    #080F0D;   /* Fondo oscuro con pizca de verde orgánico */
+}
+
+
+/* ============================================================
+  02. BREADCRUMB
+  Mismo patrón que en Fe y Educación, con el color menta.
+  Solo sobreescribo lo que cambia — el resto lo hereda style.css.
+  ============================================================ */
+.breadcrumb {
+  padding: calc(var(--space-4) + 70px) 0 var(--space-4);
+  border-bottom: 1px solid rgba(56, 181, 151, 0.12);
+  background: var(--color-bg);
+}
+.breadcrumb__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.breadcrumb__link {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  transition: color var(--transition-base);
+}
+.breadcrumb__link:hover { color: var(--bn-mint); }
+.breadcrumb__sep {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  opacity: 0.4;
+}
+.breadcrumb__current {
+  font-size: var(--text-sm);
+  color: var(--bn-mint);
+  font-weight: 500;
+}
+
+/* Tag menta específico de esta sección */
+.bn-tag {
+  background: var(--bn-mint-dim);
+  border-color: rgba(56, 181, 151, 0.22);
+  color: var(--bn-mint-light);
+}
+
+
+/* ============================================================
+  03. HERO DE BIENESTAR
+  El diseño del hero es diferente a Fe (estrellas) y
+  a Educación (grid de puntos). Aquí el canvas de fondo
+  muestra círculos concéntricos que se expanden y contraen
+  en el ritmo de una respiración — 4 s inhala, 4 s exhala.
+  Es la metáfora visual más coherente con el tema.
+
+  El fondo usa --bn-cool-bg que tiene un ligero toque
+  verdoso para diferenciar la atmósfera de forma sutil.
+  ============================================================ */
+.bn-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: var(--space-32) 0 var(--space-20);
+  background: var(--bn-cool-bg);
+}
+
+/* Canvas de ondas de respiración — cubre todo el hero */
+.bn-hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* Destellos de luz decorativos — más suaves que en Fe */
+.bn-hero__light {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  animation: bnLightBreath 8s ease-in-out infinite;
+}
+.bn-hero__light--1 {
+  width: 520px; height: 360px;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse,
+    rgba(56, 181, 151, 0.11) 0%, transparent 70%);
+  animation-delay: 0s;
+}
+.bn-hero__light--2 {
+  width: 260px; height: 260px;
+  bottom: 18%; right: 6%;
+  background: radial-gradient(circle,
+    rgba(126, 216, 192, 0.07) 0%, transparent 70%);
+  animation-delay: 3s;
+  animation-name: bnLightBreathSimple;
+}
+.bn-hero__light--3 {
+  width: 200px; height: 200px;
+  top: 22%; left: 5%;
+  background: radial-gradient(circle,
+    rgba(56, 181, 151, 0.06) 0%, transparent 70%);
+  animation-delay: 5s;
+  animation-name: bnLightBreathSimple;
+}
+
+/*
+  Separé los keyframes de la luz 1 (que tiene translateX)
+  de las luces 2 y 3 para no romper su transform individual
+  al animar — mismo patrón que en fe.css y educacion.css.
+*/
+@keyframes bnLightBreath {
+  0%, 100% { opacity: 1;    transform: scale(1) translateX(-50%); }
+  50%       { opacity: 0.55; transform: scale(1.12) translateX(-50%); }
+}
+@keyframes bnLightBreathSimple {
+  0%, 100% { opacity: 1;    transform: scale(1); }
+  50%       { opacity: 0.5;  transform: scale(1.15); }
+}
+
+/* Símbolo decorativo SVG de hoja/planta — muy tenue al fondo */
+.bn-hero__symbol-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0.025;
+}
+.bn-hero__symbol {
+  width: 300px;
+  height: 375px;
+  color: var(--bn-mint-light);
+}
+
+/* Contenido central del hero */
+.bn-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.bn-hero__content {
+  max-width: 740px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  padding: 0 var(--space-6);
+}
+
+.bn-hero__tag-row {
+  display: flex;
+  justify-content: center;
+}
+
+/* Título principal — degradado menta */
+.bn-hero__title {
+  font-size: clamp(4rem, 13vw, 9rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: transparent;
+  background: linear-gradient(135deg,
+    var(--bn-mint-light) 0%,
+    var(--bn-mint) 55%,
+    var(--bn-mint-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: none;
+}
+
+/*
+  Bloque de frase — no uso Playfair Display (ese es de Fe)
+  ni Space Grotesk (ese es de Educación). DM Sans en peso
+  light da la sobriedad que esta cita necesita. El borde
+  izquierdo menta y el fondo ligeramente coloreado la
+  diferencian visualmente del texto normal.
+*/
+.bn-hero__phrase {
+  max-width: 580px;
+  padding: var(--space-8) var(--space-9);
+  border: 1px solid rgba(56, 181, 151, 0.18);
+  border-left: 3px solid var(--bn-mint);
+  border-radius: var(--radius-xl);
+  background: rgba(56, 181, 151, 0.04);
+  position: relative;
+  text-align: left;
+}
+
+/* Comilla decorativa grande */
+.bn-hero__phrase::before {
+  content: '"';
+  position: absolute;
+  top: -14px; left: 20px;
+  font-size: 6rem;
+  color: var(--bn-mint);
+  opacity: 0.10;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.bn-hero__phrase-text {
+  font-weight: 300;
+  font-size: clamp(var(--text-base), 2vw, var(--text-md));
+  line-height: 1.75;
+  color: var(--color-text-primary);
+  font-style: italic;
+}
+
+.bn-hero__phrase-ref {
+  display: block;
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--bn-mint);
+  letter-spacing: 0.02em;
+  font-style: normal;
+}
+
+.bn-hero__desc {
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+  max-width: 500px;
+}
+
+.bn-hero__actions {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Indicador de scroll con línea menta */
+.bn-hero__scroll {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: bnScrollBounce 2.5s ease-in-out infinite;
+  z-index: 1;
+}
+.bn-hero__scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--bn-mint), transparent);
+  order: -1;
+}
+@keyframes bnScrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+
+/* ============================================================
+  04. ¿QUÉ ENCONTRARÁS AQUÍ? (INTRO)
+  Layout 2 columnas: texto reflexivo + tarjeta de principios.
+  La tarjeta usa bullets numerados en lugar de íconos para
+  dar un tono más editorial y serio, coherente con el
+  enfoque "basado en evidencia" que quiero transmitir.
+  ============================================================ */
+.bn-intro {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid rgba(56, 181, 151, 0.10);
+  border-bottom: 1px solid rgba(56, 181, 151, 0.10);
+}
+
+.bn-intro__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .bn-intro__inner { grid-template-columns: 1.4fr 1fr; gap: var(--space-16); }
+}
+
+.bn-intro__title {
+  font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl));
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  margin: var(--space-4) 0;
+  line-height: 1.15;
+}
+
+.bn-intro__desc {
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+.bn-intro__desc:last-child { margin-bottom: 0; }
+
+/* Tarjeta de principios del bienestar */
+.bn-intro__card {
+  position: relative;
+  padding: var(--space-10) var(--space-8);
+  background: linear-gradient(135deg,
+    rgba(56, 181, 151, 0.07) 0%,
+    var(--color-bg) 100%);
+  border: 1px solid rgba(56, 181, 151, 0.20);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.bn-intro__card-icon { font-size: 2.25rem; line-height: 1; }
+
+.bn-intro__card-title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+/* Lista de principios con número menta */
+.bn-intro__card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.bn-intro__card-item {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+
+/* Número del principio — acento menta */
+.bn-intro__card-bullet {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--bn-mint);
+  background: var(--bn-mint-dim);
+  border: 1px solid rgba(56, 181, 151, 0.20);
+  border-radius: var(--radius-full);
+  min-width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  letter-spacing: 0.02em;
+}
+
+.bn-intro__card-item strong { color: var(--color-text-primary); }
+
+/* Glow menta en el fondo de la tarjeta */
+.bn-intro__card-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 65% 55% at 50% 110%,
+    var(--bn-mint-dim) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+
+/* ============================================================
+  05. PILARES DEL BIENESTAR
+  Grid de 6 tarjetas — misma estructura que fe-pillars__grid
+  pero con identidad visual de Bienestar. Cada tarjeta tiene:
+  número decorativo al fondo, ícono SVG propio, título,
+  descripción y un "stat" con dato científico real.
+  El stat es el elemento diferenciador respecto a Fe —
+  ancla el contenido en lo concreto y da credibilidad.
+  ============================================================ */
+.bn-pillars {
+  padding: var(--space-24) 0;
+}
+
+.bn-pillars__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 640px)  { .bn-pillars__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .bn-pillars__grid { grid-template-columns: repeat(3, 1fr); } }
+
+.bn-pillar-card {
+  position: relative;
+  padding: var(--space-8);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: transform var(--transition-slow), border-color var(--transition-base),
+              box-shadow var(--transition-base);
+  overflow: hidden;
+}
+.bn-pillar-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(56, 181, 151, 0.38);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.35), 0 0 22px var(--bn-mint-dim);
+}
+
+/* Número grande decorativo al fondo — muy tenue */
+.bn-pillar-card__number {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-5);
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--bn-mint);
+  opacity: 0.05;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+.bn-pillar-card:hover .bn-pillar-card__number { opacity: 0.09; }
+
+/* Wrapper del ícono SVG */
+.bn-pillar-card__icon-wrap {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bn-mint-dim);
+  border: 1px solid rgba(56, 181, 151, 0.18);
+  border-radius: var(--radius-md);
+  color: var(--bn-mint-light);
+  flex-shrink: 0;
+}
+
+.bn-pillar-card__title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.25;
+}
+
+.bn-pillar-card__desc {
+  font-size: var(--text-sm);
+  line-height: 1.78;
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+
+/*
+  Stat científico al pie — este es el elemento único de
+  esta sección. Cada pilar tiene un dato real con su fuente.
+  El número grande en menta lo hace visualmente potente.
+*/
+.bn-pillar-card__stat {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.bn-pillar-card__stat-num {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--bn-mint);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.bn-pillar-card__stat-label {
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+
+/* ============================================================
+  06. ARTÍCULOS
+  Las tarjetas de artículos tienen más contenido que las
+  tarjetas típicas del sitio — son casi micro-artículos.
+  Diseñé una variante --featured para el primer artículo
+  (sueño) que ocupa el ancho completo en desktop.
+
+  Dentro de cada artículo hay bloques específicos:
+  - __inset: recuadro con lista de puntos clave
+  - __tips: sección de tips con ícono + texto
+  - __tip-row: una fila de tip individual
+  - __myth: bloque de mito desmentido (solo en el featured)
+
+  Esta estructura permite contenido denso sin que la tarjeta
+  se vea desordenada — cada bloque tiene su espacio.
+  ============================================================ */
+.bn-articles {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.bn-articles__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+/* En desktop: artículo featured ocupa ancho completo arriba,
+   los dos restantes se ponen lado a lado abajo */
+@media (min-width: 900px) {
+  .bn-articles__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bn-article-card--featured {
+    grid-column: span 2;
+  }
+}
+
+.bn-article-card {
+  padding: var(--space-8);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  transition: transform var(--transition-slow), border-color var(--transition-base);
+}
+.bn-article-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(56, 181, 151, 0.30);
+}
+
+/* Artículo featured — borde superior menta más prominente */
+.bn-article-card--featured {
+  border-top: 3px solid var(--bn-mint);
+}
+
+/* Header del artículo: tag + tiempo de lectura */
+.bn-article-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.bn-article-card__tag {
+  padding: var(--space-1) var(--space-3);
+  background: var(--bn-mint-dim);
+  border: 1px solid rgba(56, 181, 151, 0.22);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bn-mint-light);
+}
+
+.bn-article-card__read {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.bn-article-card__title {
+  font-size: clamp(var(--text-lg), 2.2vw, var(--text-xl));
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+}
+
+.bn-article-card__body {
+  font-size: var(--text-sm);
+  line-height: 1.82;
+  color: var(--color-text-secondary);
+}
+
+/* Recuadro de puntos clave — fondo menta muy tenue */
+.bn-article-card__inset {
+  padding: var(--space-6);
+  background: var(--bn-mint-dim);
+  border: 1px solid rgba(56, 181, 151, 0.18);
+  border-radius: var(--radius-lg);
+}
+
+.bn-article-card__inset-title {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--bn-mint-light);
+  margin-bottom: var(--space-4);
+  letter-spacing: 0.02em;
+}
+
+.bn-article-card__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.bn-article-card__list li {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  padding-left: var(--space-5);
+  position: relative;
+}
+
+/* Bullet personalizado en menta */
+.bn-article-card__list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--bn-mint);
+  font-weight: 700;
+  font-size: var(--text-xs);
+  top: 3px;
+}
+
+.bn-article-card__list li strong { color: var(--color-text-primary); }
+
+/* Sección de tips dentro del artículo */
+.bn-article-card__tips {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.bn-article-card__tips-title {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: 0.01em;
+}
+
+/* Fila de tip individual: ícono + texto */
+.bn-article-card__tip-row {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.bn-article-card__tip-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.bn-article-card__tip-row strong { color: var(--color-text-primary); }
+
+/* Bloque de mito desmentido — solo en el artículo featured */
+.bn-article-card__myth {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  padding: var(--space-5) var(--space-6);
+  border-left: 2px solid var(--bn-mint);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: rgba(56, 181, 151, 0.04);
+}
+
+.bn-article-card__myth strong { color: var(--bn-mint-light); }
+
+
+/* ============================================================
+  07. TIPS RÁPIDOS
+  Franja de 4 tarjetas compactas con micro-consejos.
+  El grid cambia de 1 columna en móvil a 4 en desktop.
+  Diseño deliberadamente más ligero que los pilares —
+  son consejos de acción inmediata, no contenido profundo.
+  ============================================================ */
+.bn-tips {
+  padding: var(--space-24) 0;
+}
+
+.bn-tips__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 600px) { .bn-tips__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .bn-tips__grid { grid-template-columns: repeat(4, 1fr); } }
+
+.bn-tip-item {
+  padding: var(--space-7) var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: transform var(--transition-slow), border-color var(--transition-base);
+}
+.bn-tip-item:hover {
+  transform: translateY(-4px);
+  border-color: rgba(56, 181, 151, 0.30);
+}
+
+.bn-tip-item__icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.bn-tip-item__title {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+.bn-tip-item__desc {
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+
+
+/* ============================================================
+  08. RECURSOS RECOMENDADOS
+  Grid de 2 columnas con tarjetas horizontales.
+  Mismo patrón que en Educación y Fe — ícono + info.
+  La entrada lateral desde la izquierda la maneja el JS.
+  ============================================================ */
+.bn-resources {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.bn-resources__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 768px) {
+  .bn-resources__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.bn-resource-card {
+  display: flex;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  transition: transform var(--transition-slow), border-color var(--transition-base);
+}
+.bn-resource-card:hover {
+  transform: translateX(4px);
+  border-color: rgba(56, 181, 151, 0.30);
+}
+
+.bn-resource-card__icon {
+  font-size: 2.25rem;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.bn-resource-card__info { flex: 1; }
+
+.bn-resource-card__type {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bn-mint-light);
+  margin-bottom: var(--space-1);
+}
+
+.bn-resource-card__title {
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+  line-height: 1.3;
+}
+
+.bn-resource-card__desc {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+
+/* ============================================================
+  09. DISCLAIMER
+  Diseño sobrio y discreto. No quiero que sea invasivo —
+  solo que esté visible para quien lo necesite.
+  El ícono de información SVG da contexto sin alarmar.
+  La franja usa un borde sutil para diferenciarse del fondo
+  sin crear un elemento visualmente pesado.
+  ============================================================ */
+.bn-disclaimer {
+  padding: var(--space-10) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.bn-disclaimer__inner {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  padding: var(--space-6) var(--space-8);
+  background: rgba(56, 181, 151, 0.04);
+  border: 1px solid rgba(56, 181, 151, 0.14);
+  border-radius: var(--radius-xl);
+}
+
+.bn-disclaimer__icon {
+  color: var(--bn-mint);
+  flex-shrink: 0;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+.bn-disclaimer__text {
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-text-muted);
+}
+
+.bn-disclaimer__text strong {
+  color: var(--bn-mint-light);
+}
+
+
+/* ============================================================
+  10. CTA FINAL
+  Misma estructura que fe-cta y edu-cta. La personalizo
+  con el color menta y un ícono de planta/naturaleza.
+  El glow centralizado y pulsante cierra visualmente la
+  sección con la misma calma orgánica que empezó en el hero.
+  ============================================================ */
+.bn-cta {
+  padding: var(--space-24) 0;
+}
+
+.bn-cta__inner {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-14) var(--space-10);
+  background: var(--color-surface);
+  border: 1px solid rgba(56, 181, 151, 0.18);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.bn-cta__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 65% 65% at 50% 50%,
+    rgba(56, 181, 151, 0.06) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.bn-cta__icon {
+  font-size: 3rem;
+  position: relative;
+  animation: bnIconGlow 4s ease-in-out infinite;
+}
+@keyframes bnIconGlow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(56, 181, 151, 0.35)); }
+  50%       { filter: drop-shadow(0 0 22px rgba(126, 216, 192, 0.60)); }
+}
+
+.bn-cta__title {
+  font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl));
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  position: relative;
+}
+
+.bn-cta__highlight {
+  color: transparent;
+  background: linear-gradient(135deg, var(--bn-mint-light), var(--bn-mint));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.bn-cta__desc {
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  max-width: 480px;
+  position: relative;
+}
+
+.bn-cta__actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+}
+
+
+/* ============================================================
+  11. BOTONES PROPIOS DE ESTA SECCIÓN
+  El botón primario usa el menta como fondo.
+  El texto oscuro (#03170F) garantiza contraste WCAG AA
+  sobre el fondo menta.
+  ============================================================ */
+.bn-btn--primary {
+  background: var(--bn-mint);
+  color: #03170F;
+  font-weight: 700;
+  box-shadow: 0 4px 20px var(--bn-mint-glow);
+}
+.bn-btn--primary:hover {
+  background: var(--bn-mint-light);
+  box-shadow: 0 6px 28px rgba(56, 181, 151, 0.45);
+  transform: translateY(-2px);
+  color: #03170F;
+}
+
+.bn-btn--ghost {
+  border-color: rgba(56, 181, 151, 0.28);
+  color: var(--bn-mint-light);
+}
+.bn-btn--ghost:hover {
+  border-color: var(--bn-mint);
+  background: var(--bn-mint-dim);
+  color: var(--bn-mint-light);
+}
+
+
+/* ============================================================
+  12. RESPONSIVE — AJUSTES ADICIONALES PARA MÓVIL
+  Complemento los grids automáticos con correcciones
+  específicas para pantallas muy pequeñas.
+  ============================================================ */
+@media (max-width: 640px) {
+
+  .bn-hero {
+    padding: var(--space-20) 0 var(--space-16);
+    min-height: auto;
+  }
+  .bn-hero__title { font-size: clamp(3rem, 18vw, 5rem); }
+  .bn-hero__phrase {
+    padding: var(--space-6) var(--space-5);
+    text-align: left;
+  }
+  .bn-hero__phrase::before { font-size: 4rem; }
+  .bn-hero__actions {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .bn-hero__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .bn-article-card { padding: var(--space-6); }
+  .bn-article-card__tip-row { flex-direction: column; gap: var(--space-2); }
+
+  .bn-disclaimer__inner {
+    flex-direction: column;
+    padding: var(--space-5) var(--space-6);
+  }
+
+  .bn-cta__inner { padding: var(--space-10) var(--space-6); }
+  .bn-cta__actions {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .bn-cta__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .bn-intro__card { padding: var(--space-7) var(--space-6); }
+  .bn-pillar-card { padding: var(--space-6); }
+  .bn-article-card__inset { padding: var(--space-5); }
+}
+
+/* Footer link activo — menta de esta sección */
+.footer__link--active { color: var(--bn-mint-light); }

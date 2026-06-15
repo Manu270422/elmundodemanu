@@ -3,24 +3,24 @@
   ============================================================
   tecnologia.html — El Mundo de Manu / Tecnología
   ============================================================
-  Esta es mi sección de tecnología. Aquí comparto todo lo
-  relacionado con mi camino como desarrollador: proyectos,
-  recursos que uso, artículos que escribo y las herramientas
-  que van formando mi stack técnico.
+  Mi sección de tecnología. Aquí hablo de todo lo que tiene
+  que ver con el mundo tech: mi stack, mis proyectos reales,
+  noticias del sector y mis notas de aprendizaje.
 
-  Es mi vitrina como desarrollador en formación — honesta,
-  real y en constante crecimiento.
+  Funciona como un blog técnico personal y como vitrina de
+  mis proyectos. Cada proyecto tiene botones que funcionan
+  de verdad y apuntan al lugar correcto.
 
   Estructura de la página:
-  - Hero de sección con identidad visual propia
-  - Mi stack tecnológico actual
-  - Proyectos técnicos (catálogo expandible)
-  - Recursos y aprendizaje (lo que estoy estudiando)
-  - Blog / notas técnicas (artículos futuros)
+  - Hero con terminal animada y canvas matrix
+  - Mi stack tecnológico (tabs por categoría)
+  - Mis proyectos técnicos (catálogo filtrable con botones reales)
+  - Noticias y tendencias tech (blog)
+  - Mi camino de aprendizaje (barras de progreso)
   - CTA para conectar en GitHub
 
   Autor: Carlos Manuel Turizo Hernández
-  Versión: 1.0.0
+  Versión: 2.0.0
   ============================================================
 -->
 <html lang="es">
@@ -29,21 +29,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="Tecnología — El Mundo de Manu. Mi stack, proyectos, recursos de aprendizaje y notas técnicas de un desarrollador en formación." />
+    content="Tecnología — El Mundo de Manu. Mi stack, proyectos reales, noticias tech y notas de un desarrollador en formación desde Barrancabermeja." />
   <meta name="author" content="Manu" />
 
   <title>Tecnología — El Mundo de Manu</title>
 
-  <!-- Fuentes del sitio -->
+  <!-- Fuentes del sitio + JetBrains Mono para código -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500;700&display=swap"
     rel="stylesheet" />
-  <!--
-    Agrego JetBrains Mono porque es la fuente perfecta para
-    mostrar código. Le da autenticidad técnica a esta sección.
-  -->
 
   <!-- CSS global primero, luego el específico de esta sección -->
   <link rel="stylesheet" href="../../style.css" />
@@ -51,17 +47,13 @@
 </head>
 
 <body class="page-tecnologia">
-  <!--
-    La clase page-tecnologia en el body me permite sobrescribir
-    variables o estilos globales de forma controlada si lo necesito.
-  -->
 
   <!-- Cursor personalizado -->
   <div class="cursor" id="cursor" aria-hidden="true"></div>
   <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
 
   <!-- ============================================================
-    NAVBAR — Misma estructura del sitio, paths relativos
+    NAVBAR — Paths relativos desde /secciones/tecnologia/
   ============================================================ -->
   <header class="navbar" id="navbar" role="banner">
     <nav class="navbar__container" aria-label="Navegación principal">
@@ -73,7 +65,7 @@
 
       <ul class="navbar__links" role="list">
         <li><a href="../../index.html#inicio"    class="navbar__link">Inicio</a></li>
-        <li><a href="../../index.html#mundos"    class="navbar__link">Mis Mundos</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__link navbar__link--active">Mis Mundos</a></li>
         <li><a href="../../index.html#proyectos" class="navbar__link">Proyectos</a></li>
         <li><a href="../../index.html#sobre-mi"  class="navbar__link">Sobre Mí</a></li>
         <li>
@@ -107,7 +99,7 @@
   <div class="breadcrumb" aria-label="Ruta de navegación">
     <div class="container">
       <nav class="breadcrumb__nav">
-        <a href="../../index.html" class="breadcrumb__link">Inicio</a>
+        <a href="../../index.html"        class="breadcrumb__link">Inicio</a>
         <span class="breadcrumb__sep" aria-hidden="true">/</span>
         <a href="../../index.html#mundos" class="breadcrumb__link">Mis Mundos</a>
         <span class="breadcrumb__sep" aria-hidden="true">/</span>
@@ -120,14 +112,12 @@
 
     <!-- ──────────────────────────────────────────────────────────
       HERO DE SECCIÓN — TECNOLOGÍA
-      Diseño con estética de terminal/código para darle
-      personalidad técnica desde el primer vistazo.
-      El fondo animado simula líneas de código cayendo.
+      Terminal animada + canvas matrix de fondo.
+      El JS (tecnologia.js) se encarga de la animación.
     ────────────────────────────────────────────────────────── -->
     <section class="tc-hero" id="tc-inicio" aria-labelledby="tcHeroTitle">
 
       <div class="tc-hero__bg" aria-hidden="true">
-        <!-- Canvas de lluvia de código — lo animo desde JS -->
         <canvas class="tc-hero__matrix" id="matrixCanvas"></canvas>
         <div class="tc-hero__overlay"></div>
       </div>
@@ -135,7 +125,7 @@
       <div class="container">
         <div class="tc-hero__inner">
 
-          <!-- Terminal window decorativa con mi presentación -->
+          <!-- Terminal animada — el JS escribe las líneas una a una -->
           <div class="tc-hero__terminal" data-animate="fade-right">
             <div class="tc-hero__terminal-bar" aria-hidden="true">
               <span class="tc-hero__terminal-dot tc-hero__terminal-dot--red"></span>
@@ -143,43 +133,42 @@
               <span class="tc-hero__terminal-dot tc-hero__terminal-dot--green"></span>
               <span class="tc-hero__terminal-title">manu@dev ~ bash</span>
             </div>
-            <div class="tc-hero__terminal-body" aria-label="Ventana de terminal con mi presentación">
-              <!-- Líneas de la terminal — se van escribiendo con JS -->
+            <div class="tc-hero__terminal-body" aria-label="Terminal con mi presentación">
               <div class="tc-hero__terminal-line">
                 <span class="tc-term-prompt" aria-hidden="true">→</span>
                 <span class="tc-term-cmd">whoami</span>
               </div>
               <div class="tc-hero__terminal-line tc-hero__terminal-line--output">
-                Manu — Estudiante de Ing. Informática &amp; Dev en formación
+                Manu — Ing. Informática & Dev en formación · Barrancabermeja 🇨🇴
               </div>
               <div class="tc-hero__terminal-line">
                 <span class="tc-term-prompt" aria-hidden="true">→</span>
-                <span class="tc-term-cmd">cat pasion.txt</span>
+                <span class="tc-term-cmd">cat proyectos.txt</span>
               </div>
               <div class="tc-hero__terminal-line tc-hero__terminal-line--output">
-                Construir cosas útiles con código.
+                <span class="tc-term-file">pack-cartas-amor/</span>
+                <span class="tc-term-file">saberquest/</span>
+                <span class="tc-term-file">academix/</span>
               </div>
               <div class="tc-hero__terminal-line">
                 <span class="tc-term-prompt" aria-hidden="true">→</span>
-                <span class="tc-term-cmd">ls proyectos/</span>
+                <span class="tc-term-cmd">echo $META</span>
               </div>
               <div class="tc-hero__terminal-line tc-hero__terminal-line--output">
-                <span class="tc-term-file">el-mundo-de-manu/</span>
-                <span class="tc-term-file">proximos-proyectos/</span>
+                Construir, aprender y crecer — un proyecto a la vez 🚀
               </div>
               <div class="tc-hero__terminal-line">
                 <span class="tc-term-prompt" aria-hidden="true">→</span>
-                <!-- Cursor parpadeante al final -->
                 <span class="tc-term-cursor" aria-hidden="true" id="termCursor">_</span>
               </div>
             </div>
           </div>
 
-          <!-- Texto de presentación de la sección -->
+          <!-- Texto y acciones principales del hero -->
           <div class="tc-hero__text" data-animate="fade-left">
             <div class="tc-hero__tag-row">
               <span class="section-tag">Mi mundo técnico</span>
-              <span class="tc-hero__version" aria-label="Versión actual">v1.0.0</span>
+              <span class="tc-hero__version" aria-label="Versión actual">v2.0.0</span>
             </div>
 
             <h1 class="tc-hero__title" id="tcHeroTitle">
@@ -189,8 +178,8 @@
 
             <p class="tc-hero__desc">
               Aquí vivo lo que aprendo. La tecnología no es solo mi carrera —
-              es mi forma de resolver problemas, de crear, de servir.
-              Cada proyecto es una clase y cada bug, una lección.
+              es mi forma de resolver problemas, de crear y de servir.
+              Cada proyecto es una clase. Cada bug, una lección.
             </p>
 
             <p class="tc-hero__desc">
@@ -199,15 +188,15 @@
               Eso es exactamente lo que quiero mostrar aquí.
             </p>
 
-            <!-- Stats rápidos de esta sección -->
+            <!-- Stats actualizados con proyectos reales -->
             <div class="tc-hero__stats">
               <div class="tc-hero__stat">
-                <span class="tc-hero__stat-num">1</span>
-                <span class="tc-hero__stat-label">Proyecto activo</span>
+                <span class="tc-hero__stat-num">4</span>
+                <span class="tc-hero__stat-label">Proyectos</span>
               </div>
               <div class="tc-hero__stat-sep" aria-hidden="true"></div>
               <div class="tc-hero__stat">
-                <span class="tc-hero__stat-num">5+</span>
+                <span class="tc-hero__stat-num">8+</span>
                 <span class="tc-hero__stat-label">Tecnologías</span>
               </div>
               <div class="tc-hero__stat-sep" aria-hidden="true"></div>
@@ -218,6 +207,10 @@
             </div>
 
             <div class="tc-hero__actions">
+              <!--
+                Botón principal: lleva a la sección de proyectos
+                de esta misma página. El scroll lo maneja tecnologia.js.
+              -->
               <a href="#tc-proyectos" class="btn btn--primary">
                 Ver proyectos
                 <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -235,9 +228,8 @@
 
     <!-- ──────────────────────────────────────────────────────────
       SECCIÓN: MI STACK TECNOLÓGICO
-      Muestro las tecnologías que uso o estoy aprendiendo
-      organizadas por categorías. Diseño de tarjetas con
-      nivel de dominio visual.
+      Tabs por categoría con nivel de dominio visual.
+      StackTabs en tecnologia.js controla el cambio de panel.
     ────────────────────────────────────────────────────────── -->
     <section class="tc-stack" id="tc-stack" aria-labelledby="tcStackTitle">
       <div class="container">
@@ -247,11 +239,11 @@
           <h2 class="section-title" id="tcStackTitle">Mi Stack Actual</h2>
           <p class="section-desc">
             Las tecnologías con las que trabajo hoy y las que estoy
-            incorporando activamente a mi flujo de trabajo.
+            incorporando activamente. Nivel honesto, sin exagerar.
           </p>
         </div>
 
-        <!-- Tabs de categorías — filtro el stack por tipo -->
+        <!-- Tabs de categoría — accesibles con flechas de teclado -->
         <div class="tc-stack__tabs" role="tablist" aria-label="Categorías del stack">
           <button class="tc-stack__tab tc-stack__tab--active" role="tab"
             aria-selected="true" data-tab="frontend" aria-controls="tab-frontend">
@@ -276,14 +268,12 @@
           <div class="tc-stack__grid">
 
             <div class="tc-tech-card" data-animate="fade-up" data-delay="0">
-              <div class="tc-tech-card__icon" style="--tech-color: #E34F26">
-                <span aria-hidden="true">🌐</span>
-              </div>
+              <div class="tc-tech-card__icon" style="--tech-color: #E34F26"><span aria-hidden="true">🌐</span></div>
               <div class="tc-tech-card__info">
                 <h3 class="tc-tech-card__name">HTML5</h3>
                 <p class="tc-tech-card__desc">Estructura semántica y accesible</p>
               </div>
-              <div class="tc-tech-card__level" aria-label="Nivel: Intermedio-alto">
+              <div class="tc-tech-card__level" aria-label="Nivel: Intermedio">
                 <div class="tc-tech-card__dots">
                   <span class="tc-tech-card__dot tc-tech-card__dot--filled"></span>
                   <span class="tc-tech-card__dot tc-tech-card__dot--filled"></span>
@@ -296,12 +286,10 @@
             </div>
 
             <div class="tc-tech-card" data-animate="fade-up" data-delay="1">
-              <div class="tc-tech-card__icon" style="--tech-color: #264DE4">
-                <span aria-hidden="true">🎨</span>
-              </div>
+              <div class="tc-tech-card__icon" style="--tech-color: #264DE4"><span aria-hidden="true">🎨</span></div>
               <div class="tc-tech-card__info">
                 <h3 class="tc-tech-card__name">CSS3</h3>
-                <p class="tc-tech-card__desc">Diseño responsive, animaciones, variables</p>
+                <p class="tc-tech-card__desc">Responsive, animaciones, variables CSS</p>
               </div>
               <div class="tc-tech-card__level" aria-label="Nivel: Intermedio">
                 <div class="tc-tech-card__dots">
@@ -316,14 +304,12 @@
             </div>
 
             <div class="tc-tech-card" data-animate="fade-up" data-delay="2">
-              <div class="tc-tech-card__icon" style="--tech-color: #F7DF1E">
-                <span aria-hidden="true">⚡</span>
-              </div>
+              <div class="tc-tech-card__icon" style="--tech-color: #F7DF1E"><span aria-hidden="true">⚡</span></div>
               <div class="tc-tech-card__info">
                 <h3 class="tc-tech-card__name">JavaScript</h3>
-                <p class="tc-tech-card__desc">ES6+, DOM, módulos, async</p>
+                <p class="tc-tech-card__desc">ES6+, DOM, Canvas API, módulos</p>
               </div>
-              <div class="tc-tech-card__level" aria-label="Nivel: Básico-intermedio">
+              <div class="tc-tech-card__level" aria-label="Nivel: En progreso">
                 <div class="tc-tech-card__dots">
                   <span class="tc-tech-card__dot tc-tech-card__dot--filled"></span>
                   <span class="tc-tech-card__dot tc-tech-card__dot--filled"></span>
@@ -336,22 +322,20 @@
             </div>
 
             <div class="tc-tech-card" data-animate="fade-up" data-delay="3">
-              <div class="tc-tech-card__icon" style="--tech-color: #61DAFB">
-                <span aria-hidden="true">⚛️</span>
-              </div>
+              <div class="tc-tech-card__icon" style="--tech-color: #61DAFB"><span aria-hidden="true">⚛️</span></div>
               <div class="tc-tech-card__info">
                 <h3 class="tc-tech-card__name">React</h3>
-                <p class="tc-tech-card__desc">Próxima gran meta de aprendizaje</p>
+                <p class="tc-tech-card__desc">Componentes, hooks — lo uso en Academix</p>
               </div>
-              <div class="tc-tech-card__level" aria-label="Nivel: Iniciando">
+              <div class="tc-tech-card__level" aria-label="Nivel: Básico">
                 <div class="tc-tech-card__dots">
+                  <span class="tc-tech-card__dot tc-tech-card__dot--filled"></span>
                   <span class="tc-tech-card__dot tc-tech-card__dot--filled"></span>
                   <span class="tc-tech-card__dot"></span>
                   <span class="tc-tech-card__dot"></span>
                   <span class="tc-tech-card__dot"></span>
-                  <span class="tc-tech-card__dot"></span>
                 </div>
-                <span class="tc-tech-card__label">Iniciando</span>
+                <span class="tc-tech-card__label">Básico</span>
               </div>
             </div>
 
@@ -363,12 +347,10 @@
           <div class="tc-stack__grid">
 
             <div class="tc-tech-card" data-animate="fade-up" data-delay="0">
-              <div class="tc-tech-card__icon" style="--tech-color: #3776AB">
-                <span aria-hidden="true">🐍</span>
-              </div>
+              <div class="tc-tech-card__icon" style="--tech-color: #68A063"><span aria-hidden="true">🟢</span></div>
               <div class="tc-tech-card__info">
-                <h3 class="tc-tech-card__name">Python</h3>
-                <p class="tc-tech-card__desc">Scripts, lógica, bases de algoritmos</p>
+                <h3 class="tc-tech-card__name">Node.js + Express</h3>
+                <p class="tc-tech-card__desc">API REST — lo uso en mi Pack de Cartas</p>
               </div>
               <div class="tc-tech-card__level" aria-label="Nivel: Básico">
                 <div class="tc-tech-card__dots">
@@ -383,12 +365,10 @@
             </div>
 
             <div class="tc-tech-card" data-animate="fade-up" data-delay="1">
-              <div class="tc-tech-card__icon" style="--tech-color: #336791">
-                <span aria-hidden="true">🗄️</span>
-              </div>
+              <div class="tc-tech-card__icon" style="--tech-color: #336791"><span aria-hidden="true">🗄️</span></div>
               <div class="tc-tech-card__info">
-                <h3 class="tc-tech-card__name">SQL / Bases de datos</h3>
-                <p class="tc-tech-card__desc">Consultas, relaciones, fundamentos</p>
+                <h3 class="tc-tech-card__name">SQL / MySQL</h3>
+                <p class="tc-tech-card__desc">Consultas, relaciones — Prisma ORM en Academix</p>
               </div>
               <div class="tc-tech-card__level" aria-label="Nivel: Básico">
                 <div class="tc-tech-card__dots">
@@ -402,6 +382,42 @@
               </div>
             </div>
 
+            <div class="tc-tech-card" data-animate="fade-up" data-delay="2">
+              <div class="tc-tech-card__icon" style="--tech-color: #3ECF8E"><span aria-hidden="true">⚡</span></div>
+              <div class="tc-tech-card__info">
+                <h3 class="tc-tech-card__name">Supabase</h3>
+                <p class="tc-tech-card__desc">PostgreSQL + Auth — base del Pack de Cartas</p>
+              </div>
+              <div class="tc-tech-card__level" aria-label="Nivel: En progreso">
+                <div class="tc-tech-card__dots">
+                  <span class="tc-tech-card__dot tc-tech-card__dot--filled"></span>
+                  <span class="tc-tech-card__dot tc-tech-card__dot--filled"></span>
+                  <span class="tc-tech-card__dot"></span>
+                  <span class="tc-tech-card__dot"></span>
+                  <span class="tc-tech-card__dot"></span>
+                </div>
+                <span class="tc-tech-card__label">En progreso</span>
+              </div>
+            </div>
+
+            <div class="tc-tech-card" data-animate="fade-up" data-delay="3">
+              <div class="tc-tech-card__icon" style="--tech-color: #FF9900"><span aria-hidden="true">🔥</span></div>
+              <div class="tc-tech-card__info">
+                <h3 class="tc-tech-card__name">Firebase</h3>
+                <p class="tc-tech-card__desc">Auth + Firestore — backend de SaberQuest</p>
+              </div>
+              <div class="tc-tech-card__level" aria-label="Nivel: En progreso">
+                <div class="tc-tech-card__dots">
+                  <span class="tc-tech-card__dot tc-tech-card__dot--filled"></span>
+                  <span class="tc-tech-card__dot tc-tech-card__dot--filled"></span>
+                  <span class="tc-tech-card__dot"></span>
+                  <span class="tc-tech-card__dot"></span>
+                  <span class="tc-tech-card__dot"></span>
+                </div>
+                <span class="tc-tech-card__label">En progreso</span>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -410,12 +426,10 @@
           <div class="tc-stack__grid">
 
             <div class="tc-tech-card" data-animate="fade-up" data-delay="0">
-              <div class="tc-tech-card__icon" style="--tech-color: #F05032">
-                <span aria-hidden="true">🌿</span>
-              </div>
+              <div class="tc-tech-card__icon" style="--tech-color: #F05032"><span aria-hidden="true">🌿</span></div>
               <div class="tc-tech-card__info">
                 <h3 class="tc-tech-card__name">Git &amp; GitHub</h3>
-                <p class="tc-tech-card__desc">Control de versiones, commits, ramas</p>
+                <p class="tc-tech-card__desc">Control de versiones en todos mis proyectos</p>
               </div>
               <div class="tc-tech-card__level" aria-label="Nivel: En progreso">
                 <div class="tc-tech-card__dots">
@@ -430,12 +444,10 @@
             </div>
 
             <div class="tc-tech-card" data-animate="fade-up" data-delay="1">
-              <div class="tc-tech-card__icon" style="--tech-color: #007ACC">
-                <span aria-hidden="true">🖥️</span>
-              </div>
+              <div class="tc-tech-card__icon" style="--tech-color: #007ACC"><span aria-hidden="true">🖥️</span></div>
               <div class="tc-tech-card__info">
                 <h3 class="tc-tech-card__name">VS Code</h3>
-                <p class="tc-tech-card__desc">Mi editor principal — extensiones, atajos</p>
+                <p class="tc-tech-card__desc">Mi editor principal — extensiones y atajos</p>
               </div>
               <div class="tc-tech-card__level" aria-label="Nivel: Cómodo">
                 <div class="tc-tech-card__dots">
@@ -450,12 +462,28 @@
             </div>
 
             <div class="tc-tech-card" data-animate="fade-up" data-delay="2">
-              <div class="tc-tech-card__icon" style="--tech-color: #F24E1E">
-                <span aria-hidden="true">🎨</span>
-              </div>
+              <div class="tc-tech-card__icon" style="--tech-color: #00C7B7"><span aria-hidden="true">🚀</span></div>
               <div class="tc-tech-card__info">
-                <h3 class="tc-tech-card__name">Figma</h3>
-                <p class="tc-tech-card__desc">Prototipos, wireframes, diseño UI</p>
+                <h3 class="tc-tech-card__name">Netlify &amp; Render</h3>
+                <p class="tc-tech-card__desc">Hosting del Pack de Cartas en producción</p>
+              </div>
+              <div class="tc-tech-card__level" aria-label="Nivel: Básico">
+                <div class="tc-tech-card__dots">
+                  <span class="tc-tech-card__dot tc-tech-card__dot--filled"></span>
+                  <span class="tc-tech-card__dot tc-tech-card__dot--filled"></span>
+                  <span class="tc-tech-card__dot"></span>
+                  <span class="tc-tech-card__dot"></span>
+                  <span class="tc-tech-card__dot"></span>
+                </div>
+                <span class="tc-tech-card__label">Básico</span>
+              </div>
+            </div>
+
+            <div class="tc-tech-card" data-animate="fade-up" data-delay="3">
+              <div class="tc-tech-card__icon" style="--tech-color: #F24E1E"><span aria-hidden="true">🎨</span></div>
+              <div class="tc-tech-card__info">
+                <h3 class="tc-tech-card__name">Figma &amp; Canva</h3>
+                <p class="tc-tech-card__desc">Prototipos y diseño de mis proyectos</p>
               </div>
               <div class="tc-tech-card__level" aria-label="Nivel: Básico">
                 <div class="tc-tech-card__dots">
@@ -477,34 +505,37 @@
           <div class="tc-stack__grid">
 
             <div class="tc-tech-card tc-tech-card--learning" data-animate="fade-up" data-delay="0">
-              <div class="tc-tech-card__icon" style="--tech-color: #61DAFB">
-                <span aria-hidden="true">⚛️</span>
-              </div>
+              <div class="tc-tech-card__icon" style="--tech-color: #3178C6"><span aria-hidden="true">📘</span></div>
               <div class="tc-tech-card__info">
-                <h3 class="tc-tech-card__name">React.js</h3>
-                <p class="tc-tech-card__desc">Componentes, hooks, estado</p>
+                <h3 class="tc-tech-card__name">TypeScript</h3>
+                <p class="tc-tech-card__desc">Lo uso en Academix — sigo profundizando</p>
               </div>
-              <span class="tc-tech-card__badge">En mi radar</span>
+              <span class="tc-tech-card__badge">En curso</span>
             </div>
 
             <div class="tc-tech-card tc-tech-card--learning" data-animate="fade-up" data-delay="1">
-              <div class="tc-tech-card__icon" style="--tech-color: #68A063">
-                <span aria-hidden="true">🟢</span>
-              </div>
+              <div class="tc-tech-card__icon" style="--tech-color: #61DAFB"><span aria-hidden="true">⚛️</span></div>
               <div class="tc-tech-card__info">
-                <h3 class="tc-tech-card__name">Node.js</h3>
-                <p class="tc-tech-card__desc">Backend con JavaScript</p>
+                <h3 class="tc-tech-card__name">React avanzado</h3>
+                <p class="tc-tech-card__desc">Context, useReducer, patrones de arquitectura</p>
               </div>
               <span class="tc-tech-card__badge">En mi radar</span>
             </div>
 
             <div class="tc-tech-card tc-tech-card--learning" data-animate="fade-up" data-delay="2">
-              <div class="tc-tech-card__icon" style="--tech-color: #00ADD8">
-                <span aria-hidden="true">🐹</span>
+              <div class="tc-tech-card__icon" style="--tech-color: #FF3E00"><span aria-hidden="true">🌀</span></div>
+              <div class="tc-tech-card__info">
+                <h3 class="tc-tech-card__name">Svelte</h3>
+                <p class="tc-tech-card__desc">Framework ligero para interfaces rápidas</p>
               </div>
+              <span class="tc-tech-card__badge">Futura meta</span>
+            </div>
+
+            <div class="tc-tech-card tc-tech-card--learning" data-animate="fade-up" data-delay="3">
+              <div class="tc-tech-card__icon" style="--tech-color: #00ADD8"><span aria-hidden="true">🐹</span></div>
               <div class="tc-tech-card__info">
                 <h3 class="tc-tech-card__name">Go (Golang)</h3>
-                <p class="tc-tech-card__desc">Lo quiero aprender para backend eficiente</p>
+                <p class="tc-tech-card__desc">Backend eficiente — meta a largo plazo</p>
               </div>
               <span class="tc-tech-card__badge">Futura meta</span>
             </div>
@@ -516,48 +547,50 @@
     </section>
 
     <!-- ──────────────────────────────────────────────────────────
-      SECCIÓN: PROYECTOS TÉCNICOS
-      Catálogo de mis proyectos con filtro por tecnología
-      y estado. Pensado para crecer con el tiempo.
+      SECCIÓN: MIS PROYECTOS TÉCNICOS
+      Catálogo filtrable. Cada botón apunta a su URL real.
+      ProjectsFilter en tecnologia.js maneja el filtrado.
     ────────────────────────────────────────────────────────── -->
     <section class="tc-projects" id="tc-proyectos" aria-labelledby="tcProjectsTitle">
       <div class="container">
 
         <div class="section-header" data-animate="fade-up">
           <span class="section-tag">Lo que construyo</span>
-          <h2 class="section-title" id="tcProjectsTitle">Proyectos</h2>
+          <h2 class="section-title" id="tcProjectsTitle">Mis Proyectos</h2>
           <p class="section-desc">
-            Cada proyecto es un paso real. Aquí muestro en qué
-            estoy trabajando, qué terminé y qué está por venir.
+            Proyectos reales, construidos por mí, con botones que funcionan de verdad.
+            Cada uno es un paso hacia mis metas.
           </p>
         </div>
 
-        <!-- Filtros de proyectos -->
+        <!-- Filtros — el JS actualiza aria-pressed también -->
         <div class="tc-projects__filters" role="group" aria-label="Filtrar proyectos">
-          <button class="tc-projects__filter tc-projects__filter--active" data-filter="todos">
-            Todos
-          </button>
-          <button class="tc-projects__filter" data-filter="web">Web</button>
-          <button class="tc-projects__filter" data-filter="activo">En desarrollo</button>
-          <button class="tc-projects__filter" data-filter="proximo">Próximamente</button>
+          <button class="tc-projects__filter tc-projects__filter--active"
+            data-filter="todos" aria-pressed="true">Todos</button>
+          <button class="tc-projects__filter" data-filter="web" aria-pressed="false">Web</button>
+          <button class="tc-projects__filter" data-filter="app" aria-pressed="false">App</button>
+          <button class="tc-projects__filter" data-filter="activo" aria-pressed="false">Activos</button>
+          <button class="tc-projects__filter" data-filter="proximo" aria-pressed="false">Próximamente</button>
         </div>
 
-        <!-- Grid de proyectos -->
         <div class="tc-projects__grid" id="projectsGrid">
 
-          <!-- Proyecto principal: El Mundo de Manu -->
+          <!-- ─── PROYECTO 1: Pack de Cartas de Amor Premium ─── -->
           <article class="tc-project-card tc-project-card--featured"
             data-category="web activo" data-animate="fade-up" data-delay="0">
 
             <div class="tc-project-card__header">
               <div class="tc-project-card__meta">
-                <span class="tc-project-card__tag">Web</span>
-                <span class="tc-project-card__status tc-project-card__status--active">
-                  En desarrollo
-                </span>
+                <span class="tc-project-card__tag">Full-Stack</span>
+                <span class="tc-project-card__status tc-project-card__status--active">Activo · De pago</span>
               </div>
               <div class="tc-project-card__links">
-                <a href="#" class="tc-project-card__link-btn"
+                <!--
+                  Botón GitHub: apunta al repositorio real.
+                  Si el repo es privado, lo puedo cambiar a "#" y ocultar.
+                -->
+                <a href="https://github.com/Manu270422/pack-cartas-amor-frontend"
+                  class="tc-project-card__link-btn"
                   aria-label="Ver código en GitHub" target="_blank" rel="noopener">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483
@@ -572,8 +605,10 @@
                   </svg>
                   GitHub
                 </a>
-                <a href="../../index.html" class="tc-project-card__link-btn tc-project-card__link-btn--primary"
-                  aria-label="Ver proyecto en vivo">
+                <!-- Botón "Ver sitio": apunta al dominio en producción -->
+                <a href="https://pack-cartas-amor.netlify.app"
+                  class="tc-project-card__link-btn tc-project-card__link-btn--primary"
+                  aria-label="Ver Pack de Cartas en vivo" target="_blank" rel="noopener">
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
                       stroke-linecap="round" stroke-linejoin="round"/>
@@ -583,19 +618,208 @@
               </div>
             </div>
 
-            <h3 class="tc-project-card__title">El Mundo de Manu</h3>
+            <h3 class="tc-project-card__title">💌 Pack de Cartas de Amor Premium</h3>
             <p class="tc-project-card__desc">
-              Mi plataforma web personal. Un sitio multi-sección construido
-              desde cero con HTML5, CSS3 y JavaScript vanilla puro.
-              Sin frameworks, sin librerías externas — solo fundamentos sólidos.
-              Es el proyecto que me está formando como desarrollador.
+              Mi primer producto digital comercial. Plataforma web donde cualquier
+              persona personaliza y envía cartas de amor interactivas.
+              Integré tres pasarelas de pago colombianas (Mercado Pago, Wompi, Bold)
+              y acceso automático por correo vía Gmail SMTP. Construido desde cero
+              — aprendiendo full-stack mientras avanzaba. <strong>Precio: $15.000 COP</strong>.
             </p>
 
-            <!-- Snippet de código decorativo -->
             <div class="tc-project-card__code" aria-hidden="true">
-              <pre class="tc-code-snippet"><code><span class="tc-code-keyword">const</span> <span class="tc-code-var">vision</span> = {
-  <span class="tc-code-prop">proyecto</span>: <span class="tc-code-str">'El Mundo de Manu'</span>,
-  <span class="tc-code-prop">stack</span>: [<span class="tc-code-str">'HTML5'</span>, <span class="tc-code-str">'CSS3'</span>, <span class="tc-code-str">'JS'</span>],
+              <pre class="tc-code-snippet"><code><span class="tc-code-keyword">const</span> <span class="tc-code-var">pack</span> = {
+  <span class="tc-code-prop">frontend</span>: <span class="tc-code-str">'Netlify'</span>,
+  <span class="tc-code-prop">backend</span>:  <span class="tc-code-str">'Render + Node.js'</span>,
+  <span class="tc-code-prop">db</span>:       <span class="tc-code-str">'Supabase'</span>,
+  <span class="tc-code-prop">pagos</span>:    [<span class="tc-code-str">'MercadoPago'</span>, <span class="tc-code-str">'Wompi'</span>, <span class="tc-code-str">'Bold'</span>]
+};</code></pre>
+            </div>
+
+            <div class="tc-project-card__stack">
+              <span class="tc-project-card__tech">HTML/CSS/JS</span>
+              <span class="tc-project-card__tech">Node.js</span>
+              <span class="tc-project-card__tech">Express</span>
+              <span class="tc-project-card__tech">Supabase</span>
+              <span class="tc-project-card__tech">Netlify</span>
+              <span class="tc-project-card__tech">Render</span>
+            </div>
+          </article>
+
+          <!-- ─── PROYECTO 2: SaberQuest ─── -->
+          <article class="tc-project-card"
+            data-category="app activo" data-animate="fade-up" data-delay="1">
+
+            <div class="tc-project-card__header">
+              <div class="tc-project-card__meta">
+                <span class="tc-project-card__tag">App Android</span>
+                <span class="tc-project-card__status tc-project-card__status--active">En desarrollo</span>
+              </div>
+              <div class="tc-project-card__links">
+                <a href="https://github.com/Manu270422"
+                  class="tc-project-card__link-btn"
+                  aria-label="Ver perfil de GitHub" target="_blank" rel="noopener">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483
+                      0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466
+                      -.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832
+                      .092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688
+                      -.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004
+                      1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651
+                      .64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855
+                      0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484
+                      17.522 2 12 2z"/>
+                  </svg>
+                  GitHub
+                </a>
+                <!--
+                  SaberQuest aún no está en producción pública.
+                  Cuando lo publique en Play Store, cambio este href.
+                -->
+                <span class="tc-project-card__link-btn tc-project-card__link-btn--disabled"
+                  aria-label="Próximamente en Play Store">
+                  Próximamente
+                </span>
+              </div>
+            </div>
+
+            <h3 class="tc-project-card__title">🧠 SaberQuest</h3>
+            <p class="tc-project-card__desc">
+              App Android educativa y gamificada. El usuario responde trivia para
+              subir de rango (de Aprendiz a Gran Maestro). Incluye banco de 150
+              preguntas con shuffle Fisher-Yates, 10 niveles de competencia,
+              misiones diarias, tienda con poderes y sistema de vidas.
+              Pensada para hacer el aprendizaje más divertido. <strong>100% gratis</strong>.
+            </p>
+
+            <div class="tc-project-card__code" aria-hidden="true">
+              <pre class="tc-code-snippet"><code><span class="tc-code-keyword">const</span> <span class="tc-code-var">saberquest</span> = {
+  <span class="tc-code-prop">plataforma</span>: <span class="tc-code-str">'Android'</span>,
+  <span class="tc-code-prop">preguntas</span>:  <span class="tc-code-num">150</span>,
+  <span class="tc-code-prop">rangos</span>:     <span class="tc-code-num">10</span>,
+  <span class="tc-code-prop">precio</span>:    <span class="tc-code-str">'Gratis 🎓'</span>
+};</code></pre>
+            </div>
+
+            <div class="tc-project-card__stack">
+              <span class="tc-project-card__tech">HTML/CSS/JS</span>
+              <span class="tc-project-card__tech">Firebase</span>
+              <span class="tc-project-card__tech">Firestore</span>
+              <span class="tc-project-card__tech">Capacitor</span>
+            </div>
+          </article>
+
+          <!-- ─── PROYECTO 3: Academix ─── -->
+          <article class="tc-project-card"
+            data-category="web activo" data-animate="fade-up" data-delay="2">
+
+            <div class="tc-project-card__header">
+              <div class="tc-project-card__meta">
+                <span class="tc-project-card__tag">Web App</span>
+                <span class="tc-project-card__status tc-project-card__status--active">SENA ADSO</span>
+              </div>
+              <div class="tc-project-card__links">
+                <a href="https://github.com/Manu270422"
+                  class="tc-project-card__link-btn"
+                  aria-label="Ver código en GitHub" target="_blank" rel="noopener">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483
+                      0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466
+                      -.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832
+                      .092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688
+                      -.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004
+                      1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651
+                      .64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855
+                      0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484
+                      17.522 2 12 2z"/>
+                  </svg>
+                  GitHub
+                </a>
+                <span class="tc-project-card__link-btn tc-project-card__link-btn--disabled"
+                  aria-label="Demo en servidor local por ahora">
+                  Demo local
+                </span>
+              </div>
+            </div>
+
+            <h3 class="tc-project-card__title">🎓 Academix</h3>
+            <p class="tc-project-card__desc">
+              Sistema web de gestión académica para el SENA ADSO. Permite gestionar
+              materias, tareas, fechas y notificaciones. Arquitectura full-stack
+              profesional con React + TypeScript en frontend, Node.js + Express en
+              backend, Prisma ORM + MySQL 8, autenticación JWT y bcrypt.
+              <strong>Proyecto académico — gratis</strong>.
+            </p>
+
+            <div class="tc-project-card__code" aria-hidden="true">
+              <pre class="tc-code-snippet"><code><span class="tc-code-keyword">const</span> <span class="tc-code-var">academix</span> = {
+  <span class="tc-code-prop">frontend</span>: <span class="tc-code-str">'React + TypeScript'</span>,
+  <span class="tc-code-prop">backend</span>:  <span class="tc-code-str">'Node + Express'</span>,
+  <span class="tc-code-prop">orm</span>:      <span class="tc-code-str">'Prisma + MySQL 8'</span>
+};</code></pre>
+            </div>
+
+            <div class="tc-project-card__stack">
+              <span class="tc-project-card__tech">React</span>
+              <span class="tc-project-card__tech">TypeScript</span>
+              <span class="tc-project-card__tech">Node.js</span>
+              <span class="tc-project-card__tech">Prisma</span>
+              <span class="tc-project-card__tech">MySQL</span>
+              <span class="tc-project-card__tech">JWT</span>
+            </div>
+          </article>
+
+          <!-- ─── PROYECTO 4: El Mundo de Manu (este sitio) ─── -->
+          <article class="tc-project-card"
+            data-category="web activo" data-animate="fade-up" data-delay="3">
+
+            <div class="tc-project-card__header">
+              <div class="tc-project-card__meta">
+                <span class="tc-project-card__tag">Portafolio</span>
+                <span class="tc-project-card__status tc-project-card__status--active">En desarrollo</span>
+              </div>
+              <div class="tc-project-card__links">
+                <a href="https://github.com/Manu270422"
+                  class="tc-project-card__link-btn"
+                  aria-label="Ver en GitHub" target="_blank" rel="noopener">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483
+                      0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466
+                      -.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832
+                      .092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688
+                      -.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004
+                      1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651
+                      .64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855
+                      0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484
+                      17.522 2 12 2z"/>
+                  </svg>
+                  GitHub
+                </a>
+                <a href="https://elmundodemanu.com"
+                  class="tc-project-card__link-btn tc-project-card__link-btn--primary"
+                  aria-label="Visitar elmundodemanu.com" target="_blank" rel="noopener">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Ver sitio
+                </a>
+              </div>
+            </div>
+
+            <h3 class="tc-project-card__title">🌐 El Mundo de Manu</h3>
+            <p class="tc-project-card__desc">
+              Este mismo sitio. Multi-sección construido desde cero con HTML5, CSS3
+              y JavaScript vanilla puro — sin frameworks, sin librerías externas.
+              Cursor personalizado, canvas de partículas, animaciones con
+              IntersectionObserver, loader, filtros interactivos y diseño 100%
+              responsive. Cada línea comentada para aprender mientras progreso.
+            </p>
+
+            <div class="tc-project-card__code" aria-hidden="true">
+              <pre class="tc-code-snippet"><code><span class="tc-code-keyword">const</span> <span class="tc-code-var">elmundodemanu</span> = {
+  <span class="tc-code-prop">stack</span>:  [<span class="tc-code-str">'HTML5'</span>, <span class="tc-code-str">'CSS3'</span>, <span class="tc-code-str">'JS'</span>],
+  <span class="tc-code-prop">host</span>:   <span class="tc-code-str">'Hostinger'</span>,
   <span class="tc-code-prop">estado</span>: <span class="tc-code-str">'construyendo 🚀'</span>
 };</code></pre>
             </div>
@@ -604,52 +828,55 @@
               <span class="tc-project-card__tech">HTML5</span>
               <span class="tc-project-card__tech">CSS3</span>
               <span class="tc-project-card__tech">JavaScript</span>
-              <span class="tc-project-card__tech">CSS Variables</span>
               <span class="tc-project-card__tech">Canvas API</span>
+              <span class="tc-project-card__tech">Hostinger</span>
             </div>
           </article>
 
-          <!-- Proyecto 2: Próximo -->
+          <!-- ─── SLOT FUTURO 1: Próximo proyecto técnico ─── -->
           <article class="tc-project-card tc-project-card--coming"
-            data-category="proximo" data-animate="fade-up" data-delay="1">
+            data-category="proximo" data-animate="fade-up" data-delay="4">
             <div class="tc-project-card__header">
               <div class="tc-project-card__meta">
-                <span class="tc-project-card__tag">Idea</span>
+                <span class="tc-project-card__tag">Próximamente</span>
               </div>
             </div>
-            <h3 class="tc-project-card__title">Próximo Proyecto</h3>
+            <h3 class="tc-project-card__title">🔧 Próximo proyecto</h3>
             <p class="tc-project-card__desc">
-              Tengo ideas en mente. Cuando defina el siguiente proyecto
-              técnico, aparecerá aquí con todos sus detalles.
+              Estoy definiendo el siguiente proyecto técnico.
+              Cuando esté listo, aparecerá aquí con todos sus detalles,
+              botones reales y su código en GitHub.
             </p>
             <div class="tc-project-card__placeholder" aria-hidden="true">
               <span>⚙️</span>
-              <p>Definiendo alcance...</p>
+              <p>Ideas cocinando...</p>
             </div>
           </article>
 
-          <!-- Proyecto 3: Placeholder futuro -->
+          <!-- ─── SLOT FUTURO 2: Espacio para futuros proyectos ─── -->
           <article class="tc-project-card tc-project-card--coming"
-            data-category="proximo" data-animate="fade-up" data-delay="2">
+            data-category="proximo" data-animate="fade-up" data-delay="5">
             <div class="tc-project-card__header">
               <div class="tc-project-card__meta">
                 <span class="tc-project-card__tag">Futuro</span>
               </div>
             </div>
-            <h3 class="tc-project-card__title">Espacio reservado</h3>
+            <h3 class="tc-project-card__title">💡 Espacio reservado</h3>
             <p class="tc-project-card__desc">
-              Este espacio crecerá junto conmigo. Cada nuevo proyecto
-              que construya tendrá su lugar aquí.
+              Este espacio crecerá junto conmigo.
+              Habrá proyectos de cada sección del sitio — tecnología,
+              fe, gaming, relaciones e infancia.
             </p>
             <div class="tc-project-card__placeholder" aria-hidden="true">
               <span>💡</span>
-              <p>Muchas ideas por nacer</p>
+              <p>El futuro tiene muchas ideas</p>
             </div>
           </article>
 
         </div>
+        <!-- Fin grid proyectos -->
 
-        <!-- Mensaje cuando no hay proyectos en el filtro -->
+        <!-- Mensaje vacío cuando un filtro no tiene resultados -->
         <div class="tc-projects__empty" id="projectsEmpty" hidden aria-live="polite">
           <span aria-hidden="true">🔍</span>
           <p>No hay proyectos en esta categoría todavía. ¡Muy pronto!</p>
@@ -659,10 +886,130 @@
     </section>
 
     <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: NOTICIAS Y TENDENCIAS TECH
+      Blog de entradas sobre tecnología actual. Las primeras
+      3 son entradas reales (en proceso de escritura).
+      Los slots marcados "Próximamente" se irán llenando.
+    ────────────────────────────────────────────────────────── -->
+    <section class="tc-blog" id="tc-notas" aria-labelledby="tcBlogTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag">Mi blog tech</span>
+          <h2 class="section-title" id="tcBlogTitle">Tecnología &amp; Tendencias</h2>
+          <p class="section-desc">
+            Hablo de lo que pasa en el mundo tech, de lo que aprendo
+            y de lo que me parece relevante para developers en formación como yo.
+          </p>
+        </div>
+
+        <div class="tc-blog__grid">
+
+          <!-- Entrada 1 — en proceso de escritura -->
+          <article class="tc-blog-card tc-blog-card--real" data-animate="fade-up" data-delay="0">
+            <div class="tc-blog-card__meta">
+              <span class="tc-blog-card__tag">Aprendizaje</span>
+              <time class="tc-blog-card__date" datetime="2026">2026</time>
+            </div>
+            <h3 class="tc-blog-card__title">
+              Lo que aprendí construyendo mi primer producto digital desde cero
+            </h3>
+            <p class="tc-blog-card__excerpt">
+              Pasarelas de pago, webhooks, sessionStorage, SMTP, tokens...
+              construir el Pack de Cartas me enseñó más que cualquier tutorial.
+              Cuento los errores reales y cómo los resolví.
+            </p>
+            <span class="tc-blog-card__coming">Artículo en proceso ✍️</span>
+          </article>
+
+          <!-- Entrada 2 — en proceso -->
+          <article class="tc-blog-card tc-blog-card--real" data-animate="fade-up" data-delay="1">
+            <div class="tc-blog-card__meta">
+              <span class="tc-blog-card__tag">JavaScript</span>
+              <time class="tc-blog-card__date" datetime="2026">2026</time>
+            </div>
+            <h3 class="tc-blog-card__title">
+              IntersectionObserver: animaciones de scroll sin librerías
+            </h3>
+            <p class="tc-blog-card__excerpt">
+              Cómo animar elementos al hacer scroll usando solo la API nativa
+              del navegador. Sin dependencias, sin librerías — puro JavaScript.
+              Lo uso en todo este sitio.
+            </p>
+            <span class="tc-blog-card__coming">Artículo en proceso ✍️</span>
+          </article>
+
+          <!-- Entrada 3 — próximamente -->
+          <article class="tc-blog-card tc-blog-card--coming" data-animate="fade-up" data-delay="2">
+            <div class="tc-blog-card__meta">
+              <span class="tc-blog-card__tag">IA</span>
+            </div>
+            <h3 class="tc-blog-card__title">
+              Cómo uso la IA para aprender a programar más rápido (sin trampa)
+            </h3>
+            <p class="tc-blog-card__excerpt">
+              La diferencia entre pedirle código a la IA y pedirle que te enseñe.
+              Mi método para sacarle el mayor provecho como estudiante
+              con recursos limitados.
+            </p>
+            <span class="tc-blog-card__coming">Próximamente 🔜</span>
+          </article>
+
+          <!-- Entrada 4 — próximamente -->
+          <article class="tc-blog-card tc-blog-card--coming" data-animate="fade-up" data-delay="3">
+            <div class="tc-blog-card__meta">
+              <span class="tc-blog-card__tag">Tendencias</span>
+            </div>
+            <h3 class="tc-blog-card__title">
+              Lo más relevante en tecnología para developers Junior en 2026
+            </h3>
+            <p class="tc-blog-card__excerpt">
+              Qué aprender, qué evitar y en qué enfocarse si estás empezando
+              en el desarrollo web hoy. Mi perspectiva desde Colombia.
+            </p>
+            <span class="tc-blog-card__coming">Próximamente 🔜</span>
+          </article>
+
+          <!-- Entrada 5 — próximamente -->
+          <article class="tc-blog-card tc-blog-card--coming" data-animate="fade-up" data-delay="4">
+            <div class="tc-blog-card__meta">
+              <span class="tc-blog-card__tag">Git</span>
+            </div>
+            <h3 class="tc-blog-card__title">
+              Mi flujo de trabajo con Git trabajando solo en proyectos personales
+            </h3>
+            <p class="tc-blog-card__excerpt">
+              Cómo organizo mis commits, ramas y versiones cuando trabajo
+              solo. Sin sobrecomplícar — lo que realmente funciona.
+            </p>
+            <span class="tc-blog-card__coming">Próximamente 🔜</span>
+          </article>
+
+          <!-- Entrada 6 — slot libre -->
+          <article class="tc-blog-card tc-blog-card--coming" data-animate="fade-up" data-delay="5">
+            <div class="tc-blog-card__meta">
+              <span class="tc-blog-card__tag">Próximamente</span>
+            </div>
+            <h3 class="tc-blog-card__title">
+              Más artículos en camino...
+            </h3>
+            <p class="tc-blog-card__excerpt">
+              Escribo sobre lo que aprendo. A medida que avance en mis proyectos
+              y estudios, este blog irá llenándose de contenido real y honesto.
+            </p>
+            <span class="tc-blog-card__coming">Muy pronto 🔜</span>
+          </article>
+
+        </div>
+        <!-- Fin blog grid -->
+
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
       SECCIÓN: MI CAMINO DE APRENDIZAJE
-      Recursos, cursos y materiales que estoy usando
-      para crecer como desarrollador. Soy transparente
-      sobre lo que estudio y cómo lo estudio.
+      Barras de progreso animadas por IntersectionObserver.
+      LearningBars en tecnologia.js controla la animación.
     ────────────────────────────────────────────────────────── -->
     <section class="tc-learning" id="tc-aprendizaje" aria-labelledby="tcLearningTitle">
       <div class="container">
@@ -672,7 +1019,7 @@
           <h2 class="section-title" id="tcLearningTitle">Mi Camino de Aprendizaje</h2>
           <p class="section-desc">
             Aprendo en público, con recursos reales y construyendo cosas.
-            Aquí comparto qué estoy estudiando y cómo.
+            Aquí comparto qué estoy estudiando y cómo lo hago.
           </p>
         </div>
 
@@ -691,19 +1038,7 @@
                 <div class="tc-learning__item-icon">📘</div>
                 <div class="tc-learning__item-info">
                   <h4 class="tc-learning__item-title">JavaScript — Fundamentos avanzados</h4>
-                  <p class="tc-learning__item-source">MDN Web Docs + práctica directa</p>
-                  <div class="tc-learning__item-progress">
-                    <div class="tc-learning__item-bar" data-width="65"></div>
-                    <span>65%</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="tc-learning__item">
-                <div class="tc-learning__item-icon">🎨</div>
-                <div class="tc-learning__item-info">
-                  <h4 class="tc-learning__item-title">CSS — Animaciones y diseño avanzado</h4>
-                  <p class="tc-learning__item-source">Práctica construyendo este sitio</p>
+                  <p class="tc-learning__item-source">MDN Web Docs + práctica en proyectos reales</p>
                   <div class="tc-learning__item-progress">
                     <div class="tc-learning__item-bar" data-width="70"></div>
                     <span>70%</span>
@@ -712,13 +1047,37 @@
               </div>
 
               <div class="tc-learning__item">
+                <div class="tc-learning__item-icon">🎨</div>
+                <div class="tc-learning__item-info">
+                  <h4 class="tc-learning__item-title">CSS — Animaciones y diseño avanzado</h4>
+                  <p class="tc-learning__item-source">Construyendo este sitio desde cero</p>
+                  <div class="tc-learning__item-progress">
+                    <div class="tc-learning__item-bar" data-width="75"></div>
+                    <span>75%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tc-learning__item">
+                <div class="tc-learning__item-icon">🟢</div>
+                <div class="tc-learning__item-info">
+                  <h4 class="tc-learning__item-title">Node.js + Express — APIs REST</h4>
+                  <p class="tc-learning__item-source">Pack de Cartas + Academix</p>
+                  <div class="tc-learning__item-progress">
+                    <div class="tc-learning__item-bar" data-width="45"></div>
+                    <span>45%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tc-learning__item">
                 <div class="tc-learning__item-icon">🐙</div>
                 <div class="tc-learning__item-info">
                   <h4 class="tc-learning__item-title">Git — Flujo de trabajo profesional</h4>
-                  <p class="tc-learning__item-source">GitHub + proyectos reales</p>
+                  <p class="tc-learning__item-source">Todos mis proyectos en GitHub</p>
                   <div class="tc-learning__item-progress">
-                    <div class="tc-learning__item-bar" data-width="50"></div>
-                    <span>50%</span>
+                    <div class="tc-learning__item-bar" data-width="55"></div>
+                    <span>55%</span>
                   </div>
                 </div>
               </div>
@@ -726,7 +1085,7 @@
             </div>
           </div>
 
-          <!-- Columna derecha: principios que guían mi aprendizaje -->
+          <!-- Columna derecha: mis principios al aprender -->
           <div class="tc-learning__principles" data-animate="fade-left">
             <h3 class="tc-learning__group-title">
               <span class="tc-learning__group-dot tc-learning__group-dot--primary" aria-hidden="true"></span>
@@ -740,8 +1099,8 @@
                 <div>
                   <h4 class="tc-learning__principle-title">Construir primero</h4>
                   <p class="tc-learning__principle-desc">
-                    Aprendo mejor haciendo. Cada concepto nuevo
-                    lo aplico en un proyecto real inmediatamente.
+                    Aprendo mejor haciendo. Cada concepto nuevo lo aplico
+                    en un proyecto real de inmediato.
                   </p>
                 </div>
               </div>
@@ -751,8 +1110,8 @@
                 <div>
                   <h4 class="tc-learning__principle-title">Fundamentos sólidos</h4>
                   <p class="tc-learning__principle-desc">
-                    Antes de saltar a frameworks, quiero dominar
-                    HTML, CSS y JS vanilla con profundidad.
+                    Antes de saltar a frameworks, quiero dominar HTML,
+                    CSS y JS vanilla con profundidad real.
                   </p>
                 </div>
               </div>
@@ -787,78 +1146,8 @@
     </section>
 
     <!-- ──────────────────────────────────────────────────────────
-      SECCIÓN: NOTAS TÉCNICAS / BLOG
-      Espacio para artículos y apuntes que voy escribiendo.
-      Por ahora es un placeholder que crecerá con el tiempo.
-    ────────────────────────────────────────────────────────── -->
-    <section class="tc-blog" id="tc-notas" aria-labelledby="tcBlogTitle">
-      <div class="container">
-
-        <div class="section-header" data-animate="fade-up">
-          <span class="section-tag">Mis apuntes</span>
-          <h2 class="section-title" id="tcBlogTitle">Notas Técnicas</h2>
-          <p class="section-desc">
-            Escribo lo que aprendo para entenderlo mejor.
-            Pronto habrá artículos reales aquí.
-          </p>
-        </div>
-
-        <div class="tc-blog__grid">
-
-          <!-- Nota real: lo que aprendí construyendo este sitio -->
-          <article class="tc-blog-card tc-blog-card--real" data-animate="fade-up" data-delay="0">
-            <div class="tc-blog-card__meta">
-              <span class="tc-blog-card__tag">CSS</span>
-              <time class="tc-blog-card__date" datetime="2024">2024</time>
-            </div>
-            <h3 class="tc-blog-card__title">
-              Lo que aprendí construyendo mi primer sitio desde cero
-            </h3>
-            <p class="tc-blog-card__excerpt">
-              Variables CSS, BEM, IntersectionObserver, Canvas API...
-              construir un sitio real te enseña más que cualquier tutorial.
-              Aquí cuento los principales aprendizajes de este proceso.
-            </p>
-            <span class="tc-blog-card__coming">Artículo en proceso ✍️</span>
-          </article>
-
-          <!-- Placeholder nota 2 -->
-          <article class="tc-blog-card tc-blog-card--coming" data-animate="fade-up" data-delay="1">
-            <div class="tc-blog-card__meta">
-              <span class="tc-blog-card__tag">JavaScript</span>
-            </div>
-            <h3 class="tc-blog-card__title">
-              IntersectionObserver: animaciones sin librerías
-            </h3>
-            <p class="tc-blog-card__excerpt">
-              Cómo animar elementos al hacer scroll usando solo
-              la API nativa del navegador. Sin dependencias externas.
-            </p>
-            <span class="tc-blog-card__coming">Próximamente 🔜</span>
-          </article>
-
-          <!-- Placeholder nota 3 -->
-          <article class="tc-blog-card tc-blog-card--coming" data-animate="fade-up" data-delay="2">
-            <div class="tc-blog-card__meta">
-              <span class="tc-blog-card__tag">Git</span>
-            </div>
-            <h3 class="tc-blog-card__title">
-              Mi flujo de trabajo con Git como desarrollador solo
-            </h3>
-            <p class="tc-blog-card__excerpt">
-              Cómo organizo mis commits, ramas y versiones cuando
-              trabajo solo en un proyecto personal.
-            </p>
-            <span class="tc-blog-card__coming">Próximamente 🔜</span>
-          </article>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ──────────────────────────────────────────────────────────
-      CTA FINAL — GITHUB
+      CTA FINAL — GITHUB + CONTACTO
+      Botones que funcionan: GitHub real y contacto del index.
     ────────────────────────────────────────────────────────── -->
     <section class="tc-cta" id="tc-conectar" aria-labelledby="tcCtaTitle">
       <div class="container">
@@ -879,11 +1168,17 @@
           </div>
           <h2 class="tc-cta__title" id="tcCtaTitle">¿Quieres ver mi código?</h2>
           <p class="tc-cta__desc">
-            Próximamente el código de este sitio estará en GitHub.
-            Sígueme para ver cómo construyo en tiempo real.
+            Todos mis proyectos están (o estarán) en GitHub.
+            Sígueme para ver cómo construyo en tiempo real —
+            sin filtros, con errores incluidos.
           </p>
           <div class="tc-cta__actions">
-            <a href="#" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+            <!--
+              GitHub real de Manu — si quieres cambiar el usuario
+              solo edita el href de este botón.
+            -->
+            <a href="https://github.com/Manu270422" class="btn btn--primary"
+              target="_blank" rel="noopener noreferrer">
               Ver GitHub →
             </a>
             <a href="../../index.html#contacto" class="btn btn--ghost">

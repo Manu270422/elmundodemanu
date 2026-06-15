@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mundo Curioso 🌍 — El Mundo de Manu</title>
+  <meta name="description" content="Hub de mini-juegos educativos para niños. ¡Aprende mientras te diviertes!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       HEADER PRINCIPAL DEL HUB
+       Aquí muestro el logo del proyecto y el toggle
+       de modo oscuro/claro + el marcador de estrellas
+  ══════════════════════════════════════════════ -->
+  <header class="hub-header">
+    <div class="hub-header__inner">
+
+      <!-- Logo animado del proyecto -->
+      <div class="hub-logo">
+        <span class="hub-logo__globe" aria-hidden="true">🌍</span>
+        <div class="hub-logo__text">
+          <span class="hub-logo__title">Mundo Curioso</span>
+          <span class="hub-logo__sub">por El Mundo de Manu</span>
+        </div>
+      </div>
+
+      <!-- Panel de estrellas acumuladas globales -->
+      <div class="hub-stars" id="hubStarsDisplay" title="Tus estrellas totales">
+        <span class="hub-stars__icon" aria-hidden="true">⭐</span>
+        <span class="hub-stars__count" id="totalStars">0</span>
+        <span class="hub-stars__label">estrellas</span>
+      </div>
+
+      <!-- Botón para cambiar entre modo oscuro y claro -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+        <span class="theme-toggle__icon" id="themeIcon">🌙</span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓN HERO
+       Le doy la bienvenida al niño con energía,
+       un mensaje motivador y los logros del día
+  ══════════════════════════════════════════════ -->
+  <section class="hub-hero">
+    <div class="hub-hero__inner">
+      <h1 class="hub-hero__title">
+        ¡Hola, explorador! <span class="wave" aria-hidden="true">👋</span>
+      </h1>
+      <p class="hub-hero__subtitle">
+        ¿Listo para aprender algo increíble hoy?<br />
+        Elige tu aventura y ¡vamos! 🚀
+      </p>
+
+      <!-- Barra de progreso del día -->
+      <div class="hub-progress" role="progressbar" aria-label="Progreso del día">
+        <div class="hub-progress__label">
+          <span>Progreso de hoy</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="hub-progress__bar">
+          <div class="hub-progress__fill" id="progressFill" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Partículas decorativas de fondo -->
+    <div class="hub-particles" aria-hidden="true">
+      <span>⭐</span><span>🌟</span><span>✨</span>
+      <span>🎯</span><span>🏆</span><span>💡</span>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       GRID DE MINI-JUEGOS (el corazón del hub)
+       Cada tarjeta es un portal a un mini-juego.
+       Usé data attributes para la configuración
+       así es fácil agregar más juegos después.
+  ══════════════════════════════════════════════ -->
+  <main class="hub-grid" id="gamesGrid">
+
+    <!-- ─── TARJETA 1: Trivia Curiosa ─── -->
+    <article
+      class="game-card"
+      data-game="trivia"
+      data-color="#A78BFA"
+      tabindex="0"
+      role="button"
+      aria-label="Jugar Trivia Curiosa"
+      onclick="goToGame('trivia.html')"
+      onkeydown="handleCardKey(event, 'trivia.html')"
+    >
+      <div class="game-card__glow" style="--glow: #A78BFA"></div>
+      <div class="game-card__inner">
+        <div class="game-card__emoji" aria-hidden="true">🧠</div>
+        <h2 class="game-card__title">Trivia Curiosa</h2>
+        <p class="game-card__desc">
+          Responde preguntas de animales, espacio, países y ciencia.
+          ¡Aprende un dato nuevo con cada respuesta!
+        </p>
+        <div class="game-card__meta">
+          <span class="badge badge--category">Conocimiento</span>
+          <span class="badge badge--age">6–12 años</span>
+        </div>
+        <div class="game-card__score">
+          <span class="game-card__score-icon">⭐</span>
+          <span id="triviaScore">0</span> pts ganados
+        </div>
+        <div class="game-card__btn">
+          ¡Jugar! <span aria-hidden="true">→</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- ─── TARJETA 2: Memorama ─── -->
+    <article
+      class="game-card"
+      data-game="memorama"
+      data-color="#00C2A8"
+      tabindex="0"
+      role="button"
+      aria-label="Jugar Memorama de Animales"
+      onclick="goToGame('memorama.html')"
+      onkeydown="handleCardKey(event, 'memorama.html')"
+    >
+      <div class="game-card__glow" style="--glow: #00C2A8"></div>
+      <div class="game-card__inner">
+        <div class="game-card__emoji" aria-hidden="true">🃏</div>
+        <h2 class="game-card__title">Memorama</h2>
+        <p class="game-card__desc">
+          Encuentra los pares de cartas de animales y ciencia.
+          ¡Cada par esconde un dato fascinante!
+        </p>
+        <div class="game-card__meta">
+          <span class="badge badge--category">Memoria</span>
+          <span class="badge badge--age">6–12 años</span>
+        </div>
+        <div class="game-card__score">
+          <span class="game-card__score-icon">⭐</span>
+          <span id="memoramaScore">0</span> pts ganados
+        </div>
+        <div class="game-card__btn">
+          ¡Jugar! <span aria-hidden="true">→</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- ─── TARJETA 3: Conecta y Aprende ─── -->
+    <article
+      class="game-card"
+      data-game="conecta"
+      data-color="#F0A500"
+      tabindex="0"
+      role="button"
+      aria-label="Jugar Conecta y Aprende"
+      onclick="goToGame('conecta.html')"
+      onkeydown="handleCardKey(event, 'conecta.html')"
+    >
+      <div class="game-card__glow" style="--glow: #F0A500"></div>
+      <div class="game-card__inner">
+        <div class="game-card__emoji" aria-hidden="true">🔗</div>
+        <h2 class="game-card__title">Conecta y Aprende</h2>
+        <p class="game-card__desc">
+          Une animales con sonidos, países con banderas
+          y números con sus resultados. ¡A conectar!
+        </p>
+        <div class="game-card__meta">
+          <span class="badge badge--category">Lógica</span>
+          <span class="badge badge--age">6–12 años</span>
+        </div>
+        <div class="game-card__score">
+          <span class="game-card__score-icon">⭐</span>
+          <span id="conectaScore">0</span> pts ganados
+        </div>
+        <div class="game-card__btn">
+          ¡Jugar! <span aria-hidden="true">→</span>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════
+       PANTALLA DE VICTORIA FINAL
+       Se muestra cuando el niño completa los 3 juegos.
+       La mantengo oculta hasta que se cumpla la condición.
+  ══════════════════════════════════════════════ -->
+  <div class="victory-screen hidden" id="victoryScreen" role="dialog" aria-modal="true" aria-label="¡Felicitaciones!">
+    <div class="victory-screen__box">
+      <div class="victory-screen__confetti" aria-hidden="true">
+        🎉🎊🏆🌟⭐✨🎯🥇
+      </div>
+      <h2 class="victory-screen__title">¡Eres un campeón! 🏆</h2>
+      <p class="victory-screen__msg">Completaste todos los juegos de hoy.</p>
+      <div class="victory-screen__total">
+        <span>Total de estrellas:</span>
+        <strong id="victoryTotal">0 ⭐</strong>
+      </div>
+      <button class="btn-primary" onclick="resetAll()">
+        ¡Jugar de nuevo! 🔄
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════ -->
+  <footer class="hub-footer">
+    <p>
+      Hecho con ❤️ por
+      <a href="https://elmundodemanu.com" target="_blank" rel="noopener">El Mundo de Manu</a>
+    </p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/hub.js"></script>
+
+</body>
+</html>

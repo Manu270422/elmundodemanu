@@ -1,0 +1,1103 @@
+/*
+  ============================================================
+  barranca.css — El Mundo de Manu / Barrancabermeja
+  ============================================================
+  La sección más épica del sitio. Inspiro la estética en la
+  identidad industrial de la capital petrolera: ámbar crudo,
+  detalles metálicos, efectos de pantalla de control (HUD),
+  perspectiva 3D en el hero y una línea de tiempo que parece
+  un pipeline de crudo. Todo a nivel SENIOR.
+
+  Paleta: ámbar petrolero #D4820A + dorado #F0C060 + acento
+  rojo candente #FF4A1C. Sobre negro profundo #0C0803.
+  El color del crudo, el fuego de las antorchas y el oro del
+  petróleo convertido en riqueza.
+
+  Prefijo: bq- (barranca/barranqueño)
+
+  Estructura:
+  01. Variables locales
+  02. Breadcrumb
+  03. Hero (canvas 3D + HUD + scan-line + anillos)
+  04. Identidad
+  05. Línea de tiempo (pipeline)
+  06. La Refinería (HUD de métricas)
+  07. Río y Ciénagas
+  08. Turismo
+  09. Datos del Distrito (5 pilares)
+  10. CTA final
+  11. Botones propios
+  12. Responsive
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+*/
+
+/* ============================================================
+  01. VARIABLES LOCALES
+  ============================================================ */
+.page-barranca {
+  --bq-amber:        #D4820A;
+  --bq-amber-light:  #F0C060;
+  --bq-amber-deep:   #9B5A04;
+  --bq-fire:         #FF4A1C;
+  --bq-dim:          rgba(212, 130, 10, 0.10);
+  --bq-glow:         rgba(212, 130, 10, 0.32);
+  --bq-dark-bg:      #0C0803;
+  --font-display-bq: 'Bebas Neue', sans-serif;
+  --font-label-bq:   'Barlow Condensed', sans-serif;
+}
+
+/* ============================================================
+  02. BREADCRUMB
+  ============================================================ */
+.breadcrumb {
+  padding: calc(var(--space-4) + 70px) 0 var(--space-4);
+  border-bottom: 1px solid rgba(212, 130, 10, 0.14);
+  background: var(--color-bg);
+}
+.breadcrumb__nav { display: flex; align-items: center; gap: var(--space-2); }
+.breadcrumb__link {
+  font-size: var(--text-sm); color: var(--color-text-muted);
+  transition: color var(--transition-base);
+}
+.breadcrumb__link:hover { color: var(--bq-amber); }
+.breadcrumb__sep { font-size: var(--text-sm); color: var(--color-text-muted); opacity: 0.4; }
+.breadcrumb__current { font-size: var(--text-sm); color: var(--bq-amber); font-weight: 500; }
+
+.bq-tag {
+  background: var(--bq-dim);
+  border-color: rgba(212, 130, 10, 0.25);
+  color: var(--bq-amber-light);
+}
+
+/* ============================================================
+  03. HERO — EL MÁS ÉPICO DEL SITIO
+  El hero tiene:
+  a) Canvas 3D de partículas que fluyen como crudo en tuberías
+  b) Grid HUD (cuadrícula de pantalla de control industrial)
+  c) Scan-line diagonal que recorre el hero
+  d) 3 anillos concéntricos animados (ojo de buey industrial)
+  e) Luces ámbar tipo antorcha de refinería
+  f) Título con perspectiva CSS 3D
+  g) Badge de coordenadas geográficas reales
+  h) Stats numéricos que hacen conteo animado
+  ============================================================ */
+.bq-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: var(--space-32) 0 var(--space-20);
+  background: var(--bq-dark-bg);
+  /* Textura muy sutil de ruido */
+  background-image:
+    radial-gradient(ellipse 140% 90% at 50% 110%, rgba(212, 130, 10, 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(255, 74, 28, 0.04) 0%, transparent 60%);
+}
+
+/* CANVAS */
+.bq-hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* HUD GRID — cuadrícula tipo pantalla de control */
+.bq-hero__hud-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(212, 130, 10, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 130, 10, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  /* Degradado para que desaparezca arriba y abajo */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+
+/* SCAN LINE — diagonal animado tipo monitor de control */
+.bq-hero__scanline {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(212, 130, 10, 0.5), transparent);
+  animation: bqScanDown 5s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes bqScanDown {
+  0%   { top: -2%; opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { top: 102%; opacity: 0; }
+}
+
+/* LUCES ÁMBAR */
+.bq-hero__light {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  pointer-events: none;
+}
+.bq-hero__light--1 {
+  width: 600px; height: 350px;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(212, 130, 10, 0.16) 0%, transparent 70%);
+  animation: bqLightPulse 7s ease-in-out infinite;
+}
+.bq-hero__light--2 {
+  width: 300px; height: 300px;
+  bottom: 5%; right: 3%;
+  background: radial-gradient(circle, rgba(255, 74, 28, 0.10) 0%, transparent 70%);
+  animation: bqLightPulse 8s ease-in-out infinite 2s;
+}
+.bq-hero__light--3 {
+  width: 240px; height: 240px;
+  top: 20%; left: 2%;
+  background: radial-gradient(circle, rgba(212, 130, 10, 0.08) 0%, transparent 70%);
+  animation: bqLightPulse 9s ease-in-out infinite 4s;
+}
+@keyframes bqLightPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(1.12); }
+}
+.bq-hero__light--1 {
+  animation: bqLightPulse1 7s ease-in-out infinite;
+}
+@keyframes bqLightPulse1 {
+  0%, 100% { opacity: 1; transform: scale(1) translateX(-50%); }
+  50%       { opacity: 0.6; transform: scale(1.12) translateX(-50%); }
+}
+
+/* ANILLOS CONCÉNTRICOS — ojo de buey industrial */
+.bq-hero__ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 130, 10, 0.12);
+  pointer-events: none;
+  animation: bqRingExpand 6s linear infinite;
+}
+.bq-hero__ring--1 { width: 400px; height: 400px; margin: -200px 0 0 -200px; animation-delay: 0s; }
+.bq-hero__ring--2 { width: 700px; height: 700px; margin: -350px 0 0 -350px; animation-delay: 2s; }
+.bq-hero__ring--3 { width: 1000px; height: 1000px; margin: -500px 0 0 -500px; animation-delay: 4s; }
+@keyframes bqRingExpand {
+  0%   { opacity: 0; transform: scale(0.85); }
+  20%  { opacity: 1; }
+  80%  { opacity: 0.3; }
+  100% { opacity: 0; transform: scale(1.08); }
+}
+
+/* INNER */
+.bq-hero__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+.bq-hero__content {
+  max-width: 840px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-7);
+  padding: 0 var(--space-6);
+}
+
+/* BADGE DE COORDENADAS */
+.bq-hero__coord-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  background: rgba(212, 130, 10, 0.08);
+  border: 1px solid rgba(212, 130, 10, 0.30);
+  border-radius: var(--radius-full);
+  font-family: var(--font-label-bq);
+  font-size: var(--text-sm);
+  letter-spacing: 0.12em;
+  color: var(--bq-amber-light);
+}
+.bq-hero__coord-icon {
+  color: var(--bq-amber);
+  font-size: var(--text-sm);
+  animation: bqCoordPulse 2s ease-in-out infinite;
+}
+@keyframes bqCoordPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* PRE-TÍTULO */
+.bq-hero__pretitle {
+  font-family: var(--font-label-bq);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--bq-amber);
+  opacity: 0.75;
+}
+
+/* TÍTULO 3D — el más épico del sitio */
+.bq-hero__title {
+  font-family: var(--font-display-bq);
+  font-size: clamp(4rem, 18vw, 12rem);
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  color: transparent;
+  background: linear-gradient(
+    135deg,
+    var(--bq-amber-light) 0%,
+    var(--bq-amber) 35%,
+    var(--bq-fire) 60%,
+    var(--bq-amber-deep) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* Efecto 3D: sombra multi-capa que da profundidad */
+  filter:
+    drop-shadow(0 0 30px rgba(212, 130, 10, 0.5))
+    drop-shadow(0 0 80px rgba(212, 130, 10, 0.2));
+  /* Perspectiva CSS 3D */
+  transform: perspective(800px) rotateX(2deg);
+  transform-origin: center bottom;
+  transition: transform var(--transition-slow);
+  display: block;
+}
+.bq-hero__title:hover {
+  transform: perspective(800px) rotateX(0deg) scale(1.01);
+}
+.bq-hero__title-line--1,
+.bq-hero__title-line--2 { display: inline; }
+/* La "a" central en rojo candente como punto de impacto */
+.bq-hero__title-accent { color: var(--bq-fire); }
+
+/* APODOS OFICIALES */
+.bq-hero__nicknames {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-1) 0;
+}
+.bq-hero__nickname {
+  font-family: var(--font-label-bq);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.bq-hero__nickname-sep { color: var(--bq-amber); font-size: var(--text-sm); }
+
+/* STATS ÉPICOS */
+.bq-hero__headline-stat {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-8);
+  background: rgba(212, 130, 10, 0.05);
+  border: 1px solid rgba(212, 130, 10, 0.18);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.bq-hero__stat-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  flex: 1;
+  min-width: 120px;
+}
+.bq-hero__stat-num {
+  font-family: var(--font-display-bq);
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: transparent;
+  background: linear-gradient(to bottom, var(--bq-amber-light), var(--bq-amber));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.bq-hero__stat-sub {
+  font-family: var(--font-label-bq);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+.bq-hero__stat-divider {
+  width: 1px;
+  height: 60px;
+  background: rgba(212, 130, 10, 0.25);
+  flex-shrink: 0;
+}
+
+/* ACCIONES */
+.bq-hero__actions {
+  display: flex; gap: var(--space-4);
+  justify-content: center; flex-wrap: wrap;
+}
+
+/* SCROLL */
+.bq-hero__scroll {
+  position: absolute; bottom: var(--space-8); left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column;
+  align-items: center; gap: var(--space-2);
+  color: var(--color-text-muted); font-size: var(--text-xs);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  animation: bqScrollBounce 2.5s ease-in-out infinite; z-index: 2;
+}
+.bq-hero__scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--bq-amber), transparent);
+  order: -1;
+}
+@keyframes bqScrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ============================================================
+  04. IDENTIDAD
+  ============================================================ */
+.bq-identity {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid rgba(212, 130, 10, 0.12);
+  border-bottom: 1px solid rgba(212, 130, 10, 0.12);
+}
+.bq-identity__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .bq-identity__inner { grid-template-columns: 1.5fr 1fr; gap: var(--space-16); }
+}
+.bq-identity__title {
+  font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl));
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--color-text-primary);
+  margin: var(--space-4) 0;
+}
+.bq-identity__title-oil {
+  background: linear-gradient(135deg, var(--bq-amber-light), var(--bq-amber));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.bq-identity__desc {
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+.bq-identity__desc strong { color: var(--color-text-primary); }
+.bq-identity__desc em { color: var(--bq-amber-light); font-style: normal; }
+.bq-identity__desc:last-child { margin-bottom: 0; }
+
+/* Cards de datos oficiales — 2 columnas */
+.bq-identity__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+.bq-identity__card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  background: var(--color-bg);
+  border: 1px solid rgba(212, 130, 10, 0.15);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition-base), transform var(--transition-slow);
+}
+.bq-identity__card:hover {
+  border-color: rgba(212, 130, 10, 0.40);
+  transform: translateY(-2px);
+}
+.bq-identity__card-icon { font-size: 1.6rem; line-height: 1; }
+.bq-identity__card-label {
+  display: block;
+  font-size: var(--text-xs);
+  font-family: var(--font-label-bq);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.bq-identity__card-value {
+  display: block;
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--bq-amber-light);
+  margin-top: 2px;
+}
+
+/* ============================================================
+  05. LÍNEA DE TIEMPO — PIPELINE
+  El eje vertical imita una tubería de crudo. Los nodos son
+  válvulas. Las tarjetas alternan izquierda/derecha en desktop.
+  ============================================================ */
+.bq-timeline {
+  padding: var(--space-24) 0;
+  position: relative;
+}
+
+.bq-timeline__track {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-8) 0;
+}
+
+/* La línea vertical — tubo de crudo */
+.bq-timeline__track::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(212, 130, 10, 0.6) 10%,
+    rgba(212, 130, 10, 0.6) 90%,
+    transparent 100%
+  );
+}
+
+/* Nodo individual */
+.bq-tnode {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: var(--space-6);
+  align-items: center;
+  margin-bottom: var(--space-10);
+  position: relative;
+}
+
+/* Año a la izquierda para impares, a la derecha para pares */
+.bq-tnode__year-wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.bq-tnode--alt .bq-tnode__year-wrap { justify-content: flex-start; }
+
+.bq-tnode__year {
+  font-family: var(--font-display-bq);
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  letter-spacing: 0.04em;
+  color: var(--bq-amber);
+  opacity: 0.5;
+  line-height: 1;
+  transition: opacity var(--transition-base);
+}
+.bq-tnode:hover .bq-tnode__year { opacity: 1; }
+
+/* Punto central — válvula de tubería */
+.bq-tnode__dot {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--bq-amber);
+  border: 3px solid var(--bq-dark-bg);
+  box-shadow: 0 0 0 2px var(--bq-amber), 0 0 20px rgba(212, 130, 10, 0.6);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  transition: transform var(--transition-spring), box-shadow var(--transition-base);
+}
+.bq-tnode:hover .bq-tnode__dot {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 2px var(--bq-amber-light), 0 0 30px rgba(212, 130, 10, 0.9);
+}
+
+/* Tarjeta — impares van a la derecha, pares a la izquierda */
+.bq-tnode__card {
+  padding: var(--space-6) var(--space-7);
+  background: var(--color-surface);
+  border: 1px solid rgba(212, 130, 10, 0.18);
+  border-radius: var(--radius-xl);
+  transition: transform var(--transition-slow), border-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+.bq-tnode--alt .bq-tnode__card { order: -2; }
+.bq-tnode--alt .bq-tnode__year-wrap { order: 0; }
+
+.bq-tnode:hover .bq-tnode__card {
+  transform: translateY(-3px);
+  border-color: rgba(212, 130, 10, 0.42);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35), 0 0 20px rgba(212, 130, 10, 0.10);
+}
+.bq-tnode__card-title {
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
+  line-height: 1.3;
+}
+.bq-tnode__card-desc {
+  font-size: var(--text-sm);
+  line-height: 1.78;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+}
+.bq-tnode__card-desc strong { color: var(--color-text-primary); }
+.bq-tnode__card-desc em { color: var(--bq-amber-light); font-style: italic; }
+.bq-tnode__card-source {
+  display: block;
+  font-size: var(--text-xs);
+  font-family: var(--font-label-bq);
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  opacity: 0.7;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ============================================================
+  06. REFINERÍA — HUD DE MÉTRICAS
+  Estética de pantalla de control de planta industrial.
+  ============================================================ */
+.bq-refinery {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid rgba(212, 130, 10, 0.12);
+  border-bottom: 1px solid rgba(212, 130, 10, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+/* Textura de fondo muy sutil */
+.bq-refinery::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent 0px,
+    transparent 18px,
+    rgba(212, 130, 10, 0.015) 18px,
+    rgba(212, 130, 10, 0.015) 19px
+  );
+  pointer-events: none;
+}
+
+/* HUD de métricas — 4 indicadores tipo panel de control */
+.bq-refinery__hud {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+  margin-bottom: var(--space-14);
+  position: relative;
+  z-index: 1;
+}
+@media (min-width: 768px) {
+  .bq-refinery__hud { grid-template-columns: repeat(4, 1fr); }
+}
+
+.bq-refinery__hud-metric {
+  padding: var(--space-7) var(--space-6);
+  background: rgba(212, 130, 10, 0.04);
+  border: 1px solid rgba(212, 130, 10, 0.22);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-base), transform var(--transition-slow);
+}
+.bq-refinery__hud-metric:hover {
+  border-color: rgba(212, 130, 10, 0.55);
+  transform: translateY(-3px);
+}
+/* Esquinita decorativa tipo terminal */
+.bq-refinery__hud-metric::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 20px; height: 20px;
+  border-top: 2px solid var(--bq-amber);
+  border-right: 2px solid var(--bq-amber);
+  opacity: 0.5;
+  border-radius: 0 var(--radius-sm) 0 0;
+}
+
+.bq-refinery__hud-value {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  line-height: 1;
+}
+.bq-refinery__hud-value .bq-counter {
+  font-family: var(--font-display-bq);
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  letter-spacing: 0.02em;
+  color: transparent;
+  background: linear-gradient(to bottom, var(--bq-amber-light), var(--bq-amber));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.bq-refinery__hud-unit {
+  font-family: var(--font-display-bq);
+  font-size: 1.6rem;
+  color: var(--bq-amber);
+  opacity: 0.7;
+}
+.bq-refinery__hud-label {
+  font-family: var(--font-label-bq);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+/* Barra de progreso tipo medidor industrial */
+.bq-refinery__hud-bar {
+  height: 4px;
+  background: rgba(212, 130, 10, 0.15);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.bq-refinery__hud-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--bq-amber-deep), var(--bq-amber), var(--bq-amber-light));
+  border-radius: var(--radius-full);
+  transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* La barra se anima cuando está en viewport */
+.bq-refinery__hud-fill.bq-fill-active {
+  width: var(--fill);
+}
+
+/* Artículo explicativo de la refinería — 2 cols */
+.bq-refinery__article {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  position: relative;
+  z-index: 1;
+}
+@media (min-width: 768px) {
+  .bq-refinery__article { grid-template-columns: 1fr 1fr; }
+}
+.bq-refinery__article-col {
+  padding: var(--space-7) var(--space-8);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  transition: border-color var(--transition-base);
+}
+.bq-refinery__article-col:hover { border-color: rgba(212, 130, 10, 0.30); }
+.bq-refinery__article-title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--bq-amber-light);
+  margin-bottom: var(--space-4);
+}
+.bq-refinery__article-desc {
+  font-size: var(--text-sm);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+}
+.bq-refinery__article-desc:last-child { margin-bottom: 0; }
+.bq-refinery__article-desc strong { color: var(--color-text-primary); }
+
+/* ============================================================
+  07. RÍO Y CIÉNAGAS
+  ============================================================ */
+.bq-nature { padding: var(--space-24) 0; }
+.bq-nature__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 640px) {
+  .bq-nature__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .bq-nature__grid { grid-template-columns: repeat(4, 1fr); }
+  .bq-nature-card--featured { grid-column: span 2; }
+}
+
+.bq-nature-card {
+  padding: var(--space-7) var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: transform var(--transition-slow), border-color var(--transition-base),
+              box-shadow var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+.bq-nature-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--bq-amber), var(--bq-amber-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-slow);
+}
+.bq-nature-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(212, 130, 10, 0.35);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.35), 0 0 22px rgba(212, 130, 10, 0.10);
+}
+.bq-nature-card:hover::after { transform: scaleX(1); }
+.bq-nature-card__icon { font-size: 2rem; line-height: 1; }
+.bq-nature-card__title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+.bq-nature-card__subtitle {
+  font-size: var(--text-xs);
+  font-family: var(--font-label-bq);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--bq-amber);
+}
+.bq-nature-card__desc {
+  font-size: var(--text-sm);
+  line-height: 1.78;
+  color: var(--color-text-secondary);
+}
+.bq-nature-card__desc strong { color: var(--color-text-primary); }
+
+/* ============================================================
+  08. TURISMO — SPOTS CON NÚMERO ÉPICO
+  Diseño tipo lista numerada con acento dramático en el número.
+  ============================================================ */
+.bq-tourism {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.bq-tourism__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 768px) { .bq-tourism__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .bq-tourism__grid { grid-template-columns: repeat(3, 1fr); } }
+
+.bq-spot {
+  display: flex;
+  gap: var(--space-5);
+  padding: var(--space-7) var(--space-6);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  align-items: flex-start;
+  transition: transform var(--transition-slow), border-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+.bq-spot:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 130, 10, 0.38);
+  box-shadow: 0 10px 32px rgba(0,0,0,0.3);
+}
+.bq-spot__num {
+  font-family: var(--font-display-bq);
+  font-size: 2.8rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: transparent;
+  background: linear-gradient(to bottom, rgba(212, 130, 10, 0.4), rgba(212, 130, 10, 0.08));
+  -webkit-background-clip: text;
+  background-clip: text;
+  flex-shrink: 0;
+  width: 48px;
+  transition: background var(--transition-base);
+}
+.bq-spot:hover .bq-spot__num {
+  background: linear-gradient(to bottom, var(--bq-amber-light), var(--bq-amber));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.bq-spot__title {
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+  line-height: 1.3;
+}
+.bq-spot__desc {
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+}
+.bq-spot__type {
+  display: block;
+  font-size: var(--text-xs);
+  font-family: var(--font-label-bq);
+  letter-spacing: 0.05em;
+  color: var(--bq-amber);
+  font-weight: 600;
+}
+
+/* ============================================================
+  09. DATOS DEL DISTRITO — 5 PILARES
+  ============================================================ */
+.bq-district { padding: var(--space-24) 0; }
+.bq-district__pillars {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 600px)  { .bq-district__pillars { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .bq-district__pillars { grid-template-columns: repeat(5, 1fr); } }
+
+.bq-pillar {
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid rgba(212, 130, 10, 0.15);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  transition: transform var(--transition-slow), border-color var(--transition-base),
+              box-shadow var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+.bq-pillar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--bq-amber), transparent);
+  transform: scaleX(0);
+  transition: transform var(--transition-slow);
+}
+.bq-pillar:hover {
+  transform: translateY(-6px);
+  border-color: rgba(212, 130, 10, 0.45);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.35), 0 0 24px rgba(212, 130, 10, 0.12);
+}
+.bq-pillar:hover::before { transform: scaleX(1); }
+
+.bq-pillar__icon {
+  width: 60px; height: 60px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bq-dim);
+  border: 1px solid rgba(212, 130, 10, 0.22);
+  border-radius: var(--radius-full);
+  color: var(--bq-amber-light);
+  transition: transform var(--transition-spring), background var(--transition-base);
+}
+.bq-pillar:hover .bq-pillar__icon {
+  transform: scale(1.1) rotate(5deg);
+  background: rgba(212, 130, 10, 0.16);
+}
+.bq-pillar__title {
+  font-family: var(--font-display-bq);
+  font-size: 1.8rem;
+  letter-spacing: 0.04em;
+  color: var(--bq-amber-light);
+  line-height: 1;
+}
+.bq-pillar__desc {
+  font-size: var(--text-xs);
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* ============================================================
+  10. CTA FINAL — ORGULLO BARRANQUEÑO
+  El texto fantasma "BARRANCA" al fondo es el toque épico final.
+  ============================================================ */
+.bq-cta {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid rgba(212, 130, 10, 0.12);
+}
+.bq-cta__inner {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-16) var(--space-10);
+  background: var(--color-bg);
+  border: 1px solid rgba(212, 130, 10, 0.20);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+.bq-cta__glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(212, 130, 10, 0.07) 0%, transparent 100%);
+  pointer-events: none;
+}
+/* Texto fantasma de fondo — el detalle épico */
+.bq-cta__bg-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display-bq);
+  font-size: clamp(4rem, 15vw, 9rem);
+  letter-spacing: 0.08em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(212, 130, 10, 0.07);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+.bq-cta__icon {
+  font-size: 3.2rem;
+  position: relative;
+  z-index: 1;
+  animation: bqIconFlame 2.5s ease-in-out infinite;
+}
+@keyframes bqIconFlame {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 74, 28, 0.5)); transform: scale(1) rotate(-3deg); }
+  50%       { filter: drop-shadow(0 0 22px rgba(255, 74, 28, 0.9)); transform: scale(1.08) rotate(3deg); }
+}
+.bq-cta__title {
+  font-size: clamp(var(--text-2xl), 4.5vw, var(--text-3xl));
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  position: relative;
+  z-index: 1;
+}
+.bq-cta__highlight {
+  color: transparent;
+  background: linear-gradient(135deg, var(--bq-amber-light), var(--bq-fire));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.bq-cta__desc {
+  font-size: var(--text-base);
+  line-height: 1.78;
+  color: var(--color-text-secondary);
+  max-width: 540px;
+  position: relative;
+  z-index: 1;
+}
+.bq-cta__actions {
+  display: flex; gap: var(--space-4);
+  flex-wrap: wrap; justify-content: center;
+  position: relative; z-index: 1;
+}
+.bq-cta__sources {
+  font-family: var(--font-label-bq);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  opacity: 0.65;
+  position: relative; z-index: 1;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ============================================================
+  11. BOTONES PROPIOS
+  ============================================================ */
+.bq-btn--primary {
+  background: var(--bq-amber);
+  color: #1A0C00;
+  font-weight: 700;
+  box-shadow: 0 4px 20px var(--bq-glow);
+}
+.bq-btn--primary:hover {
+  background: var(--bq-amber-light);
+  box-shadow: 0 6px 28px rgba(212, 130, 10, 0.5);
+  transform: translateY(-2px);
+  color: #1A0C00;
+}
+.bq-btn--ghost {
+  border-color: rgba(212, 130, 10, 0.30);
+  color: var(--bq-amber-light);
+}
+.bq-btn--ghost:hover {
+  border-color: var(--bq-amber);
+  background: var(--bq-dim);
+  color: var(--bq-amber-light);
+}
+
+/* ============================================================
+  12. RESPONSIVE
+  ============================================================ */
+@media (max-width: 900px) {
+  /* Timeline a una columna en tablet/móvil */
+  .bq-timeline__track::before { left: 28px; transform: none; }
+  .bq-tnode {
+    grid-template-columns: 56px auto 1fr;
+  }
+  .bq-tnode--alt .bq-tnode__year-wrap,
+  .bq-tnode__year-wrap { justify-content: flex-start; }
+  .bq-tnode--alt .bq-tnode__card { order: 0; }
+  .bq-tnode--alt .bq-tnode__year-wrap { order: 0; }
+  .bq-tnode__year { font-size: 1.2rem; }
+}
+
+@media (max-width: 640px) {
+  .bq-hero { padding: var(--space-20) 0 var(--space-16); min-height: auto; }
+  .bq-hero__title { font-size: clamp(3rem, 18vw, 5.5rem); }
+  .bq-hero__headline-stat { padding: var(--space-5) var(--space-4); gap: var(--space-1); }
+  .bq-hero__stat-num { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+  .bq-hero__stat-divider { height: 40px; }
+  .bq-hero__actions { flex-direction: column; align-items: center; width: 100%; }
+  .bq-hero__actions .btn { width: 100%; justify-content: center; }
+
+  .bq-cta__inner { padding: var(--space-10) var(--space-6); }
+  .bq-cta__actions { flex-direction: column; align-items: center; width: 100%; }
+  .bq-cta__actions .btn { width: 100%; justify-content: center; }
+
+  .bq-identity__cards { grid-template-columns: 1fr; }
+  .bq-refinery__hud { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .bq-hero__headline-stat { flex-direction: column; gap: var(--space-4); }
+  .bq-hero__stat-divider { width: 60px; height: 1px; }
+  .bq-hero__nicknames { flex-direction: column; gap: var(--space-1); }
+  .bq-hero__nickname-sep { display: none; }
+}
+
+/* Footer link activo */
+.footer__link--active { color: var(--bq-amber-light); }

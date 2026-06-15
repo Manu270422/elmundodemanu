@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  educacion.html — El Mundo de Manu / Educación
+  ============================================================
+  Esta sección es mi homenaje al aprendizaje continuo.
+  Aquí comparto mi relación honesta con el estudio:
+  lo que me apasiona aprender, cómo lo hago, qué me ha
+  costado y los recursos que me han formado como desarrollador
+  y como persona.
+
+  No es un catálogo de certificados ni una lista de logros.
+  Es el lado humano de alguien que cree que aprender
+  es una de las formas más nobles de invertir el tiempo.
+
+  Estructura:
+  - Hero: Mi declaración de aprendizaje
+  - ¿Por qué comparto esto?: Contexto de la sección
+  - Áreas de estudio: Lo que estoy construyendo
+  - Proyectos educativos: Herramientas que he construido (Calculadora de Notas)
+  - Reflexiones: Lo que el estudio me ha enseñado fuera del aula
+  - Citas que me inspiran: Palabras que me mueven a seguir
+  - Recursos: Plataformas, libros y comunidades que recomiendo
+  - Banner: Campus Manu (sub-sección futura)
+  - CTA: Invitación a aprender juntos
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Educación — El Mundo de Manu. Mi relación con el aprendizaje: áreas de estudio, reflexiones académicas, recursos recomendados y mi filosofía de crecimiento continuo." />
+  <meta name="author" content="Manu" />
+
+  <title>Educación — El Mundo de Manu</title>
+
+  <!--
+    Fuentes: Syne + DM Sans del sitio principal, más Space Grotesk
+    para las citas — tiene un carácter académico/técnico que contrasta
+    bien con la atmósfera global sin chocar con el Playfair Display de Fe.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- CSS global del sitio, luego el específico de Educación -->
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="educacion.css" />
+</head>
+
+<body class="page-educacion">
+
+  <!-- Cursor personalizado global -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
+
+  <!-- ============================================================
+    NAVBAR — Misma estructura global, paths relativos desde
+    /secciones/educacion/. El link activo es "Mis Mundos".
+  ============================================================ -->
+  <header class="navbar" id="navbar" role="banner">
+    <nav class="navbar__container" aria-label="Navegación principal">
+
+      <a href="../../index.html" class="navbar__logo" aria-label="Volver al inicio">
+        <span class="navbar__logo-mark">M</span>
+        <span class="navbar__logo-text">El Mundo de <strong>Manu</strong></span>
+      </a>
+
+      <ul class="navbar__links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__link navbar__link--active">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__link">Sobre Mí</a></li>
+        <li>
+          <a href="../../index.html#contacto" class="navbar__link navbar__link--cta">
+            Contáctame
+            <span class="navbar__cta-dot" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+
+      <button class="navbar__toggle" id="navToggle"
+        aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </nav>
+
+    <div class="navbar__mobile" id="mobileMenu" aria-hidden="true">
+      <ul class="navbar__mobile-links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__mobile-link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__mobile-link">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__mobile-link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__mobile-link">Sobre Mí</a></li>
+        <li><a href="../../index.html#contacto"  class="navbar__mobile-link navbar__mobile-link--cta">Contáctame</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Breadcrumb de navegación -->
+  <div class="breadcrumb" aria-label="Ruta de navegación">
+    <div class="container">
+      <nav class="breadcrumb__nav">
+        <a href="../../index.html"        class="breadcrumb__link">Inicio</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="../../index.html#mundos" class="breadcrumb__link">Mis Mundos</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span class="breadcrumb__current" aria-current="page">Educación</span>
+      </nav>
+    </div>
+  </div>
+
+  <main id="main" role="main">
+
+    <!-- ──────────────────────────────────────────────────────────
+      HERO DE EDUCACIÓN
+      Diseño limpio y académico. Fondo con canvas de grid de
+      puntos animados — diferente al canvas de estrellas de Fe.
+      Cita de fondo, declaración personal y dos CTA.
+    ────────────────────────────────────────────────────────── -->
+    <section class="edu-hero" id="edu-inicio" aria-labelledby="eduHeroTitle">
+
+      <!-- Canvas del grid de puntos animados -->
+      <canvas class="edu-hero__canvas" id="eduCanvas" aria-hidden="true"></canvas>
+
+      <!-- Destellos de luz decorativos en verde -->
+      <div class="edu-hero__light edu-hero__light--1" aria-hidden="true"></div>
+      <div class="edu-hero__light edu-hero__light--2" aria-hidden="true"></div>
+      <div class="edu-hero__light edu-hero__light--3" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="edu-hero__inner">
+
+          <!-- Símbolo decorativo central: átomo/libro SVG -->
+          <div class="edu-hero__symbol-wrap" aria-hidden="true">
+            <svg class="edu-hero__symbol" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"
+                 aria-hidden="true">
+              <!-- Libro abierto estilizado -->
+              <path d="M40 16 L40 64" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M40 16 C30 12 14 14 10 20 L10 64 C14 58 30 56 40 60" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M40 16 C50 12 66 14 70 20 L70 64 C66 58 50 56 40 60" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <!-- Contenido central del hero -->
+          <div class="edu-hero__content" data-animate="fade-up">
+
+            <div class="edu-hero__tag-row">
+              <span class="section-tag edu-tag">Mi motor de crecimiento</span>
+            </div>
+
+            <h1 class="edu-hero__title" id="eduHeroTitle">
+              Educación
+            </h1>
+
+            <!-- Cita inspiracional central — tipografía Space Grotesk -->
+            <blockquote class="edu-hero__quote" data-animate="fade-up" data-delay="1">
+              <p class="edu-hero__quote-text">
+                "El que no sabe es como el que no ve. Pero el que sabe
+                y no actúa es como el que está ciego aunque tenga ojos."
+              </p>
+              <footer class="edu-hero__quote-ref">— Adaptado de un proverbio chino</footer>
+            </blockquote>
+
+            <p class="edu-hero__desc" data-animate="fade-up" data-delay="2">
+              Aprender no es solo lo que hago en un aula o frente a una pantalla.
+              Es la actitud con la que me levanto cada día: curioso, hambriento
+              de entender más y dispuesto a equivocarme para crecer.
+            </p>
+
+            <div class="edu-hero__actions" data-animate="fade-up" data-delay="3">
+              <a href="#edu-areas" class="btn edu-btn--primary">
+                Ver áreas
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a href="#edu-reflexiones" class="btn btn--ghost edu-btn--ghost">Reflexiones</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Indicador de scroll -->
+      <div class="edu-hero__scroll" aria-hidden="true">
+        <div class="edu-hero__scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: ¿POR QUÉ COMPARTO ESTO?
+      Contexto honesto sobre por qué la educación ocupa
+      un lugar central en quién soy y en este sitio.
+      Layout 2 col: texto + tarjeta de filosofía.
+    ────────────────────────────────────────────────────────── -->
+    <section class="edu-why" id="edu-porque" aria-labelledby="eduWhyTitle">
+      <div class="container">
+        <div class="edu-why__inner" data-animate="fade-up">
+
+          <div class="edu-why__text">
+            <span class="section-tag edu-tag">Transparencia</span>
+            <h2 class="edu-why__title" id="eduWhyTitle">
+              ¿Por qué comparto<br/>esto aquí?
+            </h2>
+            <p class="edu-why__desc">
+              Porque el aprendizaje no es un proceso que sucede en privado
+              y se expone solo cuando ya está terminado y pulido.
+              Aprender en público es una de las formas más poderosas de
+              crecer, enseñar y conectar con otros que están en el mismo camino.
+            </p>
+            <p class="edu-why__desc">
+              Soy estudiante de Ingeniería Informática en UNIPAZ y aprendiz
+              de ADSO en el SENA. Pero más que los títulos, me define
+              la curiosidad: esa sensación de que siempre hay algo más por
+              entender, una capa más profunda que explorar.
+            </p>
+            <p class="edu-why__desc">
+              Comparto esto para que quien esté aprendiendo solo, sintiéndose
+              atrás o dudando de si puede lograrlo, vea que yo también
+              estoy en el proceso. No llegué, estoy llegando.
+            </p>
+          </div>
+
+          <!-- Tarjeta de filosofía de aprendizaje -->
+          <div class="edu-why__card">
+            <div class="edu-why__card-icon" aria-hidden="true">🧠</div>
+            <h3 class="edu-why__card-title">Mi filosofía de aprendizaje</h3>
+
+            <ul class="edu-why__card-list" role="list">
+              <li class="edu-why__card-item">
+                <span class="edu-why__card-item-icon" aria-hidden="true">→</span>
+                <span><strong>Aprendo haciendo.</strong> La teoría sin práctica se olvida.
+                Necesito construir algo para que el conocimiento quede.</span>
+              </li>
+              <li class="edu-why__card-item">
+                <span class="edu-why__card-item-icon" aria-hidden="true">→</span>
+                <span><strong>Enseño para entender.</strong> Explicar algo es la mejor
+                prueba de que realmente lo comprendiste.</span>
+              </li>
+              <li class="edu-why__card-item">
+                <span class="edu-why__card-item-icon" aria-hidden="true">→</span>
+                <span><strong>El error es parte del método.</strong> Fallar rápido,
+                entender por qué, corregir y seguir. Ese ciclo es el aprendizaje.</span>
+              </li>
+            </ul>
+
+            <div class="edu-why__card-glow" aria-hidden="true"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: ÁREAS DE ESTUDIO
+      Las cuatro grandes áreas en las que estoy invirtiendo
+      mi tiempo y energía como estudiante y autodidacta.
+      Cada tarjeta muestra el área, nivel, temas principales
+      y una descripción honesta de en qué estoy.
+    ────────────────────────────────────────────────────────── -->
+    <section class="edu-areas" id="edu-areas" aria-labelledby="eduAreasTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag edu-tag">Lo que estudio</span>
+          <h2 class="section-title" id="eduAreasTitle">Áreas de Estudio</h2>
+          <p class="section-desc">
+            No intento aprenderlo todo a la vez. Estas son las áreas en las que
+            estoy poniendo foco real, con profundidad y sin prisa.
+          </p>
+        </div>
+
+        <div class="edu-areas__grid">
+
+          <!-- Área 1: Desarrollo de Software -->
+          <article class="edu-area-card" data-animate="fade-up" data-delay="0">
+            <div class="edu-area-card__number" aria-hidden="true">01</div>
+            <div class="edu-area-card__icon-wrap" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                   aria-hidden="true">
+                <path d="M10 12L4 16l6 4M22 12l6 4-6 4M18 8l-4 16"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="edu-area-card__level" aria-label="Nivel: En formación">En formación</div>
+            <h3 class="edu-area-card__title">Desarrollo de Software</h3>
+            <p class="edu-area-card__desc">
+              Mi área principal. Estudio programación web full-stack: frontend con HTML, CSS
+              y JavaScript puro, y backend con Node.js y Express. En el SENA profundizo
+              en análisis, diseño de sistemas y bases de datos. Cada proyecto que hago
+              es mi laboratorio real.
+            </p>
+            <div class="edu-area-card__tags" aria-label="Temas principales">
+              <span class="edu-area-card__tag">JavaScript</span>
+              <span class="edu-area-card__tag">Node.js</span>
+              <span class="edu-area-card__tag">HTML/CSS</span>
+              <span class="edu-area-card__tag">Bases de datos</span>
+              <span class="edu-area-card__tag">React</span>
+            </div>
+          </article>
+
+          <!-- Área 2: Matemáticas -->
+          <article class="edu-area-card" data-animate="fade-up" data-delay="1">
+            <div class="edu-area-card__number" aria-hidden="true">02</div>
+            <div class="edu-area-card__icon-wrap" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                   aria-hidden="true">
+                <circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="2"/>
+                <path d="M10 16h12M16 10v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M11.5 11.5l9 9M20.5 11.5l-9 9" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" opacity="0.4"/>
+              </svg>
+            </div>
+            <div class="edu-area-card__level" aria-label="Nivel: Universitario">Universitario</div>
+            <h3 class="edu-area-card__title">Matemáticas</h3>
+            <p class="edu-area-card__desc">
+              Las matemáticas y yo tenemos una relación de amor-reto. En UNIPAZ estoy
+              cursando Matemáticas IV: ecuaciones diferenciales ordinarias, Bernoulli,
+              exactas, Newton, mezclas. Me ha costado más de lo que esperaba,
+              pero cada ejercicio resuelto siente como una pequeña victoria.
+            </p>
+            <div class="edu-area-card__tags" aria-label="Temas principales">
+              <span class="edu-area-card__tag">EDO</span>
+              <span class="edu-area-card__tag">Cálculo</span>
+              <span class="edu-area-card__tag">Álgebra</span>
+              <span class="edu-area-card__tag">Estadística</span>
+            </div>
+          </article>
+
+          <!-- Área 3: Inglés -->
+          <article class="edu-area-card" data-animate="fade-up" data-delay="2">
+            <div class="edu-area-card__number" aria-hidden="true">03</div>
+            <div class="edu-area-card__icon-wrap" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                   aria-hidden="true">
+                <rect x="4" y="7" width="24" height="18" rx="3" stroke="currentColor" stroke-width="2"/>
+                <path d="M4 13h24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M10 13v12M22 13v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="16" cy="10" r="1.5" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="edu-area-card__level" aria-label="Nivel: Intermedio">Intermedio</div>
+            <h3 class="edu-area-card__title">Inglés Técnico</h3>
+            <p class="edu-area-card__desc">
+              El inglés es el idioma de la tecnología. Toda documentación relevante,
+              los mejores tutoriales, las comunidades más activas — están en inglés.
+              Estoy trabajando en pasar de leer con esfuerzo a leer con fluidez,
+              y a participar activamente en foros y comunidades internacionales.
+            </p>
+            <div class="edu-area-card__tags" aria-label="Temas principales">
+              <span class="edu-area-card__tag">Lectura técnica</span>
+              <span class="edu-area-card__tag">Documentación</span>
+              <span class="edu-area-card__tag">Conversacional</span>
+            </div>
+          </article>
+
+          <!-- Área 4: Emprendimiento -->
+          <article class="edu-area-card" data-animate="fade-up" data-delay="3">
+            <div class="edu-area-card__number" aria-hidden="true">04</div>
+            <div class="edu-area-card__icon-wrap" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                   aria-hidden="true">
+                <path d="M16 4L20 12L28 13.5L22 19.5L23.5 28L16 24L8.5 28L10 19.5L4 13.5L12 12L16 4Z"
+                  stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="edu-area-card__level" aria-label="Nivel: Practicando">Practicando</div>
+            <h3 class="edu-area-card__title">Emprendimiento Digital</h3>
+            <p class="edu-area-card__desc">
+              "El Mundo de Manu" no es solo un portafolio — es mi escuela de
+              emprendimiento. Construir productos digitales, entender pagos,
+              diseñar experiencias de usuario, gestionar proyectos reales...
+              todo eso se aprende haciéndolo, y aquí lo estoy haciendo.
+            </p>
+            <div class="edu-area-card__tags" aria-label="Temas principales">
+              <span class="edu-area-card__tag">Productos digitales</span>
+              <span class="edu-area-card__tag">UX/UI básico</span>
+              <span class="edu-area-card__tag">Marketing</span>
+              <span class="edu-area-card__tag">Monetización</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: PROYECTOS EDUCATIVOS
+      Acá muestro las herramientas que he construido y que ya
+      están disponibles para usar. La presento como una ficha
+      de aplicación, al estilo de una tienda de apps: icono,
+      estado, descripción corta, "Acerca de esta app" con el
+      detalle técnico, etiquetas de tecnologías usadas y un
+      botón directo para abrir el proyecto. Diseñé esta tarjeta
+      pensando en que pueda crecer — si más adelante agrego
+      otra herramienta, solo repito la estructura de la tarjeta
+      dentro de este mismo grid.
+    ────────────────────────────────────────────────────────── -->
+    <section class="edu-projects" id="edu-proyectos" aria-labelledby="eduProjectsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag edu-tag">Herramientas que construí</span>
+          <h2 class="section-title" id="eduProjectsTitle">Proyectos Educativos</h2>
+          <p class="section-desc">
+            No solo escribo sobre lo que aprendo — también construyo herramientas
+            con eso. Esta es una de ellas, lista para que la use cualquiera.
+          </p>
+        </div>
+
+        <div class="edu-projects__grid">
+
+          <!-- Proyecto 1: Calculadora de Notas -->
+          <article class="edu-project-card" data-animate="fade-up" data-delay="0">
+
+            <!-- Encabezado tipo "ficha de app": icono + nombre + estado -->
+            <div class="edu-project-card__header">
+              <div class="edu-project-card__icon" aria-hidden="true">
+                <svg width="34" height="34" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                     aria-hidden="true">
+                  <rect x="5" y="3" width="22" height="26" rx="3" stroke="currentColor" stroke-width="2"/>
+                  <path d="M10 9h12M10 14h5M17 14h5M10 19h5M17 19h5M10 24h5"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+
+              <div class="edu-project-card__heading">
+                <h3 class="edu-project-card__title">Calculadora de Notas</h3>
+                <p class="edu-project-card__tagline">
+                  Calcula tus 3 cortes académicos del semestre en segundos
+                </p>
+              </div>
+
+              <span class="edu-project-card__status" aria-label="Estado: Disponible">
+                <span class="edu-project-card__status-dot" aria-hidden="true"></span>
+                Disponible
+              </span>
+            </div>
+
+            <!-- Descripción general del proyecto -->
+            <p class="edu-project-card__desc">
+              La creé en 2025 porque me cansé de hacer las mismas cuentas a mano
+              cada corte: notas parciales, porcentajes, lo que necesito para
+              pasar... todo en una hoja de papel que terminaba perdida. Así que
+              programé una calculadora pensada específicamente para el sistema
+              de 3 cortes que manejamos en la universidad. La sigo usando yo
+              mismo cada semestre, y este 2026 le hice una actualización para
+              dejarla más clara y rápida de usar.
+            </p>
+
+            <!-- "Acerca de esta app" — ficha técnica estilo Play Store -->
+            <div class="edu-project-card__about">
+              <h4 class="edu-project-card__about-title">Acerca de esta herramienta</h4>
+
+              <dl class="edu-project-card__specs">
+                <div class="edu-project-card__spec">
+                  <dt>Qué hace</dt>
+                  <dd>Calcula el promedio de cada corte académico y el promedio final del semestre a partir de las notas que ingreses.</dd>
+                </div>
+                <div class="edu-project-card__spec">
+                  <dt>Para quién</dt>
+                  <dd>Estudiantes que manejan un sistema de evaluación por cortes o periodos, con distintos porcentajes por actividad.</dd>
+                </div>
+                <div class="edu-project-card__spec">
+                  <dt>Cómo se usa</dt>
+                  <dd>Ingresas tus notas y sus respectivos porcentajes por cada corte, y la calculadora te devuelve el promedio acumulado al instante — sin recargar la página.</dd>
+                </div>
+                <div class="edu-project-card__spec">
+                  <dt>Estado</dt>
+                  <dd>Funcional y en uso activo. Última actualización: 2026.</dd>
+                </div>
+              </dl>
+
+              <!-- Tecnologías usadas, mismo patrón visual que las tags de Áreas de Estudio -->
+              <div class="edu-project-card__tags" aria-label="Tecnologías usadas">
+                <span class="edu-project-card__tag">HTML</span>
+                <span class="edu-project-card__tag">CSS</span>
+                <span class="edu-project-card__tag">JavaScript</span>
+              </div>
+            </div>
+
+            <!-- Acción principal: abrir la calculadora en su propia carpeta -->
+            <div class="edu-project-card__actions">
+              <a href="calculadora/index.html" class="btn edu-btn--primary edu-project-card__cta">
+                Abrir Calculadora
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: REFLEXIONES DE APRENDIZAJE
+      Pensamientos honestos sobre lo que el estudio me ha
+      enseñado más allá del contenido técnico. Tipo blog,
+      con fecha, etiqueta de tema y un cierre reflexivo.
+    ────────────────────────────────────────────────────────── -->
+    <section class="edu-reflections" id="edu-reflexiones" aria-labelledby="eduReflectionsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag edu-tag">Del proceso</span>
+          <h2 class="section-title" id="eduReflectionsTitle">Reflexiones de Aprendizaje</h2>
+          <p class="section-desc">
+            Lo que el estudio me ha enseñado fuera de los libros.
+            Honesto, sin filtro editorial.
+          </p>
+        </div>
+
+        <div class="edu-reflections__grid">
+
+          <!-- Reflexión 1 -->
+          <article class="edu-reflection-card" data-animate="fade-up" data-delay="0">
+            <div class="edu-reflection-card__header">
+              <span class="edu-reflection-card__tag">Mentalidad</span>
+              <span class="edu-reflection-card__date">2026</span>
+            </div>
+            <h3 class="edu-reflection-card__title">
+              Lo que nadie te dice sobre estudiar solo
+            </h3>
+            <p class="edu-reflection-card__body">
+              Cuando empecé a aprender programación de manera autodidacta, creí que
+              el reto sería técnico: entender algoritmos, dominar sintaxis, memorizar APIs.
+              Pero el reto real fue otro: sostener la motivación cuando no hay nadie
+              esperando tu tarea, cuando el error no tiene un profesor que lo explique
+              y cuando el progreso es tan lento que parece invisible.
+              Aprender a aprender solo es, en sí mismo, la lección más importante.
+            </p>
+            <div class="edu-reflection-card__footer">
+              <span class="edu-reflection-card__insight">
+                💡 La disciplina llega después de la identidad, no al revés.
+              </span>
+            </div>
+          </article>
+
+          <!-- Reflexión 2 -->
+          <article class="edu-reflection-card" data-animate="fade-up" data-delay="1">
+            <div class="edu-reflection-card__header">
+              <span class="edu-reflection-card__tag">Proceso</span>
+              <span class="edu-reflection-card__date">2026</span>
+            </div>
+            <h3 class="edu-reflection-card__title">
+              El proyecto como el mejor profesor
+            </h3>
+            <p class="edu-reflection-card__body">
+              He aprendido más construyendo "El Mundo de Manu" que en muchas horas
+              de tutoriales. No porque los tutoriales sean malos, sino porque un proyecto
+              real te pone frente a problemas que ningún curso anticipa:
+              errores raros, decisiones de arquitectura, límites de presupuesto,
+              usuarios reales que hacen cosas inesperadas. El caos del mundo real
+              es el mejor currículo que existe.
+            </p>
+            <div class="edu-reflection-card__footer">
+              <span class="edu-reflection-card__insight">
+                💡 Construye algo que importe y aprenderás lo que necesitas.
+              </span>
+            </div>
+          </article>
+
+          <!-- Reflexión 3 -->
+          <article class="edu-reflection-card" data-animate="fade-up" data-delay="2">
+            <div class="edu-reflection-card__header">
+              <span class="edu-reflection-card__tag">Identidad</span>
+              <span class="edu-reflection-card__date">2026</span>
+            </div>
+            <h3 class="edu-reflection-card__title">
+              Ser estudiante en un país como Colombia
+            </h3>
+            <p class="edu-reflection-card__body">
+              Estudiar ingeniería en Barrancabermeja, sin los recursos de una
+              capital, sin conexión rápida siempre disponible, sin un ecosistema
+              tech maduro al lado, tiene su propio peso. Pero también su propio
+              sabor: cuando lo logras aquí, sabes que no fue por las condiciones
+              ideales sino a pesar de ellas. Eso construye un tipo de carácter
+              que ningún bootcamp de primer mundo puede enseñar.
+            </p>
+            <div class="edu-reflection-card__footer">
+              <span class="edu-reflection-card__insight">
+                💡 Las condiciones difíciles forjan estudiantes resilientes.
+              </span>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Nota de más reflexiones próximamente -->
+        <div class="edu-reflections__more" data-animate="fade-up">
+          <p>Seguiré escribiendo mientras sigo aprendiendo.</p>
+          <span class="edu-reflections__more-tag">Más por venir ✍️</span>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: CITAS QUE ME INSPIRAN
+      Equivalente a los versículos de Fe, pero con frases de
+      pensadores, educadores y emprendedores que me han movido.
+      Tipografía Space Grotesk, glow verde al hover/touch.
+    ────────────────────────────────────────────────────────── -->
+    <section class="edu-quotes" id="edu-citas" aria-labelledby="eduQuotesTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag edu-tag">Palabras que mueven</span>
+          <h2 class="section-title" id="eduQuotesTitle">Citas que me Inspiran</h2>
+        </div>
+
+        <div class="edu-quotes__grid" role="list">
+
+          <div class="edu-quote-card" role="listitem" data-animate="fade-up" data-delay="0">
+            <p class="edu-quote-card__text">
+              "La educación no es llenar un balde, sino encender un fuego."
+            </p>
+            <cite class="edu-quote-card__ref">— W. B. Yeats</cite>
+          </div>
+
+          <div class="edu-quote-card edu-quote-card--accent" role="listitem" data-animate="fade-up" data-delay="1">
+            <p class="edu-quote-card__text">
+              "El analfabeto del siglo XXI no será quien no sepa leer ni escribir,
+              sino quien no sepa aprender, desaprender y reaprender."
+            </p>
+            <cite class="edu-quote-card__ref">— Alvin Toffler</cite>
+          </div>
+
+          <div class="edu-quote-card" role="listitem" data-animate="fade-up" data-delay="2">
+            <p class="edu-quote-card__text">
+              "Invierte en ti mismo. Tu conocimiento y habilidades son activos
+              que nadie te puede quitar."
+            </p>
+            <cite class="edu-quote-card__ref">— Warren Buffett</cite>
+          </div>
+
+          <div class="edu-quote-card edu-quote-card--wide" role="listitem" data-animate="fade-up" data-delay="3">
+            <p class="edu-quote-card__text">
+              "El éxito es el resultado de la perfección, el trabajo duro,
+              aprender de los fracasos, la lealtad y la persistencia."
+            </p>
+            <cite class="edu-quote-card__ref">— Colin Powell</cite>
+          </div>
+
+          <div class="edu-quote-card" role="listitem" data-animate="fade-up" data-delay="4">
+            <p class="edu-quote-card__text">
+              "Dime y lo olvido, enséñame y lo recuerdo, involúcrame y lo aprendo."
+            </p>
+            <cite class="edu-quote-card__ref">— Benjamin Franklin</cite>
+          </div>
+
+          <div class="edu-quote-card" role="listitem" data-animate="fade-up" data-delay="5">
+            <p class="edu-quote-card__text">
+              "No tengas vergüenza de aprender. El conocimiento es inmenso
+              y la vida es corta."
+            </p>
+            <cite class="edu-quote-card__ref">— Maimónides</cite>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: RECURSOS QUE RECOMIENDO
+      Plataformas, libros, canales y comunidades que han sido
+      genuinamente útiles en mi formación. Recomendaciones
+      honestas, no patrocinadas.
+    ────────────────────────────────────────────────────────── -->
+    <section class="edu-resources" id="edu-recursos" aria-labelledby="eduResourcesTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag edu-tag">Lo que me ha formado</span>
+          <h2 class="section-title" id="eduResourcesTitle">Recursos que Recomiendo</h2>
+          <p class="section-desc">
+            Lo que uso, lo que he leído y lo que sigo consultando.
+            Sin afiliados, sin patrocinios — solo lo que realmente sirve.
+          </p>
+        </div>
+
+        <div class="edu-resources__grid">
+
+          <!-- Recurso: freeCodeCamp -->
+          <div class="edu-resource-card" data-animate="fade-up" data-delay="0">
+            <div class="edu-resource-card__icon" aria-hidden="true">💻</div>
+            <div class="edu-resource-card__info">
+              <span class="edu-resource-card__type">Plataforma gratuita</span>
+              <h3 class="edu-resource-card__title">freeCodeCamp</h3>
+              <p class="edu-resource-card__desc">
+                Mi punto de partida. Estructurado, gratuito y con certificaciones
+                reales. Ideal para aprender HTML, CSS, JavaScript y más desde cero
+                con proyectos prácticos al final de cada módulo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Recurso: MDN Web Docs -->
+          <div class="edu-resource-card" data-animate="fade-up" data-delay="1">
+            <div class="edu-resource-card__icon" aria-hidden="true">📖</div>
+            <div class="edu-resource-card__info">
+              <span class="edu-resource-card__type">Documentación</span>
+              <h3 class="edu-resource-card__title">MDN Web Docs</h3>
+              <p class="edu-resource-card__desc">
+                La referencia más completa de la web. Cada vez que tengo
+                dudas sobre JavaScript, CSS o HTML, MDN tiene la respuesta.
+                Aprender a leer documentación bien es una habilidad en sí misma.
+              </p>
+            </div>
+          </div>
+
+          <!-- Recurso: YouTube -->
+          <div class="edu-resource-card" data-animate="fade-up" data-delay="2">
+            <div class="edu-resource-card__icon" aria-hidden="true">🎬</div>
+            <div class="edu-resource-card__info">
+              <span class="edu-resource-card__type">Canales de video</span>
+              <h3 class="edu-resource-card__title">YouTube técnico</h3>
+              <p class="edu-resource-card__desc">
+                Traversy Media, Midudev, Fireship, Kevin Powell para CSS,
+                Fazt para español. Si no entiendo algo de un libro, seguro
+                existe un video que lo explica con código en pantalla.
+              </p>
+            </div>
+          </div>
+
+          <!-- Recurso: Libros -->
+          <div class="edu-resource-card" data-animate="fade-up" data-delay="3">
+            <div class="edu-resource-card__icon" aria-hidden="true">📚</div>
+            <div class="edu-resource-card__info">
+              <span class="edu-resource-card__type">Lectura técnica</span>
+              <h3 class="edu-resource-card__title">Libros que me marcaron</h3>
+              <p class="edu-resource-card__desc">
+                "Clean Code" de Robert Martin, "You Don't Know JS" de Kyle Simpson,
+                "El Programador Pragmático". No los lei de un tirón — los consulto,
+                los subrayo, los vuelvo a abrir cuando enfrento un problema real.
+              </p>
+            </div>
+          </div>
+
+          <!-- Recurso: Comunidades -->
+          <div class="edu-resource-card" data-animate="fade-up" data-delay="4">
+            <div class="edu-resource-card__icon" aria-hidden="true">🤝</div>
+            <div class="edu-resource-card__info">
+              <span class="edu-resource-card__type">Comunidad</span>
+              <h3 class="edu-resource-card__title">Comunidades dev</h3>
+              <p class="edu-resource-card__desc">
+                Stack Overflow para resolver, GitHub para leer código de otros,
+                Discord de comunidades colombianas de dev. Ver cómo otros
+                resuelven problemas enseña tanto como resolver los propios.
+              </p>
+            </div>
+          </div>
+
+          <!-- Recurso: SENA / UNIPAZ -->
+          <div class="edu-resource-card" data-animate="fade-up" data-delay="5">
+            <div class="edu-resource-card__icon" aria-hidden="true">🏛️</div>
+            <div class="edu-resource-card__info">
+              <span class="edu-resource-card__type">Formación formal</span>
+              <h3 class="edu-resource-card__title">SENA y UNIPAZ</h3>
+              <p class="edu-resource-card__desc">
+                La educación formal y la autodidacta no se excluyen.
+                El SENA me da estructura metodológica y trabajo por evidencias.
+                UNIPAZ me da la base científica. Ambos juntos me dan el perfil
+                completo que quiero construir.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      BANNER: CAMPUS MANU (SUB-SECCIÓN FUTURA)
+      Equivalente al banner "Mundo Bíblico" de Fe.
+      El href está preparado como placeholder para cuando
+      la sub-sección esté lista. Instrucciones claras incluidas.
+
+      TODO: cuando Campus Manu esté lista, reemplaza el atributo
+      href de .edu-campus__card por:
+        href="campus/index.html"
+      y elimina el atributo aria-disabled="true".
+    ────────────────────────────────────────────────────────── -->
+    <section class="edu-campus" id="edu-campus-manu" aria-labelledby="eduCampusTitle">
+      <div class="container">
+
+        <!--
+          PLACEHOLDER: este href apunta a la futura sub-sección.
+          Descomenta y actualiza cuando Campus Manu esté lista:
+          href="campus/index.html"
+        -->
+        <div class="edu-campus__card" data-animate="fade-up" role="article"
+             aria-labelledby="eduCampusTitle">
+
+          <div class="edu-campus__glow" aria-hidden="true"></div>
+
+          <div class="edu-campus__icon" aria-hidden="true">🎓</div>
+
+          <div class="edu-campus__text">
+            <span class="section-tag edu-tag">Próximamente</span>
+            <h2 class="edu-campus__title" id="eduCampusTitle">Campus Manu</h2>
+            <p class="edu-campus__desc">
+              Un espacio interactivo para aprender juntos: apuntes organizados,
+              mini-lecciones sobre programación y matemáticas, y recursos
+              curados por temas. Pensado para estudiantes que aprenden
+              con recursos limitados pero con ganas ilimitadas.
+            </p>
+          </div>
+
+          <div class="edu-campus__badge" aria-label="Estado: En desarrollo">
+            <span class="edu-campus__badge-dot" aria-hidden="true"></span>
+            En desarrollo
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      CTA FINAL — INVITACIÓN A APRENDER JUNTOS
+    ────────────────────────────────────────────────────────── -->
+    <section class="edu-cta" id="edu-conectar" aria-labelledby="eduCtaTitle">
+      <div class="container">
+        <div class="edu-cta__inner" data-animate="fade-up">
+
+          <!-- Fondo luminoso verde -->
+          <div class="edu-cta__glow" aria-hidden="true"></div>
+
+          <div class="edu-cta__icon" aria-hidden="true">📖</div>
+
+          <h2 class="edu-cta__title" id="eduCtaTitle">
+            ¿Aprendemos<br/>
+            <span class="edu-cta__highlight">juntos?</span>
+          </h2>
+
+          <p class="edu-cta__desc">
+            Si estás aprendiendo a programar, si tienes preguntas sobre
+            cómo organizarte como estudiante, si quieres compartir un recurso
+            o simplemente charlar sobre tecnología y educación — me encantaría
+            escucharte. Todos estamos aprendiendo algo.
+          </p>
+
+          <div class="edu-cta__actions">
+            <a href="../../index.html#contacto" class="btn edu-btn--primary">
+              Escríbeme →
+            </a>
+            <a href="../../index.html#mundos" class="btn btn--ghost edu-btn--ghost">
+              Otros mundos
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+    FOOTER — Misma estructura que fe.html, con Educación añadida
+    a la lista de mundos y marcado como activo.
+  ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+
+        <div class="footer__brand">
+          <a href="../../index.html" class="footer__logo" aria-label="Volver al inicio">
+            <span class="footer__logo-mark">M</span>
+            El Mundo de Manu
+          </a>
+          <p class="footer__tagline">Construyendo mi universo digital, un proyecto a la vez.</p>
+        </div>
+
+        <nav class="footer__nav" aria-label="Mis mundos">
+          <h4 class="footer__nav-title">Mis Mundos</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../fe/fe.html"                     class="footer__link">Fe</a></li>
+            <li><a href="../gaming/gaming.html"             class="footer__link">Gaming</a></li>
+            <li><a href="../infantil/infantil.html"         class="footer__link">Infantil</a></li>
+            <li><a href="../relaciones/relaciones.html"     class="footer__link">Relaciones</a></li>
+            <li><a href="../tecnologia/tecnologia.html"     class="footer__link">Tecnología</a></li>
+            <li><a href="educacion.html"                    class="footer__link footer__link--active">Educación</a></li>
+            <li><a href="../sobremi/sobremi.html"           class="footer__link">Sobre Mí</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__nav" aria-label="Links del sitio">
+          <h4 class="footer__nav-title">Sitio</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../../index.html#inicio"    class="footer__link">Inicio</a></li>
+            <li><a href="../../index.html#proyectos" class="footer__link">Proyectos</a></li>
+            <li><a href="../../index.html#contacto"  class="footer__link">Contacto</a></li>
+          </ul>
+        </nav>
+
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© <span id="footerYear"></span> El Mundo de Manu. Construido con 💛 y mucho café.</p>
+        <p class="footer__credits">Diseñado y desarrollado por <strong>Manu</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+  <script src="educacion.js"></script>
+
+</body>
+</html>

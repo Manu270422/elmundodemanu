@@ -1,0 +1,17 @@
+{
+  "name": "latidos-modo-pareja",
+  "version": "1.0.0",
+  "description": "Latidos: Modo Pareja. Mi videojuego exclusivo para dos: novio y novia. Colección de minijuegos románticos con mapa de progreso estilo Duolingo y economía de corazones.",
+  "author": "El Mundo de Manu",
+  "license": "MIT",
+  "scripts": {
+    "start": "npx serve .",
+    "android:init": "npx cap init latidos com.elmundodemanu.latidos --web-dir=.",
+    "android:add": "npx cap add android",
+    "android:sync": "npx cap sync android",
+    "android:open": "npx cap open android"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

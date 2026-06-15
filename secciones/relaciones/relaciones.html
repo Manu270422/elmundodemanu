@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  relaciones.html — El Mundo de Manu / Relaciones
+  ============================================================
+  Esta es mi sección de relaciones. Aquí hablo de lo que he
+  aprendido sobre el amor, la amistad y los detalles que
+  fortalecen los vínculos. También es la vitrina de mi primer
+  producto digital comercial: el Pack de Cartas de Amor Premium.
+
+  Esta sección tiene doble propósito:
+  1. Compartir contenido de valor gratuito (ideas, reflexiones)
+  2. Presentar y vender mi producto pago de forma honesta
+
+  Estructura de la página:
+  - Hero romántico con corazones flotantes en canvas
+  - Pilares: lo que creo sobre las relaciones
+  - Ideas de detalles (contenido gratuito de valor)
+  - Showcase del Pack de Cartas de Amor Premium (producto)
+  - CTA final para conectar
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Relaciones — El Mundo de Manu. Ideas para fortalecer tus vínculos, detalles que enamoran y mi Pack de Cartas de Amor Premium." />
+  <meta name="author" content="Manu" />
+
+  <title>Relaciones — El Mundo de Manu</title>
+
+  <!-- Fuentes del sitio + Playfair Display para el toque romántico -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap"
+    rel="stylesheet" />
+  <!--
+    Agrego Playfair Display porque sus serifas elegantes y su
+    cursiva transmiten exactamente la sensación de una carta
+    escrita a mano. Es la fuente perfecta para esta sección.
+  -->
+
+  <!-- CSS global primero, luego el específico de esta sección -->
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="relaciones.css" />
+</head>
+
+<body class="page-relaciones">
+  <!--
+    La clase page-relaciones me permite sobrescribir variables
+    globales solo en esta página, igual que hago en gaming.
+  -->
+
+  <!-- Cursor personalizado -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
+
+  <!-- ============================================================
+    NAVBAR — Paths relativos desde /secciones/relaciones/
+  ============================================================ -->
+  <header class="navbar" id="navbar" role="banner">
+    <nav class="navbar__container" aria-label="Navegación principal">
+
+      <a href="../../index.html" class="navbar__logo" aria-label="Volver al inicio">
+        <span class="navbar__logo-mark">M</span>
+        <span class="navbar__logo-text">El Mundo de <strong>Manu</strong></span>
+      </a>
+
+      <ul class="navbar__links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__link navbar__link--active">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__link">Sobre Mí</a></li>
+        <li>
+          <a href="../../index.html#contacto" class="navbar__link navbar__link--cta">
+            Contáctame
+            <span class="navbar__cta-dot" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+
+      <button class="navbar__toggle" id="navToggle"
+        aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </nav>
+
+    <div class="navbar__mobile" id="mobileMenu" aria-hidden="true">
+      <ul class="navbar__mobile-links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__mobile-link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__mobile-link">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__mobile-link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__mobile-link">Sobre Mí</a></li>
+        <li><a href="../../index.html#contacto"  class="navbar__mobile-link navbar__mobile-link--cta">Contáctame</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" aria-label="Ruta de navegación">
+    <div class="container">
+      <nav class="breadcrumb__nav">
+        <a href="../../index.html"        class="breadcrumb__link">Inicio</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="../../index.html#mundos" class="breadcrumb__link">Mis Mundos</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span class="breadcrumb__current" aria-current="page">Relaciones</span>
+      </nav>
+    </div>
+  </div>
+
+  <main id="main" role="main">
+
+    <!-- ──────────────────────────────────────────────────────────
+      HERO RELACIONES
+      Estética cálida y romántica: canvas con corazones flotando
+      suavemente, destellos rosados y dorados, y una tipografía
+      serif que evoca una carta escrita a mano.
+    ────────────────────────────────────────────────────────── -->
+    <section class="rl-hero" id="rl-inicio" aria-labelledby="rlHeroTitle">
+
+      <!-- Fondo: canvas de corazones + destellos -->
+      <div class="rl-hero__bg" aria-hidden="true">
+        <canvas class="rl-hero__canvas" id="rlCanvas"></canvas>
+      </div>
+      <div class="rl-hero__glow rl-hero__glow--rose" aria-hidden="true"></div>
+      <div class="rl-hero__glow rl-hero__glow--gold" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="rl-hero__inner">
+
+          <span class="section-tag rl-tag" data-animate="fade-up">Con el corazón</span>
+
+          <h1 class="rl-hero__title" id="rlHeroTitle" data-animate="fade-up" data-delay="1">
+            <span class="rl-hero__title-line">Relaciones</span>
+            <span class="rl-hero__title-sub">El arte de los detalles que <em>enamoran</em></span>
+          </h1>
+
+          <p class="rl-hero__desc" data-animate="fade-up" data-delay="2">
+            Creo que las relaciones se construyen con intención.
+            Una palabra a tiempo, un detalle inesperado, una carta
+            escrita con el alma — eso es lo que la gente recuerda.
+            Aquí comparto lo que he aprendido y las herramientas
+            que he creado para ayudarte a expresar lo que sientes.
+          </p>
+
+          <div class="rl-hero__actions" data-animate="fade-up" data-delay="3">
+            <a href="#rl-pack" class="btn rl-btn--primary">
+              Ver mi Pack de Cartas 💌
+            </a>
+            <a href="#rl-ideas" class="btn btn--ghost rl-btn--ghost">
+              Ideas gratuitas
+            </a>
+            <a href="#rl-games" class="btn btn--ghost rl-btn--ghost">
+              🎮 Jugar
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Indicador de scroll -->
+      <div class="rl-hero__scroll" aria-hidden="true">
+        <span class="rl-hero__scroll-heart">♥</span>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: MIS PILARES
+      Lo que creo sobre las relaciones — mi filosofía personal.
+    ────────────────────────────────────────────────────────── -->
+    <section class="rl-pilares" id="rl-pilares" aria-labelledby="rlPilaresTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag rl-tag">Lo que creo</span>
+          <h2 class="section-title" id="rlPilaresTitle">Mis Pilares</h2>
+          <p class="section-desc">
+            No soy experto en relaciones — soy alguien que observa,
+            aprende y cree profundamente en estos principios.
+          </p>
+        </div>
+
+        <div class="rl-pilares__grid">
+
+          <article class="rl-pilar-card" data-animate="fade-up" data-delay="1">
+            <div class="rl-pilar-card__icon" aria-hidden="true">🗣️</div>
+            <h3 class="rl-pilar-card__title">Comunicación honesta</h3>
+            <p class="rl-pilar-card__desc">
+              Las palabras construyen o destruyen. Aprendí que decir
+              lo que siento — con respeto y a tiempo — evita el 90%
+              de los malentendidos. El silencio acumulado siempre
+              cobra factura.
+            </p>
+          </article>
+
+          <article class="rl-pilar-card" data-animate="fade-up" data-delay="2">
+            <div class="rl-pilar-card__icon" aria-hidden="true">🎁</div>
+            <h3 class="rl-pilar-card__title">Detalles con intención</h3>
+            <p class="rl-pilar-card__desc">
+              No se trata de gastar — se trata de pensar en el otro.
+              Una nota escondida, una canción dedicada, una carta.
+              El detalle más valioso es el tiempo que invertiste
+              en crearlo.
+            </p>
+          </article>
+
+          <article class="rl-pilar-card" data-animate="fade-up" data-delay="3">
+            <div class="rl-pilar-card__icon" aria-hidden="true">🌱</div>
+            <h3 class="rl-pilar-card__title">Crecer juntos</h3>
+            <p class="rl-pilar-card__desc">
+              Una relación sana no te frena — te impulsa. Creo en
+              los vínculos donde ambas personas se apoyan en sus
+              metas, celebran los logros del otro y se levantan
+              juntos cuando algo sale mal.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: IDEAS GRATUITAS
+      Contenido de valor sin costo. Esto genera confianza antes
+      de presentar mi producto pago — primero doy, luego ofrezco.
+      Tarjetas tipo "flip card" que se voltean al tocarlas.
+    ────────────────────────────────────────────────────────── -->
+    <section class="rl-ideas" id="rl-ideas" aria-labelledby="rlIdeasTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag rl-tag">Gratis para ti</span>
+          <h2 class="section-title" id="rlIdeasTitle">Ideas de Detalles</h2>
+          <p class="section-desc">
+            Detalles que puedes hacer hoy mismo, sin gastar casi nada.
+            Toca cada tarjeta para revelar la idea completa.
+          </p>
+        </div>
+
+        <div class="rl-ideas__grid">
+
+          <div class="rl-idea-card" data-animate="fade-up" data-delay="1"
+            tabindex="0" role="button" aria-expanded="false"
+            aria-label="Idea: La carta de los 12 meses. Toca para revelar.">
+            <div class="rl-idea-card__inner">
+              <div class="rl-idea-card__front">
+                <span class="rl-idea-card__num">01</span>
+                <h3 class="rl-idea-card__title">La carta de los 12 meses</h3>
+                <span class="rl-idea-card__hint">Toca para revelar ♥</span>
+              </div>
+              <div class="rl-idea-card__back">
+                <p>
+                  Escribe 12 cartas pequeñas, una por cada mes del año,
+                  y entrégalas todas juntas con la instrucción de abrir
+                  solo una al inicio de cada mes. Un detalle que dura
+                  un año entero.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rl-idea-card" data-animate="fade-up" data-delay="2"
+            tabindex="0" role="button" aria-expanded="false"
+            aria-label="Idea: El mapa de nuestros lugares. Toca para revelar.">
+            <div class="rl-idea-card__inner">
+              <div class="rl-idea-card__front">
+                <span class="rl-idea-card__num">02</span>
+                <h3 class="rl-idea-card__title">El mapa de nuestros lugares</h3>
+                <span class="rl-idea-card__hint">Toca para revelar ♥</span>
+              </div>
+              <div class="rl-idea-card__back">
+                <p>
+                  Dibuja o imprime un mapa de tu ciudad y marca los
+                  lugares importantes de su historia: donde se conocieron,
+                  la primera cita, ese parque especial. Enmárcalo.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rl-idea-card" data-animate="fade-up" data-delay="3"
+            tabindex="0" role="button" aria-expanded="false"
+            aria-label="Idea: Notas escondidas. Toca para revelar.">
+            <div class="rl-idea-card__inner">
+              <div class="rl-idea-card__front">
+                <span class="rl-idea-card__num">03</span>
+                <h3 class="rl-idea-card__title">Notas escondidas</h3>
+                <span class="rl-idea-card__hint">Toca para revelar ♥</span>
+              </div>
+              <div class="rl-idea-card__back">
+                <p>
+                  Esconde notas pequeñas en lugares inesperados: el
+                  bolsillo de su chaqueta, dentro de un libro, en su
+                  billetera. Que las encuentre cuando menos lo espere.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rl-idea-card" data-animate="fade-up" data-delay="4"
+            tabindex="0" role="button" aria-expanded="false"
+            aria-label="Idea: La playlist con historia. Toca para revelar.">
+            <div class="rl-idea-card__inner">
+              <div class="rl-idea-card__front">
+                <span class="rl-idea-card__num">04</span>
+                <h3 class="rl-idea-card__title">La playlist con historia</h3>
+                <span class="rl-idea-card__hint">Toca para revelar ♥</span>
+              </div>
+              <div class="rl-idea-card__back">
+                <p>
+                  Crea una playlist donde cada canción cuente un momento
+                  de su historia juntos, y escribe junto a cada una por
+                  qué la elegiste. La música guarda recuerdos.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rl-idea-card" data-animate="fade-up" data-delay="5"
+            tabindex="0" role="button" aria-expanded="false"
+            aria-label="Idea: El frasco de razones. Toca para revelar.">
+            <div class="rl-idea-card__inner">
+              <div class="rl-idea-card__front">
+                <span class="rl-idea-card__num">05</span>
+                <h3 class="rl-idea-card__title">El frasco de razones</h3>
+                <span class="rl-idea-card__hint">Toca para revelar ♥</span>
+              </div>
+              <div class="rl-idea-card__back">
+                <p>
+                  Llena un frasco con papelitos, cada uno con una razón
+                  por la que amas a esa persona. Para los días difíciles,
+                  que saque uno y recuerde.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rl-idea-card" data-animate="fade-up" data-delay="6"
+            tabindex="0" role="button" aria-expanded="false"
+            aria-label="Idea: La carta digital personalizada. Toca para revelar.">
+            <div class="rl-idea-card__inner">
+              <div class="rl-idea-card__front">
+                <span class="rl-idea-card__num">06</span>
+                <h3 class="rl-idea-card__title">La carta digital personalizada</h3>
+                <span class="rl-idea-card__hint">Toca para revelar ♥</span>
+              </div>
+              <div class="rl-idea-card__back">
+                <p>
+                  Una carta digital interactiva, con su nombre, sus
+                  recuerdos y un diseño hermoso que puede guardar para
+                  siempre. Justo lo que creé con mi Pack de Cartas. 👇
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: JUEGOS DE RELACIONES
+      Experiencias interactivas creadas con amor. Cada juego
+      tiene su propia ficha estilo Play Store: ícono, nombre,
+      descripción, categoría y botón de acceso.
+    ────────────────────────────────────────────────────────── -->
+    <section class="rl-games" id="rl-games" aria-labelledby="rlGamesTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag rl-tag">🎮 Juegos</span>
+          <h2 class="section-title" id="rlGamesTitle">Experiencias Interactivas</h2>
+          <p class="section-desc">
+            Juegos que creé para vivir las relaciones de otra forma.
+            Gratis, directos desde el navegador — sin descargas.
+          </p>
+        </div>
+
+        <div class="rl-games__grid">
+
+          <!-- LATIDOS -->
+          <article class="rl-game-card" data-animate="fade-up" data-delay="1"
+            aria-label="Juego: Latidos">
+
+            <div class="rl-game-card__header">
+              <div class="rl-game-card__icon" aria-hidden="true">💓</div>
+              <div class="rl-game-card__meta">
+                <span class="rl-game-card__category">Arcade · Relaciones</span>
+                <div class="rl-game-card__badges">
+                  <span class="rl-game-badge rl-game-badge--free">Gratis</span>
+                  <span class="rl-game-badge rl-game-badge--new">Nuevo</span>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="rl-game-card__title">Latidos</h3>
+
+            <p class="rl-game-card__desc">
+              Un juego arcade donde cada corazón importa. Sincroniza
+              tus latidos con el ritmo, esquiva los obstáculos del
+              desamor y descubre hasta dónde llega tu conexión.
+              Simple de aprender, difícil de soltar.
+            </p>
+
+            <div class="rl-game-card__info">
+              <span class="rl-game-card__detail">
+                <span aria-hidden="true">🕹️</span> Un jugador
+              </span>
+              <span class="rl-game-card__detail">
+                <span aria-hidden="true">🌐</span> Navegador
+              </span>
+              <span class="rl-game-card__detail">
+                <span aria-hidden="true">⏳</span> En desarrollo
+              </span>
+            </div>
+
+            <div class="rl-game-card__footer">
+              <a href="latidos/index.html"
+                class="btn rl-btn--primary rl-game-card__cta"
+                aria-label="Jugar Latidos">
+                Jugar ahora ♥
+              </a>
+              <span class="rl-game-card__update">
+                Próximas actualizaciones en camino…
+              </span>
+            </div>
+
+          </article>
+
+          <!-- PLACEHOLDER — PRÓXIMO JUEGO -->
+          <article class="rl-game-card rl-game-card--coming" data-animate="fade-up" data-delay="2"
+            aria-label="Próximo juego — próximamente">
+
+            <div class="rl-game-card__header">
+              <div class="rl-game-card__icon" aria-hidden="true">🔮</div>
+              <div class="rl-game-card__meta">
+                <span class="rl-game-card__category">Próximamente</span>
+                <div class="rl-game-card__badges">
+                  <span class="rl-game-badge rl-game-badge--soon">En desarrollo</span>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="rl-game-card__title">??? Próximo juego</h3>
+
+            <p class="rl-game-card__desc">
+              Algo nuevo está tomando forma. Una experiencia interactiva
+              diseñada para los que creen que los vínculos también
+              se cultivan jugando. Mantente atento.
+            </p>
+
+            <div class="rl-game-card__info">
+              <span class="rl-game-card__detail">
+                <span aria-hidden="true">🔒</span> Sin fecha aún
+              </span>
+            </div>
+
+            <div class="rl-game-card__footer">
+              <a href="../../index.html#contacto"
+                class="btn btn--ghost rl-btn--ghost rl-game-card__cta"
+                aria-label="Sugerir una idea para el próximo juego">
+                Sugerir una idea 💡
+              </a>
+            </div>
+
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: PACK DE CARTAS DE AMOR PREMIUM
+      Mi primer producto digital comercial. Lo presento con
+      honestidad: qué es, qué incluye y por qué vale la pena.
+    ────────────────────────────────────────────────────────── -->
+    <section class="rl-pack" id="rl-pack" aria-labelledby="rlPackTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag rl-tag">Mi producto ⭐</span>
+          <h2 class="section-title" id="rlPackTitle">Pack de Cartas de Amor Premium</h2>
+          <p class="section-desc">
+            Lo desarrollé desde cero para que cualquier persona pueda
+            regalar una carta digital hermosa y personalizada — sin
+            saber nada de diseño ni de tecnología.
+          </p>
+        </div>
+
+        <div class="rl-pack__showcase" data-animate="fade-up" data-delay="1">
+
+          <!-- Lado visual: mockup de una carta animada en CSS puro -->
+          <div class="rl-pack__visual" aria-hidden="true">
+            <div class="rl-pack__card-mock">
+              <div class="rl-pack__card-seal">💌</div>
+              <p class="rl-pack__card-text">Para ti, con todo mi amor...</p>
+              <div class="rl-pack__card-line rl-pack__card-line--long"></div>
+              <div class="rl-pack__card-line rl-pack__card-line--mid"></div>
+              <div class="rl-pack__card-line rl-pack__card-line--short"></div>
+              <p class="rl-pack__card-sign">— Con amor</p>
+            </div>
+            <span class="rl-pack__float rl-pack__float--1">♥</span>
+            <span class="rl-pack__float rl-pack__float--2">♥</span>
+            <span class="rl-pack__float rl-pack__float--3">✨</span>
+          </div>
+
+          <!-- Lado informativo: qué incluye + precio + CTA -->
+          <div class="rl-pack__info">
+
+            <h3 class="rl-pack__subtitle">¿Qué incluye?</h3>
+            <ul class="rl-pack__features" role="list">
+              <li class="rl-pack__feature">
+                <span class="rl-pack__feature-icon" aria-hidden="true">✅</span>
+                Plantillas de cartas premium con diseños románticos exclusivos
+              </li>
+              <li class="rl-pack__feature">
+                <span class="rl-pack__feature-icon" aria-hidden="true">✅</span>
+                Personalizador interactivo: nombres, mensajes y detalles propios
+              </li>
+              <li class="rl-pack__feature">
+                <span class="rl-pack__feature-icon" aria-hidden="true">✅</span>
+                Acceso inmediato por correo después de tu compra
+              </li>
+              <li class="rl-pack__feature">
+                <span class="rl-pack__feature-icon" aria-hidden="true">✅</span>
+                Pago seguro con los métodos más usados en Colombia
+              </li>
+            </ul>
+
+            <div class="rl-pack__price-row">
+              <span class="rl-pack__price">$15.000 <small>COP</small></span>
+              <span class="rl-pack__price-note">Pago único — acceso de por vida</span>
+            </div>
+
+            <div class="rl-pack__actions">
+              <a href="https://pack-cartas-amor.netlify.app" class="btn rl-btn--primary"
+                target="_blank" rel="noopener noreferrer">
+                Conocer el Pack 💌
+              </a>
+              <a href="../../index.html#contacto" class="btn btn--ghost rl-btn--ghost">
+                Tengo una pregunta
+              </a>
+            </div>
+
+            <p class="rl-pack__trust">
+              Desarrollado con 💛 por mí, Manu. Si tienes algún problema
+              con tu compra, escríbeme directamente y lo resolvemos.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────
+      CTA FINAL
+    ────────────────────────────────────────────────────────── -->
+    <section class="rl-cta" id="rl-conectar" aria-labelledby="rlCtaTitle">
+      <div class="container">
+        <div class="rl-cta__inner" data-animate="fade-up">
+          <div class="rl-cta__glow" aria-hidden="true"></div>
+
+          <div class="rl-cta__icon" aria-hidden="true">💌</div>
+
+          <h2 class="rl-cta__title" id="rlCtaTitle">
+            Las palabras correctas <em>cambian todo</em>
+          </h2>
+          <p class="rl-cta__desc">
+            Si tienes una idea para un detalle especial, una pregunta
+            sobre el pack, o simplemente quieres compartir tu historia —
+            me encantaría escucharte.
+          </p>
+
+          <div class="rl-cta__actions">
+            <a href="../../index.html#contacto" class="btn rl-btn--primary">
+              Escríbeme →
+            </a>
+            <a href="../../index.html#mundos" class="btn btn--ghost rl-btn--ghost">
+              Otros mundos
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer reutilizable -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="../../index.html" class="footer__logo" aria-label="Volver al inicio">
+            <span class="footer__logo-mark">M</span>
+            El Mundo de Manu
+          </a>
+          <p class="footer__tagline">Construyendo mi universo digital, un proyecto a la vez.</p>
+        </div>
+        <nav class="footer__nav" aria-label="Mis mundos">
+          <h4 class="footer__nav-title">Mis Mundos</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../fe/fe.html"                 class="footer__link">Fe</a></li>
+            <li><a href="../gaming/gaming.html"         class="footer__link">Gaming</a></li>
+            <li><a href="../infantil/infantil.html"     class="footer__link">Infantil</a></li>
+            <li><a href="relaciones.html"               class="footer__link footer__link--active">Relaciones</a></li>
+            <li><a href="../tecnologia/tecnologia.html" class="footer__link">Tecnología</a></li>
+            <li><a href="../sobremi/sobremi.html"       class="footer__link">Sobre Mí</a></li>
+          </ul>
+        </nav>
+        <nav class="footer__nav" aria-label="Links del sitio">
+          <h4 class="footer__nav-title">Sitio</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../../index.html#inicio"    class="footer__link">Inicio</a></li>
+            <li><a href="../../index.html#proyectos" class="footer__link">Proyectos</a></li>
+            <li><a href="../../index.html#contacto"  class="footer__link">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© <span id="footerYear"></span> El Mundo de Manu. Construido con 💛 y mucho café.</p>
+        <p class="footer__credits">Diseñado y desarrollado por <strong>Manu</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+  <script src="relaciones.js"></script>
+
+</body>
+</html>

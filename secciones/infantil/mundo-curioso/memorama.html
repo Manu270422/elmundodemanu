@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memorama 🃏 — Mundo Curioso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       HEADER FIJO — botón de volver siempre visible
+  ══════════════════════════════════════════════ -->
+  <header class="game-header">
+    <a href="index.html" class="game-header__back" onclick="playClick()">
+      ← Inicio
+    </a>
+    <div class="game-header__title">🃏 Memorama</div>
+    <div class="game-header__score-box">
+      <span>⭐</span>
+      <span class="game-header__score-num" id="scoreDisplay">0</span>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       PANTALLA 1: SELECTOR DE DIFICULTAD
+       El niño elige cuántas cartas quiere jugar.
+       Menos cartas = más fácil para los más pequeños.
+  ══════════════════════════════════════════════ -->
+  <div id="screenSelector" class="selector-screen">
+
+    <div>
+      <h1 class="selector-screen__title">¡A entrenar la memoria! 🧠</h1>
+      <p class="selector-screen__subtitle">¿Cuántas cartas quieres usar?</p>
+    </div>
+
+    <div class="selector-grid" style="max-width: 540px;">
+
+      <button class="selector-btn" data-pares="4" onclick="seleccionarDificultad(4, this)">
+        <span class="selector-btn__emoji">🌱</span>
+        <span class="selector-btn__label">Fácil</span>
+        <span class="selector-btn__sub">8 cartas (4 pares)</span>
+      </button>
+
+      <button class="selector-btn" data-pares="6" onclick="seleccionarDificultad(6, this)">
+        <span class="selector-btn__emoji">🚀</span>
+        <span class="selector-btn__label">Normal</span>
+        <span class="selector-btn__sub">12 cartas (6 pares)</span>
+      </button>
+
+      <button class="selector-btn" data-pares="8" onclick="seleccionarDificultad(8, this)">
+        <span class="selector-btn__emoji">🏆</span>
+        <span class="selector-btn__label">Experto</span>
+        <span class="selector-btn__sub">16 cartas (8 pares)</span>
+      </button>
+
+    </div>
+
+    <button class="btn-primary" id="btnIniciar" disabled onclick="iniciarMemorama()">
+      ¡A jugar! 🃏
+    </button>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANTALLA 2: EL JUEGO
+  ══════════════════════════════════════════════ -->
+  <div id="screenGame" class="mem-layout hidden">
+
+    <!-- Barra de info: pares encontrados + intentos -->
+    <div class="mem-info-bar">
+      <div class="mem-info-stat">
+        <span class="mem-info-stat__icon">✅</span>
+        <span>Pares: <strong id="paresDisplay">0</strong> / <strong id="paresTotalDisplay">0</strong></span>
+      </div>
+      <div class="mem-info-stat">
+        <span class="mem-info-stat__icon">🔄</span>
+        <span>Intentos: <strong id="intentosDisplay">0</strong></span>
+      </div>
+      <div class="mem-info-stat">
+        <span class="mem-info-stat__icon">⏱️</span>
+        <span id="timerDisplay">0s</span>
+      </div>
+    </div>
+
+    <!-- Tablero de cartas — se construye dinámicamente con JS -->
+    <div class="mem-board" id="memBoard" role="list" aria-label="Tablero de memorama">
+      <!-- Las cartas se insertan aquí con JS -->
+    </div>
+
+    <!-- Panel de dato curioso al encontrar un par -->
+    <div class="mem-fact-panel hidden" id="memFactPanel">
+      <div class="mem-fact-panel__header">
+        <span>💡</span>
+        <strong>¡Par encontrado! ¿Sabías que...?</strong>
+      </div>
+      <p class="mem-fact-panel__text" id="memFactText"></p>
+      <button class="btn-primary" style="width:100%; justify-content:center;" onclick="cerrarFact()">
+        ¡Entendido! Seguir jugando →
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANTALLA 3: FIN DEL MEMORAMA
+  ══════════════════════════════════════════════ -->
+  <div id="screenEnd" class="mem-layout hidden">
+
+    <div class="trivia-end-screen">
+
+      <div class="trivia-end-screen__emoji" id="memEndEmoji">🏆</div>
+      <h2 class="trivia-end-screen__title" id="memEndTitle">¡Memoria increíble!</h2>
+      <p id="memEndMsg" style="color: var(--color-text-muted); font-weight: 600;">
+        Completaste el tablero
+      </p>
+
+      <div class="trivia-end-screen__stats">
+        <div class="trivia-stat">
+          <div class="trivia-stat__value" id="memEndPares">0</div>
+          <div class="trivia-stat__label">✅ Pares</div>
+        </div>
+        <div class="trivia-stat">
+          <div class="trivia-stat__value" id="memEndIntentos">0</div>
+          <div class="trivia-stat__label">🔄 Intentos</div>
+        </div>
+        <div class="trivia-stat">
+          <div class="trivia-stat__value" id="memEndTiempo">0s</div>
+          <div class="trivia-stat__label">⏱️ Tiempo</div>
+        </div>
+        <div class="trivia-stat">
+          <div class="trivia-stat__value" id="memEndScore">0 ⭐</div>
+          <div class="trivia-stat__label">Puntos</div>
+        </div>
+      </div>
+
+      <div class="trivia-end-screen__actions">
+        <button class="btn-primary" onclick="repetirMemorama()">
+          🔄 Jugar de nuevo
+        </button>
+        <a href="index.html" class="btn-secondary" onclick="playClick()">
+          🏠 Volver al inicio
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Overlay de celebración compartido -->
+  <div class="celebration-overlay" id="celebrationOverlay" aria-hidden="true">
+    <div class="celebration-overlay__burst" id="celebrationBurst">🎉</div>
+  </div>
+
+  <!-- Toast de mensajes -->
+  <div class="toast" id="toastMsg" role="alert" aria-live="polite"></div>
+
+  <script src="js/audio.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/memorama.js"></script>
+
+</body>
+</html>

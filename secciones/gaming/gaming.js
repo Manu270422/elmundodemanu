@@ -15,11 +15,13 @@
  * 03. Animación del HUD — contador de nivel
  * 04. Barras de stats del jugador (STR, INT, AGI, END)
  * 05. Medidores de géneros animados
- * 06. Filtro de biblioteca de juegos
- * 07. Animación de lecciones con línea lateral
- * 08. Efecto glitch en el título del hero
- * 09. Scroll suave en página
- * 10. Inicialización
+ * 06. Animación de mis creaciones (juegos propios)
+ * 07. Filtro de biblioteca de juegos
+ * 08. Animación de lecciones con línea lateral
+ * 09. Efecto glitch en el título del hero
+ * 10. Scroll suave en página
+ * 11. Animación de setup cards
+ * 12. Inicialización
  *
  * Autor: Carlos Manuel Turizo Hernández
  * Versión: 1.0.0
@@ -261,7 +263,50 @@ const GenreMeters = (() => {
 
 
 /* ============================================================
-  06. FILTRO DE BIBLIOTECA DE JUEGOS
+  06. ANIMACIÓN DE MIS CREACIONES
+  Las tarjetas de "Juegos que Desarrollé" entran con el mismo
+  efecto de fade + traslación que uso en otras secciones de
+  tarjetas, para que se sientan parte del mismo sistema visual.
+  ============================================================ */
+const CreationsAnimation = (() => {
+
+  const init = () => {
+    const cards = selAll('.gm-creation-card');
+    if (!cards.length) return;
+    if (prefersReducedMotion()) return;
+
+    cards.forEach((card, index) => {
+      card.style.opacity   = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = `
+        opacity   0.5s ease ${index * 100}ms,
+        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${index * 100}ms
+      `;
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity   = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -25px 0px',
+    });
+
+    cards.forEach((card) => observer.observe(card));
+  };
+
+  return { init };
+
+})();
+
+
+/* ============================================================
+  07. FILTRO DE BIBLIOTECA DE JUEGOS
   Filtro las tarjetas de juegos por categoría al hacer clic
   en mis pills. No recargo la página — todo es dinámico.
   ============================================================ */
@@ -338,7 +383,7 @@ const LibraryFilter = (() => {
 
 
 /* ============================================================
-  07. ANIMACIÓN DE LECCIONES
+  08. ANIMACIÓN DE LECCIONES
   Las tarjetas de lecciones entran desde abajo con delay
   escalonado. La línea de acento lateral está controlada
   por CSS hover, pero la entrada la manejo desde JS.
@@ -376,7 +421,7 @@ const LessonsAnimation = (() => {
 
 
 /* ============================================================
-  08. EFECTO GLITCH EN EL TÍTULO
+  09. EFECTO GLITCH EN EL TÍTULO
   El título "GAMING" hace un pequeño glitch ocasional —
   se desplaza unos píxeles horizontalmente con color split.
   Solo en desktop para no afectar rendimiento móvil.
@@ -424,7 +469,7 @@ const TitleGlitch = (() => {
 
 
 /* ============================================================
-  09. SCROLL SUAVE EN PÁGINA
+  10. SCROLL SUAVE EN PÁGINA
   Los botones del hero que apuntan a secciones de esta página
   hacen scroll suave con el offset del navbar.
   Compatible con móvil — no bloqueo eventos táctiles.
@@ -457,7 +502,7 @@ const InPageScroll = (() => {
 
 
 /* ============================================================
-  10. ANIMACIÓN DE SETUP CARDS
+  11. ANIMACIÓN DE SETUP CARDS
   Las tarjetas del setup entran con efecto de zoom + fade.
   ============================================================ */
 const SetupAnimation = (() => {
@@ -510,6 +555,9 @@ onReady(() => {
   /* Animaciones de barras y medidores */
   HeroStats.init();
   GenreMeters.init();
+
+  /* Animación de mis juegos propios */
+  CreationsAnimation.init();
 
   /* Filtro de juegos */
   LibraryFilter.init();

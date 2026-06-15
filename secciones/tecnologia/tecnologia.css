@@ -1014,3 +1014,40 @@
 
 /* Footer link activo */
 .footer__link--active { color: var(--color-primary); }
+
+/*
+  ============================================================
+  AÑADIDOS v2.0.0 — Botón deshabilitado + grid blog 2x3
+  ============================================================
+*/
+
+/*
+  Botón deshabilitado — lo uso para proyectos que aún no tienen
+  URL pública. Uso un <span> en lugar de <a> para que no sea
+  clickeable ni confunda al usuario con un enlace inactivo.
+*/
+.tc-project-card__link-btn--disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/*
+  El blog ahora tiene 6 entradas en lugar de 3.
+  En pantallas medianas las organizo en 2 columnas,
+  en pantallas grandes en 3 columnas, para que respire bien.
+*/
+@media (min-width: 640px) and (max-width: 1023px) {
+  .tc-blog__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .tc-blog__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/*
+  El grid de proyectos también pasa de 1-col a 2-col para
+  acomodar los 6 proyectos (4 reales + 2 slots futuros).
+*/
+@media (min-width: 768px) {
+  .tc-projects__grid { grid-template-columns: repeat(2, 1fr); }
+}

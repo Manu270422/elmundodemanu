@@ -18,12 +18,13 @@
   02. Breadcrumb
   03. Hero Gaming (HUD, canvas, control SVG)
   04. Géneros favoritos
-  05. Biblioteca / Juegos
-  06. Lecciones del gaming
-  07. Setup
-  08. CTA final
-  09. Botones propios de Gaming
-  10. Responsive
+  05. Mis creaciones — juegos que desarrollé
+  06. Biblioteca / Juegos
+  07. Lecciones del gaming
+  08. Setup
+  09. CTA final
+  10. Botones propios de Gaming
+  11. Responsive
 
   Autor: Carlos Manuel Turizo Hernández
   Versión: 1.0.0
@@ -561,7 +562,246 @@
 
 
 /* ============================================================
-  05. BIBLIOTECA / JUEGOS
+  05. MIS CREACIONES — JUEGOS QUE DESARROLLÉ
+  Tarjeta tipo "ficha de app" para mis propios juegos.
+  Reutilizo el lenguaje visual de gm-game-card (mismo radio,
+  mismo borde, mismo hover cyan) pero con estructura propia:
+  header con icono + estado, descripción, bloque "Acerca de"
+  con specs en formato definición y un botón de acción
+  destacado al final.
+
+  El grid usa auto-fit para que futuros juegos se acomoden
+  solos en 2 columnas en pantallas grandes.
+  ============================================================ */
+.gm-creations {
+  padding: var(--space-24) 0;
+}
+
+.gm-creations__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 900px) {
+  .gm-creations__grid {
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  }
+}
+
+.gm-creation-card {
+  position: relative;
+  padding: var(--space-7);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  transition: transform var(--transition-slow), border-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+.gm-creation-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gm-cyan);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 16px var(--gm-cyan-dim);
+}
+
+/* La tarjeta "Próximo desarrollo" se ve apagada hasta el hover,
+   igual que el placeholder de la biblioteca */
+.gm-creation-card--coming { opacity: 0.55; }
+.gm-creation-card--coming:hover {
+  opacity: 1;
+  border-color: var(--color-border);
+  transform: none;
+  box-shadow: none;
+}
+
+/* Header: icono + nombre/tagline + estado, en fila en desktop */
+.gm-creation-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.gm-creation-card__icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  background: var(--gm-cyan-dim);
+  border: 1px solid rgba(0, 212, 255, 0.18);
+  border-radius: var(--radius-lg);
+}
+
+.gm-creation-card__heading {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.gm-creation-card__title {
+  font-family: var(--font-gaming);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-text-primary);
+}
+
+.gm-creation-card__tagline {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Badge "Gratis" — mismo lenguaje visual que el género de gm-game-card */
+.gm-creation-card__status {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: var(--gm-cyan-dim);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: var(--radius-full);
+  font-family: var(--font-gaming);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gm-cyan);
+  white-space: nowrap;
+}
+
+.gm-creation-card__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gm-cyan);
+  animation: gmCreationDotPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes gmCreationDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.75); }
+}
+
+.gm-creation-card__desc {
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+
+/* Bloque "Acerca de este juego" — separado con borde superior,
+   como una sub-tarjeta interna dentro de la ficha */
+.gm-creation-card__about {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.gm-creation-card__about-title {
+  font-family: var(--font-gaming);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gm-cyan);
+}
+
+/* Lista de specs en formato definición — etiqueta + valor */
+.gm-creation-card__specs {
+  display: grid;
+  gap: var(--space-3);
+}
+.gm-creation-card__spec {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: var(--space-3);
+  align-items: start;
+}
+.gm-creation-card__spec dt {
+  font-family: var(--font-gaming);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  padding-top: 0.2em;
+}
+.gm-creation-card__spec dd {
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+}
+
+/* Tags de tecnología — mismo patrón visual que gm-game-card__tag */
+.gm-creation-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.gm-creation-card__tag {
+  padding: var(--space-1) var(--space-3);
+  background: rgba(0, 212, 255, 0.06);
+  border: 1px solid rgba(0, 212, 255, 0.18);
+  border-radius: var(--radius-full);
+  font-family: var(--font-gaming);
+  font-size: 9px;
+  font-weight: 600;
+  color: #d1d5db;
+  letter-spacing: 0.06em;
+  transition: background var(--transition-base), color var(--transition-base),
+              border-color var(--transition-base);
+}
+.gm-creation-card:hover .gm-creation-card__tag {
+  background: rgba(0, 212, 255, 0.12);
+  border-color: rgba(0, 212, 255, 0.35);
+  color: #e8ecf0;
+}
+
+/* Placeholder de "Próximo desarrollo" — mismo estilo que
+   el placeholder de la biblioteca */
+.gm-creation-card__placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  text-align: center;
+}
+.gm-creation-card__placeholder span { font-size: 2rem; }
+
+/* Botón de acción */
+.gm-creation-card__actions {
+  display: flex;
+}
+.gm-creation-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.gm-creation-card__cta svg {
+  transition: transform var(--transition-base);
+}
+.gm-creation-card__cta:hover svg {
+  transform: translateX(3px);
+}
+
+
+/* ============================================================
+  06. BIBLIOTECA / JUEGOS
   ============================================================ */
 .gm-library {
   padding: var(--space-24) 0;
@@ -759,7 +999,7 @@
 
 
 /* ============================================================
-  06. LECCIONES DEL GAMING
+  07. LECCIONES DEL GAMING
   ============================================================ */
 .gm-lessons {
   padding: var(--space-24) 0;
@@ -857,7 +1097,7 @@
 
 
 /* ============================================================
-  07. SETUP
+  08. SETUP
   ============================================================ */
 .gm-setup {
   padding: var(--space-24) 0;
@@ -932,7 +1172,7 @@
 
 
 /* ============================================================
-  08. CTA FINAL
+  09. CTA FINAL
   ============================================================ */
 .gm-cta {
   padding: var(--space-24) 0;
@@ -996,7 +1236,7 @@
 
 
 /* ============================================================
-  09. BOTONES PROPIOS DE GAMING
+  10. BOTONES PROPIOS DE GAMING
   El botón primario usa el cyan como color base.
   ============================================================ */
 .gm-btn--primary {
@@ -1024,7 +1264,7 @@
 
 
 /* ============================================================
-  10. RESPONSIVE
+  11. RESPONSIVE
   ============================================================ */
 @media (max-width: 640px) {
   .gm-hero {
@@ -1036,6 +1276,17 @@
   .gm-hero__actions { flex-direction: column; }
   .gm-hero__actions .btn { width: 100%; justify-content: center; }
   .gm-controller { width: 200px; height: 130px; }
+
+  /* Tarjeta de juego propio: en móvil el badge "Gratis" pasa
+     a su línea propia y el botón ocupa todo el ancho para
+     que sea fácil tocarlo */
+  .gm-creation-card { padding: var(--space-6); }
+  .gm-creation-card__status { align-self: flex-start; }
+  .gm-creation-card__spec {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+  .gm-creation-card__actions .btn { width: 100%; justify-content: center; }
 
   .gm-cta__inner  { padding: var(--space-8) var(--space-5); }
   .gm-cta__actions { flex-direction: column; align-items: center; width: 100%; }

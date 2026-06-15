@@ -21,9 +21,10 @@
   06. Reflexiones
   07. Versículos que me marcan
   08. Recursos
-  09. CTA final
-  10. Botones propios de esta sección
-  11. Responsive
+  09. Banner: Mundo Bíblico
+  10. CTA final
+  11. Botones propios de esta sección
+  12. Responsive
 
   Autor: Carlos Manuel Turizo Hernández
   Versión: 1.0.0
@@ -719,7 +720,102 @@
 
 
 /* ============================================================
-  09. CTA FINAL
+  09. BANNER: MUNDO BÍBLICO
+  Tarjeta horizontal destacada que invita a explorar la
+  sub-sección interactiva "Mundo Bíblico". Mantiene el
+  lenguaje visual dorado-ámbar del resto de Fe, con un
+  leve resplandor y desplazamiento al hacer hover.
+  ============================================================ */
+.fe-bible-world {
+  padding: var(--space-16) 0;
+}
+
+.fe-bible-world__card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-8) var(--space-8);
+  background: var(--color-surface);
+  border: 1px solid rgba(240, 165, 0, 0.18);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform var(--transition-slow), border-color var(--transition-base), box-shadow var(--transition-slow);
+}
+.fe-bible-world__card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(240, 165, 0, 0.4);
+  box-shadow: 0 12px 40px rgba(240, 165, 0, 0.12);
+}
+
+.fe-bible-world__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 60% 80% at 0% 50%,
+    rgba(240, 165, 0, 0.10) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.fe-bible-world__icon {
+  flex-shrink: 0;
+  font-size: 2.5rem;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fe-gold-dim);
+  border-radius: var(--radius-lg);
+  position: relative;
+}
+
+.fe-bible-world__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  position: relative;
+}
+
+.fe-bible-world__title {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+}
+
+.fe-bible-world__desc {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  max-width: 60ch;
+}
+
+.fe-bible-world__arrow {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(240, 165, 0, 0.25);
+  color: var(--fe-gold);
+  transition: transform var(--transition-slow), background var(--transition-base);
+  position: relative;
+}
+.fe-bible-world__card:hover .fe-bible-world__arrow {
+  transform: translateX(4px);
+  background: var(--fe-gold-dim);
+}
+
+
+/* ============================================================
+  10. CTA FINAL
   ============================================================ */
 .fe-cta {
   padding: var(--space-24) 0;
@@ -797,7 +893,7 @@
 
 
 /* ============================================================
-  10. BOTONES PROPIOS DE ESTA SECCIÓN
+  11. BOTONES PROPIOS DE ESTA SECCIÓN
   El botón primario de Fe usa el dorado como color base
   en lugar del índigo global.
   ============================================================ */
@@ -826,7 +922,7 @@
 
 
 /* ============================================================
-  11. RESPONSIVE — AJUSTES ADICIONALES
+  12. RESPONSIVE — AJUSTES ADICIONALES
   ============================================================ */
 @media (max-width: 640px) {
   .fe-hero {
@@ -838,6 +934,14 @@
   .fe-hero__verse::before { font-size: 5rem; }
   .fe-hero__actions { flex-direction: column; align-items: center; width: 100%; }
   .fe-hero__actions .btn { width: 100%; justify-content: center; }
+
+  .fe-bible-world__card {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: var(--space-6);
+  }
+  .fe-bible-world__arrow { display: none; }
 
   .fe-cta__inner { padding: var(--space-10) var(--space-6); }
   .fe-cta__actions { flex-direction: column; align-items: center; width: 100%; }

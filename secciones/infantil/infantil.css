@@ -695,6 +695,72 @@
   line-height: 1.6;
 }
 
+/* ============================================================
+  BANNER: MUNDO CURIOSO
+  Tarjeta destacada full-width que invita a entrar al hub
+  de mini-juegos. Uso mi paleta infantil y el mismo estilo
+  "botón 3D" de mis inf-btn para que se sienta parte de la familia.
+  ============================================================ */
+.inf-mc-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  margin-top: var(--space-8);
+  padding: var(--space-8) var(--space-6);
+  border-radius: var(--inf-radius-lg);
+  background: linear-gradient(135deg, #FFF7D6 0%, #E8FFF4 100%);
+  border: 3px solid var(--inf-yellow);
+  box-shadow: var(--inf-shadow-card);
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.inf-mc-banner:hover {
+  transform: translateY(-4px);
+}
+
+.inf-mc-banner__icon {
+  font-size: 3.5rem;
+  line-height: 1;
+  animation: emojiBounce 2.4s ease-in-out infinite;
+}
+
+.inf-mc-banner__text {
+  flex: 1 1 260px;
+  min-width: 220px;
+}
+
+.inf-mc-banner__title {
+  font-family: var(--font-inf-title);
+  font-size: var(--text-lg);
+  color: var(--inf-purple);
+  margin: 0 0 var(--space-2);
+}
+
+.inf-mc-banner__desc {
+  font-size: var(--text-sm);
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.inf-mc-banner__btn {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .inf-mc-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .inf-mc-banner__btn {
+    width: 100%;
+  }
+}
+
 /* ── Juego de colores ── */
 .inf-color-display {
   display: flex;

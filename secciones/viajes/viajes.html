@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  viajes.html — El Mundo de Manu / Viajes y Aventura
+  ============================================================
+  Esta sección es un mundo temático sobre viajes: cómo viajar
+  mejor, más barato y de forma más consciente. No habla de mis
+  viajes personales — es contenido útil sobre el arte de viajar
+  para cualquier persona que quiera explorar el mundo.
+
+  Cubre planificación, presupuesto, viaje responsable, destinos
+  por tipo de experiencia y herramientas prácticas. Todo pensado
+  para que el visitante salga con información que pueda aplicar.
+
+  Estructura:
+  - Hero: invitación a explorar + canvas de rutas en mapa
+  - Por qué viajar: el valor real de viajar
+  - Estilos de viaje: 6 formas de explorar el mundo
+  - Guías prácticas: 3 artículos con consejos reales
+  - Checklist: lo esencial antes de partir
+  - Herramientas: apps y recursos para viajeros
+  - Tip de seguridad: nota de viaje responsable
+  - CTA: invitación a compartir destinos
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Viajes y Aventura — El Mundo de Manu. Cómo planificar, presupuestar y disfrutar viajes de forma consciente. Guías prácticas, estilos de viaje y herramientas para exploradores." />
+  <meta name="author" content="Manu" />
+
+  <title>Viajes y Aventura — El Mundo de Manu</title>
+
+  <!--
+    Fuentes: Syne + DM Sans globales. Para esta sección no
+    agrego fuente nueva — el sistema global ya transmite la
+    sensación moderna y aventurera que quiero. La identidad
+    visual viene de la paleta atardecer y los layouts.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet" />
+
+  <!-- CSS global del sitio, luego el específico de Viajes -->
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="viajes.css" />
+</head>
+
+<body class="page-viajes">
+
+  <!-- Cursor personalizado global -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
+
+  <!-- ============================================================
+    NAVBAR — Estructura global. Paths relativos desde
+    secciones/viajes/. Link activo: "Mis Mundos".
+  ============================================================ -->
+  <header class="navbar" id="navbar" role="banner">
+    <nav class="navbar__container" aria-label="Navegación principal">
+
+      <a href="../../index.html" class="navbar__logo" aria-label="Volver al inicio">
+        <span class="navbar__logo-mark">M</span>
+        <span class="navbar__logo-text">El Mundo de <strong>Manu</strong></span>
+      </a>
+
+      <ul class="navbar__links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__link navbar__link--active">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__link">Sobre Mí</a></li>
+        <li>
+          <a href="../../index.html#contacto" class="navbar__link navbar__link--cta">
+            Contáctame
+            <span class="navbar__cta-dot" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+
+      <button class="navbar__toggle" id="navToggle"
+        aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </nav>
+
+    <div class="navbar__mobile" id="mobileMenu" aria-hidden="true">
+      <ul class="navbar__mobile-links" role="list">
+        <li><a href="../../index.html#inicio"    class="navbar__mobile-link">Inicio</a></li>
+        <li><a href="../../index.html#mundos"    class="navbar__mobile-link">Mis Mundos</a></li>
+        <li><a href="../../index.html#proyectos" class="navbar__mobile-link">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi"  class="navbar__mobile-link">Sobre Mí</a></li>
+        <li><a href="../../index.html#contacto"  class="navbar__mobile-link navbar__mobile-link--cta">Contáctame</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" aria-label="Ruta de navegación">
+    <div class="container">
+      <nav class="breadcrumb__nav">
+        <a href="../../index.html"        class="breadcrumb__link">Inicio</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="../../index.html#mundos" class="breadcrumb__link">Mis Mundos</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span class="breadcrumb__current" aria-current="page">Viajes y Aventura</span>
+      </nav>
+    </div>
+  </div>
+
+  <main id="main" role="main">
+
+    <!-- ──────────────────────────────────────────────────────────
+      HERO DE VIAJES
+      El canvas dibuja un mapa estilizado con rutas que se
+      trazan solas — puntos conectados por líneas curvas que
+      se "dibujan" progresivamente, como planeando un itinerario.
+      Es completamente distinto a los canvas de otras secciones.
+    ────────────────────────────────────────────────────────── -->
+    <section class="vj-hero" id="vj-inicio" aria-labelledby="vjHeroTitle">
+
+      <canvas class="vj-hero__canvas" id="vjCanvas" aria-hidden="true"></canvas>
+
+      <!-- Destellos cálidos de atardecer -->
+      <div class="vj-hero__light vj-hero__light--1" aria-hidden="true"></div>
+      <div class="vj-hero__light vj-hero__light--2" aria-hidden="true"></div>
+      <div class="vj-hero__light vj-hero__light--3" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="vj-hero__inner">
+
+          <!-- Símbolo decorativo: brújula SVG muy tenue al fondo -->
+          <div class="vj-hero__symbol-wrap" aria-hidden="true">
+            <svg class="vj-hero__symbol" viewBox="0 0 100 100" fill="none"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
+              <circle cx="50" cy="50" r="4" fill="currentColor"/>
+              <!-- Aguja de la brújula -->
+              <path d="M50 12 L58 50 L50 88 L42 50 Z" stroke="currentColor"
+                stroke-width="2" stroke-linejoin="round"/>
+              <!-- Marcas cardinales -->
+              <path d="M50 8v8M50 84v8M8 50h8M84 50h8" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div class="vj-hero__content" data-animate="fade-up">
+
+            <div class="vj-hero__tag-row">
+              <span class="section-tag vj-tag">Explorar · Descubrir · Crecer</span>
+            </div>
+
+            <h1 class="vj-hero__title" id="vjHeroTitle">
+              Viajes<span class="vj-hero__title-amp">&amp;</span>Aventura
+            </h1>
+
+            <blockquote class="vj-hero__phrase" data-animate="fade-up" data-delay="1">
+              <p class="vj-hero__phrase-text">
+                "El mundo es un libro, y quienes no viajan
+                leen solo una página."
+              </p>
+              <footer class="vj-hero__phrase-ref">— Atribuido a San Agustín</footer>
+            </blockquote>
+
+            <p class="vj-hero__desc" data-animate="fade-up" data-delay="2">
+              Viajar no se trata solo de visitar lugares — es ampliar la mente,
+              entender otras culturas y volver siendo una persona distinta.
+              Aquí encontrarás cómo hacerlo mejor, más consciente y sin arruinarte.
+            </p>
+
+            <div class="vj-hero__actions" data-animate="fade-up" data-delay="3">
+              <a href="#vj-estilos" class="btn vj-btn--primary">
+                Estilos de viaje
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a href="#vj-guias" class="btn btn--ghost vj-btn--ghost">Guías prácticas</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="vj-hero__scroll" aria-hidden="true">
+        <div class="vj-hero__scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: POR QUÉ VIAJAR
+      El valor real de viajar, más allá de las fotos.
+      Grid 2 col: texto + tarjeta con beneficios comprobados.
+    ────────────────────────────────────────────────────────── -->
+    <section class="vj-why" id="vj-porque" aria-labelledby="vjWhyTitle">
+      <div class="container">
+        <div class="vj-why__inner" data-animate="fade-up">
+
+          <div class="vj-why__text">
+            <span class="section-tag vj-tag">El valor de viajar</span>
+            <h2 class="vj-why__title" id="vjWhyTitle">
+              Viajar cambia<br/>cómo ves el mundo
+            </h2>
+            <p class="vj-why__desc">
+              Más allá del turismo y las fotos para redes sociales, viajar tiene
+              un impacto profundo en cómo pensamos y nos relacionamos. Salir de
+              nuestro entorno conocido nos obliga a adaptarnos, a resolver problemas
+              y a ver que existen muchas formas válidas de vivir.
+            </p>
+            <p class="vj-why__desc">
+              No necesitas cruzar océanos ni gastar fortunas. Un viaje consciente
+              a una ciudad cercana puede enseñar tanto como uno al otro lado del
+              planeta. Lo que importa es la actitud de explorador: curiosidad,
+              apertura y respeto por lo diferente.
+            </p>
+          </div>
+
+          <div class="vj-why__card">
+            <div class="vj-why__card-icon" aria-hidden="true">🧭</div>
+            <h3 class="vj-why__card-title">Lo que viajar te regala</h3>
+            <ul class="vj-why__card-list" role="list">
+              <li class="vj-why__card-item">
+                <span class="vj-why__card-bullet" aria-hidden="true">✦</span>
+                <span><strong>Perspectiva.</strong> Ver cómo viven otros relativiza
+                tus propios problemas y amplía lo que crees posible.</span>
+              </li>
+              <li class="vj-why__card-item">
+                <span class="vj-why__card-bullet" aria-hidden="true">✦</span>
+                <span><strong>Adaptabilidad.</strong> Navegar lo desconocido entrena
+                la flexibilidad mental como pocas cosas lo hacen.</span>
+              </li>
+              <li class="vj-why__card-item">
+                <span class="vj-why__card-bullet" aria-hidden="true">✦</span>
+                <span><strong>Memorias reales.</strong> Las experiencias generan más
+                felicidad duradera que las posesiones materiales, según la psicología.</span>
+              </li>
+            </ul>
+            <div class="vj-why__card-glow" aria-hidden="true"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: ESTILOS DE VIAJE
+      6 formas distintas de explorar el mundo. Cada tarjeta
+      tiene ícono SVG propio, descripción, ideal para quién
+      y un tag de presupuesto orientativo.
+    ────────────────────────────────────────────────────────── -->
+    <section class="vj-styles" id="vj-estilos" aria-labelledby="vjStylesTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag vj-tag">Encuentra el tuyo</span>
+          <h2 class="section-title" id="vjStylesTitle">Estilos de Viaje</h2>
+          <p class="section-desc">
+            No hay una forma correcta de viajar. Estos son seis enfoques
+            distintos — elige el que resuene con lo que buscas vivir.
+          </p>
+        </div>
+
+        <div class="vj-styles__grid">
+
+          <!-- Estilo 1: Mochilero -->
+          <article class="vj-style-card" data-animate="fade-up" data-delay="0">
+            <div class="vj-style-card__icon-wrap" aria-hidden="true">
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M10 8a5 5 0 0 1 10 0v3h-10z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <rect x="7" y="11" width="16" height="14" rx="3" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M12 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="vj-style-card__title">Mochilero</h3>
+            <p class="vj-style-card__desc">
+              Viajar ligero, con flexibilidad total y presupuesto ajustado.
+              Hostales, transporte local, comida de calle. La libertad de
+              cambiar de planes sobre la marcha y conocer otros viajeros.
+            </p>
+            <div class="vj-style-card__meta">
+              <span class="vj-style-card__budget vj-style-card__budget--low">$ Económico</span>
+              <span class="vj-style-card__ideal">Ideal para: jóvenes, primeros viajes largos</span>
+            </div>
+          </article>
+
+          <!-- Estilo 2: Cultural -->
+          <article class="vj-style-card" data-animate="fade-up" data-delay="1">
+            <div class="vj-style-card__icon-wrap" aria-hidden="true">
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M5 12L15 6l10 6M7 12v11M23 12v11M5 23h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M11 14v6M15 14v6M19 14v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="vj-style-card__title">Cultural</h3>
+            <p class="vj-style-card__desc">
+              Museos, historia, arquitectura, gastronomía local. Viajar para
+              entender la identidad de un lugar a fondo. Requiere investigación
+              previa para aprovechar cada sitio histórico al máximo.
+            </p>
+            <div class="vj-style-card__meta">
+              <span class="vj-style-card__budget vj-style-card__budget--mid">$$ Medio</span>
+              <span class="vj-style-card__ideal">Ideal para: curiosos, amantes de la historia</span>
+            </div>
+          </article>
+
+          <!-- Estilo 3: Naturaleza -->
+          <article class="vj-style-card" data-animate="fade-up" data-delay="2">
+            <div class="vj-style-card__icon-wrap" aria-hidden="true">
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M15 4l8 14H7zM15 11l6 11H9z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M15 22v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="vj-style-card__title">Naturaleza</h3>
+            <p class="vj-style-card__desc">
+              Montañas, selvas, playas vírgenes, senderismo. Desconectar de la
+              ciudad y reconectar con lo natural. Exige preparación física y
+              respeto absoluto por los ecosistemas que visitas.
+            </p>
+            <div class="vj-style-card__meta">
+              <span class="vj-style-card__budget vj-style-card__budget--low">$ Económico</span>
+              <span class="vj-style-card__ideal">Ideal para: aventureros, amantes del aire libre</span>
+            </div>
+          </article>
+
+          <!-- Estilo 4: Slow travel -->
+          <article class="vj-style-card" data-animate="fade-up" data-delay="3">
+            <div class="vj-style-card__icon-wrap" aria-hidden="true">
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="15" cy="15" r="11" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M15 9v6l4 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="vj-style-card__title">Slow travel</h3>
+            <p class="vj-style-card__desc">
+              Quedarse semanas o meses en un solo lugar. Vivir como local,
+              no como turista. Menos lugares pero más profundidad. La tendencia
+              que más crece entre nómadas digitales y trabajadores remotos.
+            </p>
+            <div class="vj-style-card__meta">
+              <span class="vj-style-card__budget vj-style-card__budget--mid">$$ Medio</span>
+              <span class="vj-style-card__ideal">Ideal para: nómadas digitales, remotos</span>
+            </div>
+          </article>
+
+          <!-- Estilo 5: Lujo -->
+          <article class="vj-style-card" data-animate="fade-up" data-delay="4">
+            <div class="vj-style-card__icon-wrap" aria-hidden="true">
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M5 11l4-4h12l4 4-10 13z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M5 11h20M11 7l4 17M19 7l-4 17" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="vj-style-card__title">Confort y lujo</h3>
+            <p class="vj-style-card__desc">
+              Hoteles de alta gama, experiencias premium, comodidad sin
+              compromisos. Ideal cuando el tiempo es más valioso que el dinero
+              y quieres descanso real. La planificación marca la diferencia.
+            </p>
+            <div class="vj-style-card__meta">
+              <span class="vj-style-card__budget vj-style-card__budget--high">$$$ Alto</span>
+              <span class="vj-style-card__ideal">Ideal para: descanso, ocasiones especiales</span>
+            </div>
+          </article>
+
+          <!-- Estilo 6: Voluntariado -->
+          <article class="vj-style-card" data-animate="fade-up" data-delay="5">
+            <div class="vj-style-card__icon-wrap" aria-hidden="true">
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M15 25C9 20 5 16 5 11.5 5 8.5 7.5 6 10.5 6c1.8 0 3.5.9 4.5 2.3C16 6.9 17.7 6 19.5 6 22.5 6 25 8.5 25 11.5 25 16 21 20 15 25z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="vj-style-card__title">Voluntariado</h3>
+            <p class="vj-style-card__desc">
+              Viajar con propósito: enseñar, construir, conservar, ayudar.
+              Conexión profunda con comunidades locales y un impacto real.
+              Investiga bien la organización para que el impacto sea genuino.
+            </p>
+            <div class="vj-style-card__meta">
+              <span class="vj-style-card__budget vj-style-card__budget--low">$ Económico</span>
+              <span class="vj-style-card__ideal">Ideal para: viajar con propósito social</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: GUÍAS PRÁCTICAS
+      3 artículos con consejos reales y aplicables sobre cómo
+      viajar mejor. Contenido útil, no relleno.
+    ────────────────────────────────────────────────────────── -->
+    <section class="vj-guides" id="vj-guias" aria-labelledby="vjGuidesTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag vj-tag">Aprende a viajar mejor</span>
+          <h2 class="section-title" id="vjGuidesTitle">Guías Prácticas</h2>
+          <p class="section-desc">
+            Consejos concretos que marcan la diferencia entre un viaje
+            estresante y uno memorable.
+          </p>
+        </div>
+
+        <div class="vj-guides__grid">
+
+          <!-- Guía 1: Presupuesto -->
+          <article class="vj-guide-card vj-guide-card--featured" data-animate="fade-up" data-delay="0">
+            <div class="vj-guide-card__header">
+              <span class="vj-guide-card__tag">Presupuesto</span>
+              <span class="vj-guide-card__read">5 min</span>
+            </div>
+            <h3 class="vj-guide-card__title">
+              Cómo viajar gastando menos sin sacrificar la experiencia
+            </h3>
+            <p class="vj-guide-card__body">
+              Viajar barato no significa viajar mal. Significa gastar de forma
+              inteligente, priorizando lo que realmente importa para ti y
+              recortando lo que no aporta valor a tu experiencia.
+            </p>
+            <div class="vj-guide-card__inset">
+              <h4 class="vj-guide-card__inset-title">Trucos que sí funcionan</h4>
+              <ul class="vj-guide-card__list" role="list">
+                <li><strong>Vuela en temporada baja:</strong> los precios pueden caer hasta un 60%.
+                Usa el modo incógnito al buscar vuelos para evitar precios inflados por cookies.</li>
+                <li><strong>Alójate fuera del centro:</strong> a 15 minutos en transporte el precio
+                baja drásticamente y conoces barrios más auténticos.</li>
+                <li><strong>Come donde comen los locales:</strong> los mercados y fondas locales
+                ofrecen la comida más rica y barata, lejos de las trampas turísticas.</li>
+                <li><strong>Camina la ciudad:</strong> es gratis, descubres rincones ocultos
+                y entiendes mejor la geografía del lugar.</li>
+              </ul>
+            </div>
+            <p class="vj-guide-card__highlight">
+              Regla de oro: invierte en experiencias irrepetibles (un tour único, una actividad
+              local) y ahorra en lo intercambiable (dónde duermes, cómo te mueves).
+            </p>
+          </article>
+
+          <!-- Guía 2: Planificación -->
+          <article class="vj-guide-card" data-animate="fade-up" data-delay="1">
+            <div class="vj-guide-card__header">
+              <span class="vj-guide-card__tag">Planificación</span>
+              <span class="vj-guide-card__read">4 min</span>
+            </div>
+            <h3 class="vj-guide-card__title">
+              El equilibrio entre planear y dejar espacio a la sorpresa
+            </h3>
+            <p class="vj-guide-card__body">
+              Planear demasiado convierte el viaje en una lista de tareas. No planear
+              nada genera estrés y oportunidades perdidas. El secreto está en el balance.
+            </p>
+            <div class="vj-guide-card__inset">
+              <h4 class="vj-guide-card__inset-title">La regla 70/30</h4>
+              <ul class="vj-guide-card__list" role="list">
+                <li><strong>Planea el 70%:</strong> vuelos, primer alojamiento, los 2-3
+                imperdibles del destino y el transporte desde el aeropuerto.</li>
+                <li><strong>Deja libre el 30%:</strong> espacio para recomendaciones de locales,
+                lugares que descubres en el camino y días de descanso sin agenda.</li>
+                <li><strong>Reserva con cancelación gratis:</strong> te da flexibilidad
+                para cambiar de planes sin perder dinero.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Guía 3: Viaje responsable -->
+          <article class="vj-guide-card" data-animate="fade-up" data-delay="2">
+            <div class="vj-guide-card__header">
+              <span class="vj-guide-card__tag">Viaje responsable</span>
+              <span class="vj-guide-card__read">4 min</span>
+            </div>
+            <h3 class="vj-guide-card__title">
+              Viajar dejando una huella positiva, no destructiva
+            </h3>
+            <p class="vj-guide-card__body">
+              El turismo masivo puede dañar ecosistemas y comunidades. Viajar de
+              forma responsable significa que tu paso por un lugar lo deje igual
+              o mejor de como lo encontraste.
+            </p>
+            <div class="vj-guide-card__inset">
+              <h4 class="vj-guide-card__inset-title">Principios del viaje responsable</h4>
+              <ul class="vj-guide-card__list" role="list">
+                <li><strong>Apoya la economía local:</strong> compra a artesanos, come en
+                negocios familiares, contrata guías de la comunidad.</li>
+                <li><strong>Respeta la cultura:</strong> infórmate sobre costumbres, vístete
+                apropiadamente en lugares sagrados, pide permiso antes de fotografiar personas.</li>
+                <li><strong>Cuida el entorno:</strong> no dejes basura, no extraigas recursos
+                naturales, respeta la fauna sin alimentarla ni perturbarla.</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: CHECKLIST PRE-VIAJE
+      Lista visual de lo esencial antes de partir. Formato
+      compacto, escaneable, dividido en categorías.
+    ────────────────────────────────────────────────────────── -->
+    <section class="vj-checklist" id="vj-checklist" aria-labelledby="vjChecklistTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag vj-tag">Antes de partir</span>
+          <h2 class="section-title" id="vjChecklistTitle">Checklist Esencial</h2>
+          <p class="section-desc">
+            Lo que no puedes olvidar antes de cualquier viaje, organizado
+            por categorías para que no se te escape nada.
+          </p>
+        </div>
+
+        <div class="vj-checklist__grid" data-animate="fade-up" data-delay="1">
+
+          <div class="vj-checklist__col">
+            <div class="vj-checklist__col-head">
+              <span class="vj-checklist__col-icon" aria-hidden="true">📄</span>
+              <h3 class="vj-checklist__col-title">Documentos</h3>
+            </div>
+            <ul class="vj-checklist__items" role="list">
+              <li>Pasaporte/cédula vigente (6+ meses)</li>
+              <li>Visados si el destino lo requiere</li>
+              <li>Copias digitales y físicas de todo</li>
+              <li>Seguro de viaje contratado</li>
+              <li>Reservas impresas o accesibles offline</li>
+            </ul>
+          </div>
+
+          <div class="vj-checklist__col">
+            <div class="vj-checklist__col-head">
+              <span class="vj-checklist__col-icon" aria-hidden="true">💊</span>
+              <h3 class="vj-checklist__col-title">Salud</h3>
+            </div>
+            <ul class="vj-checklist__items" role="list">
+              <li>Vacunas requeridas por el destino</li>
+              <li>Botiquín básico personal</li>
+              <li>Medicamentos con su receta</li>
+              <li>Repelente y protector solar</li>
+              <li>Contactos de emergencia anotados</li>
+            </ul>
+          </div>
+
+          <div class="vj-checklist__col">
+            <div class="vj-checklist__col-head">
+              <span class="vj-checklist__col-icon" aria-hidden="true">💰</span>
+              <h3 class="vj-checklist__col-title">Dinero</h3>
+            </div>
+            <ul class="vj-checklist__items" role="list">
+              <li>Efectivo en moneda local</li>
+              <li>Tarjeta sin comisiones internacionales</li>
+              <li>Avisar al banco sobre el viaje</li>
+              <li>Presupuesto diario calculado</li>
+              <li>Fondo de emergencia aparte</li>
+            </ul>
+          </div>
+
+          <div class="vj-checklist__col">
+            <div class="vj-checklist__col-head">
+              <span class="vj-checklist__col-icon" aria-hidden="true">🎒</span>
+              <h3 class="vj-checklist__col-title">Equipaje</h3>
+            </div>
+            <ul class="vj-checklist__items" role="list">
+              <li>Ropa según clima y duración</li>
+              <li>Adaptador de corriente universal</li>
+              <li>Batería externa cargada</li>
+              <li>Calzado cómodo ya usado</li>
+              <li>Bolsa de lavandería separada</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      SECCIÓN: HERRAMIENTAS
+      Apps y recursos genuinamente útiles para viajeros.
+    ────────────────────────────────────────────────────────── -->
+    <section class="vj-tools" id="vj-herramientas" aria-labelledby="vjToolsTitle">
+      <div class="container">
+
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag vj-tag">Tu kit digital</span>
+          <h2 class="section-title" id="vjToolsTitle">Herramientas para Viajeros</h2>
+          <p class="section-desc">
+            Apps que facilitan cada etapa del viaje. Ninguna patrocinada —
+            solo las que realmente valen la pena tener instaladas.
+          </p>
+        </div>
+
+        <div class="vj-tools__grid">
+
+          <div class="vj-tool-card" data-animate="fade-up" data-delay="0">
+            <div class="vj-tool-card__icon" aria-hidden="true">✈️</div>
+            <div class="vj-tool-card__info">
+              <span class="vj-tool-card__type">Vuelos</span>
+              <h3 class="vj-tool-card__title">Google Flights / Skyscanner</h3>
+              <p class="vj-tool-card__desc">
+                Para comparar precios de vuelos y encontrar las fechas más baratas.
+                El calendario de precios te muestra cuándo conviene volar.
+              </p>
+            </div>
+          </div>
+
+          <div class="vj-tool-card" data-animate="fade-up" data-delay="1">
+            <div class="vj-tool-card__icon" aria-hidden="true">🗺️</div>
+            <div class="vj-tool-card__info">
+              <span class="vj-tool-card__type">Mapas offline</span>
+              <h3 class="vj-tool-card__title">Maps.me / Google Maps offline</h3>
+              <p class="vj-tool-card__desc">
+                Descarga mapas para usar sin datos. Imprescindible en lugares
+                sin cobertura o para evitar gastos de roaming.
+              </p>
+            </div>
+          </div>
+
+          <div class="vj-tool-card" data-animate="fade-up" data-delay="2">
+            <div class="vj-tool-card__icon" aria-hidden="true">🏠</div>
+            <div class="vj-tool-card__info">
+              <span class="vj-tool-card__type">Alojamiento</span>
+              <h3 class="vj-tool-card__title">Booking / Hostelworld</h3>
+              <p class="vj-tool-card__desc">
+                Booking para hoteles con cancelación flexible; Hostelworld
+                para hostales y mochileros. Lee siempre las reseñas recientes.
+              </p>
+            </div>
+          </div>
+
+          <div class="vj-tool-card" data-animate="fade-up" data-delay="3">
+            <div class="vj-tool-card__icon" aria-hidden="true">🌐</div>
+            <div class="vj-tool-card__info">
+              <span class="vj-tool-card__type">Traducción</span>
+              <h3 class="vj-tool-card__title">Google Translate</h3>
+              <p class="vj-tool-card__desc">
+                Traduce texto, voz e incluso imágenes con la cámara en tiempo real.
+                Descarga el idioma para usarlo sin conexión.
+              </p>
+            </div>
+          </div>
+
+          <div class="vj-tool-card" data-animate="fade-up" data-delay="4">
+            <div class="vj-tool-card__icon" aria-hidden="true">💱</div>
+            <div class="vj-tool-card__info">
+              <span class="vj-tool-card__type">Finanzas</span>
+              <h3 class="vj-tool-card__title">XE Currency / Wise</h3>
+              <p class="vj-tool-card__desc">
+                XE para conversión de moneda en tiempo real; Wise para pagar
+                en el extranjero con tasas reales y comisiones mínimas.
+              </p>
+            </div>
+          </div>
+
+          <div class="vj-tool-card" data-animate="fade-up" data-delay="5">
+            <div class="vj-tool-card__icon" aria-hidden="true">📸</div>
+            <div class="vj-tool-card__info">
+              <span class="vj-tool-card__type">Experiencias</span>
+              <h3 class="vj-tool-card__title">GetYourGuide / Civitatis</h3>
+              <p class="vj-tool-card__desc">
+                Para reservar tours, actividades y entradas sin filas.
+                Civitatis tiene gran oferta en español por toda Latinoamérica.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      NOTA DE SEGURIDAD / VIAJE RESPONSABLE
+    ────────────────────────────────────────────────────────── -->
+    <section class="vj-note" id="vj-nota" aria-label="Nota de viaje seguro">
+      <div class="container">
+        <div class="vj-note__inner" data-animate="fade-up">
+          <div class="vj-note__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M10 2l6 2.5v5C16 14 13.5 17 10 18.5 6.5 17 4 14 4 9.5v-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M7.5 10l1.8 1.8L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="vj-note__text">
+            <strong>Viaja con cabeza:</strong> infórmate sobre la situación de seguridad de tu
+            destino en fuentes oficiales antes de partir, comparte tu itinerario con alguien de
+            confianza, y respeta siempre las leyes y costumbres locales. Un viaje seguro es un
+            viaje que disfrutas de principio a fin.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────────
+      CTA FINAL
+    ────────────────────────────────────────────────────────── -->
+    <section class="vj-cta" id="vj-conectar" aria-labelledby="vjCtaTitle">
+      <div class="container">
+        <div class="vj-cta__inner" data-animate="fade-up">
+          <div class="vj-cta__glow" aria-hidden="true"></div>
+          <div class="vj-cta__icon" aria-hidden="true">🌍</div>
+          <h2 class="vj-cta__title" id="vjCtaTitle">
+            ¿Cuál es tu<br/>
+            <span class="vj-cta__highlight">próximo destino?</span>
+          </h2>
+          <p class="vj-cta__desc">
+            El mundo es enorme y la vida es corta. Si tienes preguntas sobre cómo
+            planear un viaje, quieres recomendar un destino increíble o compartir
+            una experiencia, escríbeme. Las mejores rutas se descubren conversando.
+          </p>
+          <div class="vj-cta__actions">
+            <a href="../../index.html#contacto" class="btn vj-btn--primary">Escríbeme →</a>
+            <a href="../../index.html#mundos" class="btn btn--ghost vj-btn--ghost">Otros mundos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+    FOOTER — con Viajes añadido y marcado activo
+  ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+
+        <div class="footer__brand">
+          <a href="../../index.html" class="footer__logo" aria-label="Volver al inicio">
+            <span class="footer__logo-mark">M</span>
+            El Mundo de Manu
+          </a>
+          <p class="footer__tagline">Construyendo mi universo digital, un proyecto a la vez.</p>
+        </div>
+
+        <nav class="footer__nav" aria-label="Mis mundos">
+          <h4 class="footer__nav-title">Mis Mundos</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../fe/fe.html"                 class="footer__link">Fe</a></li>
+            <li><a href="../gaming/gaming.html"         class="footer__link">Gaming</a></li>
+            <li><a href="../infantil/infantil.html"     class="footer__link">Infantil</a></li>
+            <li><a href="../relaciones/relaciones.html" class="footer__link">Relaciones</a></li>
+            <li><a href="../tecnologia/tecnologia.html" class="footer__link">Tecnología</a></li>
+            <li><a href="../educacion/educacion.html"   class="footer__link">Educación</a></li>
+            <li><a href="../bienestar/bienestar.html"   class="footer__link">Bienestar</a></li>
+            <li><a href="viajes.html"                   class="footer__link footer__link--active">Viajes</a></li>
+            <li><a href="../sobremi/sobremi.html"       class="footer__link">Sobre Mí</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__nav" aria-label="Links del sitio">
+          <h4 class="footer__nav-title">Sitio</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="../../index.html#inicio"    class="footer__link">Inicio</a></li>
+            <li><a href="../../index.html#proyectos" class="footer__link">Proyectos</a></li>
+            <li><a href="../../index.html#contacto"  class="footer__link">Contacto</a></li>
+          </ul>
+        </nav>
+
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© <span id="footerYear"></span> El Mundo de Manu. Construido con 💛 y mucho café.</p>
+        <p class="footer__credits">Diseñado y desarrollado por <strong>Manu</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+  <script src="viajes.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,991 @@
+/*
+  ============================================================
+  finanzas.css — El Mundo de Manu / Finanzas Personales
+  ============================================================
+  Estilos propios de la sección de Finanzas. Heredan variables
+  globales de style.css y añaden la identidad de este mundo.
+
+  Dirección estética: confiable, sólida, próspera.
+  Paleta verde dinero (#2DBA77) con acento dorado. Evoca
+  crecimiento, prosperidad y estabilidad. No choca con el
+  esmeralda de Educación (#1A8C6E) ni el menta de Bienestar
+  (#38B597) — este verde es más vívido y "billete", con un
+  acento dorado que refuerza el tema financiero.
+
+  Prefijo: fn- (finanzas)
+
+  Estructura:
+  01. Variables locales
+  02. Breadcrumb
+  03. Hero (canvas de gráfico ascendente)
+  04. Por qué importa
+  05. Conceptos clave
+  06. Guías prácticas
+  07. Mitos vs realidad
+  08. Recursos
+  09. Disclaimer
+  10. CTA final
+  11. Botones propios
+  12. Responsive
+
+  Autor: Carlos Manuel Turizo Hernández
+  Versión: 1.0.0
+  ============================================================
+*/
+
+
+/* ============================================================
+  01. VARIABLES LOCALES
+  Verde dinero como color principal, con un dorado de acento
+  que aparece en los gráficos y detalles para reforzar la
+  idea de valor y prosperidad.
+  ============================================================ */
+.page-finanzas {
+  --fn-green:       #2DBA77;
+  --fn-green-light: #6BE6AB;
+  --fn-green-deep:  #1E9460;
+  --fn-gold:        #E9C46A;
+  --fn-dim:         rgba(45, 186, 119, 0.10);
+  --fn-glow:        rgba(45, 186, 119, 0.28);
+  --fn-cool-bg:     #06100B;   /* Fondo oscuro con verde muy profundo */
+}
+
+
+/* ============================================================
+  02. BREADCRUMB
+  ============================================================ */
+.breadcrumb {
+  padding: calc(var(--space-4) + 70px) 0 var(--space-4);
+  border-bottom: 1px solid rgba(45, 186, 119, 0.12);
+  background: var(--color-bg);
+}
+.breadcrumb__nav { display: flex; align-items: center; gap: var(--space-2); }
+.breadcrumb__link {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  transition: color var(--transition-base);
+}
+.breadcrumb__link:hover { color: var(--fn-green); }
+.breadcrumb__sep { font-size: var(--text-sm); color: var(--color-text-muted); opacity: 0.4; }
+.breadcrumb__current { font-size: var(--text-sm); color: var(--fn-green); font-weight: 500; }
+
+.fn-tag {
+  background: var(--fn-dim);
+  border-color: rgba(45, 186, 119, 0.22);
+  color: var(--fn-green-light);
+}
+
+
+/* ============================================================
+  03. HERO DE FINANZAS
+  El canvas dibuja una línea de gráfico ascendente animada
+  con barras de fondo, simulando un mercado en crecimiento.
+  El verde dinero y el dorado refuerzan el tema.
+  ============================================================ */
+.fn-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: var(--space-32) 0 var(--space-20);
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 100%, rgba(45, 186, 119, 0.06) 0%, transparent 55%),
+    var(--fn-cool-bg);
+}
+
+.fn-hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.fn-hero__light {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  animation: fnLightBreath 8s ease-in-out infinite;
+}
+.fn-hero__light--1 {
+  width: 540px; height: 340px;
+  top: -70px; left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(45, 186, 119, 0.13) 0%, transparent 70%);
+}
+.fn-hero__light--2 {
+  width: 260px; height: 260px;
+  bottom: 14%; right: 7%;
+  background: radial-gradient(circle, rgba(233, 196, 106, 0.07) 0%, transparent 70%);
+  animation-delay: 3s;
+  animation-name: fnLightBreathSimple;
+}
+.fn-hero__light--3 {
+  width: 220px; height: 220px;
+  top: 24%; left: 5%;
+  background: radial-gradient(circle, rgba(45, 186, 119, 0.06) 0%, transparent 70%);
+  animation-delay: 5s;
+  animation-name: fnLightBreathSimple;
+}
+@keyframes fnLightBreath {
+  0%, 100% { opacity: 1;    transform: scale(1) translateX(-50%); }
+  50%       { opacity: 0.6;  transform: scale(1.1) translateX(-50%); }
+}
+@keyframes fnLightBreathSimple {
+  0%, 100% { opacity: 1;    transform: scale(1); }
+  50%       { opacity: 0.55; transform: scale(1.12); }
+}
+
+.fn-hero__symbol-wrap {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0.03;
+}
+.fn-hero__symbol { width: 340px; height: 340px; color: var(--fn-green-light); }
+
+.fn-hero__inner { position: relative; z-index: 1; display: flex; justify-content: center; }
+
+.fn-hero__content {
+  max-width: 760px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  padding: 0 var(--space-6);
+}
+
+.fn-hero__tag-row { display: flex; justify-content: center; }
+
+.fn-hero__title {
+  font-size: clamp(3.5rem, 12vw, 8.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: transparent;
+  background: linear-gradient(135deg, var(--fn-green-light) 0%, var(--fn-green) 50%, var(--fn-green-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.fn-hero__phrase {
+  max-width: 580px;
+  padding: var(--space-7) var(--space-9);
+  border: 1px solid rgba(45, 186, 119, 0.18);
+  border-left: 3px solid var(--fn-green);
+  border-radius: var(--radius-xl);
+  background: rgba(45, 186, 119, 0.04);
+  position: relative;
+  text-align: left;
+}
+.fn-hero__phrase::before {
+  content: '"';
+  position: absolute;
+  top: -14px; left: 20px;
+  font-size: 6rem;
+  color: var(--fn-green);
+  opacity: 0.10;
+  line-height: 1;
+  pointer-events: none;
+}
+.fn-hero__phrase-text {
+  font-weight: 300;
+  font-size: clamp(var(--text-base), 2vw, var(--text-md));
+  line-height: 1.7;
+  color: var(--color-text-primary);
+  font-style: italic;
+}
+.fn-hero__phrase-ref {
+  display: block;
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--fn-green);
+  font-style: normal;
+}
+
+.fn-hero__desc {
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+  max-width: 510px;
+}
+
+.fn-hero__actions { display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap; }
+
+.fn-hero__scroll {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: fnScrollBounce 2.5s ease-in-out infinite;
+  z-index: 1;
+}
+.fn-hero__scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--fn-green), transparent);
+  order: -1;
+}
+@keyframes fnScrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+
+/* ============================================================
+  04. POR QUÉ IMPORTA
+  Layout 2 col: texto + tarjeta con un dato estadístico
+  destacado (el stat grande es el foco visual).
+  ============================================================ */
+.fn-why {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid rgba(45, 186, 119, 0.10);
+  border-bottom: 1px solid rgba(45, 186, 119, 0.10);
+}
+.fn-why__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .fn-why__inner { grid-template-columns: 1.4fr 1fr; gap: var(--space-16); }
+}
+.fn-why__title {
+  font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl));
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  margin: var(--space-4) 0;
+  line-height: 1.15;
+}
+.fn-why__desc {
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+.fn-why__desc:last-child { margin-bottom: 0; }
+
+.fn-why__card {
+  position: relative;
+  padding: var(--space-10) var(--space-8);
+  background: linear-gradient(135deg, rgba(45, 186, 119, 0.07) 0%, var(--color-bg) 100%);
+  border: 1px solid rgba(45, 186, 119, 0.20);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.fn-why__card-icon { font-size: 2.25rem; line-height: 1; }
+.fn-why__card-title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+/* Stat grande destacado */
+.fn-why__card-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-5) 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.fn-why__card-stat-num {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: transparent;
+  background: linear-gradient(135deg, var(--fn-green-light), var(--fn-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.fn-why__card-stat-label {
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+.fn-why__card-text {
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+.fn-why__card-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 110%, var(--fn-dim) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+
+/* ============================================================
+  05. CONCEPTOS CLAVE
+  Grid de 6 tarjetas. El header de cada una tiene el ícono
+  y el índice numérico alineados. Hover revela acento verde.
+  ============================================================ */
+.fn-concepts { padding: var(--space-24) 0; }
+
+.fn-concepts__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 640px)  { .fn-concepts__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .fn-concepts__grid { grid-template-columns: repeat(3, 1fr); } }
+
+.fn-concept-card {
+  position: relative;
+  padding: var(--space-8);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  overflow: hidden;
+  transition: transform var(--transition-slow), border-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+.fn-concept-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(45, 186, 119, 0.38);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35), 0 0 22px var(--fn-dim);
+}
+
+.fn-concept-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fn-concept-card__icon-wrap {
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--fn-dim);
+  border: 1px solid rgba(45, 186, 119, 0.18);
+  border-radius: var(--radius-md);
+  color: var(--fn-green-light);
+  flex-shrink: 0;
+}
+.fn-concept-card__index {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--fn-green);
+  opacity: 0.12;
+  line-height: 1;
+}
+.fn-concept-card__title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+.fn-concept-card__desc {
+  font-size: var(--text-sm);
+  line-height: 1.78;
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+
+
+/* ============================================================
+  06. GUÍAS PRÁCTICAS
+  Mismo patrón de artículos: featured + 2 normales.
+  ============================================================ */
+.fn-guides {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.fn-guides__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+@media (min-width: 900px) {
+  .fn-guides__grid { grid-template-columns: repeat(2, 1fr); }
+  .fn-guide-card--featured { grid-column: span 2; }
+}
+
+.fn-guide-card {
+  padding: var(--space-8);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  transition: transform var(--transition-slow), border-color var(--transition-base);
+}
+.fn-guide-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(45, 186, 119, 0.30);
+}
+.fn-guide-card--featured { border-top: 3px solid var(--fn-green); }
+
+.fn-guide-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.fn-guide-card__tag {
+  padding: var(--space-1) var(--space-3);
+  background: var(--fn-dim);
+  border: 1px solid rgba(45, 186, 119, 0.22);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fn-green-light);
+}
+.fn-guide-card__read { font-size: var(--text-xs); color: var(--color-text-muted); }
+
+.fn-guide-card__title {
+  font-size: clamp(var(--text-lg), 2.2vw, var(--text-xl));
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+}
+.fn-guide-card__body {
+  font-size: var(--text-sm);
+  line-height: 1.82;
+  color: var(--color-text-secondary);
+}
+
+.fn-guide-card__inset {
+  padding: var(--space-6);
+  background: var(--fn-dim);
+  border: 1px solid rgba(45, 186, 119, 0.18);
+  border-radius: var(--radius-lg);
+}
+.fn-guide-card__inset-title {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--fn-green-light);
+  margin-bottom: var(--space-4);
+}
+.fn-guide-card__list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: var(--space-3);
+}
+.fn-guide-card__list li {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  padding-left: var(--space-5);
+  position: relative;
+}
+.fn-guide-card__list li::before {
+  content: '$';
+  position: absolute; left: 0; top: 1px;
+  color: var(--fn-green);
+  font-weight: 700;
+  font-size: var(--text-sm);
+}
+.fn-guide-card__list li strong { color: var(--color-text-primary); }
+
+.fn-guide-card__highlight {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  padding: var(--space-5) var(--space-6);
+  border-left: 2px solid var(--fn-gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: rgba(233, 196, 106, 0.05);
+  font-style: italic;
+}
+
+
+/* ============================================================
+  07. MITOS VS REALIDAD
+  Tarjetas divididas en dos: mito (rojo/tachado) y realidad
+  (verde). El contraste visual refuerza el mensaje.
+  ============================================================ */
+.fn-myths { padding: var(--space-24) 0; }
+
+.fn-myths__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 768px) { .fn-myths__grid { grid-template-columns: repeat(2, 1fr); } }
+
+.fn-myth-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: transform var(--transition-slow), border-color var(--transition-base);
+}
+.fn-myth-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(45, 186, 119, 0.30);
+}
+
+/* Parte del mito — fondo rojizo tenue */
+.fn-myth-card__myth {
+  padding: var(--space-6) var(--space-7);
+  background: rgba(229, 90, 80, 0.05);
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+}
+.fn-myth-card__myth p {
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  font-style: italic;
+  text-decoration: line-through;
+  text-decoration-color: rgba(229, 90, 80, 0.5);
+  text-decoration-thickness: 1px;
+}
+
+/* Parte de la realidad — fondo verde tenue */
+.fn-myth-card__reality {
+  padding: var(--space-6) var(--space-7);
+}
+.fn-myth-card__reality p {
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+
+/* Labels de mito y realidad */
+.fn-myth-card__label {
+  display: inline-block;
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}
+.fn-myth-card__label--myth {
+  background: rgba(229, 90, 80, 0.12);
+  color: #E55A50;
+  border: 1px solid rgba(229, 90, 80, 0.25);
+}
+.fn-myth-card__label--real {
+  background: var(--fn-dim);
+  color: var(--fn-green-light);
+  border: 1px solid rgba(45, 186, 119, 0.25);
+}
+
+
+/* ============================================================
+  08. RECURSOS
+  ============================================================ */
+.fn-resources {
+  padding: var(--space-24) 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.fn-resources__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 768px) { .fn-resources__grid { grid-template-columns: repeat(2, 1fr); } }
+
+.fn-resource-card {
+  display: flex;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  transition: transform var(--transition-slow), border-color var(--transition-base);
+}
+.fn-resource-card:hover {
+  transform: translateX(4px);
+  border-color: rgba(45, 186, 119, 0.30);
+}
+.fn-resource-card__icon {
+  font-size: 2.25rem;
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+.fn-resource-card__info { flex: 1; }
+.fn-resource-card__type {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fn-green-light);
+  margin-bottom: var(--space-1);
+}
+.fn-resource-card__title {
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+  line-height: 1.3;
+}
+.fn-resource-card__desc {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+
+/* ============================================================
+  09. DISCLAIMER
+  ============================================================ */
+.fn-disclaimer { padding: var(--space-10) 0; border-top: 1px solid var(--color-border); }
+.fn-disclaimer__inner {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  padding: var(--space-6) var(--space-8);
+  background: rgba(45, 186, 119, 0.04);
+  border: 1px solid rgba(45, 186, 119, 0.14);
+  border-radius: var(--radius-xl);
+}
+.fn-disclaimer__icon { color: var(--fn-green); flex-shrink: 0; opacity: 0.8; margin-top: 2px; }
+.fn-disclaimer__text {
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-text-muted);
+}
+.fn-disclaimer__text strong { color: var(--fn-green-light); }
+
+
+/* ============================================================
+  10. CTA FINAL
+  ============================================================ */
+.fn-cta { padding: var(--space-24) 0; }
+.fn-cta__inner {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-14) var(--space-10);
+  background: var(--color-surface);
+  border: 1px solid rgba(45, 186, 119, 0.18);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+.fn-cta__glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 65% 65% at 50% 50%, rgba(45, 186, 119, 0.07) 0%, transparent 100%);
+  pointer-events: none;
+}
+.fn-cta__icon {
+  font-size: 3rem;
+  position: relative;
+  animation: fnIconGlow 3.5s ease-in-out infinite;
+}
+@keyframes fnIconGlow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(233, 196, 106, 0.4)); transform: scale(1); }
+  50%       { filter: drop-shadow(0 0 22px rgba(233, 196, 106, 0.7)); transform: scale(1.06); }
+}
+.fn-cta__title {
+  font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl));
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  position: relative;
+}
+.fn-cta__highlight {
+  color: transparent;
+  background: linear-gradient(135deg, var(--fn-green-light), var(--fn-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.fn-cta__desc {
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  max-width: 490px;
+  position: relative;
+}
+.fn-cta__actions {
+  display: flex; gap: var(--space-4);
+  flex-wrap: wrap; justify-content: center;
+  position: relative;
+}
+
+
+/* ============================================================
+  11. BOTONES PROPIOS
+  ============================================================ */
+.fn-btn--primary {
+  background: var(--fn-green);
+  color: #032117;
+  font-weight: 700;
+  box-shadow: 0 4px 20px var(--fn-glow);
+}
+.fn-btn--primary:hover {
+  background: var(--fn-green-light);
+  box-shadow: 0 6px 28px rgba(45, 186, 119, 0.45);
+  transform: translateY(-2px);
+  color: #032117;
+}
+.fn-btn--ghost {
+  border-color: rgba(45, 186, 119, 0.28);
+  color: var(--fn-green-light);
+}
+.fn-btn--ghost:hover {
+  border-color: var(--fn-green);
+  background: var(--fn-dim);
+  color: var(--fn-green-light);
+}
+
+
+/* ============================================================
+  12. RESPONSIVE
+  ============================================================ */
+@media (max-width: 640px) {
+  .fn-hero { padding: var(--space-20) 0 var(--space-16); min-height: auto; }
+  .fn-hero__title { font-size: clamp(2.8rem, 16vw, 4.5rem); }
+  .fn-hero__phrase { padding: var(--space-6) var(--space-5); }
+  .fn-hero__phrase::before { font-size: 4rem; }
+  .fn-hero__actions { flex-direction: column; align-items: center; width: 100%; }
+  .fn-hero__actions .btn { width: 100%; justify-content: center; }
+
+  .fn-cta__inner { padding: var(--space-10) var(--space-6); }
+  .fn-cta__actions { flex-direction: column; align-items: center; width: 100%; }
+  .fn-cta__actions .btn { width: 100%; justify-content: center; }
+
+  .fn-disclaimer__inner { flex-direction: column; padding: var(--space-5) var(--space-6); }
+}
+
+@media (max-width: 480px) {
+  .fn-why__card { padding: var(--space-7) var(--space-6); }
+  .fn-concept-card { padding: var(--space-6); }
+  .fn-guide-card { padding: var(--space-6); }
+  .fn-guide-card__inset { padding: var(--space-5); }
+  .fn-why__card-stat-num { font-size: 2.5rem; }
+}
+
+/* Footer link activo */
+.footer__link--active { color: var(--fn-green-light); }
+
+
+/* ============================================================
+  SECCIÓN: HERRAMIENTA INTERACTIVA (fn-tool)
+  Card destacada que enlaza a la calculadora de IF.
+  Diseño tipo "producto destacado" — más llamativa que las
+  secciones editoriales, usa el verde intenso del mundo.
+  ============================================================ */
+.fn-tool {
+  padding: var(--space-24) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.fn-tool__inner {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-7);
+  padding: var(--space-14) var(--space-10);
+  background: linear-gradient(
+    135deg,
+    rgba(45, 186, 119, 0.08) 0%,
+    var(--color-surface) 50%,
+    rgba(45, 186, 119, 0.05) 100%
+  );
+  border: 1px solid rgba(45, 186, 119, 0.28);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+/* Glow de fondo */
+.fn-tool__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 0%,
+    rgba(45, 186, 119, 0.12) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Badge de gratuito */
+.fn-tool__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-4);
+  background: rgba(45, 186, 119, 0.10);
+  border: 1px solid rgba(45, 186, 119, 0.25);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--fn-green-light);
+  position: relative;
+  z-index: 1;
+}
+.fn-tool__badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--fn-green);
+  flex-shrink: 0;
+  animation: fnToolDotPulse 2s ease-in-out infinite;
+}
+@keyframes fnToolDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* Mini gráfico decorativo */
+.fn-tool__chart-deco {
+  width: 200px;
+  height: 60px;
+  position: relative;
+  z-index: 1;
+  opacity: 0.9;
+}
+.fn-tool__chart-deco svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Título */
+.fn-tool__title {
+  font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl));
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  position: relative;
+  z-index: 1;
+}
+.fn-tool__title-highlight {
+  color: transparent;
+  background: linear-gradient(
+    135deg,
+    var(--fn-green-light) 0%,
+    var(--fn-green) 50%,
+    #0FA866 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Descripción */
+.fn-tool__desc {
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+  max-width: 560px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Features de la herramienta */
+.fn-tool__features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+  z-index: 1;
+}
+.fn-tool__feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  background: rgba(45, 186, 119, 0.06);
+  border: 1px solid rgba(45, 186, 119, 0.14);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  text-align: left;
+}
+.fn-tool__feature-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Botón CTA — el más llamativo de toda la sección */
+.fn-tool__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-10);
+  background: var(--fn-green);
+  color: #032117;
+  font-weight: 700;
+  font-size: var(--text-base);
+  border-radius: var(--radius-full);
+  box-shadow:
+    0 4px 24px rgba(45, 186, 119, 0.40),
+    0 0 0 0 rgba(45, 186, 119, 0.30);
+  transition:
+    transform var(--transition-slow),
+    box-shadow var(--transition-base),
+    background var(--transition-base);
+  position: relative;
+  z-index: 1;
+}
+.fn-tool__cta:hover {
+  background: var(--fn-green-light);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow:
+    0 8px 32px rgba(45, 186, 119, 0.55),
+    0 0 0 4px rgba(45, 186, 119, 0.12);
+}
+.fn-tool__cta:active {
+  transform: translateY(-1px) scale(1.00);
+}
+.fn-tool__cta svg {
+  transition: transform var(--transition-base);
+}
+.fn-tool__cta:hover svg {
+  transform: translateX(4px);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .fn-tool__inner {
+    padding: var(--space-10) var(--space-6);
+    gap: var(--space-5);
+  }
+  .fn-tool__cta {
+    width: 100%;
+    justify-content: center;
+    padding: var(--space-4) var(--space-6);
+  }
+  .fn-tool__chart-deco { width: 160px; height: 48px; }
+}
