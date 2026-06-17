@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" role="img" aria-label="El Mundo de Manu">
+  <!--
+    ============================================================
+    logo.svg — El Mundo de Manu
+    ============================================================
+    Mi logo oficial. El concepto: una "M" que se lee también
+    como un sistema orbital — dos órbitas elípticas (las dos
+    "patas" de la M) que se curvan alrededor de un núcleo
+    central. Los puntos pequeños sobre las órbitas representan
+    los mundos temáticos que orbitan mi identidad central.
+
+    Construido 100% en paths matemáticos (sin trazo a mano ni
+    vectorización de imagen) para que escale perfecto desde
+    16px (favicon) hasta 4K sin perder nitidez ni peso.
+
+    Paleta Digital Cosmos:
+    - Núcleo: gradiente índigo → ámbar (#6C63FF → #F5A623)
+    - Órbitas: índigo con opacidad decreciente
+    - Puntos orbitales: ámbar dorado
+
+    Uso: loader, navbar, favicon, og:image, futuras expansiones.
+
+    Autor: Carlos Manuel Turizo Hernández
+    Versión: 1.0.0
+    ============================================================
+  -->
+
+  <defs>
+    <!-- Gradiente principal del núcleo central -->
+    <radialGradient id="logoCoreGrad" cx="50%" cy="42%" r="65%">
+      <stop offset="0%"  stop-color="#9B93FF"/>
+      <stop offset="55%" stop-color="#6C63FF"/>
+      <stop offset="100%" stop-color="#4A42D6"/>
+    </radialGradient>
+
+    <!-- Gradiente de los trazos orbitales (la "M") -->
+    <linearGradient id="logoStrokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#8B83FF"/>
+      <stop offset="100%" stop-color="#6C63FF"/>
+    </linearGradient>
+
+    <!-- Gradiente de los puntos orbitales (ámbar) -->
+    <radialGradient id="logoDotGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%"  stop-color="#FFD27A"/>
+      <stop offset="100%" stop-color="#F5A623"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ══════════════════════════════════════
+    LA "M" ORBITAL
+    Dos arcos elípticos que dibujan la silueta de una M
+    vista como dos órbitas que se cruzan en el centro.
+  ══════════════════════════════════════ -->
+  <g stroke="url(#logoStrokeGrad)" stroke-width="7" stroke-linecap="round" fill="none">
+    <!-- Trazo izquierdo: sube, baja al centro -->
+    <path d="M 16 72 L 16 30 Q 16 24 21 24 Q 26 24 29 30 L 42 58"/>
+    <!-- Trazo derecho: simétrico, sube desde el centro -->
+    <path d="M 58 58 L 71 30 Q 74 24 79 24 Q 84 24 84 30 L 84 72"/>
+  </g>
+
+  <!-- ══════════════════════════════════════
+    NÚCLEO CENTRAL
+    El punto de encuentro de la M — representa el centro
+    de identidad desde el que parten todos mis mundos.
+  ══════════════════════════════════════ -->
+  <circle cx="50" cy="58" r="11" fill="url(#logoCoreGrad)"/>
+  <!-- Brillo interno sutil -->
+  <circle cx="46.5" cy="54" r="3.4" fill="#FFFFFF" opacity="0.35"/>
+
+  <!-- ══════════════════════════════════════
+    ANILLO ORBITAL DECORATIVO
+    Una elipse fina que envuelve el núcleo, reforzando
+    la idea de "mundos en órbita". Sutil, no compite
+    con la M.
+  ══════════════════════════════════════ -->
+  <ellipse cx="50" cy="58" rx="22" ry="8" fill="none"
+    stroke="#F5A623" stroke-width="1.6" opacity="0.55"
+    transform="rotate(-8 50 58)"/>
+
+  <!-- ══════════════════════════════════════
+    PUNTOS ORBITALES (los "mundos")
+    Pequeños puntos ámbar sobre los trazos de la M y el
+    anillo — cada uno evoca uno de los mundos temáticos.
+  ══════════════════════════════════════ -->
+  <circle cx="16" cy="30" r="3.4" fill="url(#logoDotGrad)"/>
+  <circle cx="84" cy="30" r="3.4" fill="url(#logoDotGrad)"/>
+  <circle cx="71" cy="35" r="2.1" fill="#F5A623" opacity="0.85"/>
+  <circle cx="29.5" cy="35" r="2.1" fill="#F5A623" opacity="0.85"/>
+</svg>

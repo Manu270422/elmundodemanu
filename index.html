@@ -19,14 +19,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="El Mundo de Manu — Portafolio personal de un estudiante de Ingeniería Informática apasionado por la tecnología, el gaming, la fe y el emprendimiento digital." />
-  <meta name="keywords" content="portafolio, desarrollador, ingeniería informática, gaming, tecnología, fe, emprendimiento" />
-  <meta name="author" content="Manu" />
+    content="El Mundo de Manu — Mi universo digital personal con 12 mundos temáticos: tecnología, fe, gaming, finanzas, música, viajes y más. Construido por Carlos Manuel Turizo Hernández." />
+  <meta name="keywords" content="portafolio, desarrollador, ingeniería informática, gaming, tecnología, fe, emprendimiento, finanzas, viajes, música, educación" />
+  <meta name="author" content="Carlos Manuel Turizo Hernández" />
+  <meta name="theme-color" content="#0A0A0F" />
 
-  <!-- Open Graph para compartir en redes sociales -->
-  <meta property="og:title" content="El Mundo de Manu" />
-  <meta property="og:description" content="Mi espacio digital — tecnología, fe, gaming y más." />
+  <!-- ============================================================
+    FAVICON — Mi logo en todas las resoluciones que los
+    navegadores y sistemas operativos puedan necesitar.
+    favicon.ico en la raíz cubre navegadores antiguos;
+    los PNG cubren pestañas modernas, accesos directos en
+    Android/iOS y PWA.
+  ============================================================ -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/assets/logo/logo-favicon.svg" />
+  <link rel="apple-touch-icon" href="/assets/logo/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/logo/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/logo/icon-512.png" />
+
+  <!-- ============================================================
+    OPEN GRAPH — Cómo se ve mi sitio cuando alguien comparte
+    el link en WhatsApp, Facebook, LinkedIn, Discord, etc.
+  ============================================================ -->
+  <meta property="og:title" content="El Mundo de Manu — 12 Mundos, Un Universo Digital" />
+  <meta property="og:description" content="Tecnología, fe, gaming, finanzas, música, viajes y más — mi espacio digital personal construido desde Barrancabermeja, Colombia." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://elmundodemanu.com/" />
+  <meta property="og:image" content="https://elmundodemanu.com/assets/logo/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="es_CO" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="El Mundo de Manu" />
+  <meta name="twitter:description" content="Mi universo digital — 12 mundos temáticos por explorar." />
+  <meta name="twitter:image" content="https://elmundodemanu.com/assets/logo/og-image.png" />
 
   <title>El Mundo de Manu</title>
 
@@ -58,7 +86,33 @@
   <div class="loader" id="loader" aria-hidden="true">
     <div class="loader__inner">
       <div class="loader__logo">
-        <span class="loader__letter">M</span>
+        <!--
+          Logo SVG inline (no <img>) para poder animar el trazo
+          con CSS (stroke-dasharray) y que el glow del loader
+          se sienta parte del mismo diseño, no una imagen pegada.
+        -->
+        <svg class="loader__logo-svg" viewBox="0 0 100 100" fill="none"
+          role="img" aria-label="El Mundo de Manu">
+          <g stroke="url(#loaderStrokeGrad)" stroke-width="7" stroke-linecap="round" fill="none">
+            <path class="loader__logo-path" d="M 16 72 L 16 30 Q 16 24 21 24 Q 26 24 29 30 L 42 58"/>
+            <path class="loader__logo-path" d="M 58 58 L 71 30 Q 74 24 79 24 Q 84 24 84 30 L 84 72"/>
+          </g>
+          <circle class="loader__logo-core" cx="50" cy="58" r="11" fill="url(#loaderCoreGrad)"/>
+          <ellipse class="loader__logo-ring" cx="50" cy="58" rx="22" ry="8" fill="none"
+            stroke="#F5A623" stroke-width="1.6" opacity="0.55" transform="rotate(-8 50 58)"/>
+          <circle class="loader__logo-dot" cx="16" cy="30" r="3.4" fill="#F5A623"/>
+          <circle class="loader__logo-dot" cx="84" cy="30" r="3.4" fill="#F5A623"/>
+          <defs>
+            <linearGradient id="loaderStrokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8B83FF"/>
+              <stop offset="100%" stop-color="#6C63FF"/>
+            </linearGradient>
+            <radialGradient id="loaderCoreGrad" cx="50%" cy="42%" r="65%">
+              <stop offset="0%" stop-color="#9B93FF"/>
+              <stop offset="100%" stop-color="#4A42D6"/>
+            </radialGradient>
+          </defs>
+        </svg>
       </div>
       <div class="loader__bar">
         <div class="loader__progress" id="loaderProgress"></div>
@@ -76,8 +130,8 @@
     <nav class="navbar__container" aria-label="Navegación principal">
 
       <!-- Logo / Identidad -->
-      <a href="index.html" class="navbar__logo" aria-label="Ir al inicio">
-        <span class="navbar__logo-mark">M</span>
+      <a href="index.html" class="navbar__logo" aria-label="Ir al inicio — El Mundo de Manu">
+        <img src="assets/logo/logo.svg" alt="" class="navbar__logo-mark" width="32" height="32" />
         <span class="navbar__logo-text">El Mundo de <strong>Manu</strong></span>
       </a>
 
@@ -1060,8 +1114,8 @@
 
         <!-- Branding -->
         <div class="footer__brand">
-          <a href="index.html" class="footer__logo" aria-label="Volver al inicio">
-            <span class="footer__logo-mark">M</span>
+          <a href="index.html" class="footer__logo" aria-label="Volver al inicio — El Mundo de Manu">
+            <img src="assets/logo/logo.svg" alt="" class="footer__logo-mark" width="28" height="28" />
             El Mundo de Manu
           </a>
           <p class="footer__tagline">

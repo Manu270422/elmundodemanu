@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="El Mundo de Manu">
+  <!--
+    ============================================================
+    logo-favicon.svg — El Mundo de Manu (con fondo)
+    ============================================================
+    Versión con fondo sólido redondeado para usar como favicon.
+    Los favicons sin fondo pierden contraste en pestañas claras
+    del navegador — por eso esta variante lleva el fondo oscuro
+    de mi marca (fondo base #0A0A0F) con esquinas redondeadas tipo
+    ícono de app moderna.
+
+    Autor: Carlos Manuel Turizo Hernández
+    Versión: 1.0.0
+    ============================================================
+  -->
+  <defs>
+    <radialGradient id="favCoreGrad" cx="50%" cy="42%" r="65%">
+      <stop offset="0%"  stop-color="#9B93FF"/>
+      <stop offset="55%" stop-color="#6C63FF"/>
+      <stop offset="100%" stop-color="#4A42D6"/>
+    </radialGradient>
+    <linearGradient id="favStrokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#8B83FF"/>
+      <stop offset="100%" stop-color="#6C63FF"/>
+    </linearGradient>
+    <radialGradient id="favDotGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%"  stop-color="#FFD27A"/>
+      <stop offset="100%" stop-color="#F5A623"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Fondo redondeado -->
+  <rect width="100" height="100" rx="22" fill="#0A0A0F"/>
+
+  <g stroke="url(#favStrokeGrad)" stroke-width="7" stroke-linecap="round" fill="none">
+    <path d="M 16 72 L 16 30 Q 16 24 21 24 Q 26 24 29 30 L 42 58"/>
+    <path d="M 58 58 L 71 30 Q 74 24 79 24 Q 84 24 84 30 L 84 72"/>
+  </g>
+
+  <circle cx="50" cy="58" r="11" fill="url(#favCoreGrad)"/>
+  <circle cx="46.5" cy="54" r="3.4" fill="#FFFFFF" opacity="0.35"/>
+
+  <ellipse cx="50" cy="58" rx="22" ry="8" fill="none"
+    stroke="#F5A623" stroke-width="1.6" opacity="0.55"
+    transform="rotate(-8 50 58)"/>
+
+  <circle cx="16" cy="30" r="3.4" fill="url(#favDotGrad)"/>
+  <circle cx="84" cy="30" r="3.4" fill="url(#favDotGrad)"/>
+  <circle cx="71" cy="35" r="2.1" fill="#F5A623" opacity="0.85"/>
+  <circle cx="29.5" cy="35" r="2.1" fill="#F5A623" opacity="0.85"/>
+</svg>
